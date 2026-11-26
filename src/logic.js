@@ -54,6 +54,7 @@
     text.slice(i + 8).split('\n').forEach((l) => { const k = l.indexOf(':'); if (k > 0) { const v = l.slice(k + 1).trim(); o[l.slice(0, k).trim()] = /^-?\d+(\.\d+)?$/.test(v) ? Number(v) : v; } });
     return [o];
   };
+  window.TTparse = { md, tsv, kv };
   const L = (id, fn) => dash.loader(id, { description: '', fn });
   L('rates', md({ TP_BISTTLREF_ORAN: 'tlref', TP_APIFON4: 'aofm', TP_AOFOBAP: 'bist_repo' }));
   L('bills', md(null));
@@ -149,11 +150,11 @@ C('emtia', ['fx', 'crypto'], (fx, crypto) => {
   const c = (s) => { const r = (crypto || []).find((x) => x.symbol === s); return r && typeof r.price === 'number' ? r.price : null; };
   const usd = g('USD'), gram = g('gram-altin'), brent = g('BRENT'), btc = c('BTC-USD'), eth = c('ETH-USD');
   const out = [];
-  if (gram != null) out.push({ ad: 'Gram altın', son: gram, birim: '₺/g', d: 2 });
-  if (gram != null && usd) out.push({ ad: 'Ons altın (türetilmiş)', son: gram / usd * 31.1035, birim: '$/oz', d: 2 });
-  if (brent != null) out.push({ ad: 'Brent', son: brent, birim: '$/varil', d: 2 });
+  if (gram != null) out.push({ ad: 'Gold (gram)', son: gram, birim: 'TRY/g', d: 2 });
+  if (gram != null && usd) out.push({ ad: 'Gold (oz, derived)', son: gram / usd * 31.1035, birim: '$/oz', d: 2 });
+  if (brent != null) out.push({ ad: 'Brent', son: brent, birim: '$/bbl', d: 2 });
   if (btc != null) out.push({ ad: 'Bitcoin', son: btc, birim: '$', d: 0 });
-  if (btc != null && usd) out.push({ ad: 'Bitcoin', son: btc * usd, birim: '₺', d: 0 });
+  if (btc != null && usd) out.push({ ad: 'Bitcoin', son: btc * usd, birim: 'TRY', d: 0 });
   if (eth != null) out.push({ ad: 'Ethereum', son: eth, birim: '$', d: 2 });
   return out;
 });
@@ -209,7 +210,7 @@ C('ppk_takvim', ['egri', 'ozet', 'makro_ozet'], (egri, ozet, mk) => {
 // Relative performance, rebased to 100 at the common start date
 C('perf', ['usd', 'gold_hist', 'xu100_hist'], (usd, gold, xu) => {
   const ser = (rows, name) => { const r = (rows || []).filter((x) => typeof x.close === 'number').map((x) => ({ d: String(x.date).slice(0, 10), v: x.close })).sort((a, b) => a.d < b.d ? -1 : 1); return { name, r }; };
-  const all = [ser(usd, 'USD/TRY'), ser(gold, 'Gram altın'), ser(xu, 'XU100')].filter((s) => s.r.length);
+  const all = [ser(usd, 'USD/TRY'), ser(gold, 'Gold (gram)'), ser(xu, 'XU100')].filter((s) => s.r.length);
   if (!all.length) return [];
   const start = all.map((s) => s.r[0].d).sort().pop();
   const out = [];
@@ -222,14 +223,14 @@ C('uyarilar', ['ozet', 'fiyatlama', 'teknik_tablo', 'bist_tablo', 'makro_ozet', 
   const a = [];
   const o = (oz || [])[0], f = (fy || [])[0], m = (mk || [])[0], u = (uo || [])[0];
   const push = (seviye, konu, mesaj) => a.push({ seviye, konu, mesaj });
-  if (o && Math.abs(o.tlref_aofm_bp) >= 50) push(o.tlref_aofm_bp > 0 ? 'yüksek' : 'orta', 'TLREF', 'TLREF, AOFM\'nin ' + Math.abs(o.tlref_aofm_bp) + ' bp ' + (o.tlref_aofm_bp > 0 ? 'üstünde: fonlama sıkışıyor' : 'altında: likidite bol'));
-  if (o && Math.abs(o.tlref_degisim_bp) >= 50) push('yüksek', 'TLREF', 'TLREF bir günde ' + (o.tlref_degisim_bp > 0 ? '+' : '') + o.tlref_degisim_bp + ' bp değişti');
-  if (f && f.aofm_farki_bp <= -200) push('orta', 'OIS', 'Bonolar ' + f.gun + ' gün için AOFM\'nin ' + Math.abs(f.aofm_farki_bp) + ' bp altında O/N fiyatlıyor: indirim beklentisi güçlü');
-  (tk || []).forEach((r) => { if (r.rsi != null && r.rsi < 30) push('orta', r.symbol, 'RSI ' + r.rsi.toFixed(1) + ': aşırı satım bölgesinde'); if (r.rsi != null && r.rsi > 70) push('orta', r.symbol, 'RSI ' + r.rsi.toFixed(1) + ': aşırı alım bölgesinde'); });
-  (bt || []).forEach((r) => { if (r.g5 != null && r.g5 <= -5) push('düşük', r.symbol, '5 günde %' + Math.abs(r.g5).toFixed(2) + ' düştü'); if (r.son && r.dip && r.son <= r.dip * 1.05) push('düşük', r.symbol, '52 haftalık dibine %5\'ten yakın'); });
-  if (m && m.rez_chg != null && m.rez_chg <= -5) push('yüksek', 'REZERV', 'TCMB brüt rezervleri bir haftada ' + Math.abs(m.rez_chg).toFixed(1) + ' mlr $ azaldı');
-  if (m && m.reel_ante != null && m.reel_ante > 10) push('düşük', 'REEL FAİZ', 'Ex-ante reel faiz +' + m.reel_ante.toFixed(1) + ' puan: sıkı duruş sürüyor');
-  if (u && Math.abs(u.degisim_yuzde) >= 0.5) push('orta', 'USD/TRY', 'Günlük değişim %' + u.degisim_yuzde.toFixed(2));
-  const rank = { 'yüksek': 0, 'orta': 1, 'düşük': 2 };
+  if (o && Math.abs(o.tlref_aofm_bp) >= 50) push(o.tlref_aofm_bp > 0 ? 'high' : 'medium', 'TLREF', 'TLREF is ' + Math.abs(o.tlref_aofm_bp) + ' bp ' + (o.tlref_aofm_bp > 0 ? 'above the CBRT funding cost: funding is tight' : 'below the CBRT funding cost: liquidity is ample'));
+  if (o && Math.abs(o.tlref_degisim_bp) >= 50) push('high', 'TLREF', 'TLREF moved ' + (o.tlref_degisim_bp > 0 ? '+' : '') + o.tlref_degisim_bp + ' bp in one day');
+  if (f && f.aofm_farki_bp <= -200) push('medium', 'OIS', 'Bills price the O/N rate ' + Math.abs(f.aofm_farki_bp) + ' bp below the CBRT funding cost over ' + f.gun + ' days: strong easing expectations');
+  (tk || []).forEach((r) => { if (r.rsi != null && r.rsi < 30) push('medium', r.symbol, 'RSI ' + r.rsi.toFixed(1) + ': oversold'); if (r.rsi != null && r.rsi > 70) push('medium', r.symbol, 'RSI ' + r.rsi.toFixed(1) + ': overbought'); });
+  (bt || []).forEach((r) => { if (r.g5 != null && r.g5 <= -5) push('low', r.symbol, 'Down ' + Math.abs(r.g5).toFixed(2) + '% in 5 days'); if (r.son && r.dip && r.son <= r.dip * 1.05) push('low', r.symbol, 'Within 5% of its 52-week low'); });
+  if (m && m.rez_chg != null && m.rez_chg <= -5) push('high', 'RESERVES', 'CBRT gross reserves fell $' + Math.abs(m.rez_chg).toFixed(1) + ' bn in one week');
+  if (m && m.reel_ante != null && m.reel_ante > 10) push('low', 'REAL RATE', 'Ex-ante real rate +' + m.reel_ante.toFixed(1) + ' pp: policy stance remains tight');
+  if (u && Math.abs(u.degisim_yuzde) >= 0.5) push('medium', 'USD/TRY', '1-day change ' + u.degisim_yuzde.toFixed(2) + '%');
+  const rank = { 'high': 0, 'medium': 1, 'low': 2 };
   return a.sort((x, y) => rank[x.seviye] - rank[y.seviye]);
 });

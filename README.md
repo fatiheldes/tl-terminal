@@ -1,4 +1,4 @@
-# TL Faiz Terminali
+# TL Rates Terminal
 
 TLREF, TCMB fonlama maliyeti, BIST repo, hazine bonolarından yaklaşık TLREF OIS eğrisi, döviz/altın/Brent/XU100 ve Türkiye ekonomik takvimi tek sayfada.
 

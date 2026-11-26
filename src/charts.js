@@ -1,13 +1,13 @@
 
 (function () {
-  const L = d3.formatLocale({ decimal: ',', thousands: '.', grouping: [3], currency: ['', ' ₺'] });
+  const L = d3.formatLocale({ decimal: '.', thousands: ',', grouping: [3], currency: ['', ''] });
   const f2 = L.format(',.2f'), f1 = L.format(',.1f'), f0 = L.format(',.0f'), f4 = L.format(',.4f'), f3 = L.format(',.3f');
-  const months = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'];
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   const dt = (s) => { const d = (s instanceof Date) ? s : new Date(String(s).slice(0, 10) + 'T00:00:00Z'); return d.getUTCDate() + ' ' + months[d.getUTCMonth()] + ' ' + d.getUTCFullYear(); };
   const dShort = (d) => d.getUTCDate() + ' ' + months[d.getUTCMonth()];
   const mShort = (d) => months[d.getUTCMonth()] + (d.getUTCMonth() === 0 ? ' ' + String(d.getUTCFullYear()).slice(2) : '');
   window.TT = {
-    pct: (v) => (v == null || isNaN(v)) ? '—' : '%' + f2(v),
+    pct: (v) => (v == null || isNaN(v)) ? '—' : f2(v) + '%',
     bp: (v) => (v == null || isNaN(v)) ? '—' : (v > 0 ? '+' : v < 0 ? '−' : '') + f0(Math.abs(v)),
     f0, f1, f2, f3, f4, dt, dShort, mShort,
     parseD: (s) => new Date(String(s).slice(0, 10) + 'T00:00:00Z'),
@@ -20,7 +20,7 @@
     o = o || {};
     d3.select(el).selectAll('*').remove();
     const all = series.flatMap((s) => s.values).filter((v) => v.y != null && !isNaN(v.y));
-    if (!all.length) { const p = document.createElement('div'); p.className = 'tt-empty'; p.textContent = o.empty || 'Veri yok.'; el.appendChild(p); return; }
+    if (!all.length) { const p = document.createElement('div'); p.className = 'tt-empty'; p.textContent = o.empty || 'No data.'; el.appendChild(p); return; }
     const lg = d3.select(el).append('div').attr('class', 'tt-legend');
     series.forEach((s) => lg.append('span').attr('class', s.dash ? 'dash' : null).style('--sw', s.color).text(s.name));
     const W = Math.max(260, el.clientWidth), H = o.height || 240;
@@ -28,9 +28,9 @@
     const pad = Math.max(0.25, (yExt[1] - yExt[0]) * 0.08);
     const y = d3.scaleLinear().domain([yExt[0] - pad, yExt[1] + pad]).nice();
     const x = d3.scaleUtc().domain(o.xDomain || d3.extent(all, (d) => d.x));
-    const svg = d3.select(el).append('svg').attr('width', W).attr('height', H).attr('role', 'img').attr('aria-label', el.getAttribute('aria-label') || 'Grafik');
+    const svg = d3.select(el).append('svg').attr('width', W).attr('height', H).attr('role', 'img').attr('aria-label', el.getAttribute('aria-label') || 'Chart');
     const ticksY = H < 200 ? 4 : 5;
-    const yFmt = o.yFmt || ((v) => '%' + TT.f0(v));
+    const yFmt = o.yFmt || ((v) => TT.f0(v) + '%');
     const gy = svg.append('g').attr('class', 'axis');
     gy.call(d3.axisLeft(y).ticks(ticksY).tickFormat(yFmt).tickSizeOuter(0));
     let ml = 0; gy.selectAll('text').each(function () { ml = Math.max(ml, this.getComputedTextLength()); });
@@ -92,22 +92,66 @@
     const lg = d3.select(el).append('div').attr('class', 'tt-legend');
     lg.append('span').style('--sw', o.color).text(o.label || '');
     const W = Math.max(260, el.clientWidth), H = o.height || 110;
+    const yF = o.yFmt || ((v) => TT.f1(v) + '%'), tF = o.tipFmt || ((v) => TT.f2(v) + '%');
+    const spanD = data.length > 1 ? Math.abs(data[data.length - 1].x - data[0].x) / 864e5 : 0; const xF = spanD > 0 && spanD < 150 ? TT.dShort : TT.mShort;
     const m = { t: 6, r: 14, b: 22, l: 40 };
     const x = d3.scaleBand().domain(data.map((d) => +d.x)).range([m.l, W - m.r]).padding(0.25);
     const y = d3.scaleLinear().domain([Math.min(0, d3.min(data, (d) => d.y)), Math.max(0, d3.max(data, (d) => d.y))]).nice().range([H - m.b, m.t]);
-    const svg = d3.select(el).append('svg').attr('width', W).attr('height', H).attr('role', 'img').attr('aria-label', o.label || 'Sütun grafik');
+    const svg = d3.select(el).append('svg').attr('width', W).attr('height', H).attr('role', 'img').attr('aria-label', o.label || 'Bar chart');
     svg.append('g').attr('class', 'grid').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(3).tickSize(-(W - m.l - m.r)).tickFormat(''));
-    svg.append('g').attr('class', 'axis').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(3).tickFormat((v) => '%' + TT.f1(v)).tickSizeOuter(0));
+    svg.append('g').attr('class', 'axis').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(3).tickFormat(yF).tickSizeOuter(0));
     const every = Math.max(1, Math.ceil(data.length / Math.max(2, Math.floor((W - m.l - m.r) / 60))));
-    svg.append('g').attr('class', 'axis').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).tickValues(x.domain().filter((d, i) => i % every === 0)).tickFormat((d) => TT.mShort(new Date(d))).tickSizeOuter(0));
+    svg.append('g').attr('class', 'axis').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).tickValues(x.domain().filter((d, i) => i % every === 0)).tickFormat((d) => xF(new Date(d))).tickSizeOuter(0));
     const tip = d3.select(el).append('div').attr('class', 'tt-tip').style('display', 'none');
     svg.append('g').selectAll('rect').data(data).join('rect')
       .attr('x', (d) => x(+d.x)).attr('width', x.bandwidth())
       .attr('y', (d) => TT.anim && TT.motion() ? y(0) : y(Math.max(0, d.y))).attr('height', (d) => TT.anim && TT.motion() ? 0 : Math.abs(y(d.y) - y(0)))
-      .style('fill', o.color || '#3cc8f0')
-      .on('pointerenter', (ev, d) => { tip.selectAll('*').remove(); tip.append('div').attr('class', 'tt-tip-d').text(TT.mShort(d.x) + ' ' + d.x.getUTCFullYear()); tip.append('div').text((o.label || '') + ': %' + TT.f2(d.y)); const px = x(+d.x); tip.style('display', null).style('top', '20px').style('left', Math.min(px + 10, W - 140) + 'px'); })
+      .style('fill', (d) => o.signColor ? (d.y >= 0 ? '#22d160' : '#ff3b3b') : (o.color || '#3cc8f0'))
+      .on('pointerenter', (ev, d) => { tip.selectAll('*').remove(); tip.append('div').attr('class', 'tt-tip-d').text(TT.dt(d.x)); tip.append('div').text(tF(d.y)); const px = x(+d.x); tip.style('display', null).style('top', '20px').style('left', Math.min(px + 10, W - 140) + 'px'); })
       .on('pointerleave', () => tip.style('display', 'none'));
     if (TT.anim && TT.motion()) svg.selectAll('rect').filter((d) => d && d.x).transition().delay((d, i) => i * 35).duration(600).ease(d3.easeCubicOut).attr('y', (d) => y(Math.max(0, d.y))).attr('height', (d) => Math.abs(y(d.y) - y(0)));
+  };
+
+  // Numeric x-axis chart (yield curve). series: [{name,color,dash,dots,width,values:[{x,y}]}]
+  window.TT.xy = function (el, series, o) {
+    o = o || {};
+    d3.select(el).selectAll('*').remove();
+    const all = series.flatMap((s) => s.values).filter((v) => v.y != null && !isNaN(v.y));
+    if (!all.length) return;
+    const lg = d3.select(el).append('div').attr('class', 'tt-legend');
+    series.forEach((s) => lg.append('span').attr('class', s.dash ? 'dash' : null).style('--sw', s.color).text(s.name));
+    const W = Math.max(280, el.clientWidth), H = o.height || 260, m = { t: 8, r: 16, b: 24, l: 44 };
+    const x = d3.scaleLinear().domain([0, d3.max(all, (d) => d.x) * 1.03]).range([m.l, W - m.r]);
+    const ye = d3.extent(all, (d) => d.y); const pad = Math.max(0.3, (ye[1] - ye[0]) * 0.1);
+    const y = d3.scaleLinear().domain([ye[0] - pad, ye[1] + pad]).nice().range([H - m.b, m.t]);
+    const svg = d3.select(el).append('svg').attr('width', W).attr('height', H).attr('role', 'img').attr('aria-label', el.getAttribute('aria-label') || 'Chart');
+    svg.append('g').attr('class', 'grid').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(6).tickSize(-(W - m.l - m.r)).tickFormat(''));
+    svg.append('g').attr('class', 'axis').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(6).tickFormat(o.yFmt || ((v) => v)).tickSizeOuter(0));
+    svg.append('g').attr('class', 'axis').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).ticks(Math.min(10, Math.floor((W - m.l - m.r) / 55))).tickFormat(o.xFmt || ((v) => v)).tickSizeOuter(0));
+    const anim = TT.anim && TT.motion();
+    series.forEach((s) => {
+      const vals = s.values.filter((v) => v.y != null).sort((a, b) => a.x - b.x);
+      if (s.width !== 0) {
+        const p = svg.append('path').datum(vals).attr('d', d3.line().x((d) => x(d.x)).y((d) => y(d.y)).curve(d3.curveMonotoneX)).style('fill', 'none').style('stroke', s.color).style('stroke-width', s.width || 2).style('stroke-dasharray', s.dash ? '5 3' : null);
+        if (anim && !s.dash) { const len = p.node().getTotalLength(); p.style('stroke-dasharray', len + ' ' + len).style('stroke-dashoffset', len).transition().duration(1300).ease(d3.easeCubicOut).style('stroke-dashoffset', 0).on('end', function () { d3.select(this).style('stroke-dasharray', null); }); }
+        if (anim && s.dash) p.style('opacity', 0).transition().delay(500).duration(700).style('opacity', 1);
+      }
+      if (s.dots) {
+        const c = svg.append('g').selectAll('circle').data(vals).join('circle').attr('cx', (d) => x(d.x)).attr('cy', (d) => y(d.y)).attr('r', anim ? 0 : 4).style('fill', s.color).style('stroke', '#000').style('stroke-width', 1);
+        if (anim) c.transition().delay((d, i) => 700 + i * 50).duration(300).attr('r', 4);
+      }
+    });
+    const tip = d3.select(el).append('div').attr('class', 'tt-tip').style('display', 'none');
+    const rule = svg.append('line').attr('y1', m.t).attr('y2', H - m.b).style('stroke', '#ffa028').style('stroke-opacity', 0.5).style('display', 'none');
+    svg.append('rect').attr('x', m.l).attr('y', m.t).attr('width', W - m.l - m.r).attr('height', H - m.t - m.b).style('fill', 'transparent')
+      .on('pointermove', (ev) => {
+        const [px] = d3.pointer(ev); const xv = x.invert(px);
+        rule.style('display', null).attr('x1', px).attr('x2', px);
+        tip.selectAll('*').remove(); tip.append('div').attr('class', 'tt-tip-d').text((o.tipX || ((v) => v))(xv));
+        series.forEach((s) => { const v = s.values.filter((q) => q.y != null); if (!v.length) return; const n = v.reduce((a, b) => Math.abs(b.x - xv) < Math.abs(a.x - xv) ? b : a); if (Math.abs(n.x - xv) < (s.dots ? 0.25 : 0.2)) tip.append('div').text(s.name + ': ' + (o.tipY || ((q) => q))(n.y) + (s.dots ? ' @ ' + TT.f2(n.x) + 'Y' : '')); });
+        tip.style('display', null).style('top', (m.t + 26) + 'px'); const tw = tip.node().offsetWidth; tip.style('left', (px + 12 + tw > W ? px - tw - 12 : px + 12) + 'px');
+      })
+      .on('pointerleave', () => { tip.style('display', 'none'); rule.style('display', 'none'); });
   };
 
   window.TT.motion = () => !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -118,7 +162,7 @@
     d3.select(el).selectAll('*').remove();
     if (!data.length) return;
     const lg = d3.select(el).append('div').attr('class', 'tt-legend');
-    lg.append('span').style('--sw', '#2ee66b').text('yükselen gün'); lg.append('span').style('--sw', '#ff4545').text('düşen gün');
+    lg.append('span').style('--sw', '#2ee66b').text('up day'); lg.append('span').style('--sw', '#ff4545').text('down day');
     (o.refs || []).forEach((r) => lg.append('span').attr('class', 'dash').style('--sw', r.color).text(r.label));
     const W = Math.max(280, el.clientWidth), H = o.height || 300, vh = 46;
     const m = { t: 8, r: 58, b: 22, l: 8 };
@@ -127,7 +171,7 @@
     const ext = [Math.min(lo, ...(o.refs || []).map((r) => r.y)), Math.max(hi, ...(o.refs || []).map((r) => r.y))];
     const y = d3.scaleLinear().domain(ext).nice().range([H - m.b - vh - 6, m.t]);
     const yv = d3.scaleLinear().domain([0, d3.max(data, (d) => d.v || 0)]).range([H - m.b, H - m.b - vh]);
-    const svg = d3.select(el).append('svg').attr('width', W).attr('height', H).attr('role', 'img').attr('aria-label', el.getAttribute('aria-label') || 'Mum grafik');
+    const svg = d3.select(el).append('svg').attr('width', W).attr('height', H).attr('role', 'img').attr('aria-label', el.getAttribute('aria-label') || 'Candlestick chart');
     svg.append('g').attr('class', 'grid').attr('transform', `translate(${W - m.r},0)`).call(d3.axisRight(y).ticks(6).tickSize(-(W - m.l - m.r)).tickFormat(''));
     svg.append('g').attr('class', 'axis').attr('transform', `translate(${W - m.r},0)`).call(d3.axisRight(y).ticks(6).tickFormat((v) => TT.f0(v)).tickSizeOuter(0));
     const every = Math.max(1, Math.ceil(data.length / Math.max(2, Math.floor((W - m.l - m.r) / 70))));
@@ -158,8 +202,8 @@
         vline.style('display', null).attr('x1', cx).attr('x2', cx); hline.style('display', null).attr('y1', py).attr('y2', py);
         tip.selectAll('*').remove();
         tip.append('div').attr('class', 'tt-tip-d').text(TT.dt(d.x));
-        [['Açılış', d.o], ['Yüksek', d.h], ['Düşük', d.l], ['Kapanış', d.c]].forEach(([k, v]) => tip.append('div').text(k + ': ' + TT.f2(v)));
-        const prev = data[i - 1]; if (prev) tip.append('div').text('Değişim: ' + (d.c >= prev.c ? '+' : '−') + '%' + TT.f2(Math.abs(d.c / prev.c - 1) * 100));
+        [['Open', d.o], ['High', d.h], ['Low', d.l], ['Close', d.c]].forEach(([k, v]) => tip.append('div').text(k + ': ' + TT.f2(v)));
+        const prev = data[i - 1]; if (prev) tip.append('div').text('Change: ' + (d.c >= prev.c ? '+' : '−') + TT.f2(Math.abs(d.c / prev.c - 1) * 100) + '%');
         tip.style('display', null).style('top', '28px');
         const tw = tip.node().offsetWidth; tip.style('left', (cx + 12 + tw > W ? cx - tw - 12 : cx + 12) + 'px');
       })
@@ -171,7 +215,7 @@
     o = o || {};
     d3.select(el).selectAll('*').remove();
     const W = Math.max(180, Math.min(el.clientWidth, 320)), H = W * 0.62, r = W * 0.36, cx = W / 2, cy = H - 18;
-    const svg = d3.select(el).append('svg').attr('width', W).attr('height', H).attr('role', 'img').attr('aria-label', (o.label || 'Gösterge') + ' ' + TT.f1(value));
+    const svg = d3.select(el).append('svg').attr('width', W).attr('height', H).attr('role', 'img').attr('aria-label', (o.label || 'Gauge') + ' ' + TT.f1(value));
     const a = d3.scaleLinear().domain([0, 100]).range([-Math.PI / 2, Math.PI / 2]);
     const arc = d3.arc().innerRadius(r * 0.78).outerRadius(r);
     [[0, 30, '#2ee66b'], [30, 70, '#3a3a3a'], [70, 100, '#ff4545']].forEach(([f, t, c]) => svg.append('path').attr('transform', `translate(${cx},${cy})`).attr('d', arc({ startAngle: a(f), endAngle: a(t) })).style('fill', c).style('opacity', 0.85));

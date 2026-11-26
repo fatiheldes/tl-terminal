@@ -82,7 +82,7 @@ html, body { margin: 0; background: #000; }
 .tabs .hint { margin-left: 8px; }
 .alerts { display: flex; flex-direction: column; gap: 3px; max-height: 236px; overflow: auto; }
 .alerts div { display: grid; grid-template-columns: 62px 86px 1fr; gap: 8px; padding: 3px 6px; border-left: 3px solid var(--mu); background: #0b0b0b; font-size: 11px; }
-.alerts div.yüksek { border-color: var(--dn); } .alerts div.orta { border-color: var(--am); } .alerts div.düşük { border-color: var(--cy); }
+.alerts div.high { border-color: var(--dn); } .alerts div.medium { border-color: var(--am); } .alerts div.low { border-color: var(--cy); }
 .alerts b { font-weight: 700; } .alerts .lv { text-transform: uppercase; font-size: 10px; }
 .rsi { display: inline-block; position: relative; width: 80px; height: 8px; vertical-align: middle; background: linear-gradient(90deg, #1d6b33 0 30%, #2a2a2a 30% 70%, #7a2222 70% 100%); }
 .rsi i { position: absolute; top: -2px; width: 3px; height: 12px; background: var(--yl); }
@@ -92,145 +92,204 @@ html, body { margin: 0; background: #000; }
 .foot { border-top: 1px solid var(--ln); color: var(--mu); font-size: 10.5px; padding: 4px 4px 2px; line-height: 1.5; }
 .foot summary { cursor: pointer; color: var(--am); letter-spacing: .05em; }
 .foot p { margin: 4px 0; max-width: 80em; }
+.seg { display: inline-flex; gap: 2px; flex-wrap: wrap; }
+.seg button { font: inherit; font-size: 10.5px; background: #161616; color: var(--mu); border: 1px solid var(--ln); padding: 2px 8px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--am); color: #000; border-color: var(--am); }
+.tb th[data-sort] { cursor: pointer; } .tb th[data-sort]:hover { color: var(--yl); }
+.calc { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 6px; align-items: end; margin-bottom: 6px; }
+.calc label { display: flex; flex-direction: column; gap: 3px; font-size: 10px; color: var(--am); letter-spacing: .05em; text-transform: uppercase; }
+.calc select, .calc input { font: inherit; font-size: 12px; background: #0e0e0e; color: var(--tx); border: 1px solid #3a3a3a; padding: 4px 6px; }
+.calc input[type=range] { padding: 0; accent-color: var(--am); }
+.cov { color: var(--mu); font-size: 10.5px; line-height: 1.5; margin: 0; }
+.cov b { color: var(--am); font-weight: 600; }
 </style>
 
 <div class="bt">
   <header class="bt-top">
-    <h1>TL FAİZ TERMİNALİ</h1>
-    <span class="tag">TLREF · OIS · PİYASA · MAKRO · HİSSE · TAKVİM</span>
-    <span class="upd"><span class="blink">●</span> GÜNCELLEME: __ASOF__</span>
-    <span class="clk">İSTANBUL <span data-draw="saat">—</span></span>
+    <h1>TL RATES TERMINAL</h1>
+    <span class="tag">TLREF · OIS · FIXED INCOME · MARKETS · MACRO · EQUITIES · CALENDAR</span>
+    <span class="upd"><span class="blink">●</span> UPDATED: __ASOF__</span>
+    <span class="clk">ISTANBUL <span data-draw="saat">—</span></span>
   </header>
 
-  <div class="tape" aria-label="Fiyat şeridi"><div class="tape-in" data-draw="tape"></div></div>
+  <div class="tape" aria-label="Price ticker"><div class="tape-in" data-draw="tape"></div></div>
 
   <nav class="tabs" role="tablist">
-    <button role="tab" data-tab="piyasa"><span class="k">1</span>PİYASA</button>
-    <button role="tab" data-tab="faiz"><span class="k">2</span>FAİZ · OIS</button>
-    <button role="tab" data-tab="makro"><span class="k">3</span>MAKRO</button>
-    <button role="tab" data-tab="hisse"><span class="k">4</span>HİSSE</button>
-    <button role="tab" data-tab="takvim"><span class="k">5</span>TAKVİM</button>
-    <button role="tab" data-tab="teknik"><span class="k">6</span>TEKNİK</button>
-    <button class="mon" type="button" aria-pressed="false" title="Sekmeleri 15 saniyede bir otomatik döndürür">▶ MONİTÖR MODU<i></i></button>
-    <span class="hint">klavye: 1–6 sekme · M monitör</span>
+    <button role="tab" data-tab="piyasa"><span class="k">1</span>MARKETS</button>
+    <button role="tab" data-tab="faiz"><span class="k">2</span>RATES · OIS</button>
+    <button role="tab" data-tab="fixed"><span class="k">3</span>FIXED INCOME</button>
+    <button role="tab" data-tab="makro"><span class="k">4</span>MACRO</button>
+    <button role="tab" data-tab="hisse"><span class="k">5</span>EQUITIES</button>
+    <button role="tab" data-tab="takvim"><span class="k">6</span>CALENDAR</button>
+    <button role="tab" data-tab="teknik"><span class="k">7</span>TECHNICALS</button>
+    <button class="mon" type="button" aria-pressed="false" title="Rotates through the pages every 15 seconds">▶ MONITOR MODE<i></i></button>
+    <span class="hint">keys: 1–7 pages · M monitor</span>
   </nav>
 
-  <!-- 1 PİYASA -->
+  <!-- 1 MARKETS -->
   <section class="page" id="piyasa">
     <div class="g">
-      <div class="pn"><h2><span class="n">1.1</span>Döviz<span class="s">son kapanış · çapraz kurlar hesaplanır</span></h2>
-        <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Parite</th><th class="r">Son</th><th class="r">Tarih</th></tr></thead><tbody data-draw="t-fx"></tbody></table></div></div></div>
-      <div class="pn"><h2><span class="n">1.2</span>Emtia · Kripto<span class="s">ons altın gram fiyatından türetilir</span></h2>
-        <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Varlık</th><th class="r">Son</th><th class="r">Birim</th></tr></thead><tbody data-draw="t-emtia"></tbody></table></div></div></div>
-      <div class="pn"><h2><span class="n">1.3</span>Endeksler<span class="s">XU100 günlük · ABD ETF 52H aralık</span></h2>
-        <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Endeks</th><th class="r">Son</th><th class="r">Gün %</th><th class="r">52H</th></tr></thead><tbody data-draw="t-endeks"></tbody></table></div></div></div>
+      <div class="pn"><h2><span class="n">1.1</span>FX<span class="s">last close · crosses computed from TRY rates</span></h2>
+        <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Pair</th><th class="r">Last</th><th class="r">As of</th></tr></thead><tbody data-draw="t-fx"></tbody></table></div></div></div>
+      <div class="pn"><h2><span class="n">1.2</span>Commodities · Crypto<span class="s">gold oz derived from gram price</span></h2>
+        <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Asset</th><th class="r">Last</th><th class="r">Unit</th></tr></thead><tbody data-draw="t-emtia"></tbody></table></div></div></div>
+      <div class="pn"><h2><span class="n">1.3</span>Indices<span class="s">BIST 100 daily · US ETFs 52-week range</span></h2>
+        <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Index</th><th class="r">Last</th><th class="r">1D %</th><th class="r">52W</th></tr></thead><tbody data-draw="t-endeks"></tbody></table></div></div></div>
     </div>
     <div class="g w2">
-      <div class="pn"><h2><span class="n">1.0</span>Uyarılar<span class="s">kurala dayalı · otomatik</span></h2><div class="bd"><div class="alerts" data-draw="alerts"></div></div></div>
-      <div class="pn"><h2><span class="n">1.9</span>Göreli performans<span class="s">3 ay · başlangıç = 100</span></h2><div class="bd"><div class="tt-chart" style="min-height:236px" data-draw="ch-perf" aria-label="Göreli performans"></div></div></div>
+      <div class="pn"><h2><span class="n">1.0</span>Alerts<span class="s">rule-based · automatic</span></h2><div class="bd"><div class="alerts" data-draw="alerts"></div></div></div>
+      <div class="pn"><h2><span class="n">1.9</span>Relative performance<span class="s">3 months · start = 100</span></h2><div class="bd"><div class="tt-chart" style="min-height:236px" data-draw="ch-perf" aria-label="Relative performance"></div></div></div>
     </div>
     <div class="g w2">
-      <div class="pn"><h2><span class="n">1.4</span>BIST ısı haritası<span class="s">günlük değişim %</span></h2><div class="bd"><div class="heat" data-draw="heat"></div></div></div>
-      <div class="pn"><h2><span class="n">1.5</span>TL faiz özeti<span class="s">EVDS · TCMB anketi</span></h2>
+      <div class="pn"><h2><span class="n">1.4</span>BIST heatmap<span class="s">1-day change %</span></h2><div class="bd"><div class="heat" data-draw="heat"></div></div></div>
+      <div class="pn"><h2><span class="n">1.5</span>TL rates snapshot<span class="s">CBRT EVDS · CBRT survey</span></h2>
         <div class="bd"><div class="kv">
           <div><div class="l">TLREF O/N</div><div class="v" data-draw="k-tlref">—</div><div class="c"><span data-draw="k-chg">—</span> bp</div></div>
-          <div><div class="l">TCMB AOFM</div><div class="v" data-draw="k-aofm">—</div><div class="c">fonlama maliyeti</div></div>
-          <div><div class="l">İMA O/N (BONO)</div><div class="v" data-draw="k-ima">—</div><div class="c"><span data-draw="k-ima-fark">—</span> bp vs AOFM</div></div>
-          <div><div class="l">PPK BEKLENTİ</div><div class="v" data-draw="k-ppk">—</div><div class="c">ilk toplantı (anket)</div></div>
-          <div><div class="l">TÜFE YILLIK</div><div class="v" data-draw="k-tufe">—</div><div class="c" data-draw="k-tufe-ay">—</div></div>
-          <div><div class="l">REEL FAİZ (EX-ANTE)</div><div class="v" data-draw="k-reel">—</div><div class="c">TLREF − 12A TÜFE bekl.</div></div>
+          <div><div class="l">CBRT AWFC</div><div class="v" data-draw="k-aofm">—</div><div class="c">avg funding cost</div></div>
+          <div><div class="l">IMPLIED O/N (BILLS)</div><div class="v" data-draw="k-ima">—</div><div class="c"><span data-draw="k-ima-fark">—</span> bp vs AWFC</div></div>
+          <div><div class="l">MPC EXPECTATION</div><div class="v" data-draw="k-ppk">—</div><div class="c">next meeting (survey)</div></div>
+          <div><div class="l">CPI Y/Y</div><div class="v" data-draw="k-tufe">—</div><div class="c" data-draw="k-tufe-ay">—</div></div>
+          <div><div class="l">REAL RATE (EX-ANTE)</div><div class="v" data-draw="k-reel">—</div><div class="c">TLREF − 12M CPI exp.</div></div>
         </div></div></div>
     </div>
     <div class="g">
-      <div class="pn"><h2><span class="n">1.6</span>XU100<span class="s">haftalık kapanış · 3 ay</span></h2><div class="bd"><div class="tt-chart sm" data-draw="ch-xu" aria-label="XU100 haftalık"></div></div></div>
-      <div class="pn"><h2><span class="n">1.7</span>USD/TRY<span class="s">günlük · 3 ay</span></h2><div class="bd"><div class="tt-chart sm" data-draw="ch-usd" aria-label="USD/TRY"></div></div></div>
-      <div class="pn"><h2><span class="n">1.8</span>Gram altın<span class="s">TL · 3 ay</span></h2><div class="bd"><div class="tt-chart sm" data-draw="ch-gold" aria-label="Gram altın"></div></div></div>
+      <div class="pn"><h2><span class="n">1.6</span>BIST 100<span class="s">weekly close · 3 months</span></h2><div class="bd"><div class="tt-chart sm" data-draw="ch-xu" aria-label="BIST 100 weekly"></div></div></div>
+      <div class="pn"><h2><span class="n">1.7</span>USD/TRY<span class="s">daily · 3 months</span></h2><div class="bd"><div class="tt-chart sm" data-draw="ch-usd" aria-label="USD/TRY"></div></div></div>
+      <div class="pn"><h2><span class="n">1.8</span>Gold (gram)<span class="s">TRY · 3 months</span></h2><div class="bd"><div class="tt-chart sm" data-draw="ch-gold" aria-label="Gold per gram"></div></div></div>
     </div>
   </section>
 
-  <!-- 2 FAİZ -->
+  <!-- 2 RATES · OIS -->
   <section class="page" id="faiz" hidden>
-    <p class="news"><span class="k">ÖZET</span>TLREF <b data-draw="k-tlref-s">—</b> (<span data-draw="k-tlref-tarih">—</span>), önceki iş gününe göre <b data-draw="k-chg-s">—</b> bp. Hazine bonoları <b data-draw="f-gun">—</b> gün için ortalama <b data-draw="f-ort">—</b> gecelik faiz ima ediyor: TCMB fonlama maliyetinin <b data-draw="f-fark">—</b> bp <span data-draw="f-yon">—</span>. Anket katılımcıları ilk PPK toplantısı için <b data-draw="k-ppk-s">—</b> bekliyor.</p>
+    <p class="news"><span class="k">SUMMARY</span>TLREF <b data-draw="k-tlref-s">—</b> (<span data-draw="k-tlref-tarih">—</span>), <b data-draw="k-chg-s">—</b> bp vs the previous business day. T-bills price an average overnight rate of <b data-draw="f-ort">—</b> over the next <b data-draw="f-gun">—</b> days: <b data-draw="f-fark">—</b> bp <span data-draw="f-yon">—</span> the CBRT average funding cost. Survey respondents expect <b data-draw="k-ppk-s">—</b> at the next MPC meeting.</p>
     <div class="kv" style="margin-top:4px">
       <div><div class="l">TLREF O/N</div><div class="v" data-draw="k-tlref">—</div><div class="c"><span data-draw="k-chg">—</span> bp</div></div>
-      <div><div class="l">TCMB AOFM</div><div class="v" data-draw="k-aofm">—</div><div class="c">fonlama maliyeti</div></div>
-      <div><div class="l">BIST O/N REPO</div><div class="v" data-draw="k-repo">—</div><div class="c">ağırlıklı ort.</div></div>
-      <div><div class="l">TLREF−AOFM</div><div class="v" data-draw="k-spread">—</div><div class="c">baz puan</div></div>
-      <div><div class="l">İMA O/N (BONO)</div><div class="v" data-draw="k-ima">—</div><div class="c"><span data-draw="k-ima-fark">—</span> bp vs AOFM</div></div>
-      <div><div class="l">YIL SONU PPK</div><div class="v" data-draw="k-ppk-ys">—</div><div class="c">anket beklentisi</div></div>
-      <div><div class="l">12 AY SONRA PPK</div><div class="v" data-draw="k-ppk-12">—</div><div class="c">anket beklentisi</div></div>
+      <div><div class="l">CBRT AWFC</div><div class="v" data-draw="k-aofm">—</div><div class="c">avg funding cost</div></div>
+      <div><div class="l">BIST O/N REPO</div><div class="v" data-draw="k-repo">—</div><div class="c">weighted avg.</div></div>
+      <div><div class="l">TLREF−AWFC</div><div class="v" data-draw="k-spread">—</div><div class="c">basis points</div></div>
+      <div><div class="l">IMPLIED O/N (BILLS)</div><div class="v" data-draw="k-ima">—</div><div class="c"><span data-draw="k-ima-fark">—</span> bp vs AWFC</div></div>
+      <div><div class="l">YEAR-END POLICY</div><div class="v" data-draw="k-ppk-ys">—</div><div class="c">survey expectation</div></div>
+      <div><div class="l">POLICY IN 12M</div><div class="v" data-draw="k-ppk-12">—</div><div class="c">survey expectation</div></div>
     </div>
     <div class="g w2" style="margin-top:4px">
-      <div class="pn"><h2><span class="n">2.1</span>İma edilen O/N patikası<span class="s">bono forward · basit, gün/365</span></h2><div class="bd"><div class="tt-chart" data-draw="ch-patika" aria-label="İma edilen gecelik faiz patikası"></div></div></div>
-      <div class="pn"><h2><span class="n">2.2</span>Yaklaşık OIS eğrisi<span class="s">TCMB gösterge fiyatı</span></h2>
-        <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Bono</th><th>Vade</th><th class="r">Gün</th><th class="r">Fiyat</th><th class="r">OIS eşd.</th><th class="r">İma O/N</th><th class="r">Fwd</th></tr></thead><tbody data-draw="t-egri"></tbody></table></div>
-        <p class="note">OIS eşdeğeri = (100/P − 1) × 365/gün. İma O/N, bu getiriyi günlük bileşik TLREF'e çeviren oran. Gerçek swap kotasyonu değildir.</p></div></div>
-      <div class="pn"><h2><span class="n">2.3</span>TLREF · AOFM · BIST repo<span class="s">günlük, son 6 ay</span></h2><div class="bd"><div class="tt-chart" data-draw="ch-oranlar" aria-label="TLREF, AOFM ve BIST repo"></div></div></div>
-      <div class="pn"><h2><span class="n">2.4</span>Bono ima O/N geçmişi<span class="s">düşüş = daha çok indirim fiyatı</span></h2><div class="bd"><div class="tt-chart" data-draw="ch-gecmis" aria-label="Bono ima O/N geçmişi"></div></div></div>
-      <div class="pn"><h2><span class="n">2.5</span>Politika faizi beklentileri<span class="s">TCMB Piyasa Katılımcıları Anketi</span></h2><div class="bd"><div class="tt-chart" data-draw="ch-ppk" aria-label="Politika faizi beklentileri"></div></div></div>
-      <div class="pn"><h2><span class="n">2.6</span>PPK takvimi ve piyasa fiyatlaması<span class="s">toplantı tarihindeki ima edilen forward O/N</span></h2>
-        <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>PPK</th><th class="r">Kalan gün</th><th class="r">İma fwd O/N</th><th class="r">AOFM'ye göre</th><th class="r">Anket</th></tr></thead><tbody data-draw="t-ppk"></tbody></table></div>
-        <div class="tt-chart sm" style="margin-top:6px" data-draw="ch-ppk-bar" aria-label="PPK tarihlerinde ima edilen değişim"></div>
-        <p class="note">Bonolardan çıkan forward O/N, toplantı tarihini kapsayan döneme aittir; bono-repo bazı düzeltilmemiştir, bu yüzden indirim büyüklüğünü abartabilir. Son bononun vadesinden sonraki toplantılar için piyasa verisi yoktur.</p></div></div>
+      <div class="pn"><h2><span class="n">2.1</span>Implied O/N path<span class="s">bill forwards · simple, act/365</span></h2><div class="bd"><div class="tt-chart" data-draw="ch-patika" aria-label="Implied overnight rate path"></div></div></div>
+      <div class="pn"><h2><span class="n">2.2</span>Approximate OIS curve<span class="s">CBRT indicative prices</span></h2>
+        <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Bill</th><th>Maturity</th><th class="r">Days</th><th class="r">Price</th><th class="r">OIS equiv.</th><th class="r">Implied O/N</th><th class="r">Fwd</th></tr></thead><tbody data-draw="t-egri"></tbody></table></div>
+        <p class="note">OIS equivalent = (100/P − 1) × 365/days. Implied O/N converts that yield into a daily-compounded TLREF rate. Not an actual swap quote.</p></div></div>
+      <div class="pn"><h2><span class="n">2.3</span>TLREF · AWFC · BIST repo<span class="s">daily, last 6 months</span></h2><div class="bd"><div class="tt-chart" data-draw="ch-oranlar" aria-label="TLREF, AWFC and BIST repo"></div></div></div>
+      <div class="pn"><h2><span class="n">2.4</span>Bill-implied O/N history<span class="s">falling = more cuts priced</span></h2><div class="bd"><div class="tt-chart" data-draw="ch-gecmis" aria-label="Bill-implied O/N history"></div></div></div>
+      <div class="pn"><h2><span class="n">2.5</span>Policy rate expectations<span class="s">CBRT Survey of Market Participants</span></h2><div class="bd"><div class="tt-chart" data-draw="ch-ppk" aria-label="Policy rate expectations"></div></div></div>
+      <div class="pn"><h2><span class="n">2.6</span>MPC calendar &amp; market pricing<span class="s">implied forward O/N at each meeting date</span></h2>
+        <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>MPC</th><th class="r">Days</th><th class="r">Implied fwd O/N</th><th class="r">vs AWFC</th><th class="r">Survey</th></tr></thead><tbody data-draw="t-ppk"></tbody></table></div>
+        <div class="tt-chart sm" style="margin-top:6px" data-draw="ch-ppk-bar" aria-label="Implied change at MPC dates"></div>
+        <p class="note">Bill forwards belong to the period that contains each meeting date and are not adjusted for the bill–repo basis, so they may overstate the size of cuts. No market data beyond the last bill's maturity.</p></div></div>
     </div>
   </section>
 
-  <!-- 3 MAKRO -->
+  <!-- 3 FIXED INCOME -->
+  <section class="page" id="fixed" hidden>
+    <div class="kv">
+      <div><div class="l">TRY 2Y (FITTED)</div><div class="v" data-draw="fi-k-2Y">—</div><div class="c" data-draw="fi-k-2Y-c">—</div></div>
+      <div><div class="l">TRY 5Y (FITTED)</div><div class="v" data-draw="fi-k-5Y">—</div><div class="c" data-draw="fi-k-5Y-c">—</div></div>
+      <div><div class="l">TRY 7Y (FITTED)</div><div class="v" data-draw="fi-k-7Y">—</div><div class="c" data-draw="fi-k-7Y-c">—</div></div>
+      <div><div class="l">2s7s SLOPE</div><div class="v" data-draw="fi-k-slope">—</div><div class="c">7Y − 2Y</div></div>
+      <div><div class="l">3M–2Y SLOPE</div><div class="v" data-draw="fi-k-slope2">—</div><div class="c">2Y − 3M</div></div>
+      <div><div class="l">CBRT NET FUNDING</div><div class="v" data-draw="fi-k-net">—</div><div class="c" data-draw="fi-k-net-c">—</div></div>
+      <div><div class="l">NON-RESIDENT GDDS</div><div class="v" data-draw="fi-k-nr">—</div><div class="c" data-draw="fi-k-nr-c">—</div></div>
+    </div>
+    <div class="g w2" style="margin-top:4px">
+      <div class="pn"><h2><span class="n">3.1</span>TRY government yield curve<span class="s">Nelson–Siegel fit · compounded YTM</span></h2>
+        <div class="bd"><div class="seg" style="margin-bottom:4px"><button data-curve="Today" aria-pressed="true">TODAY</button><button data-curve="1D ago" aria-pressed="false">1D AGO</button><button data-curve="1W ago" aria-pressed="true">1W AGO</button><button data-curve="1M ago" aria-pressed="true">1M AGO</button></div>
+        <div class="tt-chart" style="min-height:300px" data-draw="fi-curve" aria-label="TRY government yield curve"></div></div></div>
+      <div class="pn"><h2><span class="n">3.2</span>Curve matrix<span class="s">fitted yields and changes, bp</span></h2>
+        <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Tenor</th><th class="r">Yield</th><th class="r">1D</th><th class="r">1W</th><th class="r">1M</th></tr></thead><tbody data-draw="fi-matrix"></tbody></table></div>
+        <div class="tt-chart" style="margin-top:6px;min-height:230px" data-draw="fi-bench" aria-label="Benchmark yields history"></div></div></div>
+    </div>
+    <div class="pn" style="margin-top:4px"><h2><span class="n">3.3</span>Bond screener<span class="s">TRY fixed-coupon bonds and T-bills · click a row to analyse · click a header to sort</span></h2>
+      <div class="bd"><div class="seg" style="margin-bottom:5px"><button data-scr="all" aria-pressed="true">ALL</button><button data-scr="bill" aria-pressed="false">BILLS</button><button data-scr="s" aria-pressed="false">BONDS &lt;2Y</button><button data-scr="m" aria-pressed="false">2–5Y</button><button data-scr="l" aria-pressed="false">5Y+</button></div>
+      <div class="tw"><table class="tb"><thead><tr><th data-sort="isin">ISIN</th><th data-sort="type">Type</th><th data-sort="maturity">Maturity</th><th class="r" data-sort="years">Yrs</th><th class="r" data-sort="coupon">Coupon</th><th class="r" data-sort="price">Dirty px</th><th class="r" data-sort="ytm">YTM</th><th class="r" data-sort="simple">Simple</th><th class="r" data-sort="mod_dur">Mod dur</th><th class="r" data-sort="convexity">Convexity</th><th class="r" data-sort="dv01">DV01/1mn</th><th class="r" data-sort="chg_1d">1D bp</th><th class="r" data-sort="chg_1w">1W bp</th><th class="r" data-sort="chg_1m">1M bp</th><th class="r" data-sort="rich_cheap">vs curve bp</th></tr></thead><tbody data-draw="fi-screener"></tbody></table></div>
+      <p class="note">Prices are CBRT indicative values, coupon-inclusive (dirty), per 100 nominal. YTM is annually compounded, act/365, with semi-annual coupons. "vs curve" is the residual to the fitted Nelson–Siegel curve: positive = cheap, negative = rich.</p></div></div>
+    <div class="g w2" style="margin-top:4px">
+      <div class="pn"><h2><span class="n">3.4</span>Yield &amp; spread analysis<span class="s">price ↔ yield, risk, spreads, cash flows</span></h2>
+        <div class="bd" data-draw="fi-calc">
+          <div class="calc"><label>Security<select id="fi-calc-bond" data-draw="fi-calc-bond"></select></label><label>Solve from<select id="fi-calc-mode"><option value="price">Dirty price</option><option value="yield">Yield %</option></select></label><label>Input<input id="fi-calc-input" type="number" step="0.001"></label></div>
+          <div class="kv" style="grid-template-columns:repeat(auto-fit,minmax(175px,1fr))" data-calc-out></div>
+          <div class="tw" style="margin-top:6px;max-height:220px;overflow:auto"><table class="tb"><thead><tr><th>Cash-flow date</th><th class="r">Years</th><th class="r">Cash flow</th><th class="r">Discount factor</th><th class="r">PV</th></tr></thead><tbody data-calc-cf></tbody></table></div>
+        </div></div>
+      <div class="pn"><h2><span class="n">3.5</span>Scenario &amp; horizon analysis<span class="s">parallel shift · total return with coupon reinvestment</span></h2>
+        <div class="bd">
+          <div class="calc"><label>Parallel shift (bp)<input id="fi-shift" type="range" min="-500" max="500" step="25" value="-200"></label><label>Horizon (days)<input id="fi-horizon" type="range" min="7" max="365" step="1" value="90"></label><label style="color:var(--yl)"><span data-scn-label>—</span></label></div>
+          <div class="tt-chart" style="min-height:280px" data-draw="fi-scenario" aria-label="Scenario total returns"></div>
+          <p class="note">Bars: horizon total return if yields move by the shift on day one and stay there. Yellow line: instant price change. Coupons received before the horizon are reinvested at the shifted yield.</p></div></div>
+    </div>
+    <div class="g w2" style="margin-top:4px">
+      <div class="pn"><h2><span class="n">3.6</span>Money markets &amp; liquidity<span class="s">CBRT open market operations</span></h2><div class="bd"><div class="tt-chart" style="min-height:200px" data-draw="fi-liq" aria-label="CBRT net funding"></div></div></div>
+      <div class="pn"><h2><span class="n">3.7</span>Non-resident positioning<span class="s">weekly, CBRT securities statistics</span></h2><div class="bd"><div class="tt-chart sm" data-draw="fi-nr-stock" aria-label="Non-resident holdings"></div><div class="tt-chart" style="min-height:180px" data-draw="fi-nr" aria-label="Non-resident flows"></div></div></div>
+      <div class="pn"><h2><span class="n">3.9</span>Floating-rate bonds (TLREF-linked)<span class="s">price only · coupon resets each period</span></h2>
+        <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>ISIN</th><th>Maturity</th><th class="r">Yrs</th><th class="r">Dirty px</th><th class="r">1D</th><th class="r">Current cpn (ann.)</th><th class="r">Next coupon</th></tr></thead><tbody data-draw="fi-frn"></tbody></table></div>
+        <p class="note">These pay a coupon that resets with TLREF, so a fixed-rate yield or duration would be misleading; they are kept out of the curve, screener and scenarios.</p></div></div>
+      <div class="pn"><h2><span class="n">3.8</span>Global policy rates<span class="s">BIS via CBRT EVDS · monthly</span></h2>
+        <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Central bank</th><th class="r">Rate</th><th class="r">3M bp</th><th class="r">12M bp</th><th>12M path</th><th class="r">As of</th></tr></thead><tbody data-draw="fi-policy"></tbody></table></div></div></div>
+    </div>
+    <p class="cov" style="margin-top:4px"><b>COVERAGE.</b> Included: TRY government fixed-coupon bonds and T-bills, money markets, non-resident flows, global policy rates. TLREF-linked floaters are shown with price and current coupon only. Not available from the connected sources: corporate credit, CDS, Eurobond prices, CPI-linked and floater spread analytics, bond futures, live swap quotes and execution.</p>
+  </section>
+
+  <!-- 4 MACRO -->
   <section class="page" id="makro" hidden>
     <div class="kv">
-      <div><div class="l">TÜFE YILLIK</div><div class="v" data-draw="k-tufe">—</div><div class="c" data-draw="k-tufe-ay">—</div></div>
-      <div><div class="l">YIL SONU TÜFE BEKL.</div><div class="v" data-draw="k-bek-ys">—</div><div class="c">anket</div></div>
-      <div><div class="l">12 AY TÜFE BEKL.</div><div class="v" data-draw="k-bek-12">—</div><div class="c">anket</div></div>
-      <div><div class="l">REEL FAİZ EX-ANTE</div><div class="v" data-draw="k-reel">—</div><div class="c">TLREF − 12A bekl.</div></div>
-      <div><div class="l">REEL FAİZ EX-POST</div><div class="v" data-draw="k-reel-post">—</div><div class="c">TLREF − son TÜFE</div></div>
-      <div><div class="l">BRÜT REZERV</div><div class="v" data-draw="k-rez">—</div><div class="c"><span data-draw="k-rez-chg">—</span> haftalık</div></div>
-      <div><div class="l">12 AY USD/TRY BEKL.</div><div class="v" data-draw="k-usd12">—</div><div class="c" data-draw="k-usd12-fark">—</div></div>
+      <div><div class="l">CPI Y/Y</div><div class="v" data-draw="k-tufe">—</div><div class="c" data-draw="k-tufe-ay">—</div></div>
+      <div><div class="l">YEAR-END CPI EXP.</div><div class="v" data-draw="k-bek-ys">—</div><div class="c">survey</div></div>
+      <div><div class="l">12M CPI EXP.</div><div class="v" data-draw="k-bek-12">—</div><div class="c">survey</div></div>
+      <div><div class="l">REAL RATE EX-ANTE</div><div class="v" data-draw="k-reel">—</div><div class="c">TLREF − 12M exp.</div></div>
+      <div><div class="l">REAL RATE EX-POST</div><div class="v" data-draw="k-reel-post">—</div><div class="c">TLREF − last CPI</div></div>
+      <div><div class="l">GROSS RESERVES</div><div class="v" data-draw="k-rez">—</div><div class="c"><span data-draw="k-rez-chg">—</span> weekly</div></div>
+      <div><div class="l">USD/TRY IN 12M EXP.</div><div class="v" data-draw="k-usd12">—</div><div class="c" data-draw="k-usd12-fark">—</div></div>
     </div>
     <div class="g w2" style="margin-top:4px">
-      <div class="pn"><h2><span class="n">3.1</span>TÜFE<span class="s">yıllık % (çizgi) · aylık % (sütun) · 24 ay</span></h2><div class="bd"><div class="tt-chart" data-draw="ch-tufe" aria-label="TÜFE"></div></div></div>
-      <div class="pn"><h2><span class="n">3.2</span>Enflasyon beklentileri<span class="s">anket vs gerçekleşen</span></h2><div class="bd"><div class="tt-chart" data-draw="ch-bek" aria-label="Enflasyon beklentileri"></div></div></div>
-      <div class="pn"><h2><span class="n">3.3</span>TCMB brüt rezervleri<span class="s">haftalık, milyar $</span></h2><div class="bd"><div class="tt-chart" data-draw="ch-rez" aria-label="TCMB rezervleri"></div></div></div>
-      <div class="pn"><h2><span class="n">3.4</span>Anket özeti<span class="s">son iki anket</span></h2>
-        <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Gösterge</th><th class="r">Önceki</th><th class="r">Son</th><th class="r">Fark</th></tr></thead><tbody data-draw="t-anket"></tbody></table></div></div></div>
+      <div class="pn"><h2><span class="n">4.1</span>CPI<span class="s">annual % (line) · monthly % (bars) · 24 months</span></h2><div class="bd"><div class="tt-chart" data-draw="ch-tufe" aria-label="CPI"></div></div></div>
+      <div class="pn"><h2><span class="n">4.2</span>Inflation expectations<span class="s">survey vs actual</span></h2><div class="bd"><div class="tt-chart" data-draw="ch-bek" aria-label="Inflation expectations"></div></div></div>
+      <div class="pn"><h2><span class="n">4.3</span>CBRT gross reserves<span class="s">weekly, $ bn</span></h2><div class="bd"><div class="tt-chart" data-draw="ch-rez" aria-label="CBRT reserves"></div></div></div>
+      <div class="pn"><h2><span class="n">4.4</span>Survey summary<span class="s">last two surveys</span></h2>
+        <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Indicator</th><th class="r">Previous</th><th class="r">Latest</th><th class="r">Change</th></tr></thead><tbody data-draw="t-anket"></tbody></table></div></div></div>
     </div>
   </section>
 
-  <!-- 4 HİSSE -->
+  <!-- 5 EQUITIES -->
   <section class="page" id="hisse" hidden>
-    <div class="pn"><h2><span class="n">4.1</span>BIST seçili hisseler<span class="s">günlük ve 5 günlük değişim · çarpanlar</span></h2>
-      <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Hisse</th><th class="r">Son</th><th class="r">Gün %</th><th class="r">5G %</th><th class="r">F/K</th><th class="r">PD/DD</th><th class="r">Temettü %</th><th class="r">Piy. değ. (mlr ₺)</th><th class="r">52H dip</th><th>52H aralık</th><th class="r">52H tepe</th><th class="r">Hacim (mn)</th></tr></thead><tbody data-draw="t-bist"></tbody></table></div></div></div>
-    <div class="pn" style="margin-top:4px"><h2><span class="n">4.2</span>ABD<span class="s">son fiyat · 52 haftalık aralık</span></h2>
-      <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Sembol</th><th>Ad</th><th class="r">Son $</th><th class="r">F/K</th><th class="r">PD/DD</th><th class="r">Piy. değ. (mlr $)</th><th class="r">52H dip</th><th>52H aralık</th><th class="r">52H tepe</th><th class="r">Tepeden %</th></tr></thead><tbody data-draw="t-us"></tbody></table></div></div></div>
+    <div class="pn"><h2><span class="n">5.1</span>Selected BIST stocks<span class="s">1-day and 5-day change · multiples</span></h2>
+      <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Stock</th><th class="r">Last</th><th class="r">1D %</th><th class="r">5D %</th><th class="r">P/E</th><th class="r">P/B</th><th class="r">Div. yld %</th><th class="r">Mkt cap (TRY bn)</th><th class="r">52W low</th><th>52W range</th><th class="r">52W high</th><th class="r">Volume (mn)</th></tr></thead><tbody data-draw="t-bist"></tbody></table></div></div></div>
+    <div class="pn" style="margin-top:4px"><h2><span class="n">5.2</span>United States<span class="s">last price · 52-week range</span></h2>
+      <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Ticker</th><th>Name</th><th class="r">Last $</th><th class="r">P/E</th><th class="r">P/B</th><th class="r">Mkt cap ($ bn)</th><th class="r">52W low</th><th>52W range</th><th class="r">52W high</th><th class="r">From high %</th></tr></thead><tbody data-draw="t-us"></tbody></table></div></div></div>
   </section>
 
-  <!-- 5 TAKVİM -->
+  <!-- 6 CALENDAR -->
   <section class="page" id="takvim" hidden>
     <div class="g w2">
-      <div class="pn"><h2><span class="n">5.1</span>Türkiye ekonomik takvimi<span class="s">bu hafta ve gelecek hafta</span></h2>
-        <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Zaman</th><th>Veri</th><th>Önem</th><th class="r">Önceki</th></tr></thead><tbody data-draw="t-takvim"></tbody></table></div><div data-draw="t-takvim-bos"></div></div></div>
-      <div class="pn"><h2><span class="n">5.2</span>Küresel, yüksek önem<span class="s">bu hafta · tüm ülkeler</span></h2>
-        <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Zaman</th><th>Ülke</th><th>Veri</th><th class="r">Önceki</th></tr></thead><tbody data-draw="t-global"></tbody></table></div><div data-draw="t-global-bos"></div></div></div>
+      <div class="pn"><h2><span class="n">6.1</span>Türkiye economic calendar<span class="s">this week and next</span></h2>
+        <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Time</th><th>Release</th><th>Impact</th><th class="r">Previous</th></tr></thead><tbody data-draw="t-takvim"></tbody></table></div><div data-draw="t-takvim-bos"></div></div></div>
+      <div class="pn"><h2><span class="n">6.2</span>Global, high impact<span class="s">this week · all countries</span></h2>
+        <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Time</th><th>Country</th><th>Release</th><th class="r">Previous</th></tr></thead><tbody data-draw="t-global"></tbody></table></div><div data-draw="t-global-bos"></div></div></div>
     </div>
   </section>
 
-  <!-- 6 TEKNİK -->
+  <!-- 7 TECHNICALS -->
   <section class="page" id="teknik" hidden>
     <div class="g w2">
-      <div class="pn"><h2><span class="n">6.1</span>XU100 mum grafik<span class="s">günlük · 1 ay · SMA20 / EMA50</span></h2><div class="bd"><div class="tt-chart" style="min-height:320px" data-draw="ch-candle" aria-label="XU100 mum grafik"></div></div></div>
-      <div class="pn"><h2><span class="n">6.2</span>RSI göstergeleri<span class="s">14 gün · 30 altı aşırı satım, 70 üstü aşırı alım</span></h2><div class="bd"><div class="gauges" data-draw="gauges"></div></div></div>
+      <div class="pn"><h2><span class="n">7.1</span>BIST 100 candlesticks<span class="s">daily · 1 month · SMA20 / EMA50</span></h2><div class="bd"><div class="tt-chart" style="min-height:320px" data-draw="ch-candle" aria-label="BIST 100 candlesticks"></div></div></div>
+      <div class="pn"><h2><span class="n">7.2</span>RSI gauges<span class="s">14-day · below 30 oversold, above 70 overbought</span></h2><div class="bd"><div class="gauges" data-draw="gauges"></div></div></div>
     </div>
-    <div class="pn" style="margin-top:4px"><h2><span class="n">6.3</span>Teknik tarama<span class="s">günlük · hareketli ortalamalar ve MACD</span></h2>
-      <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Sembol</th><th class="r">Son</th><th>RSI</th><th class="r">RSI</th><th class="r">SMA20'ye göre</th><th class="r">EMA50'ye göre</th><th class="r">MACD hist.</th><th>Sinyal</th></tr></thead><tbody data-draw="t-teknik"></tbody></table></div></div></div>
+    <div class="pn" style="margin-top:4px"><h2><span class="n">7.3</span>Technical scan<span class="s">daily · moving averages and MACD</span></h2>
+      <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Ticker</th><th class="r">Last</th><th>RSI</th><th class="r">RSI</th><th class="r">vs SMA20</th><th class="r">vs EMA50</th><th class="r">MACD hist.</th><th>Signal</th></tr></thead><tbody data-draw="t-teknik"></tbody></table></div></div></div>
     <div class="g w2" style="margin-top:4px">
-      <div class="pn"><h2><span class="n">6.4</span>Günün yükselenleri<span class="s">XU100 · %3 üzeri</span></h2><div class="bd"><div class="tt-chart" style="min-height:260px" data-draw="ch-gainers" aria-label="En çok yükselenler"></div></div></div>
-      <div class="pn"><h2><span class="n">6.5</span>Günün düşenleri<span class="s">XU100 · %3 üzeri kayıp</span></h2><div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Hisse</th><th class="r">Kapanış</th><th class="r">Değişim</th><th class="r">Hacim (mn)</th></tr></thead><tbody data-draw="t-losers"></tbody></table></div><div data-draw="t-losers-bos"></div></div></div>
+      <div class="pn"><h2><span class="n">7.4</span>Top gainers<span class="s">BIST 100 · above 3%</span></h2><div class="bd"><div class="tt-chart" style="min-height:260px" data-draw="ch-gainers" aria-label="Top gainers"></div></div></div>
+      <div class="pn"><h2><span class="n">7.5</span>Top losers<span class="s">BIST 100 · more than 3% down</span></h2><div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Stock</th><th class="r">Close</th><th class="r">Change</th><th class="r">Volume (mn)</th></tr></thead><tbody data-draw="t-losers"></tbody></table></div><div data-draw="t-losers-bos"></div></div></div>
     </div>
   </section>
 
   <details class="foot">
-    <summary>KAYNAK VE YÖNTEM</summary>
-    <p>Kaynaklar: TCMB EVDS (TLREF, AOFM, BIST repo, hazine bonosu gösterge fiyatları, Piyasa Katılımcıları Anketi, rezervler) ve Borsa bağlantısı (döviz, altın, Brent, kripto, BIST ve ABD fiyatları, TÜFE, ekonomik takvim). TLREF 16:00'dan sonra yayımlanır.</p>
-    <p>Yaklaşık OIS: vadeye kalan gün d ve gösterge fiyatı P olan iskontolu bono için OIS eşdeğeri = (100/P − 1) × 365/d; ima edilen ortalama gecelik faiz = 365 × ((100/P)^(1/d) − 1). Gerçek TLREF OIS kotasyonu değildir. Ons altın, gram altın ve USD/TRY'den (31,1035 g) türetilir; çapraz kurlar TL kurlarından hesaplanır.</p>
-    <p>Sayfa hafta içi günde birkaç kez otomatik güncellenir; açık sekme 30 dakikada bir kendini yeniler.</p>
+    <summary>SOURCES &amp; METHODOLOGY</summary>
+    <p>Sources: CBRT EVDS (TLREF, CBRT average funding cost, BIST repo, indicative prices of government securities, Survey of Market Participants, reserves, non-resident securities holdings, open market operations, BIS policy rates) and the Borsa connector (FX, gold, Brent, crypto, BIST and US prices, CPI, technical indicators, economic calendar). TLREF is published after 16:00 Istanbul time.</p>
+    <p>Approximate OIS: for a discount bill with d days to maturity and indicative price P, OIS-equivalent fixed rate = (100/P − 1) × 365/d; implied average overnight rate = 365 × ((100/P)^(1/d) − 1). Not an actual TLREF OIS quote. Bond yields are solved from coupon-inclusive indicative prices; the curve is a Nelson–Siegel fit. Gold per ounce is derived from gram gold and USD/TRY (31.1035 g); FX crosses are computed from TRY rates.</p>
+    <p>The page refreshes automatically several times each weekday; an open tab reloads itself every 30 minutes.</p>
   </details>
 </div>

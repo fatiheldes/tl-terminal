@@ -33,7 +33,7 @@
       const d = draws[n];
       try {
         if (typeof d === 'function') d(el);
-        else { if (!el.__m) { el.__m = true; el.textContent = ''; el.__made = d.mount ? d.mount(el) : undefined; } if (d.update) d.update(el, el.__made); }
+        else { if (!el.__m) { el.__m = true; el.__made = d.mount ? d.mount(el) : undefined; } if (d.update) d.update(el, el.__made); }
       } catch (e) { console.error(n, e); }
     }));
   }

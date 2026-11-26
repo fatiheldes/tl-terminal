@@ -16,7 +16,7 @@ import pathlib
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent
-IDS = ['rates', 'bills', 'pka', 'reserves', 'fx', 'crypto', 'usd', 'gold_hist', 'xu100_hist', 'bist', 'bist_quotes', 'bist_hist', 'us_quotes', 'inflation', 'cal_this', 'cal_next', 'cal_global', 'tech', 'xu100_daily', 'gainers', 'losers']
+IDS = ['rates', 'bills', 'pka', 'reserves', 'fx', 'crypto', 'usd', 'gold_hist', 'xu100_hist', 'bist', 'bist_quotes', 'bist_hist', 'us_quotes', 'inflation', 'cal_this', 'cal_next', 'cal_global', 'tech', 'xu100_daily', 'gainers', 'losers', 'bonds', 'coupons1', 'coupons2', 'polrates1', 'polrates2', 'nonres', 'funding', 'frn', 'frn_coupons']
 
 
 def read(p):
@@ -42,12 +42,12 @@ def main():
     safe = lambda s: s.replace('</script', '<\\/script')
 
     html = f'''<!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="refresh" content="1800">
-<title>TL Faiz Terminali</title>
+<title>TL Rates Terminal</title>
 {style}
 <script>{read('vendor/d3.min.js')}</script>
 <script>{safe(data_js)}</script>
@@ -60,6 +60,7 @@ def main():
 <script>{read('src/charts.js')}</script>
 <script>{read('src/logic.js')}</script>
 <script>{read('src/draw.js')}</script>
+<script>{read('src/fi.js')}</script>
 </body>
 </html>
 '''
