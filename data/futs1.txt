@@ -1,0 +1,14 @@
+## data
+```tsv
+symbol	name	market	currency	current_price	volume	week_52_high	week_52_low	avg_volume
+ZQZ26.CBT	30 Day Federal Funds Futures,De	us	USD	95.945	1066	97.055	95.785	42751
+ZQF27.CBT	30 Day Federal Funds Futures,Ja	us	USD	95.855	9597	97.045	95.71	118720
+ZQG27.CBT	30 Day Federal Funds Futures,Fe	us	USD	95.725	11864	97.045	95.585	73684
+ZQH27.CBT	30 Day Federal Funds Futures,Ma	us	USD	95.65	1378	97.045	95.5	15588
+ZQJ27.CBT	30 Day Federal Funds Futures,Ap	us	USD	95.57	2293	97.095	95.395	34868
+ZQK27.CBT	30 Day Federal Funds Futures,Ma	us	USD	95.515	1069	97.085	95.3	17693
+ZQM27.CBT	30 Day Federal Funds Futures,Ju	us	USD	95.465	577	97.085	95.225	4447
+ZQN27.CBT	30 Day Federal Funds Futures,Ju	us	USD	95.445	524	97.115	95.19	8305
+ZQQ27.CBT	30 Day Federal Funds Futures,Au	us	USD	95.455	290	97.09	95.155	5577
+ZQU27.CBT	30 Day Federal Funds Futures,Se	us	USD	95.465	331	97.09	95.14	1786
+```

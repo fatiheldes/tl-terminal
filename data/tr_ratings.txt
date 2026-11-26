@@ -1,0 +1,22 @@
+## metadata
+source: agency announcements as reported by Hurriyet Daily News, Daily Sabah, Turkiye Today; history from worldgovernmentbonds.com
+## data
+```tsv
+date	agency	rating	outlook	action
+2026-10-16	S&P	BB-	stable	Scheduled review date passed without publication; last affirmed BB-/B stable in April 2026
+2026-07-24	Moody's	Ba3	stable	Periodic review completed, no rating action
+2026-07-17	Fitch	BB-	stable	Affirmed
+2026-04-10	Fitch	BB-	stable	Outlook revised to stable from positive (energy-price shock)
+2026-04	S&P	BB-	stable	Affirmed BB-/B
+2026-01-23	Fitch	BB-	positive	Outlook revised to positive from stable, rating affirmed
+2026-01-23	Moody's	Ba3	stable	Affirmed
+2025-07-25	Moody's	Ba3	stable	Upgraded from B1
+2025-07-25	Fitch	BB-	stable	Affirmed
+2024-11-01	S&P	BB-	stable	Upgraded from B+
+2024-09-06	Fitch	BB-	stable	Upgraded from B+
+2024-07-19	Moody's	B1	positive	Upgraded two notches from B3
+2024-05-03	S&P	B+	positive	Upgraded from B
+2024-03-08	Fitch	B+	positive	Upgraded from B
+2024-01-12	Moody's	B3	positive	Outlook to positive
+2023-12-01	S&P	B	positive	Outlook to positive
+```

@@ -1,0 +1,52 @@
+## metadata
+source: worldgovernmentbonds.com world credit ratings, snapshot 2026-11-26; Turkey row checked against agency announcements (Fitch BB- since Sep 2024)
+## data
+```tsv
+country	sp	moodys	fitch
+United States	AA+	Aa1	AA+
+United Kingdom	AA	Aa3	AA-
+Germany	AAA	Aaa	AAA
+France	A+	Aa3	A+
+Italy	BBB+	Baa2	BBB+
+Spain	A+	A3	A
+Netherlands	AAA	Aaa	AAA
+Belgium	AA-	A1	A+
+Austria	AA+	Aa1	AA
+Portugal	A+	A3	A
+Greece	BBB	Baa3	BBB
+Ireland	AA+	Aa3	AA
+Finland	AA+	Aa1	AA
+Switzerland	AAA	Aaa	AAA
+Sweden	AAA	Aaa	AAA
+Denmark	AAA	Aaa	AAA
+Norway	AAA	Aaa	AAA
+Japan	A+	A1	A
+Australia	AAA	Aaa	AAA
+Canada	AAA	Aaa	AA+
+New Zealand	AA+	Aaa	AA+
+Singapore	AAA	Aaa	AAA
+Israel	A	Baa1	A
+China	A+	A1	A
+South Korea	AA	Aa2	AA-
+India	BBB	Baa3	BBB-
+Indonesia	BBB	Baa2	BBB
+Malaysia	A-	A3	BBB+
+Thailand	BBB+	Baa1	BBB+
+Philippines	BBB+	Baa2	BBB
+Vietnam	BB+	Ba2	BB+
+Brazil	BB	Ba1	BB
+Mexico	BBB	Baa3	BBB-
+Colombia	BB-	Baa3	BB+
+Chile	A	A2	A-
+Peru	BBB-	Baa1	BBB
+South Africa	BB	Ba2	BB-
+Poland	A-	A2	A-
+Czech Republic	AA-	Aa3	AA-
+Hungary	BBB-	Baa2	BBB
+Romania	BBB-	Baa3	BBB-
+Turkey	BB-	Ba3	BB-
+Egypt	B	Caa1	B
+Nigeria	B	B3	B
+Kenya	B	B3	B-
+Pakistan	B-	Caa1	B-
+```

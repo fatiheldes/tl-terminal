@@ -22,11 +22,20 @@
     colors: ['#ffa028', '#3cc8f0', '#e8e8e8', '#c86bff', '#2ee66b', '#ff6b9a'],
     loader: (id, o) => { loaders[id] = o.fn; },
     calc: (id, o) => { calcs[id] = o; },
-    draw: (name, fn) => { draws[name] = fn; },
+    draw: (name, fn) => { if (fn === undefined) { redraw(name); return; } draws[name] = fn; },
     onData: (fn) => { ondata.push(fn); },
     data: get,
     refresh: () => {}, params: () => ({}), setParams: () => {}, resetParams: () => {}, setLink: () => {}
   };
+  function drawOne(n, el) {
+    const d = draws[n]; if (!d) return;
+    try {
+      if (typeof d === 'function') d(el);
+      else { if (!el.__m) { el.__m = true; el.__made = d.mount ? d.mount(el) : undefined; } if (d.update) d.update(el, el.__made); }
+    } catch (e) { console.error(n, e); }
+  }
+  function redraw(n) { document.querySelectorAll('[data-draw="' + n + '"]').forEach((el) => drawOne(n, el)); }
+  window.TTredraw = redraw;
   function run() {
     ondata.forEach((f) => { try { f(); } catch (e) { console.error(e); } });
     Object.keys(draws).forEach((n) => document.querySelectorAll('[data-draw="' + n + '"]').forEach((el) => {

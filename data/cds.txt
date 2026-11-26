@@ -1,0 +1,37 @@
+## metadata
+source: worldgovernmentbonds.com sovereign CDS (5Y, USD), last update 26 Nov 2026 02:46 GMT
+snapshot: 2026-11-26
+## data
+```tsv
+country	sp	cds5y	var1m	var6m	pd	date
+Switzerland	AAA	7.01	-12.48	-9.55	0.12	26 Nov
+Sweden	AAA	9.40	-7.93	21.45	0.16	25 Nov
+Denmark	AAA	9.98	-2.16	17.41	0.17	25 Nov
+Germany	AAA	13.06	0.46	66.37	0.22	25 Nov
+Netherlands	AAA	13.12	-3.81	70.83	0.22	26 Nov
+Finland	AA+	15.16	-2.19	26.76	0.25	22 Nov
+Australia	AAA	16.71	1.83	11.47	0.28	26 Nov
+Ireland	AA+	17.12	-2.95	19.80	0.29	22 Nov
+Austria	AA+	18.29	0.49	56.19	0.30	22 Nov
+South Korea	AA	22.61	-10.03	0.85	0.38	26 Nov
+Portugal	A+	24.23	-3.62	61.43	0.40	25 Nov
+United Kingdom	AA	25.63	-5.53	32.18	0.43	26 Nov
+Japan	A+	28.67	-5.29	4.41	0.48	25 Nov
+Spain	A+	29.64	-9.88	79.09	0.49	26 Nov
+China	A+	34.32	-12.20	-14.63	0.57	26 Nov
+United States	AA+	35.29	3.37	-6.44	0.59	26 Nov
+Canada	AAA	39.60	0.00	0.00	0.66	26 Nov
+Belgium	AA-	46.18	18.44	153.04	0.77	22 Nov
+Greece	BBB	50.67	-2.84	76.80	0.84	26 Nov
+Italy	BBB+	62.62	-7.69	115.19	1.04	26 Nov
+Israel	A	63.23	4.67	3.49	1.05	26 Nov
+India	BBB	87.67	0.00	0.00	1.46	26 Nov
+France	A+	89.73	-6.75	226.41	1.50	26 Nov
+Indonesia	BBB	103.05	-2.65	11.88	1.72	25 Nov
+Mexico	BBB	104.83	8.06	20.44	1.75	26 Nov
+South Africa	BB	148.80	12.85	4.83	2.48	26 Nov
+Brazil	BB	171.30	43.64	42.85	2.86	26 Nov
+Turkey	BB-	262.10	3.29	4.54	4.37	26 Nov
+Egypt	B	375.26	3.54	18.21	6.25	26 Nov
+Russia	NR	13775.17	0.00	0.00	100.00	26 Nov
+```

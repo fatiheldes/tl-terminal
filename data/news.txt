@@ -1,0 +1,18 @@
+## metadata
+source: web search headlines
+## data
+```tsv
+date	title	source	url	tag
+2026-11-05	Bank of England raises Bank Rate to 4.00%	investingLive	https://investinglive.com/news/investinglive-european-news-wrap-boe-raises-bank-rate-to-4-00-as-expected/	Central banks
+2026-10-23	S&P warns Turkish banks face rising but manageable debt risks	Türkiye Today	https://www.turkiyetoday.com/business/sp-warns-turkish-banks-face-rising-but-manageable-debt-risks-3230876	Credit
+2026-10-21	S&P flags three hurdles to Türkiye upgrade as it skips rating decision	Türkiye Today	https://www.turkiyetoday.com/business/sp-global-flags-3-key-hurdles-to-turkiye-upgrade-as-it-skips-rating-decision-3230748	Ratings
+2026-10-20	US Treasury yields fall on Tuesday	Trading Economics	https://tradingeconomics.com/united-states/government-bond-yield/news/593498	Treasuries
+2026-10-13	Treasury yields fall as global bond selloff loses momentum	Trading Economics	https://tradingeconomics.com/united-states/government-bond-yield/news/591456	Treasuries
+2026-10-02	Fund probe not weighing on Türkiye credit rating, S&P Global says	Daily Sabah	https://www.dailysabah.com/business/economy/fund-probe-not-weighing-on-turkiye-credit-rating-sp-global-says	Ratings
+2026-10-01	Treasury sell-off eases; 25bp Fed hike fully priced for this year	Trading Economics	https://tradingeconomics.com/united-states/government-bond-yield/news/588867	Treasuries
+2026-09-25	Treasury yields edge lower but remain at multi-year highs	Trading Economics	https://tradingeconomics.com/united-states/government-bond-yield/news/586881	Treasuries
+2026-09-22	U.S. Treasury, European government bond yields turn lower	Morningstar / Dow Jones	https://www.morningstar.com/news/dow-jones/202609221954/us-treasury-european-government-bond-yields-turn-lower-update	Europe
+2026-08-04	Türkiye to remain major global sukuk, EM debt issuer: Fitch	Daily Sabah	https://www.dailysabah.com/business/economy/turkiye-to-remain-major-global-sukuk-emerging-market-debt-issuer-fitch	Issuance
+2026-07-25	Moody's completes periodic review of Türkiye, takes no rating action	Hurriyet Daily News	https://www.hurriyetdailynews.com/moodys-completes-periodic-review-of-turkiye-takes-no-rating-action-224798	Ratings
+2026-07-21	Fitch says sustained reserve buildup key for Türkiye rating upgrade	Daily Sabah	https://www.dailysabah.com/business/economy/fitch-says-sustained-reserve-buildup-key-for-turkiye-rating-upgrade	Ratings
+```

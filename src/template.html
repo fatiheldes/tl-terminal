@@ -102,6 +102,21 @@ html, body { margin: 0; background: #000; }
 .calc input[type=range] { padding: 0; accent-color: var(--am); }
 .cov { color: var(--mu); font-size: 10.5px; line-height: 1.5; margin: 0; }
 .cov b { color: var(--am); font-weight: 600; }
+
+.fnbar { display: flex; flex-wrap: wrap; gap: 2px; margin-bottom: 4px; padding: 3px; background: #0b0b0b; border: 1px solid var(--ln); align-items: stretch; }
+.fnbar button { font: inherit; font-size: 10.5px; background: #141414; color: var(--mu); border: 1px solid #2a2a2a; padding: 3px 9px 3px 4px; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+.fnbar button b { background: #2a1d05; color: var(--am); padding: 1px 5px; font-weight: 700; letter-spacing: .05em; }
+.fnbar button:hover { color: var(--tx); border-color: #4a4a4a; }
+.fnbar button[aria-selected="true"] { background: var(--am); color: #000; border-color: var(--am); }
+.fnbar button[aria-selected="true"] b { background: #000; color: var(--am); }
+.fnbar .go { margin-left: auto; display: flex; align-items: center; gap: 6px; font-size: 10px; color: var(--am); letter-spacing: .06em; }
+.fnbar .go input { font: inherit; font-size: 11.5px; width: 190px; background: #000; color: var(--yl); border: 1px solid #3a3a3a; padding: 3px 6px; text-transform: uppercase; }
+.fnbar .go input:focus { outline: 1px solid var(--am); }
+.fnbar .go input.bad { border-color: var(--dn); }
+.seg.iyc button { border-left: 3px solid var(--sw, #555); }
+.tb.sticky thead th { position: sticky; top: 0; background: #0d0d0d; z-index: 1; }
+a.nlink { color: var(--tx); text-decoration: none; }
+a.nlink:hover { color: var(--am); text-decoration: underline; }
 </style>
 
 <div class="bt">
@@ -188,7 +203,21 @@ html, body { margin: 0; background: #000; }
 
   <!-- 3 FIXED INCOME -->
   <section class="page" id="fixed" hidden>
-    <div class="kv">
+    <div class="fnbar" role="tablist" aria-label="Fixed income functions">
+      <button data-fn="GOVT" aria-selected="true"><b>GOVT</b>TRY curve</button>
+      <button data-fn="YAS" aria-selected="false"><b>YAS</b>Screener · analytics</button>
+      <button data-fn="WB" aria-selected="false"><b>WB</b>World bonds</button>
+      <button data-fn="BTMM" aria-selected="false"><b>BTMM</b>Treasuries · money mkts</button>
+      <button data-fn="WIRP" aria-selected="false"><b>WIRP</b>Rate expectations</button>
+      <button data-fn="CORP" aria-selected="false"><b>CORP</b>Credit</button>
+      <button data-fn="CRPR" aria-selected="false"><b>CRPR</b>Ratings · CDS</button>
+      <button data-fn="MTGE" aria-selected="false"><b>MTGE</b>Structured</button>
+      <button data-fn="NIM" aria-selected="false"><b>NIM</b>Issuance</button>
+      <button data-fn="NEWS" aria-selected="false"><b>NEWS</b>News · calendar</button>
+      <label class="go"><span>FUNCTION</span><input id="fn-go" type="text" autocomplete="off" spellcheck="false" placeholder="type WB, YAS, WCDS… ⏎" aria-label="Go to function"></label>
+    </div>
+    <div class="fsub" data-fn="GOVT">
+<div class="kv">
       <div><div class="l">TRY 2Y (FITTED)</div><div class="v" data-draw="fi-k-2Y">—</div><div class="c" data-draw="fi-k-2Y-c">—</div></div>
       <div><div class="l">TRY 5Y (FITTED)</div><div class="v" data-draw="fi-k-5Y">—</div><div class="c" data-draw="fi-k-5Y-c">—</div></div>
       <div><div class="l">TRY 7Y (FITTED)</div><div class="v" data-draw="fi-k-7Y">—</div><div class="c" data-draw="fi-k-7Y-c">—</div></div>
@@ -197,24 +226,55 @@ html, body { margin: 0; background: #000; }
       <div><div class="l">CBRT NET FUNDING</div><div class="v" data-draw="fi-k-net">—</div><div class="c" data-draw="fi-k-net-c">—</div></div>
       <div><div class="l">NON-RESIDENT GDDS</div><div class="v" data-draw="fi-k-nr">—</div><div class="c" data-draw="fi-k-nr-c">—</div></div>
     </div>
-    <div class="g w2" style="margin-top:4px">
-      <div class="pn"><h2><span class="n">3.1</span>TRY government yield curve<span class="s">Nelson–Siegel fit · compounded YTM</span></h2>
+<div class="g w2" style="margin-top:4px">
+<div class="pn"><h2><span class="n">3.1</span>TRY government yield curve<span class="s">Nelson–Siegel fit · compounded YTM</span></h2>
         <div class="bd"><div class="seg" style="margin-bottom:4px"><button data-curve="Today" aria-pressed="true">TODAY</button><button data-curve="1D ago" aria-pressed="false">1D AGO</button><button data-curve="1W ago" aria-pressed="true">1W AGO</button><button data-curve="1M ago" aria-pressed="true">1M AGO</button></div>
         <div class="tt-chart" style="min-height:300px" data-draw="fi-curve" aria-label="TRY government yield curve"></div></div></div>
-      <div class="pn"><h2><span class="n">3.2</span>Curve matrix<span class="s">fitted yields and changes, bp</span></h2>
+<div class="pn"><h2><span class="n">3.2</span>Curve matrix<span class="s">fitted yields and changes, bp</span></h2>
         <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Tenor</th><th class="r">Yield</th><th class="r">1D</th><th class="r">1W</th><th class="r">1M</th></tr></thead><tbody data-draw="fi-matrix"></tbody></table></div>
         <div class="tt-chart" style="margin-top:6px;min-height:230px" data-draw="fi-bench" aria-label="Benchmark yields history"></div></div></div>
-    </div>
-    <div class="g w2" style="margin-top:4px">
-      <div class="pn"><h2><span class="n">3.10</span>Türkiye sovereign debt monitor<span class="s">fitted benchmarks · curves · butterflies · real yields · 1-month range and z-score</span></h2>
+</div>
+<div style="margin-top:4px"><div class="pn"><h2><span class="n">3.10</span>Türkiye sovereign debt monitor<span class="s">fitted benchmarks · curves · butterflies · real yields · 1-month range and z-score</span></h2>
         <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Measure</th><th class="r">Level</th><th class="r">1D</th><th>1M trend</th><th class="r">1M low</th><th>Range (◆ avg · ● now)</th><th class="r">1M high</th><th class="r">1M avg</th><th class="r">z-score</th></tr></thead><tbody data-draw="tr-sdm"></tbody></table></div>
-        <p class="note">Real yields use the CBRT survey's 12-month-ahead CPI expectation as a breakeven proxy (no inflation-linked curve is available). z-score = (level − 1M average) / 1M standard deviation; |z| ≥ 1.5 is highlighted.</p></div></div>
-      <div class="pn"><h2><span class="n">3.11</span>Global sovereign monitor · DM / CEE / LatAm / Asia<span class="s">policy rate vs inflation · bubble = GDP</span></h2>
-        <div class="bd"><div class="tt-chart" style="min-height:300px" data-draw="g-scatter" aria-label="Inflation vs policy rate by country"></div>
-        <div class="tw" style="margin-top:6px"><table class="tb"><thead><tr><th data-gsort="country">Country</th><th data-gsort="region">Region</th><th class="r" data-gsort="policy">Policy</th><th class="r" data-gsort="chg_12m">12M bp</th><th class="r" data-gsort="cpi_yoy">CPI y/y</th><th class="r" data-gsort="real_policy">Real policy</th><th class="r" data-gsort="ca_gdp">C/A % GDP</th><th class="r" data-gsort="gdp_bn">GDP</th><th class="r">CPI as of</th></tr></thead><tbody data-draw="g-sov"></tbody></table></div>
-        <p class="note">Sources: BIS policy rates, IMF CPI, current account (last 4 quarters) and nominal GDP, all via CBRT EVDS; monthly/quarterly. *Euro area uses German CPI. Click a header to sort. Sovereign 10Y yields and 5Y CDS are not in these sources (see coverage note).</p></div></div>
+        <p class="note">Real yields use the CBRT survey's 12-month-ahead CPI expectation as a breakeven proxy (no inflation-linked curve is available). z-score = (level − 1M average) / 1M standard deviation; |z| ≥ 1.5 is highlighted.</p></div></div></div>
     </div>
-    <div class="kv" style="margin-top:4px">
+    <div class="fsub" data-fn="YAS" hidden>
+<div style="margin-top:4px"><div class="pn"><h2><span class="n">3.3</span>Bond screener<span class="s">TRY fixed-coupon bonds and T-bills · click a row to analyse · click a header to sort</span></h2>
+      <div class="bd"><div class="seg" style="margin-bottom:5px"><button data-scr="all" aria-pressed="true">ALL</button><button data-scr="bill" aria-pressed="false">BILLS</button><button data-scr="s" aria-pressed="false">BONDS &lt;2Y</button><button data-scr="m" aria-pressed="false">2–5Y</button><button data-scr="l" aria-pressed="false">5Y+</button></div>
+      <div class="tw"><table class="tb"><thead><tr><th data-sort="isin">ISIN</th><th data-sort="type">Type</th><th data-sort="maturity">Maturity</th><th class="r" data-sort="years">Yrs</th><th class="r" data-sort="coupon">Coupon</th><th class="r" data-sort="price">Dirty px</th><th class="r" data-sort="ytm">YTM</th><th class="r" data-sort="simple">Simple</th><th class="r" data-sort="mod_dur">Mod dur</th><th class="r" data-sort="convexity">Convexity</th><th class="r" data-sort="dv01">DV01/1mn</th><th class="r" data-sort="chg_1d">1D bp</th><th class="r" data-sort="chg_1w">1W bp</th><th class="r" data-sort="chg_1m">1M bp</th><th class="r" data-sort="rich_cheap">vs curve bp</th></tr></thead><tbody data-draw="fi-screener"></tbody></table></div>
+      <p class="note">Prices are CBRT indicative values, coupon-inclusive (dirty), per 100 nominal. YTM is annually compounded, act/365, with semi-annual coupons. "vs curve" is the residual to the fitted Nelson–Siegel curve: positive = cheap, negative = rich.</p></div></div></div>
+<div class="g w2" style="margin-top:4px">
+<div class="pn"><h2><span class="n">3.4</span>Security description · yield &amp; spread analysis<span class="s">price ↔ yield, risk, spreads, cash flows</span></h2>
+        <div class="bd" data-draw="fi-calc">
+          <div class="calc"><label>Security<select id="fi-calc-bond" data-draw="fi-calc-bond"></select></label><label>Solve from<select id="fi-calc-mode"><option value="price">Dirty price</option><option value="yield">Yield %</option></select></label><label>Input<input id="fi-calc-input" type="number" step="0.001"></label></div>
+          <div class="kv" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-bottom:6px" data-des></div>
+          <div class="kv" style="grid-template-columns:repeat(auto-fit,minmax(175px,1fr))" data-calc-out></div>
+          <div class="tw" style="margin-top:6px;max-height:220px;overflow:auto"><table class="tb"><thead><tr><th>Cash-flow date</th><th class="r">Years</th><th class="r">Cash flow</th><th class="r">Discount factor</th><th class="r">PV</th></tr></thead><tbody data-calc-cf></tbody></table></div>
+        </div></div>
+<div class="pn"><h2><span class="n">3.5</span>Scenario &amp; horizon analysis<span class="s">parallel shift · total return with coupon reinvestment</span></h2>
+        <div class="bd">
+          <div class="calc"><label>Parallel shift (bp)<input id="fi-shift" type="range" min="-500" max="500" step="25" value="-200"></label><label>Horizon (days)<input id="fi-horizon" type="range" min="7" max="365" step="1" value="90"></label><label style="color:var(--yl)"><span data-scn-label>—</span></label></div>
+          <div class="tt-chart" style="min-height:280px" data-draw="fi-scenario" aria-label="Scenario total returns"></div>
+          <p class="note">Bars: horizon total return if yields move by the shift on day one and stay there. Yellow line: instant price change. Coupons received before the horizon are reinvested at the shifted yield.</p></div></div>
+</div>
+    </div>
+    <div class="fsub" data-fn="WB" hidden>
+<div class="kv">
+      <div><div class="l">BUND 10Y</div><div class="v" data-draw="wb-k-de">—</div><div class="c" data-draw="wb-k-de-c">—</div></div>
+      <div><div class="l">GILT 10Y</div><div class="v" data-draw="wb-k-uk">—</div><div class="c" data-draw="wb-k-uk-c">—</div></div>
+      <div><div class="l">OAT 10Y</div><div class="v" data-draw="wb-k-fr">—</div><div class="c" data-draw="wb-k-fr-c">—</div></div>
+      <div><div class="l">BTP 10Y</div><div class="v" data-draw="wb-k-it">—</div><div class="c" data-draw="wb-k-it-c">—</div></div>
+      <div><div class="l">JGB 10Y</div><div class="v" data-draw="wb-k-jp">—</div><div class="c" data-draw="wb-k-jp-c">—</div></div>
+      <div><div class="l">UST 10Y</div><div class="v" data-draw="wb-k-us">—</div><div class="c" data-draw="wb-k-us-c">—</div></div>
+    </div>
+<div style="margin-top:4px"><div class="pn"><h2><span class="n">WB 1</span>World government bond monitor<span class="s">yields % · 1D, curve and spreads in bp · ratings · 5Y CDS · click a header to sort</span></h2><div class="bd"><div class="seg" style="margin-bottom:5px"><button data-wbf="ALL" aria-pressed="true">ALL</button><button data-wbf="DM" aria-pressed="false">DEVELOPED</button><button data-wbf="EZ" aria-pressed="false">EURO AREA</button><button data-wbf="EM" aria-pressed="false">EMERGING</button></div><div class="tw" style="max-height:520px;overflow:auto"><table class="tb sticky"><thead><tr><th data-wbs="country">Country</th><th class="r" data-wbs="y2">2Y</th><th class="r" data-wbs="y5">5Y</th><th class="r" data-wbs="y10">10Y</th><th class="r" data-wbs="y30">30Y</th><th class="r" data-wbs="chg10">10Y 1D</th><th class="r" data-wbs="s2s10">2s10s</th><th class="r" data-wbs="vs_ust">vs UST</th><th class="r" data-wbs="vs_bund">vs Bund</th><th class="r">S&amp;P</th><th class="r">Moody&#39;s</th><th class="r">Fitch</th><th class="r" data-wbs="cds">5Y CDS</th></tr></thead><tbody data-draw="wb-table"></tbody></table></div><p class="note">Yields: investing.com world government bonds, snapshot taken at each refresh (· marks a country with quotes older than today). Spreads use the same source for the US and Germany, so they can differ slightly from the Cboe UST figures on BTMM. Ratings and CDS: see CRPR.</p></div></div></div>
+<div class="g w2" style="margin-top:4px">
+<div class="pn"><h2><span class="n">WB 2</span>10-year yields ranked<span class="s">axis capped at 14%: ▸ marks yields beyond it</span></h2><div class="bd"><div class="tt-chart" data-draw="wb-bars" aria-label="10-year yields ranked"></div></div></div>
+<div class="pn"><h2><span class="n">IYC</span>Country yield curves compared<span class="s">click a country to add or remove it</span></h2><div class="bd"><div class="seg iyc" data-draw="iyc-btns" style="margin-bottom:4px;flex-wrap:wrap"></div><div class="tt-chart" style="min-height:300px" data-draw="iyc" aria-label="Yield curves by country"></div></div></div>
+</div>
+    </div>
+    <div class="fsub" data-fn="BTMM" hidden>
+<div class="kv" style="margin-top:4px">
       <div><div class="l">UST 10Y</div><div class="v" data-draw="g-k-10y">—</div><div class="c" data-draw="g-k-10y-c">—</div></div>
       <div><div class="l">UST 2s10s</div><div class="v" data-draw="g-k-2s10s">—</div><div class="c">10Y − 2Y</div></div>
       <div><div class="l">TRY 2Y − UST 2Y</div><div class="v" data-draw="g-k-try">—</div><div class="c">local-currency differential</div></div>
@@ -222,45 +282,81 @@ html, body { margin: 0; background: #000; }
       <div><div class="l">VIX</div><div class="v" data-draw="g-k-vix">—</div><div class="c">equity implied vol</div></div>
       <div><div class="l">DOLLAR INDEX</div><div class="v" data-draw="g-k-dxy">—</div><div class="c">DXY</div></div>
     </div>
-    <div class="g w2" style="margin-top:4px">
-      <div class="pn"><h2><span class="n">3.12</span>World bond markets · US Treasuries<span class="s">curve today vs 1M / 6M ago · spreads</span></h2>
+<div class="g w2" style="margin-top:4px">
+<div class="pn"><h2><span class="n">3.12</span>World bond markets · US Treasuries<span class="s">curve today vs 1M / 6M ago · spreads</span></h2>
         <div class="bd"><div class="tt-chart" style="min-height:230px" data-draw="g-ust-curve" aria-label="US Treasury curve"></div>
         <div class="tw" style="margin-top:6px"><table class="tb"><thead><tr><th>Tenor</th><th class="r">Yield</th><th class="r">1W bp</th><th class="r">1M bp</th><th class="r">3M bp</th><th class="r">6M bp</th><th>6M trend</th><th>52W range</th></tr></thead><tbody data-draw="g-ust"></tbody></table></div>
         <div class="tw" style="margin-top:6px"><table class="tb"><thead><tr><th>Spread</th><th class="r">Level</th><th class="r">1M bp</th><th class="r">6M low</th><th class="r">6M high</th></tr></thead><tbody data-draw="g-spreads"></tbody></table></div>
         <p class="note">3M, 5Y, 10Y, 30Y: Cboe Treasury yield indices; 2Y: CME 2-year yield futures. History is weekly closes (Yahoo Finance via Borsa). TRY − UST rows compare fitted TRY yields with US yields: a currency-and-inflation differential, not a credit spread.</p></div></div>
-      <div class="pn"><h2><span class="n">3.13</span>Global bond &amp; credit monitor<span class="s">UST · IG · HY · DM ex-US · EM hard and local · 6M performance, 100 = start</span></h2>
+<div><div class="pn"><h2><span class="n">3.6</span>Money markets &amp; liquidity<span class="s">CBRT open market operations</span></h2><div class="bd"><div class="tt-chart" style="min-height:200px" data-draw="fi-liq" aria-label="CBRT net funding"></div></div></div><div style="margin-top:4px"><div class="pn"><h2><span class="n">3.9</span>Floating-rate bonds (TLREF-linked)<span class="s">price only · coupon resets each period</span></h2>
+        <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>ISIN</th><th>Maturity</th><th class="r">Yrs</th><th class="r">Dirty px</th><th class="r">1D</th><th class="r">Current cpn (ann.)</th><th class="r">Next coupon</th></tr></thead><tbody data-draw="fi-frn"></tbody></table></div>
+        <p class="note">These pay a coupon that resets with TLREF, so a fixed-rate yield or duration would be misleading; they are kept out of the curve, screener and scenarios.</p></div></div></div></div>
+</div>
+    </div>
+    <div class="fsub" data-fn="WIRP" hidden>
+<div class="g w2" style="margin-top:4px">
+<div class="pn"><h2><span class="n">WIRP</span>US rate expectations · Fed funds &amp; SOFR futures<span class="s">implied rate = 100 − price</span></h2><div class="bd"><div class="tt-chart" style="min-height:250px" data-draw="wirp-chart" aria-label="Implied US policy rate path"></div><div class="tw" style="margin-top:6px;max-height:260px;overflow:auto"><table class="tb sticky"><thead><tr><th>Contract</th><th>Type</th><th>Month</th><th class="r">Price</th><th class="r">Implied</th><th class="r">vs policy bp</th><th class="r">vs front bp</th><th class="r">25bp moves</th></tr></thead><tbody data-draw="wirp-table"></tbody></table></div><p class="note">CME 30-day Fed funds and 3-month SOFR futures (Yahoo Finance via Borsa). The policy-rate reference is the BIS monthly series, so a decision after its last month is not reflected there; compare the front contract instead.</p></div></div>
+<div class="pn"><h2><span class="n">3.8</span>Global policy rates<span class="s">BIS via CBRT EVDS · monthly</span></h2>
+        <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Central bank</th><th class="r">Rate</th><th class="r">3M bp</th><th class="r">12M bp</th><th>12M path</th><th class="r">As of</th></tr></thead><tbody data-draw="fi-policy"></tbody></table></div></div></div>
+</div>
+<div class="g w2" style="margin-top:4px">
+<div class="pn"><h2><span class="n">CB</span>Central bank decisions<span class="s">last change in the policy rate · BIS monthly series via CBRT EVDS</span></h2><div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Central bank</th><th class="r">Rate</th><th>Last move</th><th class="r">Size</th><th>Stance</th><th class="r">Hikes / cuts, 14M</th></tr></thead><tbody data-draw="cb-moves"></tbody></table></div><p class="note">Monthly data catch a decision in the month it takes effect; very recent decisions (e.g. this month&#39;s) appear after BIS updates.</p></div></div>
+<div class="pn"><h2><span class="n">3.11</span>Global sovereign monitor · DM / CEE / LatAm / Asia<span class="s">policy rate vs inflation · bubble = GDP</span></h2>
+        <div class="bd"><div class="tt-chart" style="min-height:300px" data-draw="g-scatter" aria-label="Inflation vs policy rate by country"></div>
+        <div class="tw" style="margin-top:6px"><table class="tb"><thead><tr><th data-gsort="country">Country</th><th data-gsort="region">Region</th><th class="r" data-gsort="policy">Policy</th><th class="r" data-gsort="chg_12m">12M bp</th><th class="r" data-gsort="cpi_yoy">CPI y/y</th><th class="r" data-gsort="real_policy">Real policy</th><th class="r" data-gsort="ca_gdp">C/A % GDP</th><th class="r" data-gsort="gdp_bn">GDP</th><th class="r">CPI as of</th></tr></thead><tbody data-draw="g-sov"></tbody></table></div>
+        <p class="note">Sources: BIS policy rates, IMF CPI, current account (last 4 quarters) and nominal GDP, all via CBRT EVDS; monthly/quarterly. *Euro area uses German CPI. Click a header to sort. Sovereign yields and CDS: see WB and CRPR.</p></div></div>
+</div>
+    </div>
+    <div class="fsub" data-fn="CORP" hidden>
+<div class="g w2" style="margin-top:4px">
+<div class="pn"><h2><span class="n">3.13</span>Global bond &amp; credit monitor<span class="s">UST · IG · HY · DM ex-US · EM hard and local · 6M performance, 100 = start</span></h2>
         <div class="bd"><div class="tt-chart" style="min-height:230px" data-draw="g-perf" aria-label="Bond ETF performance"></div>
         <div class="tw" style="margin-top:6px"><table class="tb"><thead><tr><th>Ticker</th><th>Exposure</th><th class="r">Price</th><th class="r">1W</th><th class="r">1M</th><th class="r">3M</th><th class="r">6M</th><th>6M trend</th><th>52W range</th><th class="r">Dist. yld</th></tr></thead><tbody data-draw="g-etf"></tbody></table></div>
         <p class="note">Price returns of listed bond ETFs used as market proxies for each segment (USD). Distribution yield is trailing income, not yield to maturity. Sovereign CDS are not in the connected sources.</p></div></div>
+<div><div class="pn"><h2><span class="n">CRDT</span>Credit &amp; securitised yield pick-up<span class="s">trailing distribution yield minus Treasury ETF of similar duration</span></h2><div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Ticker</th><th>Segment</th><th class="r">Dist. yld</th><th class="r">Bench</th><th class="r">Pick-up</th><th>−100 … +400 bp</th></tr></thead><tbody data-draw="credit-pick"></tbody></table></div><p class="note">A rough proxy for credit spreads (option-adjusted spreads are not available): IEF (7–10Y UST) for fixed-rate funds, SHY (1–3Y) for floating-rate ones.</p></div></div><div style="margin-top:4px"><div class="pn"><h2><span class="n">CORP</span>Türkiye private-sector bonds outstanding (TRY)<span class="s">nominal value, bn TRY · weekly · CBRT securities statistics</span></h2><div class="bd"><div class="tt-chart" style="min-height:220px" data-draw="corp-tr" aria-label="Turkish private sector bonds outstanding"></div></div></div></div></div>
+</div>
     </div>
-    <div class="pn" style="margin-top:4px"><h2><span class="n">3.3</span>Bond screener<span class="s">TRY fixed-coupon bonds and T-bills · click a row to analyse · click a header to sort</span></h2>
-      <div class="bd"><div class="seg" style="margin-bottom:5px"><button data-scr="all" aria-pressed="true">ALL</button><button data-scr="bill" aria-pressed="false">BILLS</button><button data-scr="s" aria-pressed="false">BONDS &lt;2Y</button><button data-scr="m" aria-pressed="false">2–5Y</button><button data-scr="l" aria-pressed="false">5Y+</button></div>
-      <div class="tw"><table class="tb"><thead><tr><th data-sort="isin">ISIN</th><th data-sort="type">Type</th><th data-sort="maturity">Maturity</th><th class="r" data-sort="years">Yrs</th><th class="r" data-sort="coupon">Coupon</th><th class="r" data-sort="price">Dirty px</th><th class="r" data-sort="ytm">YTM</th><th class="r" data-sort="simple">Simple</th><th class="r" data-sort="mod_dur">Mod dur</th><th class="r" data-sort="convexity">Convexity</th><th class="r" data-sort="dv01">DV01/1mn</th><th class="r" data-sort="chg_1d">1D bp</th><th class="r" data-sort="chg_1w">1W bp</th><th class="r" data-sort="chg_1m">1M bp</th><th class="r" data-sort="rich_cheap">vs curve bp</th></tr></thead><tbody data-draw="fi-screener"></tbody></table></div>
-      <p class="note">Prices are CBRT indicative values, coupon-inclusive (dirty), per 100 nominal. YTM is annually compounded, act/365, with semi-annual coupons. "vs curve" is the residual to the fitted Nelson–Siegel curve: positive = cheap, negative = rich.</p></div></div>
-    <div class="g w2" style="margin-top:4px">
-      <div class="pn"><h2><span class="n">3.4</span>Security description · yield &amp; spread analysis<span class="s">price ↔ yield, risk, spreads, cash flows</span></h2>
-        <div class="bd" data-draw="fi-calc">
-          <div class="calc"><label>Security<select id="fi-calc-bond" data-draw="fi-calc-bond"></select></label><label>Solve from<select id="fi-calc-mode"><option value="price">Dirty price</option><option value="yield">Yield %</option></select></label><label>Input<input id="fi-calc-input" type="number" step="0.001"></label></div>
-          <div class="kv" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-bottom:6px" data-des></div>
-          <div class="kv" style="grid-template-columns:repeat(auto-fit,minmax(175px,1fr))" data-calc-out></div>
-          <div class="tw" style="margin-top:6px;max-height:220px;overflow:auto"><table class="tb"><thead><tr><th>Cash-flow date</th><th class="r">Years</th><th class="r">Cash flow</th><th class="r">Discount factor</th><th class="r">PV</th></tr></thead><tbody data-calc-cf></tbody></table></div>
-        </div></div>
-      <div class="pn"><h2><span class="n">3.5</span>Scenario &amp; horizon analysis<span class="s">parallel shift · total return with coupon reinvestment</span></h2>
-        <div class="bd">
-          <div class="calc"><label>Parallel shift (bp)<input id="fi-shift" type="range" min="-500" max="500" step="25" value="-200"></label><label>Horizon (days)<input id="fi-horizon" type="range" min="7" max="365" step="1" value="90"></label><label style="color:var(--yl)"><span data-scn-label>—</span></label></div>
-          <div class="tt-chart" style="min-height:280px" data-draw="fi-scenario" aria-label="Scenario total returns"></div>
-          <p class="note">Bars: horizon total return if yields move by the shift on day one and stay there. Yellow line: instant price change. Coupons received before the horizon are reinvested at the shifted yield.</p></div></div>
+    <div class="fsub" data-fn="CRPR" hidden>
+<div class="kv">
+      <div><div class="l">TÜRKİYE 5Y CDS</div><div class="v" data-draw="cr-k-tr">—</div><div class="c" data-draw="cr-k-tr-c">—</div></div>
+      <div><div class="l">TÜRKİYE RATING</div><div class="v" data-draw="cr-k-rt">—</div><div class="c">S&amp;P / Moody&#39;s / Fitch · all stable</div></div>
+      <div><div class="l">US 5Y CDS</div><div class="v" data-draw="cr-k-us">—</div><div class="c">AA+ / Aa1 / AA+</div></div>
+      <div><div class="l">FRANCE 5Y CDS</div><div class="v" data-draw="cr-k-fr">—</div><div class="c">A+ / Aa3 / A+</div></div>
+      <div><div class="l">ITALY 5Y CDS</div><div class="v" data-draw="cr-k-it">—</div><div class="c">BBB+ / Baa2 / BBB+</div></div>
+      <div><div class="l">BRAZIL 5Y CDS</div><div class="v" data-draw="cr-k-br">—</div><div class="c">BB / Ba1 / BB</div></div>
     </div>
-    <div class="g w2" style="margin-top:4px">
-      <div class="pn"><h2><span class="n">3.6</span>Money markets &amp; liquidity<span class="s">CBRT open market operations</span></h2><div class="bd"><div class="tt-chart" style="min-height:200px" data-draw="fi-liq" aria-label="CBRT net funding"></div></div></div>
-      <div class="pn"><h2><span class="n">3.7</span>Non-resident positioning<span class="s">weekly, CBRT securities statistics</span></h2><div class="bd"><div class="tt-chart sm" data-draw="fi-nr-stock" aria-label="Non-resident holdings"></div><div class="tt-chart" style="min-height:180px" data-draw="fi-nr" aria-label="Non-resident flows"></div></div></div>
-      <div class="pn"><h2><span class="n">3.9</span>Floating-rate bonds (TLREF-linked)<span class="s">price only · coupon resets each period</span></h2>
-        <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>ISIN</th><th>Maturity</th><th class="r">Yrs</th><th class="r">Dirty px</th><th class="r">1D</th><th class="r">Current cpn (ann.)</th><th class="r">Next coupon</th></tr></thead><tbody data-draw="fi-frn"></tbody></table></div>
-        <p class="note">These pay a coupon that resets with TLREF, so a fixed-rate yield or duration would be misleading; they are kept out of the curve, screener and scenarios.</p></div></div>
-      <div class="pn"><h2><span class="n">3.8</span>Global policy rates<span class="s">BIS via CBRT EVDS · monthly</span></h2>
-        <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Central bank</th><th class="r">Rate</th><th class="r">3M bp</th><th class="r">12M bp</th><th>12M path</th><th class="r">As of</th></tr></thead><tbody data-draw="fi-policy"></tbody></table></div></div></div>
+<div class="g w2" style="margin-top:4px">
+<div class="pn"><h2><span class="n">WCDS</span>Sovereign 5Y CDS<span class="s">USD contracts, bp · bar colour = S&amp;P rating band</span></h2><div class="bd"><div class="tt-chart" data-draw="cds-bars" aria-label="Sovereign CDS"></div></div></div>
+<div class="pn"><h2><span class="n">CRPR</span>Ratings &amp; CDS monitor<span class="s">S&amp;P · Moody&#39;s · Fitch · CDS changes · implied default probability · click a header to sort</span></h2><div class="bd"><div class="tw" style="max-height:430px;overflow:auto"><table class="tb sticky"><thead><tr><th data-cdss="country">Country</th><th class="r">S&amp;P</th><th class="r">Moody&#39;s</th><th class="r">Fitch</th><th class="r" data-cdss="cds">5Y CDS</th><th class="r" data-cdss="var1m">1M</th><th class="r" data-cdss="var6m">6M</th><th class="r" data-cdss="pd">5Y PD</th><th class="r" data-cdss="y10">10Y yld</th><th class="r">Date</th></tr></thead><tbody data-draw="cds-table"></tbody></table></div><p class="note">CDS and ratings: worldgovernmentbonds.com snapshot (26 Nov 2026); PD assumes 40% recovery. This source can lag agency actions; the Türkiye row was checked against the agencies&#39; own announcements. Snapshot, not refreshed automatically.</p></div></div>
+</div>
+<div class="g w2" style="margin-top:4px">
+<div class="pn"><h2><span class="n">SOVR</span>CDS vs credit rating<span class="s">log scale · dashed line = rating-implied CDS · hover for rich/cheap</span></h2><div class="bd"><div class="tt-chart" style="min-height:280px" data-draw="cds-scatter" aria-label="CDS versus rating"></div></div></div>
+<div class="pn"><h2><span class="n">RATC</span>Türkiye rating actions<span class="s">Moody&#39;s · S&amp;P · Fitch</span></h2><div class="bd"><div class="tw" style="max-height:300px;overflow:auto"><table class="tb sticky"><thead><tr><th>Date</th><th>Agency</th><th class="r">Rating</th><th>Outlook</th><th>Action</th></tr></thead><tbody data-draw="tr-ratings"></tbody></table></div><p class="note">Next scheduled reviews are set by each agency&#39;s EU sovereign calendar; S&amp;P did not publish on its 16 Oct 2026 date.</p></div></div>
+</div>
     </div>
-    <p class="cov" style="margin-top:4px"><b>COVERAGE.</b> Included: TRY government fixed-coupon bonds and T-bills, money markets, non-resident flows, US Treasury yields and curve spreads, global bond and credit ETFs (IG, HY, DM ex-US, EM hard and local currency), global policy rates, inflation, current accounts and GDP for 16 DM/EM economies. TLREF-linked floaters are shown with price and current coupon only. Not available from the connected sources yet: Bund/Gilt/JGB and EM local 10Y yields, sovereign CDS, corporate credit, Eurobond prices, CPI-linked and floater spread analytics, bond futures, live swap quotes and execution.</p>
+    <div class="fsub" data-fn="MTGE" hidden>
+<div class="g w2" style="margin-top:4px">
+<div class="pn"><h2><span class="n">MTGE</span>Mortgage, structured &amp; floating-rate credit<span class="s">ETF proxies: agency MBS · CMBS · AAA CLO · leveraged loans · IG floaters</span></h2><div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Ticker</th><th>Exposure</th><th class="r">Price</th><th>52W range</th><th class="r">In range</th><th class="r">vs 52W high</th><th class="r">Dist. yld</th></tr></thead><tbody data-draw="mtge-table"></tbody></table></div><p class="note">Listed ETFs used as market proxies (USD). Pool-level prepayment speeds, OAS and tranche analytics need a pricing service and are not in the connected sources.</p></div></div>
+<div class="pn"><h2><span class="n">CRDT</span>Credit &amp; securitised yield pick-up<span class="s">trailing distribution yield minus Treasury ETF of similar duration</span></h2><div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Ticker</th><th>Segment</th><th class="r">Dist. yld</th><th class="r">Bench</th><th class="r">Pick-up</th><th>−100 … +400 bp</th></tr></thead><tbody data-draw="credit-pick"></tbody></table></div><p class="note">A rough proxy for credit spreads (option-adjusted spreads are not available): IEF (7–10Y UST) for fixed-rate funds, SHY (1–3Y) for floating-rate ones.</p></div></div>
+</div>
+    </div>
+    <div class="fsub" data-fn="NIM" hidden>
+<div class="g w2" style="margin-top:4px">
+<div class="pn"><h2><span class="n">NIM 1</span>Debt outstanding &amp; net issuance<span class="s">weekly, CBRT securities statistics · changes in nominal outstanding</span></h2><div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Segment</th><th class="r">Outstanding</th><th class="r">1W</th><th class="r">1M</th><th class="r">6M</th><th>6M trend</th></tr></thead><tbody data-draw="nim-table"></tbody></table></div><p class="note">Changes in outstanding capture new issues net of redemptions; individual deal terms (size, pricing, books) are not in the connected sources.</p></div></div>
+<div class="pn"><h2><span class="n">NIM 2</span>Treasury net domestic borrowing<span class="s">DİBS outstanding and weekly net change</span></h2><div class="bd"><div class="tt-chart sm" data-draw="nim-dibs-stock" aria-label="DİBS outstanding"></div><div class="tt-chart" style="min-height:200px" data-draw="nim-dibs" aria-label="Weekly net change in DİBS"></div></div></div>
+</div>
+<div class="g w2" style="margin-top:4px">
+<div class="pn"><h2><span class="n">NIM 3</span>Central government domestic debt stock<span class="s">monthly, TRY tn · Ministry of Treasury and Finance</span></h2><div class="bd"><div class="tt-chart" style="min-height:190px" data-draw="nim-ibs" aria-label="Domestic debt stock"></div></div></div>
+<div class="pn"><h2><span class="n">3.7</span>Non-resident positioning<span class="s">weekly, CBRT securities statistics</span></h2><div class="bd"><div class="tt-chart sm" data-draw="fi-nr-stock" aria-label="Non-resident holdings"></div><div class="tt-chart" style="min-height:180px" data-draw="fi-nr" aria-label="Non-resident flows"></div></div></div>
+</div>
+    </div>
+    <div class="fsub" data-fn="NEWS" hidden>
+<div class="g w2" style="margin-top:4px">
+<div class="pn"><h2><span class="n">TOP</span>Fixed income news<span class="s">central banks · Treasuries · credit · ratings · headlines link to the source</span></h2><div class="bd"><div class="seg" data-draw="news-tags" style="margin-bottom:5px;flex-wrap:wrap"></div><div class="tw"><table class="tb"><thead><tr><th>Date</th><th>Topic</th><th>Headline</th><th>Source</th></tr></thead><tbody data-draw="news-list"></tbody></table></div><p class="note">Headlines from a web search at each refresh; titles only, open the link for the article.</p></div></div>
+<div><div class="pn"><h2><span class="n">ECO</span>CBRT MPC dates &amp; market pricing<span class="s">implied forward O/N at each meeting</span></h2><div class="bd"><div class="tw"><table class="tb"><thead><tr><th>MPC</th><th class="r">Days</th><th class="r">Implied fwd O/N</th><th class="r">vs AWFC</th><th class="r">Survey</th></tr></thead><tbody data-draw="t-ppk"></tbody></table></div></div></div><div style="margin-top:4px"><div class="pn"><h2><span class="n">ECO</span>Türkiye release calendar<span class="s">this week and next</span></h2><div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Time</th><th>Release</th><th>Impact</th><th class="r">Previous</th></tr></thead><tbody data-draw="t-takvim"></tbody></table></div><div data-draw="t-takvim-bos"></div></div></div></div></div>
+</div>
+    </div>
+    <p class="cov" style="margin-top:4px"><b>COVERAGE.</b> Market data: CBRT EVDS (TRY bonds and bills, money markets, debt stock, issuance, policy rates, IMF/BIS macro), Yahoo Finance via Borsa (US Treasury yields, Fed funds and SOFR futures, Treasury futures, bond ETFs). Web snapshots: investing.com (world government bond yields, refreshed with the page), worldgovernmentbonds.com (sovereign CDS and ratings, 26 Nov 2026), news headlines. Not available: individual corporate bond prices and issuer debt profiles, OAS/CDS curves, MBS prepayment analytics, auction results and deal books, live swap quotes and execution. Keys inside this page: [ and ] step through functions, / jumps to the function box.</p>
   </section>
 
   <!-- 4 MACRO -->

@@ -1,0 +1,14 @@
+## data
+```tsv
+symbol	name	market	currency	current_price	volume	week_52_high	week_52_low	avg_volume	dividend_yield
+ZQ=F	ZQ=F	us	USD	95.725	11864	96.3825	96.1075	62518	
+SR3=F	SR3=F	us	USD	95.735	55213	95.7375	95.725	37	
+ZF=F	ZF=F	us	USD	105.0156	187754	110.2188	103.0312	1379563	
+UB=F	UB=F	us	USD	110.0312	43803	122.9062	102.0312	441314	
+MBB	iShares MBS ETF	us	USD	92.03	2740700	96.97	88.58	5684523	4.43
+VMBS	Vanguard Mortgage-Backed Securities Index Fund ETF Shares	us	USD	45.58	1510000	47.9	43.95	2293325	4.32
+JAAA	Janus Henderson AAA CLO ETF	us	USD	50.65	7605100	50.82	50.32	7551025	5.26
+CMBS	iShares CMBS ETF	us	USD	47.89	36200	49.89	47.09	57873	3.7
+BKLN	Invesco Senior Loan ETF	us	USD	20.39	19464700	21.07	20.11	12370537	6.4
+FLOT	iShares Floating Rate Bond ETF	us	USD	50.97	2441600	51.08	50.67	2239703	4.27
+```

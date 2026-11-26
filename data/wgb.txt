@@ -1,0 +1,171 @@
+## metadata
+source: investing.com world government bonds
+fetched: 2026-11-26 15:45 Istanbul
+## data
+```tsv
+country	group	tenor	yield	prev	time
+United States	US	3M	4.133	4.139	13:05:13
+United States	US	1Y	4.454	4.411	13:05:06
+United States	US	2Y	4.716	4.682	13:09:23
+United States	US	5Y	4.824	4.807	13:09:56
+United States	US	10Y	4.978	4.986	13:15:32
+United States	US	30Y	5.300	5.315	13:09:57
+United Kingdom	DM	3M	4.182	4.182	12:03:35
+United Kingdom	DM	1Y	4.6211	4.6155	13:15:01
+United Kingdom	DM	2Y	4.9373	4.9386	13:15:27
+United Kingdom	DM	5Y	5.0009	4.9988	13:15:10
+United Kingdom	DM	10Y	5.3517	5.3474	13:15:01
+United Kingdom	DM	30Y	5.749	5.746	13:15:09
+Germany	EZ	2Y	3.090	3.079	13:15:37
+Germany	EZ	5Y	3.182	3.174	13:15:35
+Germany	EZ	10Y	3.3732	3.3549	13:15:30
+Germany	EZ	30Y	3.695	3.684	13:15:34
+France	EZ	2Y	3.728	3.724	
+France	EZ	5Y	4.318	4.320	
+France	EZ	10Y	4.904	4.902	
+France	EZ	30Y	5.401	5.409	
+Italy	EZ	2Y	3.506	3.506	
+Italy	EZ	5Y	3.982	3.982	
+Italy	EZ	10Y	4.498	4.499	
+Italy	EZ	30Y	5.061	5.054	13:00:15
+Spain	EZ	2Y	3.268	3.266	13:15:38
+Spain	EZ	5Y	3.531	3.524	13:15:30
+Spain	EZ	10Y	4.008	3.998	13:15:21
+Spain	EZ	30Y	4.488	4.488	13:00:32
+Netherlands	EZ	2Y	3.110	3.132	
+Netherlands	EZ	5Y	3.235	3.228	
+Netherlands	EZ	10Y	3.479	3.461	
+Netherlands	EZ	30Y	3.675	3.665	
+Belgium	EZ	2Y	3.362	3.352	13:03:52
+Belgium	EZ	5Y	3.829	3.829	13:03:54
+Belgium	EZ	10Y	4.383	4.370	13:03:58
+Belgium	EZ	30Y	5.020	5.015	
+Austria	EZ	2Y	3.267	3.255	
+Austria	EZ	5Y	3.449	3.451	
+Austria	EZ	10Y	3.636	3.626	
+Austria	EZ	30Y	3.944	3.939	
+Portugal	EZ	2Y	3.189	3.197	13:15:40
+Portugal	EZ	5Y	3.461	3.457	13:15:39
+Portugal	EZ	10Y	3.878	3.870	13:00:15
+Portugal	EZ	30Y	4.324	4.323	
+Greece	EZ	2Y	3.289	3.385	
+Greece	EZ	5Y	3.759	3.759	
+Greece	EZ	10Y	4.343	4.393	
+Greece	EZ	30Y	4.809	4.813	
+Ireland	EZ	2Y	3.117	3.109	13:15:37
+Ireland	EZ	5Y	3.239	3.226	13:15:37
+Ireland	EZ	10Y	3.517	3.512	13:09:54
+Ireland	EZ	30Y	3.839	3.848	
+Finland	EZ	2Y	3.161	3.183	13:15:30
+Finland	EZ	5Y	3.416	3.415	13:15:38
+Finland	EZ	10Y	3.719	3.722	13:15:36
+Finland	EZ	30Y	4.153	4.147	
+Switzerland	DM	2Y	0.229	0.205	13:15:24
+Switzerland	DM	5Y	0.408	0.398	13:14:49
+Switzerland	DM	10Y	0.478	0.476	12:52:44
+Switzerland	DM	30Y	0.491	0.482	12:52:44
+Sweden	DM	2Y	2.712	2.710	11:19:47
+Sweden	DM	5Y	2.947	2.941	13:05:59
+Sweden	DM	10Y	3.110	3.110	11:12:47
+Denmark	DM	2Y	2.973	2.971	
+Denmark	DM	5Y	3.050	3.043	
+Denmark	DM	10Y	3.203	3.176	
+Denmark	DM	30Y	3.316	3.311	
+Norway	DM	5Y	4.621	4.619	
+Norway	DM	10Y	4.483	4.508	
+Japan	DM	2Y	1.912	1.871	13:02:11
+Japan	DM	5Y	2.265	2.221	13:02:14
+Japan	DM	10Y	2.820	2.804	13:02:12
+Japan	DM	30Y	3.841	3.816	13:02:12
+Australia	DM	2Y	4.924	4.911	13:15:27
+Australia	DM	5Y	4.890	4.875	13:15:30
+Australia	DM	10Y	5.181	5.172	13:07:58
+Australia	DM	30Y	5.600	5.599	
+Canada	DM	2Y	3.366	3.361	13:15:08
+Canada	DM	5Y	3.573	3.576	13:15:37
+Canada	DM	10Y	3.831	3.847	13:15:30
+Canada	DM	30Y	4.126	4.140	13:15:29
+New Zealand	DM	2Y	3.920	3.920	23/10
+New Zealand	DM	5Y	4.468	4.468	23/10
+New Zealand	DM	10Y	4.970	4.970	23/10
+Singapore	DM	2Y	1.867	1.867	
+Singapore	DM	5Y	2.094	2.094	
+Singapore	DM	10Y	2.309	2.309	
+Singapore	DM	30Y	2.320	2.320	
+Israel	EM	2Y	3.312	3.311	
+Israel	EM	5Y	3.759	3.757	
+Israel	EM	10Y	4.067	4.062	
+Israel	EM	30Y	4.610	4.615	
+China	EM	2Y	1.243	1.251	
+China	EM	5Y	1.347	1.356	
+China	EM	10Y	1.627	1.606	
+China	EM	30Y	2.070	2.079	
+South Korea	EM	2Y	3.750	3.741	
+South Korea	EM	5Y	3.935	3.935	
+South Korea	EM	10Y	4.077	4.075	
+South Korea	EM	30Y	4.168	4.165	
+India	EM	2Y	6.714	6.849	
+India	EM	5Y	7.378	7.359	
+India	EM	10Y	7.482	7.473	
+India	EM	30Y	7.890	7.866	
+Indonesia	EM	5Y	7.364	7.364	
+Indonesia	EM	10Y	7.454	7.454	
+Indonesia	EM	30Y	7.453	7.453	23/10
+Malaysia	EM	5Y	3.670	3.646	
+Malaysia	EM	10Y	3.908	3.887	
+Malaysia	EM	30Y	4.382	4.368	
+Thailand	EM	2Y	1.345	1.368	
+Thailand	EM	5Y	1.658	1.688	
+Thailand	EM	10Y	2.188	2.240	
+Philippines	EM	2Y	7.083	7.083	
+Philippines	EM	5Y	7.957	7.957	
+Philippines	EM	10Y	8.094	8.094	
+Vietnam	EM	2Y	3.789	3.789	
+Vietnam	EM	5Y	4.359	4.359	
+Vietnam	EM	10Y	4.578	4.578	
+Brazil	EM	2Y	12.790	12.790	22/10
+Brazil	EM	5Y	12.865	12.865	22/10
+Brazil	EM	10Y	12.990	12.990	22/10
+Mexico	EM	5Y	8.448	8.453	11:14:48
+Mexico	EM	10Y	9.298	9.308	11:12:40
+Mexico	EM	30Y	9.844	9.859	10:55:28
+Colombia	EM	2Y	12.400	12.400	23/10
+Colombia	EM	5Y	12.943	12.943	23/10
+Colombia	EM	10Y	12.942	12.942	23/10
+Chile	EM	2Y	5.030	5.030	23/10
+Chile	EM	5Y	5.705	5.705	23/10
+Chile	EM	10Y	5.995	5.995	23/10
+Chile	EM	30Y	6.150	6.160	12:17:03
+Peru	EM	2Y	3.950	3.950	23/10
+Peru	EM	5Y	4.500	4.500	23/10
+Peru	EM	30Y	6.840	6.840	23/10
+South Africa	EM	5Y	8.225	8.245	
+South Africa	EM	10Y	8.785	8.785	
+South Africa	EM	30Y	9.085	9.085	
+Poland	EM	2Y	4.807	4.807	
+Poland	EM	5Y	5.955	5.955	
+Poland	EM	10Y	6.418	6.418	
+Czech Republic	EM	2Y	4.385	4.390	12:53:45
+Czech Republic	EM	5Y	4.821	4.821	12:01:37
+Czech Republic	EM	10Y	5.391	5.401	12:55:25
+Hungary	EM	5Y	5.840	5.840	09:10:26
+Hungary	EM	10Y	5.750	5.750	09:10:18
+Romania	EM	2Y	6.780	6.780	
+Romania	EM	5Y	7.110	7.110	
+Romania	EM	10Y	7.230	7.230	
+Turkey	EM	3M	31.772	32.000	10:48:09
+Turkey	EM	2Y	39.800	36.530	10:51:11
+Turkey	EM	5Y	38.945	35.640	10:51:40
+Turkey	EM	10Y	35.785	33.010	06:01:21
+Egypt	EM	2Y	24.940	24.940	
+Egypt	EM	5Y	23.780	23.780	
+Egypt	EM	10Y	23.490	23.490	
+Nigeria	EM	2Y	16.116	16.116	23/10
+Nigeria	EM	5Y	16.468	16.468	23/10
+Nigeria	EM	10Y	16.905	16.905	23/10
+Kenya	EM	2Y	9.110	9.110	
+Kenya	EM	5Y	9.230	9.240	
+Kenya	EM	10Y	12.530	12.530	
+Pakistan	EM	5Y	12.640	12.695	09:04:01
+Pakistan	EM	10Y	12.799	12.829	09:04:02
+```
