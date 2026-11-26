@@ -330,12 +330,47 @@ ul.soon li::marker { color: var(--am); }
   </section>
   <!-- 3 FX -->
   <section class="page" id="fx" hidden>
+<div class="kv">
+      <div><div class="l">USD/TRY</div><div class="v" data-draw="fx-k-usd">—</div><div class="c" data-draw="fx-k-usd-c">—</div></div>
+      <div><div class="l">EUR/TRY</div><div class="v" data-draw="fx-k-eur">—</div><div class="c">CBRT</div></div>
+      <div><div class="l">BASKET (½ USD + ½ EUR)</div><div class="v" data-draw="fx-k-bsk">—</div><div class="c">TRY</div></div>
+      <div><div class="l">USD/TRY 1Y FORWARD</div><div class="v" data-draw="fx-k-1y">—</div><div class="c" data-draw="fx-k-1y-c">—</div></div>
+      <div><div class="l">USD/TRY REALISED VOL</div><div class="v" data-draw="fx-k-vol">—</div><div class="c">20-day, annualised</div></div>
+      <div><div class="l">REAL EFFECTIVE RATE</div><div class="v" data-draw="fx-k-reer">—</div><div class="c" data-draw="fx-k-reer-c">—</div></div>
+      <div><div class="l">DOLLAR INDEX</div><div class="v" data-draw="fx-k-dxy">—</div><div class="c">DXY</div></div>
+    </div>
+<div class="fnbar" role="tablist" style="margin-top:4px"><button data-fn="FXC" aria-selected="true"><b>FXC</b>TRY monitor · crosses</button><button data-fn="WCRS" aria-selected="false"><b>WCRS</b>World currencies</button><button data-fn="FRD" aria-selected="false"><b>FRD</b>Forwards · carry</button><button data-fn="FXV" aria-selected="false"><b>FXV</b>Volatility</button><button data-fn="CBFX" aria-selected="false"><b>CBFX</b>CBRT · REER</button></div>
+<div class="fsub" data-fn="FXC">
 <div class="g w2" style="margin-top:4px">
-<div class="pn"><h2><span class="n">1.1</span>FX<span class="s">last close · crosses computed from TRY rates</span></h2>
-        <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Pair</th><th class="r">Last</th><th class="r">As of</th></tr></thead><tbody data-draw="t-fx"></tbody></table></div></div></div>
-<div class="pn"><h2><span class="n">1.7</span>USD/TRY<span class="s">daily · 3 months</span></h2><div class="bd"><div class="tt-chart sm" data-draw="ch-usd" aria-label="USD/TRY"></div></div></div>
+<div class="pn"><h2><span class="n">FXC 1</span>Turkish lira monitor<span class="s">TRY per unit · change of each currency against TRY (red = TRY weaker)</span></h2><div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Pair</th><th>Currency</th><th class="r">TRY</th><th class="r">1W</th><th class="r">1M</th><th class="r">3M</th><th class="r">6M</th></tr></thead><tbody data-draw="fx-try"></tbody></table></div><p class="note">USD/TRY and EUR/TRY: CBRT and Borsa quotes; other crosses derived from USD rates (Yahoo Finance). Changes use weekly closes.</p></div></div>
+<div><div class="pn"><h2><span class="n">FXC 2</span>Cross-rate matrix<span class="s">major currencies and TRY · price of 1 unit of the row currency in the column currency</span></h2><div class="bd"><div class="tw"><table class="tb"><thead></thead><tbody data-draw="fx-matrix"></tbody></table></div></div></div><div style="margin-top:4px"><div class="pn"><h2><span class="n">FXC 3</span>USD/TRY<span class="s">CBRT daily rate · 3 months</span></h2><div class="bd"><div class="tt-chart" style="min-height:230px" data-draw="fx-usdtry" aria-label="USD/TRY"></div></div></div></div></div>
 </div>
-<div style="margin-top:4px"><div class="pn"><h2><span class="n">FX</span>Foreign exchange<span class="s">in progress</span></h2><div class="bd"><p class="soon">This area is being built. Planned functions:</p><ul class="soon"><li>USD/TRY and EUR/TRY forward curves implied by TLREF vs SOFR / €STR (covered interest parity)</li><li>Cross-rate matrix and EM FX monitor</li><li>Real effective exchange rate (CBRT)</li><li>Realised volatility, carry and FX swap points</li><li>CBRT FX swaps and settled forwards</li></ul></div></div></div>
+</div>
+<div class="fsub" data-fn="WCRS" hidden>
+<div class="g w2" style="margin-top:4px">
+<div class="pn"><h2><span class="n">WCRS 1</span>Currency performance vs USD<span class="s">positive = currency stronger against the dollar</span></h2><div class="bd"><div class="seg" style="margin-bottom:4px;flex-wrap:wrap"><button data-fxper="w1" aria-pressed="false">1W</button><button data-fxper="m1" aria-pressed="true">1M</button><button data-fxper="m3" aria-pressed="false">3M</button><button data-fxper="m6" aria-pressed="false">6M</button><span style="width:12px"></span><button data-fxreg="ALL" aria-pressed="true">ALL</button><button data-fxreg="G10" aria-pressed="false">G10</button><button data-fxreg="EMEA" aria-pressed="false">EMEA</button><button data-fxreg="LatAm" aria-pressed="false">LATAM</button><button data-fxreg="Asia" aria-pressed="false">ASIA</button></div><div class="tt-chart" data-draw="fx-wcrs-bars" aria-label="Currency performance"></div></div></div>
+<div class="pn"><h2><span class="n">WCRS 2</span>World currencies<span class="s">quote · % change of the currency vs USD · 6M realised vol (weekly) · position in 52-week range</span></h2><div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Ccy</th><th>Pair</th><th class="r">Last</th><th class="r">1W</th><th class="r">1M</th><th class="r">3M</th><th class="r">6M</th><th>6M trend</th><th class="r">Vol</th><th class="r">52W pos.</th></tr></thead><tbody data-draw="fx-wcrs"></tbody></table></div><p class="note">Source: Yahoo Finance via Borsa, weekly closes. 52W position is where the currency’s value sits between its 52-week low (0%) and high (100%).</p></div></div>
+</div>
+</div>
+<div class="fsub" data-fn="FRD" hidden>
+<div class="g w2" style="margin-top:4px">
+<div class="pn"><h2><span class="n">FRD 1</span>USD/TRY forward curve<span class="s">covered interest parity · CBRT survey expectation at 12 months</span></h2><div class="bd"><div class="tt-chart" style="min-height:250px" data-draw="fx-fwd-chart" aria-label="Forward curve"></div></div></div>
+<div class="pn"><h2><span class="n">FRD 2</span>Theoretical forwards<span class="s">F = S × (1 + r<sub>TRY</sub>·d/365) / (1 + r<sub>USD</sub>·d/360)</span></h2><div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Tenor</th><th class="r">Days</th><th class="r">TRY rate</th><th class="r">USD rate</th><th class="r">USD/TRY fwd</th><th class="r">Points</th><th class="r">TRY loss, period</th><th class="r">Annualised</th><th class="r">EUR/TRY fwd</th></tr></thead><tbody data-draw="fx-fwd"></tbody></table></div><p class="note">Not market quotes. TRY rates: TLREF and T-bill yields (simple) up to the longest bill, fitted government curve beyond; USD: 3M bill and 1Y Treasury; EUR: ECB rate to German 2Y. Onshore swap-implied rates can differ materially from these, especially in stress.</p></div></div>
+</div>
+<div style="margin-top:4px"><div class="pn"><h2><span class="n">FRD 3</span>EM carry monitor<span class="s">policy rate minus US 3M bill · carry-to-volatility · click a header to sort</span></h2><div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Ccy</th><th>Currency</th><th class="r" data-carrys="policy">Policy</th><th class="r" data-carrys="carry">Carry</th><th class="r" data-carrys="vol">Vol</th><th class="r" data-carrys="carry_vol">Carry/vol</th><th class="r" data-carrys="m6">Spot 6M</th><th class="r">Spot + carry 6M</th></tr></thead><tbody data-draw="fx-carry"></tbody></table></div><p class="note">Carry uses BIS policy rates as a proxy for short-term deposit rates; “spot + carry” adds half a year of carry to the 6-month spot return (approximate total return of a long position funded in USD).</p></div></div></div>
+</div>
+<div class="fsub" data-fn="FXV" hidden>
+<div class="g w2" style="margin-top:4px">
+<div class="pn"><h2><span class="n">FXV 1</span>USD/TRY realised volatility<span class="s">20-day rolling, annualised, from CBRT daily rates</span></h2><div class="bd"><div class="tt-chart" style="min-height:220px" data-draw="fx-rvol" aria-label="Realised volatility"></div><div class="tt-chart" style="min-height:160px;margin-top:4px" data-draw="fx-dchg" aria-label="Daily changes"></div></div></div>
+<div class="pn"><h2><span class="n">FXV 2</span>Realised volatility by currency<span class="s">6 months, weekly returns, annualised</span></h2><div class="bd"><div class="tt-chart" data-draw="fx-vol-bars" aria-label="Volatility by currency"></div><p class="note">Option-implied volatilities and risk reversals are not in the connected sources.</p></div></div>
+</div>
+</div>
+<div class="fsub" data-fn="CBFX" hidden>
+<div class="g w2" style="margin-top:4px">
+<div class="pn"><h2><span class="n">CBFX 1</span>Real effective exchange rate<span class="s">CPI-based, 2025 = 100 · higher = real TRY appreciation</span></h2><div class="bd"><div class="tt-chart" style="min-height:240px" data-draw="fx-reer" aria-label="REER"></div></div></div>
+<div class="pn"><h2><span class="n">CBFX 2</span>CBRT FX operations<span class="s">swap stocks and TRY-settled FX forwards, weekly</span></h2><div class="bd"><div class="tt-chart" style="min-height:240px" data-draw="fx-ops" aria-label="CBRT swaps and forwards"></div><div class="tw" style="margin-top:6px"><table class="tb"><thead><tr><th>Position</th><th class="r">Latest</th><th class="r">4W chg</th><th class="r">6M chg</th></tr></thead><tbody data-draw="fx-ops-table"></tbody></table></div><p class="note">Source: CBRT EVDS, weekly (week-ending Friday; a week still in progress is not shown).</p></div></div>
+</div>
+</div>
   </section>
   <!-- 4 COMMODITIES -->
   <section class="page" id="cmdty" hidden>

@@ -58,7 +58,7 @@
   // Global command line: page names, function codes and common Bloomberg aliases
   const ALIAS = {
     MKT: ['piyasa'], MARKETS: ['piyasa'], EQ: ['equity'], EQUITY: ['equity'], EQUITIES: ['equity'], FI: ['fixed'], FIXED: ['fixed'], GOVT: ['fixed', 'GOVT'], YCRV: ['fixed', 'GOVT'], GC: ['fixed', 'GOVT'], SRCH: ['fixed', 'YAS'], DES: ['fixed', 'YAS'], YA: ['fixed', 'YAS'], FIHZ: ['fixed', 'YAS'], IYC: ['fixed', 'WB'], WBX: ['fixed', 'WB'],
-    FX: ['fx'], FXC: ['fx'], WCRS: ['fx'], CMDTY: ['cmdty'], GLCO: ['cmdty'], CMBQ: ['cmdty'], DERIV: ['deriv'], OIS: ['deriv', 'OIS'], SWPM: ['deriv', 'OIS'], IRSB: ['deriv', 'OIS'], FUT: ['deriv', 'FUT'], CTM: ['deriv', 'FUT'], VOL: ['deriv', 'VOL'],
+    FX: ['fx'], FXC: ['fx', 'FXC'], WCRS: ['fx', 'WCRS'], FRD: ['fx', 'FRD'], FXFA: ['fx', 'FRD'], FXFC: ['fx', 'FRD'], CARRY: ['fx', 'FRD'], FXV: ['fx', 'FXV'], CBFX: ['fx', 'CBFX'], REER: ['fx', 'CBFX'], FXIP: ['fx', 'FXC'], CMDTY: ['cmdty'], GLCO: ['cmdty'], CMBQ: ['cmdty'], DERIV: ['deriv'], OIS: ['deriv', 'OIS'], SWPM: ['deriv', 'OIS'], IRSB: ['deriv', 'OIS'], FUT: ['deriv', 'FUT'], CTM: ['deriv', 'FUT'], VOL: ['deriv', 'VOL'],
     MM: ['mm'], MONEY: ['mm'], BTMM: ['mm', 'BTMM'], MMR: ['mm', 'BTMM'], LIQ: ['mm', 'LIQ'], CP: ['mm', 'CP'], USMM: ['mm', 'USMM'], WIRP: ['mm', 'USMM'], FEDS: ['mm', 'USMM'],
     ECO: ['eco'], ECON: ['eco'], ECFC: ['eco', 'ECO'], CAL: ['eco', 'CAL'], ECOC: ['eco', 'CAL'], CB: ['eco', 'CB'], WIR: ['eco', 'CB'], CENB: ['eco', 'CB'],
     FUNDS: ['funds'], ETF: ['funds'], FUND: ['funds'], FSRC: ['funds'], CREDIT: ['credit'], CRPR: ['credit', 'CRPR'], WCDS: ['credit', 'CRPR'], SOVR: ['credit', 'CRPR'], RATC: ['credit', 'CRPR'], CDSW: ['credit', 'CRPR'], CORP: ['credit', 'CORP'], IGHY: ['credit', 'CORP'],
