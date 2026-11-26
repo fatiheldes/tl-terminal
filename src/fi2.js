@@ -357,7 +357,7 @@
     fn = name;
     document.querySelectorAll('#fixed .fsub').forEach((s) => { s.hidden = s.dataset.fn !== name; });
     document.querySelectorAll('.fnbar button[data-fn]').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.fn === name)));
-    try { localStorage.setItem('tlft-fn', name); history.replaceState(null, '', '#fixed/' + name); } catch (e) { /* file:// */ }
+    try { localStorage.setItem('tlft-fn', name); const fx = document.getElementById('fixed'); if (fx && !fx.hidden) history.replaceState(null, '', '#fixed/' + name); } catch (e) { /* file:// */ }
     if (redraw !== false) {
       const sec = document.querySelector('#fixed .fsub[data-fn="' + name + '"]');
       if (sec && TT.motion()) sec.querySelectorAll('.pn').forEach((p, i) => { p.classList.remove('enter'); void p.offsetWidth; p.style.animationDelay = (i * 50) + 'ms'; p.classList.add('enter'); });
@@ -366,6 +366,7 @@
     return true;
   }
   window.FIfn = setFn;
+  window.FIcur = () => fn;
   document.addEventListener('DOMContentLoaded', () => {
     setFn(fn, false);
     document.querySelectorAll('.fnbar button[data-fn]').forEach((b) => b.addEventListener('click', () => setFn(b.dataset.fn)));

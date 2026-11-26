@@ -19,7 +19,7 @@
     cur = name;
     document.querySelectorAll('section.page').forEach((s) => { s.hidden = s.id !== name; });
     document.querySelectorAll('.tabs button[data-tab]').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.tab === name)));
-    try { history.replaceState(null, '', '#' + name); } catch (e) { /* file:// */ }
+    try { history.replaceState(null, '', '#' + name + (name === 'fixed' && window.FIcur ? '/' + window.FIcur() : '')); } catch (e) { /* file:// */ }
     const sec = document.getElementById(name);
     if (sec && TT.motion()) sec.querySelectorAll('.pn').forEach((p, i) => { p.classList.remove('enter'); void p.offsetWidth; p.style.animationDelay = (i * 60) + 'ms'; p.classList.add('enter'); });
     TT.anim = true;
@@ -45,7 +45,7 @@
       if (i >= 0) { show(PAGES[i]); if (monTimer) monitor(true); }
       if (e.key === 'm' || e.key === 'M') monitor(!monTimer);
     });
-    show((location.hash || '#piyasa').slice(1));
+    show((location.hash || '#piyasa').slice(1).split('/')[0]);
     let saved = null; try { saved = localStorage.getItem('tlft-monitor'); } catch (e) { /* ignore */ }
     if (saved === '1') monitor(true);
   });
