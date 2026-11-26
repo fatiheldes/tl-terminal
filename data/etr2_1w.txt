@@ -1,0 +1,17 @@
+## metadata
+window: 2026-11-19 .. 2026-11-26
+base_currency: USD
+## comparison
+```tsv
+asset	market	currency	price_basis	start_date	end_date	start_price	end_price	return_try	return_usd
+XLB	us	USD	last	2026-11-19	2026-11-25	49.42	51.21	0.0407	0.0362
+XLV	us	USD	last	2026-11-19	2026-11-25	177.46	183.68	0.0395	0.0351
+XLP	us	USD	last	2026-11-19	2026-11-25	89.86	92.3	0.0316	0.0272
+XLC	us	USD	last	2026-11-19	2026-11-25	102.76	105.38	0.0299	0.0255
+XLF	us	USD	last	2026-11-19	2026-11-25	55.58	56.51	0.0211	0.0167
+XLU	us	USD	last	2026-11-19	2026-11-25	43.01	43.61	0.0183	0.014
+XLY	us	USD	last	2026-11-19	2026-11-25	115.88	117.49	0.0183	0.0139
+XLI	us	USD	last	2026-11-19	2026-11-25	161.36	162.95	0.0142	0.0099
+XLE	us	USD	last	2026-11-19	2026-11-25	60.89	60.9	0.0045	0.0002
+XLK	us	USD	last	2026-11-19	2026-11-25	160.69	155.79	-0.0263	-0.0305
+```

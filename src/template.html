@@ -552,11 +552,58 @@ ul.soon li::marker { color: var(--am); }
   </section>
   <!-- 8 FUNDS & ETFs -->
   <section class="page" id="funds" hidden>
+<div class="kv">
+      <div><div class="l">S&amp;P 500 · SPY</div><div class="v" data-draw="fu-k-spy">—</div><div class="c" data-draw="fu-k-spy-c">—</div></div>
+      <div><div class="l">NASDAQ 100 · QQQ</div><div class="v" data-draw="fu-k-qqq">—</div><div class="c" data-draw="fu-k-qqq-c">—</div></div>
+      <div><div class="l">EMERGING MKTS · EEM</div><div class="v" data-draw="fu-k-eem">—</div><div class="c" data-draw="fu-k-eem-c">—</div></div>
+      <div><div class="l">MSCI TÜRKİYE · TUR</div><div class="v" data-draw="fu-k-tur">—</div><div class="c" data-draw="fu-k-tur-c">—</div></div>
+      <div><div class="l">TL MONEY MKT FUNDS 1M</div><div class="v" data-draw="fu-k-mm">—</div><div class="c" data-draw="fu-k-mm-c">—</div></div>
+      <div><div class="l">USD/TRY 1M</div><div class="v" data-draw="fu-k-usd">—</div><div class="c" data-draw="fu-k-usd-c">—</div></div>
+      <div><div class="l">CPI INFLATION</div><div class="v" data-draw="fu-k-cpi">—</div><div class="c" data-draw="fu-k-cpi-c">—</div></div>
+    </div>
+<div class="fnbar" role="tablist" style="margin-top:4px"><button data-fn="FUND" aria-selected="true"><b>FUND</b>TEFAS fund monitor</button><button data-fn="FSRT" aria-selected="false"><b>FSRT</b>Category leaders</button><button data-fn="FDES" aria-selected="false"><b>FDES</b>Fund detail</button><button data-fn="ETF" aria-selected="false"><b>ETF</b>ETF monitor</button><button data-fn="ETFR" aria-selected="false"><b>ETFR</b>Rotation · momentum</button><button data-fn="BETF" aria-selected="false"><b>BETF</b>Bond ETFs</button></div>
+<div class="fsub" data-fn="FUND">
+<div style="margin-top:4px"><div class="pn"><h2><span class="n">FUND 1</span>Key TEFAS funds<span class="s">largest and most-followed funds by type · returns in TRY unless switched</span></h2><div class="bd"><div class="seg" style="margin-bottom:4px"><button data-fuv="TRY" aria-pressed="true">TRY</button><button data-fuv="USD" aria-pressed="false">In USD</button><button data-fuv="REAL" aria-pressed="false">Real (1Y vs CPI)</button></div>
+<div class="tw"><table class="tb sticky"><thead><tr><th>Code</th><th>Fund</th><th class="r">Price</th><th class="r">1D</th><th class="r">1W</th><th class="r">1M</th><th class="r">3M</th><th class="r">6M</th><th class="r">YTD</th><th class="r">1Y</th><th class="r">3Y</th><th class="r">Size TRY</th><th class="r">Investors</th></tr></thead><tbody data-draw="fu-table"></tbody></table></div>
+<p class="note">TEFAS data via Borsa (fund prices are published once a day, so 1D is the latest published day). In USD converts each return with the USD/TRY change over the matching window, implied by the TRY and USD returns of US-listed ETFs; 1D, 6M and 3Y have no matching window. Real uses the latest annual CPI inflation and applies to 1Y only. Returns are after fund fees.</p></div></div></div>
+<div class="g w2" style="margin-top:4px">
+<div class="pn"><h2><span class="n">FUND 2</span>Fund returns vs benchmarks<span class="s">TRY · dashed lines: USD/TRY, CPI, money-market median</span></h2><div class="bd"><div class="seg" style="margin-bottom:4px"><button data-fuper="m1" aria-pressed="false">1M</button><button data-fuper="m3" aria-pressed="false">3M</button><button data-fuper="ytd" aria-pressed="false">YTD</button><button data-fuper="y1" aria-pressed="true">1Y</button></div><div data-draw="fu-bars" aria-label="Fund returns vs benchmarks"></div></div></div>
+<div class="pn"><h2><span class="n">FUND 3</span>Benchmarks for a TRY investor<span class="s">what cash, dollars, gold and equities returned</span></h2><div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Benchmark</th><th class="r">1W</th><th class="r">1M</th><th class="r">3M</th><th class="r">YTD</th><th class="r">1Y</th></tr></thead><tbody data-draw="fu-bench"></tbody></table></div><p class="note">Money market median is the median of the top 15 TL money market funds by 1-month return, so it leans to the better performers. USD/TRY change is implied from ETF returns in TRY and USD over the same dates.</p></div></div>
+</div>
+</div>
+<div class="fsub" data-fn="FSRT" hidden>
+<div style="margin-top:4px"><div class="pn"><h2><span class="n">FSRT 1</span>Money market funds · top 15 by 1-month return<span class="s">TL · "Ann." compounds the 1M return to a year</span></h2><div class="bd"><div class="tw"><table class="tb sticky"><thead><tr><th>#</th><th>Code</th><th>Fund</th><th class="r">1W</th><th class="r">1M</th><th class="r">3M</th><th class="r">6M</th><th class="r">1Y</th><th class="r">3Y</th><th class="r">Ann. (1M)</th><th class="r">Size TRY</th><th class="r">Investors</th></tr></thead><tbody data-draw="fs-mm"></tbody></table></div></div></div></div>
+<div style="margin-top:4px">
+<div class="pn"><h2><span class="n">FSRT 2</span>Debt funds · top 30 by 1-month return<span class="s">mostly short-term TL debt</span></h2><div class="bd"><div class="tw" style="max-height:420px;overflow:auto"><table class="tb sticky"><thead><tr><th>#</th><th>Code</th><th>Fund</th><th class="r">1W</th><th class="r">1M</th><th class="r">3M</th><th class="r">6M</th><th class="r">1Y</th><th class="r">3Y</th><th class="r">Ann. (1M)</th><th class="r">Size TRY</th><th class="r">Investors</th></tr></thead><tbody data-draw="fs-debt"></tbody></table></div></div></div>
+</div>
+<div style="margin-top:4px">
+<div class="pn"><h2><span class="n">FSRT 3</span>Size vs return<span class="s">1-month return against fund size</span></h2><div class="bd"><div data-draw="fs-scatter" style="min-height:260px" aria-label="Fund size vs return"></div><p class="note">The TEFAS screener ranks by return and leaves out funds outside its top results, so these are leaders, not the whole category. Very small or single-investor (özel) funds can top the list with returns that are hard to replicate.</p></div></div>
+</div>
+</div>
+<div class="fsub" data-fn="FDES" hidden>
+<div style="margin-top:4px"><div class="pn"><h2><span class="n">FDES</span><span data-draw="fd-title">—</span><span class="s">pick a fund</span></h2><div class="bd"><div class="seg" data-draw="fd-btns" style="margin-bottom:4px;flex-wrap:wrap"></div>
+<div class="g w2"><div><div class="tw"><table class="tb"><tbody data-draw="fd-info"></tbody></table></div><div style="margin-top:8px" data-draw="fd-ret" aria-label="Fund returns by period"></div></div><div><p class="note" style="margin-top:0">Portfolio allocation, % of fund</p><div data-draw="fd-alloc" aria-label="Fund allocation"></div></div></div>
+<p class="note">Fund details and the asset-type breakdown come from TEFAS via Borsa; the breakdown is the latest published, by asset type rather than by holding.</p></div></div></div>
+</div>
+<div class="fsub" data-fn="ETF" hidden>
+<div style="margin-top:4px"><div class="pn"><h2><span class="n">ETF</span>US-listed ETF monitor<span class="s">40 ETFs · broad market, sectors, styles &amp; assets, countries</span></h2><div class="bd"><div class="seg" style="margin-bottom:4px;flex-wrap:wrap"><button data-etg="0" aria-pressed="true">All</button><button data-etg="1" aria-pressed="false">Broad</button><button data-etg="2" aria-pressed="false">Sectors</button><button data-etg="3" aria-pressed="false">Styles &amp; assets</button><button data-etg="4" aria-pressed="false">Countries</button><span style="width:16px"></span><button data-etcur="USD" aria-pressed="true">USD</button><button data-etcur="TRY" aria-pressed="false">TRY</button></div>
+<div class="tw"><table class="tb sticky"><thead><tr><th>Ticker</th><th>Exposure</th><th class="r">Last $</th><th class="r">1W</th><th class="r">1M</th><th class="r">3M</th><th class="r">YTD</th><th class="r">1Y</th><th>52W range</th><th class="r">From high</th><th class="r">P/E</th><th class="r">Div. yld</th></tr></thead><tbody data-draw="et-table"></tbody></table></div>
+<p class="note">Price returns (dividends excluded) from Yahoo Finance via Borsa; the TRY view converts with the USD/TRY series the source uses (canlidoviz). P/E and dividend yield are the fund's trailing figures as reported. Windows end at the last US close.</p></div></div></div>
+</div>
+<div class="fsub" data-fn="ETFR" hidden>
+<div style="margin-top:4px"><div class="pn"><h2><span class="n">ETFR 1</span>Momentum map<span class="s">1-month vs 3-month return, USD · all 40 ETFs</span></h2><div class="bd"><div data-draw="er-mom" style="min-height:330px" aria-label="ETF momentum map"></div><p class="note">Top right: strong over both windows. Top left: recovering in the last month after a weak quarter. Bottom right: strong quarter, fading lately.</p></div></div></div>
+<div class="g w2" style="margin-top:4px">
+<div class="pn"><h2><span class="n">ETFR 2</span>US sector rotation<span class="s">SPDR sector ETFs vs S&amp;P 500</span></h2><div class="bd"><div class="seg" style="margin-bottom:4px"><button data-etper="1w" aria-pressed="false">1W</button><button data-etper="1m" aria-pressed="true">1M</button><button data-etper="3m" aria-pressed="false">3M</button><button data-etper="ytd" aria-pressed="false">YTD</button><button data-etper="1y" aria-pressed="false">1Y</button></div><div data-draw="er-sect" aria-label="Sector returns"></div></div></div>
+<div class="pn"><h2><span class="n">ETFR 3</span>Country ETFs<span class="s">iShares MSCI country funds vs ACWI · USD</span></h2><div class="bd"><div data-draw="er-ctry" aria-label="Country ETF returns"></div></div></div>
+<div class="pn"><h2><span class="n">ETFR 4</span>Currency effect for a TRY investor<span class="s">USD/TRY change over each window</span></h2><div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Window</th><th>Dates</th><th class="r">USD/TRY</th></tr></thead><tbody data-draw="er-fx"></tbody></table></div><p class="note">A USD return turns into roughly (1 + USD return) × (1 + USD/TRY change) − 1 in lira.</p></div></div>
+</div>
+</div>
+<div class="fsub" data-fn="BETF" hidden>
 <div style="margin-top:4px"><div class="pn"><h2><span class="n">3.13</span>Global bond &amp; credit monitor<span class="s">UST · IG · HY · DM ex-US · EM hard and local · 6M performance, 100 = start</span></h2>
         <div class="bd"><div class="tt-chart" style="min-height:230px" data-draw="g-perf" aria-label="Bond ETF performance"></div>
         <div class="tw" style="margin-top:6px"><table class="tb"><thead><tr><th>Ticker</th><th>Exposure</th><th class="r">Price</th><th class="r">1W</th><th class="r">1M</th><th class="r">3M</th><th class="r">6M</th><th>6M trend</th><th>52W range</th><th class="r">Dist. yld</th></tr></thead><tbody data-draw="g-etf"></tbody></table></div>
         <p class="note">Price returns of listed bond ETFs used as market proxies for each segment (USD). Distribution yield is trailing income, not yield to maturity. Sovereign CDS are not in the connected sources.</p></div></div></div>
-<div style="margin-top:4px"><div class="pn"><h2><span class="n">FUND</span>Funds &amp; ETFs<span class="s">in progress</span></h2><div class="bd"><p class="soon">This area is being built. Planned functions:</p><ul class="soon"><li>TEFAS fund screener: returns, size, investor count, fund type</li><li>Fund flows and best/worst performers by category</li><li>US ETF monitor across asset classes</li><li>Fund detail: allocation and price history</li></ul></div></div></div>
+</div>
   </section>
   <!-- 9 CREDIT -->
   <section class="page" id="credit" hidden>

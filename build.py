@@ -16,7 +16,7 @@ import pathlib
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent
-IDS = ['rates', 'bills', 'pka', 'reserves', 'fx', 'crypto', 'usd', 'gold_hist', 'xu100_hist', 'bist', 'bist_quotes', 'bist_hist', 'us_quotes', 'inflation', 'cal_this', 'cal_next', 'cal_global', 'tech', 'xu100_daily', 'gainers', 'losers', 'bonds', 'coupons1', 'coupons2', 'polrates1', 'polrates2', 'nonres', 'funding', 'frn', 'frn_coupons', 'gcpi', 'gca', 'ggdp1', 'ggdp2', 'gq1', 'gq2', 'gq3', 'us_yh', 'etf_h', 'etf_h2', 'wgb', 'cds', 'ratings', 'tr_ratings', 'news', 'futs1', 'futs2', 'struct', 'debt', 'ibs', 'mm_daily', 'mm_weekly', 'usmm', 'fxq1', 'fxq2', 'fxh1', 'fxh2', 'fxh3', 'reer', 'fxops', 'cmq1', 'cmq2', 'cmh1', 'cmh2', 'cmc_cl', 'cmc_bz', 'cmc_ng']
+IDS = ['rates', 'bills', 'pka', 'reserves', 'fx', 'crypto', 'usd', 'gold_hist', 'xu100_hist', 'bist', 'bist_quotes', 'bist_hist', 'us_quotes', 'inflation', 'cal_this', 'cal_next', 'cal_global', 'tech', 'xu100_daily', 'gainers', 'losers', 'bonds', 'coupons1', 'coupons2', 'polrates1', 'polrates2', 'nonres', 'funding', 'frn', 'frn_coupons', 'gcpi', 'gca', 'ggdp1', 'ggdp2', 'gq1', 'gq2', 'gq3', 'us_yh', 'etf_h', 'etf_h2', 'wgb', 'cds', 'ratings', 'tr_ratings', 'news', 'futs1', 'futs2', 'struct', 'debt', 'ibs', 'mm_daily', 'mm_weekly', 'usmm', 'fxq1', 'fxq2', 'fxh1', 'fxh2', 'fxh3', 'reer', 'fxops', 'cmq1', 'cmq2', 'cmh1', 'cmh2', 'cmc_cl', 'cmc_bz', 'cmc_ng', 'fq1', 'fq2', 'fq3', 'fmm', 'fdebt', 'fd1', 'fd2', 'fd3', 'fd4', 'fd5', 'fd6', 'etq1', 'etq2', 'etq3', 'etq4', 'etr1_1w', 'etr1_1m', 'etr1_3m', 'etr1_ytd', 'etr1_1y', 'etr2_1w', 'etr2_1m', 'etr2_3m', 'etr2_ytd', 'etr2_1y', 'etr3_1w', 'etr3_1m', 'etr3_3m', 'etr3_ytd', 'etr3_1y', 'etr4_1w', 'etr4_1m', 'etr4_3m', 'etr4_ytd', 'etr4_1y']
 
 
 def read(p):
@@ -65,6 +65,7 @@ def main():
 <script>{read('src/mm.js')}</script>
 <script>{read('src/fx.js')}</script>
 <script>{read('src/cmdty.js')}</script>
+<script>{read('src/funds.js')}</script>
 <script>{read('src/nav.js')}</script>
 </body>
 </html>

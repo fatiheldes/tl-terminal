@@ -1,0 +1,17 @@
+## metadata
+market: us
+source: yfinance
+## data
+```tsv
+symbol	name	market	currency	current_price	volume	pe_ratio	dividend_yield	week_52_high	week_52_low	avg_volume	pb_ratio
+XLRE	State Street Real Estate Select Sector SPDR ETF	us	USD	43.86	8422600	29.29	3.34	46.455	39.725	7151989	
+SMH	VanEck Semiconductor ETF	us	USD	422.46	14007200	22.81	0.21	671.83	338.06	9414384	
+IBIT	iShares Bitcoin Trust ETF	us	USD	34.07	69641700		0	55.6	32.35	47824167	
+GLD	SPDR Gold Shares	us	USD	327.45	17008300		0	509.7	313.96	9723993	1.93
+SLV	iShares Silver Trust	us	USD	37.1	50868000		0	109.83	34.48	19046173	1.74
+USO	United States Oil Fund, LP	us	USD	139.89	2153100	42.33	0	171.82	65.99	5186234	2.02
+VUG	Vanguard Morningstar Growth ETF	us	USD	79.1	10580500	26.64	0.41	93	69.6333	6905026	0.37
+VTV	Vanguard Morningstar Value ETF	us	USD	221.04	2937400	18.85	1.83	231.99	188.27	2884050	2.92
+SCHD	Schwab U.S. Dividend Equity ETF	us	USD	35.29	26026100	18.98	2.95	36.38	27.21	24323339	
+MTUM	iShares MSCI USA Momentum Factor ETF	us	USD	61.51	6362600	22.8	0.65	86.3975	57.355	4928007	
+```

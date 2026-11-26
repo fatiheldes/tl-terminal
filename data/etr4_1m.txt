@@ -1,0 +1,17 @@
+## metadata
+window: 2026-10-26 .. 2026-11-26
+base_currency: USD
+## comparison
+```tsv
+asset	market	currency	price_basis	start_date	end_date	start_price	end_price	return_try	return_usd
+INDA	us	USD	last	2026-10-26	2026-11-25	46.59	53.2	0.1622	0.1419
+EZU	us	USD	last	2026-10-26	2026-11-25	64.93	63.27	-0.0082	-0.0256
+EWW	us	USD	last	2026-10-26	2026-11-25	75.3	73.34	-0.0087	-0.026
+EWG	us	USD	last	2026-10-26	2026-11-25	41.24	40.08	-0.0108	-0.0281
+EWU	us	USD	last	2026-10-26	2026-11-25	47.61	46.12	-0.014	-0.0313
+FXI	us	USD	last	2026-10-26	2026-11-25	32.51	31.3	-0.0201	-0.0372
+TUR	us	USD	last	2026-10-26	2026-11-25	30.82	29.08	-0.0397	-0.0565
+EWJ	us	USD	last	2026-10-26	2026-11-25	94.28	87.25	-0.0581	-0.0746
+EWZ	us	USD	last	2026-10-26	2026-11-25	34.15	30.16	-0.1011	-0.1168
+EWY	us	USD	last	2026-10-26	2026-11-25	152.72	129.19	-0.139	-0.1541
+```

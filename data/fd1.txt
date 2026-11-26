@@ -1,0 +1,36 @@
+## metadata
+market: fund
+symbols: TI2
+## fund
+code: TI2
+name: İŞ PORTFÖY HİSSE SENEDİ (TL) FONU (HİSSE SENEDİ YOĞUN FON)
+category: Hisse Senedi Fonu
+price: 0.1055
+total_assets: 2568004471.71
+investor_count: 18347
+daily_return: -2.5535
+weekly_return: -7.11
+return_1m: -3.4526
+return_3m: -18.1259
+return_6m: -16.9795
+return_ytd: -4.6069
+return_1y: 0.0579
+return_3y: 78.1704
+return_5y: 973.4891
+category_rank: 108
+category_fund_count: 201
+market_share: 1.97
+isin: TRMTI2WWWWW8
+order_cutoff_time: 17:45
+buy_valor_days: 1
+sell_valor_days: 2
+## portfolio
+date: 2026-11-26
+### allocation
+```tsv
+code	label	weight
+hs	Hisse Senedi	89.8
+vint	Vadeli İşlemler Nakit Teminatları	4.25
+tr	Ters-Repo	3.5
+yyf	Yatırım Fonları Katılma Payları	2.45
+```

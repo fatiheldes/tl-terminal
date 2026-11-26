@@ -1,0 +1,17 @@
+## metadata
+window: 2025-12-31 .. 2026-11-26
+base_currency: USD
+## comparison
+```tsv
+asset	market	currency	price_basis	start_date	end_date	start_price	end_price	return_try	return_usd
+IWM	us	USD	last	2025-12-31	2026-11-25	246.16	268.87	0.2884	0.0923
+VTI	us	USD	last	2025-12-31	2026-11-25	335.27	353.2	0.2427	0.0535
+VEA	us	USD	last	2025-12-31	2026-11-25	62.47	65.67	0.24	0.0512
+SPY	us	USD	last	2025-12-31	2026-11-25	681.92	716.7	0.2398	0.051
+ACWI	us	USD	last	2025-12-31	2026-11-25	141.49	148	0.2339	0.046
+VXUS	us	USD	last	2025-12-31	2026-11-25	75.44	78.02	0.2199	0.0342
+EFA	us	USD	last	2025-12-31	2026-11-25	96.03	99.18	0.2183	0.0328
+QQQ	us	USD	last	2025-12-31	2026-11-25	614.31	633.93	0.2173	0.0319
+EEM	us	USD	last	2025-12-31	2026-11-25	54.71	56.4	0.216	0.0309
+VWO	us	USD	last	2025-12-31	2026-11-25	53.76	52.78	0.1581	-0.0182
+```

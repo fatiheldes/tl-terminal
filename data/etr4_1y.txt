@@ -1,0 +1,17 @@
+## metadata
+window: 2025-11-26 .. 2026-11-26
+base_currency: USD
+## comparison
+```tsv
+asset	market	currency	price_basis	start_date	end_date	start_price	end_price	return_try	return_usd
+EWY	us	USD	last	2025-11-26	2026-11-25	91.55	129.19	0.6848	0.4111
+EWW	us	USD	last	2025-11-26	2026-11-25	67.88	73.34	0.29	0.0804
+EWU	us	USD	last	2025-11-26	2026-11-25	42.99	46.12	0.2809	0.0728
+EWJ	us	USD	last	2025-11-26	2026-11-25	83.26	87.25	0.2512	0.0479
+EZU	us	USD	last	2025-11-26	2026-11-25	62.42	63.27	0.2102	0.0136
+EWG	us	USD	last	2025-11-26	2026-11-25	40.6	40.08	0.1787	-0.0128
+INDA	us	USD	last	2025-11-26	2026-11-25	54.67	53.2	0.1618	-0.0269
+EWZ	us	USD	last	2025-11-26	2026-11-25	33.47	30.16	0.0759	-0.0989
+TUR	us	USD	last	2025-11-26	2026-11-25	33.59	29.08	0.0336	-0.1343
+FXI	us	USD	last	2025-11-26	2026-11-25	39.37	31.3	-0.0508	-0.205
+```

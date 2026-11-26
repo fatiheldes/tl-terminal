@@ -1,0 +1,39 @@
+## metadata
+market: fund
+symbols: ZBJ
+## fund
+code: ZBJ
+name: ZİRAAT PORTFÖY BAŞAK PARA PİYASASI (TL) FONU
+category: Para Piyasası Fonu
+price: 5.6968
+total_assets: 48976421419.29
+investor_count: 37946
+daily_return: 0.0488
+weekly_return: 0.6
+return_1m: 3.0302
+return_3m: 9.4136
+return_6m: 20.9484
+return_ytd: 40.6008
+return_1y: 46.1191
+return_3y: 262.3694
+category_rank: 8
+category_fund_count: 86
+market_share: 3.2
+isin: TRYZIPO00394
+order_cutoff_time: 13:30
+buy_valor_days: 0
+sell_valor_days: 0
+## portfolio
+date: 2026-11-26
+### allocation
+```tsv
+code	label	weight
+vmtl	Mevduat (TL)	41.23
+dt	Devlet Tahvili	19.79
+tr	Ters-Repo	14.15
+tpp	Takasbank Para Piyasası	13.76
+khtl	Katılma Hesabı (TL)	6.39
+ost	Özel Sektör Tahvili	2.16
+vdm	Varlığa Dayalı Menkul Kıymetler	1.5
+fb	Finansman Bonosu	1.01
+```

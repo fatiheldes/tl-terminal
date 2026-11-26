@@ -1,0 +1,43 @@
+## metadata
+market: fund
+symbols: TCD
+## fund
+code: TCD
+name: TACİRLER PORTFÖY DEĞIŞKEN FON
+category: Değişken Fon
+price: 40.6611
+total_assets: 1058244939.24
+investor_count: 9925
+daily_return: -2.4808
+weekly_return: -6.32
+return_1m: -3.8461
+return_3m: -17.7094
+return_6m: -12.2064
+return_ytd: 9.3873
+return_1y: 15.3397
+return_3y: 52.7249
+return_5y: 599.6566
+category_rank: 95
+category_fund_count: 189
+market_share: 1.27
+isin: TRMTCDWWWWW8
+order_cutoff_time: 17:30
+buy_valor_days: 1
+sell_valor_days: 2
+## portfolio
+date: 2026-11-26
+### allocation
+```tsv
+code	label	weight
+hs	Hisse Senedi	80.74
+yyf	Yatırım Fonları Katılma Payları	6.18
+tr	Ters-Repo	3.74
+yhs	Yabancı Hisse Senedi	3.68
+byf	Borsa Yatırım Fonları Katılma Payları	1.99
+vint	Vadeli İşlemler Nakit Teminatları	1.54
+osdb	Özel Sektör Dış Borçlanma Araçları	1.12
+ybyf	Yabancı Borsa Yatırım Fonları	0.95
+dt	Devlet Tahvili	0.02
+tpp	Takasbank Para Piyasası	0.02
+vmtl	Mevduat (TL)	0.02
+```

@@ -1,0 +1,17 @@
+## metadata
+market: us
+source: yfinance
+## data
+```tsv
+symbol	name	market	currency	current_price	volume	pe_ratio	week_52_high	week_52_low	avg_volume	pb_ratio	dividend_yield
+SPY	State Street SPDR S&P 500 ETF Trust	us	USD	716.7	72919200	22.8	781.62	629.28	48642879		
+QQQ	Invesco QQQ Trust	us	USD	633.93	81600300	26.11	762.86	555.6	43663278	1.77	0.45
+IWM	iShares Russell 2000 ETF	us	USD	268.87	33293000	15.67	305.18	238.69	25033982	1.23	0.98
+VTI	Vanguard Morningstar Total Stock Market ETF	us	USD	353.2	5962500	21.68	385.12	310.4	3551656	2.53	1.06
+ACWI	iShares MSCI ACWI ETF	us	USD	148	3089200	19.57	162.8	133.65	2616648		1.44
+EFA	iShares MSCI EAFE ETF	us	USD	99.18	17614300	16.47	108.89	93.08	14444987	1.37	3.26
+EEM	iShares MSCI Emerging Markets ETF	us	USD	56.4	39861000	13.24	71.57	52.58	24326735	1.07	1.83
+VEA	Vanguard FTSE Developed Markets Index Fund ETF Shares	us	USD	65.67	18190000	14.8	74.04	61.23	11040635		2.46
+VWO	Vanguard FTSE Emerging Markets Index Fund ETF Shares	us	USD	52.78	15702000	13.16	61.54	50.5	9032692	1.1	2.19
+VXUS	Vanguard Total International Stock Index Fund ETF Shares	us	USD	78.02	7647600	14.35	88.62	74.3	6016365		2.42
+```

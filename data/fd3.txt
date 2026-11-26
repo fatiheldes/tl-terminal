@@ -1,0 +1,38 @@
+## metadata
+market: fund
+symbols: GTA
+## fund
+code: GTA
+name: GARANTİ PORTFÖY ALTIN FONU
+category: Altın Fonu
+price: 1.4132
+total_assets: 20657670766.87
+investor_count: 69800
+daily_return: -2.2182
+weekly_return: -3.05
+return_1m: -7.0762
+return_3m: -16.5978
+return_6m: -11.2609
+return_ytd: -3.8703
+return_1y: 1.6842
+return_3y: 185.4711
+return_5y: 648.4512
+category_rank: 16
+category_fund_count: 30
+market_share: 12.75
+isin: TRYGRAN00027
+order_cutoff_time: 17:45
+buy_valor_days: 1
+sell_valor_days: 1
+## portfolio
+date: 2026-11-26
+### allocation
+```tsv
+code	label	weight
+kmkks	Kıymetli Madenler Cinsinden İhraç Edilen Kamu Kira Sertifikaları	52.27
+km	Kıymetli Madenler	44.71
+kmkba	Kıymetli Madenler Cinsinden İhraç Edilen Kamu Borçlanma Araçları	2.88
+vmd	Mevduat (Döviz)	0.09
+vmtl	Mevduat (TL)	0.03
+vint	Vadeli İşlemler Nakit Teminatları	0.01
+```

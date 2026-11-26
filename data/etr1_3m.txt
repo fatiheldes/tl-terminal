@@ -1,0 +1,17 @@
+## metadata
+window: 2026-08-26 .. 2026-11-26
+base_currency: USD
+## comparison
+```tsv
+asset	market	currency	price_basis	start_date	end_date	start_price	end_price	return_try	return_usd
+SPY	us	USD	last	2026-08-26	2026-11-25	766.08	716.7	-0.0143	-0.0645
+VTI	us	USD	last	2026-08-26	2026-11-25	378.23	353.2	-0.0161	-0.0662
+ACWI	us	USD	last	2026-08-26	2026-11-25	160.9	148	-0.0308	-0.0802
+EFA	us	USD	last	2026-08-26	2026-11-25	108.27	99.18	-0.0348	-0.084
+IWM	us	USD	last	2026-08-26	2026-11-25	298.93	268.87	-0.0523	-0.1006
+VEA	us	USD	last	2026-08-26	2026-11-25	73.45	65.67	-0.058	-0.1059
+QQQ	us	USD	last	2026-08-26	2026-11-25	711.37	633.93	-0.0611	-0.1089
+VXUS	us	USD	last	2026-08-26	2026-11-25	87.82	78.02	-0.0639	-0.1116
+VWO	us	USD	last	2026-08-26	2026-11-25	60.66	52.78	-0.0832	-0.1299
+EEM	us	USD	last	2026-08-26	2026-11-25	67.17	56.4	-0.1153	-0.1603
+```

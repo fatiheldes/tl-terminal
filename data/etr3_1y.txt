@@ -1,0 +1,17 @@
+## metadata
+window: 2025-11-26 .. 2026-11-26
+base_currency: USD
+## comparison
+```tsv
+asset	market	currency	price_basis	start_date	end_date	start_price	end_price	return_try	return_usd
+USO	us	USD	last	2025-11-26	2026-11-25	70.04	139.89	1.3846	0.9973
+SCHD	us	USD	last	2025-11-26	2026-11-25	27.45	35.29	0.5349	0.2856
+SMH	us	USD	last	2025-11-26	2026-11-25	347.71	422.46	0.4506	0.215
+VTV	us	USD	last	2025-11-26	2026-11-25	189.23	221.04	0.3946	0.1681
+XLRE	us	USD	last	2025-11-26	2026-11-25	41.47	43.86	0.2628	0.0576
+MTUM	us	USD	last	2025-11-26	2026-11-25	61.92	61.51	0.186	-0.0066
+VUG	us	USD	last	2025-11-26	2026-11-25	81.3967	79.1	0.1603	-0.0282
+GLD	us	USD	last	2025-11-26	2026-11-25	383.12	327.45	0.0205	-0.1453
+SLV	us	USD	last	2025-11-26	2026-11-25	48.4	37.1	-0.0848	-0.2335
+IBIT	us	USD	last	2025-11-26	2026-11-25	51.03	34.07	-0.2029	-0.3324
+```

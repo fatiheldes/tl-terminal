@@ -1,0 +1,17 @@
+## metadata
+market: us
+source: yfinance
+## data
+```tsv
+symbol	name	market	currency	current_price	volume	pe_ratio	pb_ratio	dividend_yield	week_52_high	week_52_low	avg_volume
+XLK	State Street Technology Select Sector SPDR ETF	us	USD	155.79	19691800	27.47	1.04	0.47	203.25	126.68	10705271
+XLF	State Street Financial Select Sector SPDR ETF	us	USD	56.51	38637700	15.26	1.66	1.46	60.04	47.67	37003540
+XLE	State Street Energy Select Sector SPDR ETF	us	USD	60.9	26523200	15.21	1.17	2.18	70.15	43.77	33866842
+XLV	State Street Health Care Select Sector SPDR ETF	us	USD	183.68	15511400	29.94	1.44	1.38	192.32	141.97	9901276
+XLI	State Street Industrial Select Sector SPDR ETF	us	USD	162.95	13052200	26.13	1.66	1.13	188.19	151.37	8234820
+XLY	State Street Consumer Discretionary Select Sector SPDR ETF	us	USD	117.49	8579600	24.59	0.7	0.81	125.01	105.19	7720720
+XLP	State Street Consumer Staples Select Sector SPDR ETF	us	USD	92.3	23032500	24.84	1.35	2.46	93.48	76.51	15295345
+XLU	State Street Utilities Select Sector SPDR ETF	us	USD	43.61	21637400	17.94	0.68	2.79	47.8	39.03	27753896
+XLB	State Street Materials Select Sector SPDR ETF	us	USD	51.21	14292500	21.3	0.65	1.64	54.63	43.35	11868317
+XLC	State Street Communication Services Select Sector SPDR ETF	us	USD	105.38	5584900	16.74		1.38	120.405	99.325	6632750
+```
