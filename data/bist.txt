@@ -1,0 +1,7 @@
+## index
+code: XU100
+name: BIST 100
+value: 10775.27
+change: 119.53
+change_percent: 1.12
+previous_close: 10655.74

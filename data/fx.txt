@@ -1,0 +1,8 @@
+## rates
+```tsv
+symbol	name	last	as_of
+USD	USD	50.6832	2026-11-25
+EUR	EUR	55.6268	2026-11-25
+gram-altin	gram-altin	5819.415	2026-11-25
+BRENT	BRENT	90.79	2026-11-25
+```
