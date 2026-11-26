@@ -1,0 +1,17 @@
+## metadata
+window: 2025-11-26 .. 2026-11-26
+base_currency: USD
+## comparison
+```tsv
+asset	market	currency	price_basis	start_date	end_date	start_price	end_price	return_try	return_usd
+FSK	fund	TRY	nav	2025-11-26	2026-11-25	4.6441	6.7155	0.446	0.2111
+MAIN	us	USD	last	2025-11-26	2026-11-25	57.69	57.69	0.1939	0
+ARCC	us	USD	last	2025-11-26	2026-11-25	20.51	18.95	0.1031	-0.0761
+GBDC	us	USD	last	2025-11-26	2026-11-25	13.96	12.6	0.0776	-0.0974
+HTGC	us	USD	last	2025-11-26	2026-11-25	17.88	15.89	0.0611	-0.1113
+PSP	us	USD	last	2025-11-26	2026-11-25	65.46	58.08	0.0593	-0.1127
+BIZD	us	USD	last	2025-11-26	2026-11-25	14.55	12.37	0.0151	-0.1498
+BXSL	us	USD	last	2025-11-26	2026-11-25	27.49	23.22	0.0085	-0.1553
+OBDC	us	USD	last	2025-11-26	2026-11-25	13.13	10.99	-0.0007	-0.163
+PSEC	us	USD	last	2025-11-26	2026-11-25	2.62	1.43	-0.3483	-0.4542
+```

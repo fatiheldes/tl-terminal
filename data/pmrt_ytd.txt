@@ -1,0 +1,17 @@
+## metadata
+window: 2025-12-31 .. 2026-11-26
+base_currency: TRY
+## comparison
+```tsv
+asset	market	currency	price_basis	start_date	end_date	start_price	end_price	return_try	return_usd
+TRGYO	bist	TRY	last	2025-12-31	2026-11-26	74	82.75	0.1182	-0.052
+ISGSY	bist	TRY	last	2025-12-31	2026-11-26	11.5836	10.69	-0.0771	-0.2176
+ISGYO	bist	TRY	last	2025-12-31	2026-11-26	21	17.62	-0.161	-0.2887
+ZRGYO	bist	TRY	last	2025-12-31	2026-11-26	23.44	18.59	-0.2069	-0.3277
+OZKGY	bist	TRY	last	2025-12-31	2026-11-26	14.22	11.09	-0.2201	-0.3389
+GOZDE	bist	TRY	last	2025-12-31	2026-11-26	21.72	14.25	-0.3439	-0.4438
+VERTU	bist	TRY	last	2025-12-31	2026-11-26	42.3	23.8	-0.4374	-0.523
+KLGYO	bist	TRY	last	2025-12-31	2026-11-26	6.09	3.35	-0.4499	-0.5337
+SNGYO	bist	TRY	last	2025-12-31	2026-11-26	4.54	2.32	-0.489	-0.5668
+HDFGS	bist	TRY	last	2025-12-31	2026-11-26	3.15	1.04	-0.6698	-0.7201
+```

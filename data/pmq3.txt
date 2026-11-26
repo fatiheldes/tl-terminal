@@ -1,0 +1,14 @@
+## metadata
+source: yfinance
+## data
+```tsv
+symbol	name	market	currency	current_price	volume	pe_ratio	pb_ratio	dividend_yield	week_52_high	week_52_low	avg_volume
+VNQ	Vanguard Real Estate Index Fund ETF Shares	us	USD	95.66	4002300	30.11	1.64	3.63	101.8	86.84	4171879
+REET	iShares Global REIT ETF	us	USD	26.9	2648700	22.42		3.52	29.06	24.645	3096656
+IGF	iShares Global Infrastructure ETF	us	USD	65.71	1123400	19.39		2.93	69.6	60.58	902453
+IPO	Renaissance IPO ETF	us	USD	43.54	25400	23.44		0.13	60.33	39.31	23760
+ARKK	ARK Innovation ETF	us	USD	67.36	6557100	43.48		0	94.82	62.685	5430143
+PAVE	Global X U.S. Infrastructure Development ETF	us	USD	51.38	2351100	25.41		0.8	60.43	47.71	1766020
+VNQI	Vanguard Global ex-U.S. Real Estate Index Fund ETF Shares	us	USD	42.93	274800	9.88		5.06	50.88	41.53	318556
+SRVR	Pacer Data & Infrastructure Real Estate ETF	us	USD	26.18	138500	25.51		4.9	35.81	25.532	101762
+```

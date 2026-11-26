@@ -1,0 +1,15 @@
+## metadata
+window: 2025-11-26 .. 2026-11-26
+base_currency: USD
+## comparison
+```tsv
+asset	market	currency	price_basis	start_date	end_date	start_price	end_price	return_try	return_usd
+PAVE	us	USD	last	2025-11-26	2026-11-25	48.3	51.38	0.2701	0.0638
+REET	us	USD	last	2025-11-26	2026-11-25	25.55	26.9	0.257	0.0528
+VNQ	us	USD	last	2025-11-26	2026-11-25	91.04	95.66	0.2545	0.0507
+IGF	us	USD	last	2025-11-26	2026-11-25	62.73	65.71	0.2507	0.0475
+IPO	us	USD	last	2025-11-26	2026-11-25	45.43	43.54	0.1443	-0.0416
+VNQI	us	USD	last	2025-11-26	2026-11-25	47.81	42.93	0.0721	-0.1021
+SRVR	us	USD	last	2025-11-26	2026-11-25	29.169	26.18	0.0716	-0.1025
+ARKK	us	USD	last	2025-11-26	2026-11-25	78.47	67.36	0.0249	-0.1416
+```

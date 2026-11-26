@@ -1,0 +1,17 @@
+## metadata
+window: 2025-12-31 .. 2026-11-26
+base_currency: USD
+## comparison
+```tsv
+asset	market	currency	price_basis	start_date	end_date	start_price	end_price	return_try	return_usd
+BAM	us	USD	last	2025-12-31	2026-11-25	52.39	52.12	0.1735	-0.0052
+III.L	us	USD	last	2025-12-31	2026-11-25	3263	2718	-0.0174	-0.167
+APO	us	USD	last	2025-12-31	2026-11-25	144.76	120.48	-0.0183	-0.1677
+ARES	us	USD	last	2025-12-31	2026-11-25	161.63	133.94	-0.0225	-0.1713
+BX	us	USD	last	2025-12-31	2026-11-25	154.14	118.95	-0.0897	-0.2283
+TPG	us	USD	last	2025-12-31	2026-11-25	63.84	47.24	-0.1271	-0.26
+KKR	us	USD	last	2025-12-31	2026-11-25	127.48	94.1	-0.1293	-0.2618
+CG	us	USD	last	2025-12-31	2026-11-25	59.11	39.44	-0.2129	-0.3328
+OWL	us	USD	last	2025-12-31	2026-11-25	14.94	9.21	-0.2728	-0.3835
+PGHN.SW	us	USD	last	2026-01-05	2026-11-25	1030	628	-0.2818	-0.3903
+```
