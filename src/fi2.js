@@ -347,43 +347,4 @@
   });
   document.addEventListener('click', (e) => { const b = e.target.closest && e.target.closest('[data-ntag]'); if (!b) return; newsTag = b.dataset.ntag; document.querySelectorAll('[data-ntag]').forEach((x) => x.setAttribute('aria-pressed', String(x === b))); dash.draw('news-list'); });
 
-  // ---------- Function bar (Bloomberg-style sub-pages inside FIXED INCOME) ----------
-  const FNS = ['GOVT', 'YAS', 'WB', 'BTMM', 'WIRP', 'CORP', 'CRPR', 'MTGE', 'NIM', 'NEWS'];
-  let fn = 'GOVT';
-  try { const s = localStorage.getItem('tlft-fn'); if (FNS.includes(s)) fn = s; } catch (e) { /* storage blocked */ }
-  const m = /#fixed\/([A-Z]+)/.exec(location.hash || ''); if (m && FNS.includes(m[1])) fn = m[1];
-  function setFn(name, redraw) {
-    if (!FNS.includes(name)) return false;
-    fn = name;
-    document.querySelectorAll('#fixed .fsub').forEach((s) => { s.hidden = s.dataset.fn !== name; });
-    document.querySelectorAll('.fnbar button[data-fn]').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.fn === name)));
-    try { localStorage.setItem('tlft-fn', name); const fx = document.getElementById('fixed'); if (fx && !fx.hidden) history.replaceState(null, '', '#fixed/' + name); } catch (e) { /* file:// */ }
-    if (redraw !== false) {
-      const sec = document.querySelector('#fixed .fsub[data-fn="' + name + '"]');
-      if (sec && TT.motion()) sec.querySelectorAll('.pn').forEach((p, i) => { p.classList.remove('enter'); void p.offsetWidth; p.style.animationDelay = (i * 50) + 'ms'; p.classList.add('enter'); });
-      TT.anim = true; if (window.TTrun) window.TTrun(); TT.anim = false;
-    }
-    return true;
-  }
-  window.FIfn = setFn;
-  window.FIcur = () => fn;
-  document.addEventListener('DOMContentLoaded', () => {
-    setFn(fn, false);
-    document.querySelectorAll('.fnbar button[data-fn]').forEach((b) => b.addEventListener('click', () => setFn(b.dataset.fn)));
-    const go = document.getElementById('fn-go');
-    if (go) go.addEventListener('keydown', (e) => {
-      if (e.key !== 'Enter') return;
-      const v = go.value.trim().toUpperCase().replace(/\s*<?GO>?$/, '');
-      const alias = { YCRV: 'GOVT', GC: 'GOVT', FICM: 'GOVT', SRCH: 'YAS', DES: 'YAS', YA: 'YAS', FIHZ: 'YAS', IYC: 'WB', WBX: 'WB', GOVTW: 'WB', WIR: 'WIRP', FEDS: 'WIRP', ECO: 'NEWS', TOP: 'NEWS', WCDS: 'CRPR', SOVR: 'CRPR', RATC: 'CRPR', CDSW: 'CRPR', IGHY: 'CORP', CMX: 'CORP', ABS: 'MTGE', CLO: 'MTGE' };
-      const t = alias[v] || v;
-      if (setFn(t)) { go.value = ''; go.classList.remove('bad'); } else { go.classList.add('bad'); }
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.target && /input|textarea|select/i.test(e.target.tagName)) return;
-      const sec = document.getElementById('fixed'); if (!sec || sec.hidden) return;
-      if (e.key === ']' || e.key === '.') { setFn(FNS[(FNS.indexOf(fn) + 1) % FNS.length]); }
-      if (e.key === '[' || e.key === ',') { setFn(FNS[(FNS.indexOf(fn) + FNS.length - 1) % FNS.length]); }
-      if (e.key === '/' && go) { e.preventDefault(); go.focus(); }
-    });
-  });
 })();

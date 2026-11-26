@@ -10,46 +10,6 @@
   const rows = (id) => { const d = dash.data(id); return d.status === 'ok' && Array.isArray(d.data) ? d.data : []; };
   const first = (id) => rows(id)[0] || null;
 
-  // ---- tabs, animation and monitor mode ----
-  const PAGES = ['piyasa', 'faiz', 'fixed', 'makro', 'hisse', 'takvim', 'teknik'];
-  let cur = 'piyasa', monTimer = null;
-  const MON_MS = 15000;
-  function show(name) {
-    if (!PAGES.includes(name)) name = 'piyasa';
-    cur = name;
-    document.querySelectorAll('section.page').forEach((s) => { s.hidden = s.id !== name; });
-    document.querySelectorAll('.tabs button[data-tab]').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.tab === name)));
-    try { history.replaceState(null, '', '#' + name + (name === 'fixed' && window.FIcur ? '/' + window.FIcur() : '')); } catch (e) { /* file:// */ }
-    const sec = document.getElementById(name);
-    if (sec && TT.motion()) sec.querySelectorAll('.pn').forEach((p, i) => { p.classList.remove('enter'); void p.offsetWidth; p.style.animationDelay = (i * 60) + 'ms'; p.classList.add('enter'); });
-    TT.anim = true;
-    if (window.TTrun) window.TTrun();
-    TT.anim = false;
-    if (sec && TT.motion()) sec.querySelectorAll('.kv .v, .heat div').forEach((v) => { v.classList.remove('flash'); void v.offsetWidth; v.classList.add('flash'); });
-  }
-  function monitor(on) {
-    const b = document.querySelector('.tabs .mon');
-    clearInterval(monTimer); monTimer = null;
-    if (b) { b.setAttribute('aria-pressed', String(on)); b.style.setProperty('--mon', (MON_MS / 1000) + 's'); b.firstChild.textContent = on ? '■ MONITOR ON' : '▶ MONITOR MODE'; }
-    if (on) monTimer = setInterval(() => show(PAGES[(PAGES.indexOf(cur) + 1) % PAGES.length]), MON_MS);
-    try { localStorage.setItem('tlft-monitor', on ? '1' : '0'); } catch (e) { /* storage may be blocked */ }
-  }
-  window.TTshow = show;
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.tabs button[data-tab]').forEach((b) => b.addEventListener('click', () => { show(b.dataset.tab); if (monTimer) monitor(true); }));
-    const mb = document.querySelector('.tabs .mon'); if (mb) mb.addEventListener('click', () => monitor(!monTimer));
-    document.addEventListener('keydown', (e) => {
-      if (e.target && /input|textarea|select/i.test(e.target.tagName)) return;
-      if (e.metaKey || e.ctrlKey || e.altKey) return;
-      const i = ['1', '2', '3', '4', '5', '6', '7'].indexOf(e.key);
-      if (i >= 0) { show(PAGES[i]); if (monTimer) monitor(true); }
-      if (e.key === 'm' || e.key === 'M') monitor(!monTimer);
-    });
-    show((location.hash || '#piyasa').slice(1).split('/')[0]);
-    let saved = null; try { saved = localStorage.getItem('tlft-monitor'); } catch (e) { /* ignore */ }
-    if (saved === '1') monitor(true);
-  });
-
   // ---- clock ----
   dash.draw('saat', { mount: (el) => { const f = new Intl.DateTimeFormat('tr-TR', { timeZone: 'Europe/Istanbul', day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' }); const t = () => { el.textContent = f.format(new Date()); }; t(); return setInterval(t, 1000); }, update: () => {}, unmount: (el, id) => clearInterval(id) });
 
