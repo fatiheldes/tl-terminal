@@ -1,0 +1,12 @@
+## metadata
+market: us
+source: yfinance
+## data
+```tsv
+symbol	name	market	currency	current_price	volume	week_52_high	week_52_low	avg_volume
+^OVX	CBOE Crude Oil Volatility Index	us	USD	48.04	0	125.99	28.4	0
+^GVZ	CBOE Gold Volatility Index	us	USD	35.84	0	48.68	19.39	0
+^VXEEM	CBOE EMERGING MARKETS ETF VOLAT	us	USD	39.77	0	0	0	
+^VXTLT	CBOE 20+ Year Treasury Bond ETF	us	USD	13.36	0	0	0	
+^VXSLV	CBOE SILVER ETF VOLATILITY INDE	us	USD	54	0	0	0	
+```

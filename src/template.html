@@ -448,8 +448,34 @@ ul.soon li::marker { color: var(--am); }
   </section>
   <!-- 5 DERIVATIVES -->
   <section class="page" id="deriv" hidden>
-<div class="fnbar" role="tablist"><button data-fn="OIS" aria-selected="true"><b>OIS</b>TLREF OIS · MPC pricing</button><button data-fn="FUT" aria-selected="false"><b>FUT</b>Rate futures</button><button data-fn="STRC" aria-selected="false"><b>STRC</b>Structured · floaters</button></div>
-<div class="fsub" data-fn="OIS">
+<div class="kv">
+      <div><div class="l">VIX</div><div class="v" data-draw="dv-k-vix">—</div><div class="c" data-draw="dv-k-vix-c">—</div></div>
+      <div><div class="l">VIX TERM RATIO</div><div class="v" data-draw="dv-k-term">—</div><div class="c" data-draw="dv-k-term-c">—</div></div>
+      <div><div class="l">MOVE</div><div class="v" data-draw="dv-k-move">—</div><div class="c" data-draw="dv-k-move-c">—</div></div>
+      <div><div class="l">VVIX</div><div class="v" data-draw="dv-k-vvix">—</div><div class="c" data-draw="dv-k-vvix-c">—</div></div>
+      <div><div class="l">S&amp;P REALISED VOL</div><div class="v" data-draw="dv-k-rv">—</div><div class="c" data-draw="dv-k-rv-c">—</div></div>
+      <div><div class="l">OIL VOL (OVX)</div><div class="v" data-draw="dv-k-ovx">—</div><div class="c" data-draw="dv-k-ovx-c">—</div></div>
+    </div>
+<div class="fnbar" role="tablist" style="margin-top:4px"><button data-fn="VOL" aria-selected="true"><b>VOL</b>Volatility monitor</button><button data-fn="FMON" aria-selected="false"><b>FMON</b>Futures basis · carry</button><button data-fn="OIS" aria-selected="false"><b>OIS</b>TLREF OIS · MPC pricing</button><button data-fn="FUT" aria-selected="false"><b>FUT</b>Rate futures</button><button data-fn="STRC" aria-selected="false"><b>STRC</b>Structured · floaters</button></div>
+<div class="fsub" data-fn="VOL">
+<div class="g w2" style="margin-top:4px">
+<div class="pn"><h2><span class="n">VOL 1</span>VIX term structure<span class="s">S&amp;P 500 implied vol by horizon, today</span></h2><div class="bd"><div data-draw="dv-term" style="min-height:220px" aria-label="VIX term structure"></div><div class="tt-chart sm" style="margin-top:6px" data-draw="dv-ratio" aria-label="VIX to VIX3M ratio"></div><p class="note">An upward-sloping curve (short-dated below long-dated) is the normal, calm state; an inverted curve means the market pays more for near-term protection.</p></div></div>
+<div class="pn"><h2><span class="n">VOL 2</span>Implied vs realised<span class="s">is option insurance cheap or expensive?</span></h2><div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Index</th><th class="r">Implied</th><th class="r">Realised 10D</th><th class="r">Realised 20D</th><th class="r">Premium</th><th class="r">Implied 1-day move</th><th class="r">Largest 1-day move</th></tr></thead><tbody data-draw="dv-rv"></tbody></table></div><div class="tt-chart" style="margin-top:6px" data-draw="dv-rvc" aria-label="Realised volatility"></div><p class="note">Realised vol = annualised standard deviation of daily log returns (√252) over the last month of closes. Premium = implied minus 20-day realised; implied 1-day move = implied ÷ √252.</p></div></div>
+</div>
+<div style="margin-top:4px"><div class="pn"><h2><span class="n">VOL 3</span>Cross-asset implied volatility<span class="s">Cboe and ICE indices · level, change, position in 52-week range</span></h2><div class="bd"><div class="tw"><table class="tb sticky"><thead><tr><th>Index</th><th>Underlying</th><th class="r">Level</th><th class="r">1W chg</th><th class="r">1M chg</th><th class="r">52W low</th><th class="r">52W high</th><th>In 52W range</th><th>6M trend</th></tr></thead><tbody data-draw="dv-table"></tbody></table></div><p class="note">Indices from Yahoo Finance via Borsa. Changes and trends use weekly closes for VIX, VIX3M, MOVE and VVIX only. SKEW above ~140 signals heavy demand for out-of-the-money puts. Some 52-week ranges are missing in the source.</p></div></div></div>
+<div class="g w2" style="margin-top:4px">
+<div class="pn"><h2><span class="n">VOL 4</span>Equity volatility, 6 months<span class="s">weekly closes</span></h2><div class="bd"><div class="tt-chart" data-draw="dv-hist" aria-label="VIX history"></div></div></div>
+<div class="pn"><h2><span class="n">VOL 5</span>Rates volatility &amp; vol-of-vol<span class="s">weekly closes</span></h2><div class="bd"><div class="tt-chart" data-draw="dv-move" aria-label="MOVE history"></div></div></div>
+</div>
+</div>
+<div class="fsub" data-fn="FMON" hidden>
+<div style="margin-top:4px"><div class="pn"><h2><span class="n">FMON 1</span>Equity index futures vs cash<span class="s">front quarterly contract · basis and implied carry</span></h2><div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Future</th><th>Contract</th><th class="r">Futures</th><th class="r">Cash index</th><th class="r">Basis</th><th class="r">Basis %</th><th class="r">To expiry</th><th class="r">Implied carry p.a.</th><th class="r">3M T-bill</th><th class="r">T-bill − carry ≈ div. yield</th><th>Check</th></tr></thead><tbody data-draw="df-eq"></tbody></table></div><p class="note">Implied carry = (futures ÷ cash − 1) × 360 ÷ days to the third Friday of the contract month. Fair value is cash × (1 + (financing − dividends) × days/360), so T-bill minus implied carry approximates the dividend yield the market prices. Futures trade almost round the clock while cash indices only print in exchange hours, so the basis is distorted when the two prices are taken at different times (e.g. US holidays).</p></div></div></div>
+<div class="g w2" style="margin-top:4px">
+<div class="pn"><h2><span class="n">FMON 2</span>FX futures vs spot<span class="s">CME front contract · implied USD − foreign rate gap</span></h2><div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Future</th><th>Pair</th><th class="r">Futures</th><th class="r">Spot</th><th class="r">Points</th><th class="r">To expiry</th><th class="r">Implied gap p.a.</th><th class="r">Policy gap</th><th>Check</th></tr></thead><tbody data-draw="df-fx"></tbody></table></div><p class="note">By covered interest parity, futures ÷ spot − 1 ≈ (USD rate − foreign rate) × days/360. Policy gap = Fed rate minus the foreign central bank rate (BIS). With few days left to expiry, small price differences move the implied gap a lot.</p></div></div>
+<div class="pn"><h2><span class="n">FMON 3</span>Carry priced into futures<span class="s">annualised, %</span></h2><div class="bd"><div data-draw="df-bars" aria-label="Implied carry"></div></div></div>
+</div>
+</div>
+<div class="fsub" data-fn="OIS" hidden>
 
     <p class="news"><span class="k">SUMMARY</span>TLREF <b data-draw="k-tlref-s">—</b> (<span data-draw="k-tlref-tarih">—</span>), <b data-draw="k-chg-s">—</b> bp vs the previous business day. T-bills price an average overnight rate of <b data-draw="f-ort">—</b> over the next <b data-draw="f-gun">—</b> days: <b data-draw="f-fark">—</b> bp <span data-draw="f-yon">—</span> the CBRT average funding cost. Survey respondents expect <b data-draw="k-ppk-s">—</b> at the next MPC meeting.</p>
     <div class="kv" style="margin-top:4px">
@@ -677,8 +703,33 @@ ul.soon li::marker { color: var(--am); }
   </section>
   <!-- 9 CREDIT -->
   <section class="page" id="credit" hidden>
-<div class="fnbar" role="tablist"><button data-fn="CRPR" aria-selected="true"><b>CRPR</b>Ratings · CDS</button><button data-fn="CORP" aria-selected="false"><b>CORP</b>Corporate credit</button></div>
-<div class="fsub" data-fn="CRPR">
+<div class="kv">
+      <div><div class="l">TL COMMERCIAL LOAN RATE</div><div class="v" data-draw="cr-k-comm">—</div><div class="c" data-draw="cr-k-comm-c">—</div></div>
+      <div><div class="l">TL CONSUMER LOAN RATE</div><div class="v" data-draw="cr-k-cons">—</div><div class="c" data-draw="cr-k-cons-c">—</div></div>
+      <div><div class="l">TL DEPOSIT RATE</div><div class="v" data-draw="cr-k-dep">—</div><div class="c" data-draw="cr-k-dep-c">—</div></div>
+      <div><div class="l">LENDING SPREAD</div><div class="v" data-draw="cr-k-sp">—</div><div class="c" data-draw="cr-k-sp-c">—</div></div>
+      <div><div class="l">LOAN GROWTH</div><div class="v" data-draw="cr-k-gr">—</div><div class="c" data-draw="cr-k-gr-c">—</div></div>
+      <div><div class="l">NPL RATIO</div><div class="v" data-draw="cr-k-npl">—</div><div class="c" data-draw="cr-k-npl-c">—</div></div>
+    </div>
+<div class="fnbar" role="tablist" style="margin-top:4px"><button data-fn="TRCR" aria-selected="true"><b>TRCR</b>Türkiye loan pricing</button><button data-fn="LOAN" aria-selected="false"><b>LOAN</b>Loan growth · NPL</button><button data-fn="CRPR" aria-selected="false"><b>CRPR</b>Ratings · CDS</button><button data-fn="CORP" aria-selected="false"><b>CORP</b>Corporate credit</button></div>
+<div class="fsub" data-fn="TRCR">
+<div class="g w2" style="margin-top:4px">
+<div class="pn"><h2><span class="n">TRCR 1</span>Bank lending and deposit rates<span class="s">new business, weekly, % (compound)</span></h2><div class="bd"><div class="tt-chart" data-draw="cr-rates" aria-label="Loan and deposit rates"></div></div></div>
+<div class="pn"><h2><span class="n">TRCR 2</span>Lending spreads<span class="s">loan rate minus TL deposit rate, pp</span></h2><div class="bd"><div class="tt-chart" data-draw="cr-spread" aria-label="Lending spreads"></div><div class="tt-chart sm" style="margin-top:6px" data-draw="cr-real" aria-label="Real rates"></div><p class="note">Real rates deflate by the annual CPI print available in each week.</p></div></div>
+</div>
+<div class="g w2" style="margin-top:4px">
+<div class="pn"><h2><span class="n">TRCR 3</span>Rate table<span class="s">latest week · change in percentage points</span></h2><div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Product</th><th class="r">Latest</th><th class="r">4W</th><th class="r">13W</th><th class="r">Since</th><th>Trend</th></tr></thead><tbody data-draw="cr-rtab"></tbody></table></div><p class="note">CBRT weighted average rates on new loans and deposits (flow), weekly, via EVDS. Consumer = general-purpose + auto + housing excluding overdrafts. Weekly prints are noisy around month-ends and holidays.</p></div></div>
+<div class="pn"><h2><span class="n">TRCR 4</span>FX lending and deposit rates<span class="s">USD and EUR, new business</span></h2><div class="bd"><div class="tt-chart" data-draw="cr-fx" aria-label="FX loan rates"></div></div></div>
+</div>
+</div>
+<div class="fsub" data-fn="LOAN" hidden>
+<div class="g w2" style="margin-top:4px">
+<div class="pn"><h2><span class="n">LOAN 1</span>Loan growth<span class="s">13-week annualised, % · TL and FX loans in TL</span></h2><div class="bd"><div class="tt-chart" data-draw="cr-growth" aria-label="Loan growth"></div></div></div>
+<div class="pn"><h2><span class="n">LOAN 2</span>Non-performing loans<span class="s">NPL ÷ (performing + NPL), %</span></h2><div class="bd"><div class="tt-chart" data-draw="cr-npl" aria-label="NPL ratio"></div></div></div>
+</div>
+<div style="margin-top:4px"><div class="pn"><h2><span class="n">LOAN 3</span>Banking sector loans<span class="s">latest week · TRY tn · growth and share</span></h2><div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Segment</th><th class="r">Stock TRY tn</th><th class="r">13W ann.</th><th class="r">Y/Y</th><th class="r">Share of total</th><th>6M trend</th></tr></thead><tbody data-draw="cr-gtab"></tbody></table></div><p class="note">BRSA weekly bulletin (domestic branches, residents) via EVDS. FX loans are included at the current exchange rate, so lira depreciation adds to measured growth. The NPL ratio here divides the weekly NPL stocks by the resident loan stock plus NPLs; it is close to, but not the same as, the BRSA headline ratio.</p></div></div></div>
+</div>
+<div class="fsub" data-fn="CRPR" hidden>
 
 <div class="kv">
       <div><div class="l">TÜRKİYE 5Y CDS</div><div class="v" data-draw="cr-k-tr">—</div><div class="c" data-draw="cr-k-tr-c">—</div></div>

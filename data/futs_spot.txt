@@ -1,0 +1,8 @@
+## metadata
+market: us
+source: yfinance
+## data
+```tsv
+symbol	name	market	currency	current_price	volume	week_52_high	week_52_low	avg_volume
+^NDX	NASDAQ-100	us	USD	26046.9004	11362660000	31361.3691	22841.4199	8580377500
+```
