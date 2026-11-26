@@ -16,7 +16,7 @@ import pathlib
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent
-IDS = ['rates', 'bills', 'pka', 'reserves', 'fx', 'crypto', 'usd', 'gold_hist', 'xu100_hist', 'bist', 'bist_quotes', 'bist_hist', 'us_quotes', 'inflation', 'cal_this', 'cal_next', 'cal_global', 'tech', 'xu100_daily', 'gainers', 'losers', 'bonds', 'coupons1', 'coupons2', 'polrates1', 'polrates2', 'nonres', 'funding', 'frn', 'frn_coupons']
+IDS = ['rates', 'bills', 'pka', 'reserves', 'fx', 'crypto', 'usd', 'gold_hist', 'xu100_hist', 'bist', 'bist_quotes', 'bist_hist', 'us_quotes', 'inflation', 'cal_this', 'cal_next', 'cal_global', 'tech', 'xu100_daily', 'gainers', 'losers', 'bonds', 'coupons1', 'coupons2', 'polrates1', 'polrates2', 'nonres', 'funding', 'frn', 'frn_coupons', 'gcpi', 'gca', 'ggdp1', 'ggdp2', 'gq1', 'gq2', 'gq3', 'us_yh', 'etf_h', 'etf_h2']
 
 
 def read(p):

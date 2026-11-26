@@ -236,6 +236,7 @@ window.FI = (function () {
     const sel = document.querySelector('#fi-calc-bond'), mode = document.querySelector('#fi-calc-mode'), inp = document.querySelector('#fi-calc-input');
     if (!out || !sel) return;
     const r = rows('fi_bonds').find((x) => x.isin === sel.value); if (!r) return;
+    if (window.FIdes) window.FIdes();
     const t0 = Date.parse(r.date + 'T00:00:00Z'); const fl = FI.flows(r.isin, r.coupon ? r.coupon / 2 : 0, t0);
     if (!inp.dataset.touched || inp.dataset.for !== r.isin + mode.value) { inp.value = mode.value === 'price' ? r.price.toFixed(3) : r.ytm.toFixed(2); inp.dataset.for = r.isin + mode.value; inp.dataset.touched = ''; }
     const v = parseFloat(inp.value);
@@ -339,6 +340,265 @@ window.FI = (function () {
       const svg = d3.select(td).append('svg').attr('width', w).attr('height', h).attr('aria-hidden', 'true');
       svg.append('path').attr('d', d3.line().x((v, i) => xs(i)).y((v) => ys(v)).curve(d3.curveStepAfter)(s)).style('fill', 'none').style('stroke', r.code === 'TUR' ? '#ffd23c' : '#3cc8f0').style('stroke-width', 1.5);
       cell(tr, TT.mShort(TT.parseD(r.as_of)) + ' ' + r.as_of.slice(0, 4), 'r mu');
+    });
+  });
+})();
+
+// ===================== GLOBAL SOVEREIGN MONITOR & TÜRKİYE SOVEREIGN DEBT MONITOR =====================
+(function () {
+  const P = window.TTparse;
+  ['gcpi', 'gca', 'ggdp1', 'ggdp2'].forEach((id) => dash.loader(id, { description: '', fn: P.md(null) }));
+  const R2 = (v) => v == null || isNaN(v) ? null : Math.round(v * 100) / 100;
+  const REGION = { USA: 'DM', XM: 'DM', GBR: 'DM', JPN: 'DM', AUS: 'DM', KOR: 'DM', CZE: 'CEE', POL: 'CEE', HUN: 'CEE', TUR: 'CEE', BRA: 'LatAm', MEX: 'LatAm', ZAF: 'EMEA', IND: 'Asia EM', IDN: 'Asia EM', CHN: 'Asia EM' };
+  const col = (rows, key) => (rows || []).filter((r) => typeof r[key] === 'number').sort((a, b) => a.tarih < b.tarih ? -1 : 1);
+  dash.calc('gsov', { inputs: ['fi_policy', 'gcpi', 'gca', 'ggdp1', 'ggdp2'], title: 'gsov', fn: (pol, cpi, ca, g1, g2) => {
+    const gdp = {}; [g1, g2].forEach((rs) => { const last = (rs || []).slice().sort((a, b) => a.tarih < b.tarih ? -1 : 1).pop(); if (last) Object.keys(last).forEach((k) => { if (k !== 'tarih' && typeof last[k] === 'number') gdp[k.replace('IMFGDPUSDN_', '')] = last[k]; }); });
+    return (pol || []).map((p) => {
+      const cc = p.code === 'XM' ? 'DEU' : p.code;
+      const s = col(cpi, 'IMFCPIND_' + cc); let yoy = null, cpiAsOf = null;
+      if (s.length) { const l = s[s.length - 1]; const y0 = String(+l.tarih.slice(0, 4) - 1) + l.tarih.slice(4); const b = s.find((r) => r.tarih === y0); if (b) { yoy = R2((l['IMFCPIND_' + cc] / b['IMFCPIND_' + cc] - 1) * 100); cpiAsOf = l.tarih; } }
+      const q = p.code === 'XM' ? [] : col(ca, 'IMFCA_' + p.code); const last4 = q.slice(-4);
+      const caGdp = last4.length === 4 && gdp[p.code] ? R2(last4.reduce((x, r) => x + r['IMFCA_' + p.code], 0) / 1e9 / gdp[p.code] * 100) : null;
+      return { code: p.code, country: p.code === 'XM' ? 'Euro area' : p.country, region: REGION[p.code] || 'Other', policy: p.rate, chg_12m: p.chg_12m, cpi_yoy: yoy, cpi_note: p.code === 'XM' ? 'Germany CPI used' : null, cpi_as_of: cpiAsOf, real_policy: yoy == null ? null : R2(p.rate - yoy), ca_gdp: caGdp, gdp_bn: gdp[p.code] || null };
+    });
+  } });
+
+  // Türkiye sovereign debt monitor: benchmarks, curve spreads, butterfly, real yield with 1M statistics
+  dash.calc('tr_sdm', { inputs: ['fi_hist', 'makro_ozet'], title: 'tr_sdm', fn: (h, mk) => {
+    const dates = Array.from(new Set((h || []).map((r) => r.date))).sort();
+    if (!dates.length) return [];
+    const y = (d, t) => { const r = h.find((x) => x.date === d && x.tenor === t); return r ? r.yield : null; };
+    const exp12 = ((mk || [])[0] || {}).tufe_12a;
+    const defs = [
+      ['Benchmarks', '1Y yield', (d) => y(d, '1Y'), '%'], ['Benchmarks', '2Y yield', (d) => y(d, '2Y'), '%'], ['Benchmarks', '5Y yield', (d) => y(d, '5Y'), '%'], ['Benchmarks', '7Y yield', (d) => y(d, '7Y'), '%'],
+      ['Curves', '2s5s', (d) => (y(d, '5Y') - y(d, '2Y')) * 100, 'bp'], ['Curves', '2s7s', (d) => (y(d, '7Y') - y(d, '2Y')) * 100, 'bp'], ['Curves', '5s7s', (d) => (y(d, '7Y') - y(d, '5Y')) * 100, 'bp'], ['Curves', '1s2s', (d) => (y(d, '2Y') - y(d, '1Y')) * 100, 'bp'],
+      ['Butterflies', '2s5s7s', (d) => (2 * y(d, '5Y') - y(d, '2Y') - y(d, '7Y')) * 100, 'bp'], ['Butterflies', '1s2s5s', (d) => (2 * y(d, '2Y') - y(d, '1Y') - y(d, '5Y')) * 100, 'bp'],
+      ['Real', '1Y real (vs 12M CPI exp.)', (d) => exp12 == null ? null : y(d, '1Y') - exp12, '%'], ['Real', '2Y real (vs 12M CPI exp.)', (d) => exp12 == null ? null : y(d, '2Y') - exp12, '%']
+    ];
+    return defs.map(([group, name, f, unit]) => {
+      const s = dates.map((d) => f(d)).filter((v) => v != null && !isNaN(v));
+      if (!s.length) return null;
+      const cur = s[s.length - 1], prev = s[s.length - 2], avg = d3.mean(s), sd = d3.deviation(s) || 0;
+      return { group, name, unit, value: R2(cur), chg_1d: prev == null ? null : R2(unit === '%' ? (cur - prev) * 100 : cur - prev), low: R2(d3.min(s)), high: R2(d3.max(s)), avg: R2(avg), z: sd ? R2((cur - avg) / sd) : 0, spark: s.map(R2) };
+    }).filter(Boolean);
+  } });
+})();
+
+(function () {
+  const L = d3.formatLocale({ decimal: '.', thousands: ',', grouping: [3], currency: ['', ''] });
+  const N = (v, d) => v == null || isNaN(v) ? '—' : L.format(',.' + (d == null ? 2 : d) + 'f')(v);
+  const sgn = (v) => v > 0 ? '+' : v < 0 ? '−' : '';
+  const rows = (id) => { const d = dash.data(id); return d.status === 'ok' && Array.isArray(d.data) ? d.data : []; };
+  const tone = (el, v, inv) => { const x = inv ? -v : v; el.classList.toggle('up', typeof v === 'number' && x > 0); el.classList.toggle('dn', typeof v === 'number' && x < 0); };
+  const cell = (tr, text, cls) => { const td = tr.insertCell(); td.textContent = text; if (cls) td.className = cls; return td; };
+  const RC = { DM: '#3cc8f0', CEE: '#ffa028', LatAm: '#2ee66b', EMEA: '#c86bff', 'Asia EM': '#ff6b9a', Other: '#8a8a8a' };
+  let gsSort = { k: 'real_policy', dir: -1 };
+
+  dash.draw('g-sov', (tb) => {
+    tb.replaceChildren();
+    const r = rows('gsov').slice().sort((a, b) => ((a[gsSort.k] ?? -1e9) > (b[gsSort.k] ?? -1e9) ? 1 : -1) * gsSort.dir);
+    r.forEach((x) => {
+      const tr = tb.insertRow();
+      const c = cell(tr, x.country, x.code === 'TUR' ? 'yl' : 'hi'); if (x.cpi_note) c.title = x.cpi_note;
+      const rg = cell(tr, x.region); rg.style.color = RC[x.region];
+      cell(tr, N(x.policy, 2) + '%', 'r'); tone(cell(tr, x.chg_12m == null ? '—' : sgn(x.chg_12m) + N(Math.abs(x.chg_12m), 0), 'r'), x.chg_12m, true);
+      cell(tr, x.cpi_yoy == null ? '—' : N(x.cpi_yoy, 1) + '%' + (x.cpi_note ? '*' : ''), 'r');
+      tone(cell(tr, x.real_policy == null ? '—' : sgn(x.real_policy) + N(Math.abs(x.real_policy), 2), 'r'), x.real_policy);
+      tone(cell(tr, x.ca_gdp == null ? '—' : (Math.abs(x.ca_gdp) < 0.05 ? '' : sgn(x.ca_gdp)) + N(Math.abs(x.ca_gdp), 1) + '%', 'r'), Math.abs(x.ca_gdp) < 0.05 ? 0 : x.ca_gdp);
+      cell(tr, x.gdp_bn == null ? '—' : '$' + N(x.gdp_bn / 1000, 2) + 'tn', 'r mu');
+      cell(tr, x.cpi_as_of ? TT.mShort(TT.parseD(x.cpi_as_of)) + ' ' + x.cpi_as_of.slice(2, 4) : '—', 'r mu');
+    });
+  });
+  document.addEventListener('click', (e) => { const h = e.target.closest && e.target.closest('th[data-gsort]'); if (!h) return; const k = h.dataset.gsort; gsSort = { k, dir: gsSort.k === k ? -gsSort.dir : -1 }; dash.draw('g-sov'); });
+
+  // Bubble chart: CPI vs policy rate, bubble = GDP
+  dash.draw('g-scatter', (el) => {
+    d3.select(el).selectAll('*').remove();
+    const d = rows('gsov').filter((x) => x.cpi_yoy != null);
+    if (!d.length) return;
+    const lg = d3.select(el).append('div').attr('class', 'tt-legend');
+    Object.keys(RC).filter((k) => d.some((x) => x.region === k)).forEach((k) => lg.append('span').style('--sw', RC[k]).text(k));
+    lg.append('span').attr('class', 'dash').style('--sw', '#5a5a5a').text('real rate = 0');
+    const W = Math.max(300, el.clientWidth), H = 300, m = { t: 10, r: 16, b: 30, l: 42 };
+    const useLog = d3.max(d, (x) => x.policy) > 20;
+    const x = (useLog ? d3.scaleSymlog().constant(2) : d3.scaleLinear()).domain([Math.min(0, d3.min(d, (q) => q.cpi_yoy)), d3.max(d, (q) => q.cpi_yoy) * 1.1]).range([m.l, W - m.r]);
+    const y = (useLog ? d3.scaleSymlog().constant(2) : d3.scaleLinear()).domain([0, d3.max(d, (q) => q.policy) * 1.1]).range([H - m.b, m.t]);
+    const r = d3.scaleSqrt().domain([0, d3.max(d, (q) => q.gdp_bn || 0)]).range([4, 26]);
+    const svg = d3.select(el).append('svg').attr('width', W).attr('height', H).attr('role', 'img').attr('aria-label', 'Inflation vs policy rate by country');
+    const tv = [0, 1, 2, 5, 10, 20, 30, 40].filter((v) => v <= x.domain()[1]); const tvy = [0, 1, 2, 5, 10, 20, 30, 40].filter((v) => v <= y.domain()[1]);
+    svg.append('g').attr('class', 'grid').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).tickValues(tvy).tickSize(-(W - m.l - m.r)).tickFormat(''));
+    svg.append('g').attr('class', 'axis').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).tickValues(tvy).tickFormat((v) => v + '%').tickSizeOuter(0));
+    svg.append('g').attr('class', 'axis').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).tickValues(tv).tickFormat((v) => v + '%').tickSizeOuter(0));
+    svg.append('text').attr('x', W - m.r).attr('y', H - 4).attr('text-anchor', 'end').style('fill', '#8a8a8a').style('font-size', '10px').text('CPI y/y →');
+    svg.append('text').attr('x', m.l + 4).attr('y', m.t + 8).style('fill', '#8a8a8a').style('font-size', '10px').text('↑ policy rate' + (useLog ? ' (log-like scale)' : ''));
+    const lo = Math.max(x.domain()[0], y.domain()[0]), hi = Math.min(x.domain()[1], y.domain()[1]);
+    const diag = d3.range(lo, hi, (hi - lo) / 60).concat([hi]);
+    svg.append('path').attr('d', d3.line().x((v) => x(v)).y((v) => y(v))(diag)).style('stroke', '#5a5a5a').style('stroke-dasharray', '4 3').style('fill', 'none');
+    const anim = TT.anim && TT.motion();
+    const g = svg.append('g').selectAll('g').data(d.sort((a, b) => (b.gdp_bn || 0) - (a.gdp_bn || 0))).join('g').attr('transform', (q) => `translate(${x(q.cpi_yoy)},${y(q.policy)})`);
+    const c = g.append('circle').attr('r', anim ? 0 : (q) => r(q.gdp_bn || 0)).style('fill', (q) => RC[q.region]).style('fill-opacity', 0.35).style('stroke', (q) => RC[q.region]).style('stroke-width', (q) => q.code === 'TUR' ? 2.5 : 1);
+    if (anim) c.transition().delay((q, i) => i * 60).duration(700).ease(d3.easeBackOut).attr('r', (q) => r(q.gdp_bn || 0));
+    g.append('text').attr('y', 3).attr('text-anchor', 'middle').style('fill', '#e8e8e8').style('font-size', '9.5px').style('font-weight', (q) => q.code === 'TUR' ? 700 : 400).text((q) => q.code);
+    const tip = d3.select(el).append('div').attr('class', 'tt-tip').style('display', 'none');
+    g.on('pointerenter', (ev, q) => { tip.selectAll('*').remove(); tip.append('div').attr('class', 'tt-tip-d').text(q.country); tip.append('div').text('Policy ' + N(q.policy, 2) + '% · CPI ' + N(q.cpi_yoy, 1) + '%'); tip.append('div').text('Real policy rate ' + sgn(q.real_policy) + N(Math.abs(q.real_policy), 2) + ' pp'); if (q.ca_gdp != null) tip.append('div').text('Current account ' + N(q.ca_gdp, 1) + '% of GDP'); const [px, py] = d3.pointer(ev, el); tip.style('display', null).style('left', Math.min(px + 12, W - 190) + 'px').style('top', Math.max(0, py - 10) + 'px'); })
+      .on('pointerleave', () => tip.style('display', 'none'));
+  });
+
+  // Türkiye sovereign debt monitor table with 1M range bars, z-scores and sparklines
+  dash.draw('tr-sdm', (tb) => {
+    tb.replaceChildren();
+    let grp = null;
+    rows('tr_sdm').forEach((r) => {
+      if (r.group !== grp) { grp = r.group; const tr = tb.insertRow(); const td = cell(tr, grp.toUpperCase(), 'am'); td.colSpan = 9; td.style.fontSize = '10px'; td.style.letterSpacing = '.06em'; td.style.paddingTop = '6px'; }
+      const tr = tb.insertRow(); const isPct = r.unit === '%';
+      cell(tr, r.name, 'hi'); cell(tr, isPct ? N(r.value, 2) + '%' : sgn(r.value) + N(Math.abs(r.value), 0) + ' bp', 'r');
+      tone(cell(tr, r.chg_1d == null ? '—' : sgn(r.chg_1d) + N(Math.abs(r.chg_1d), 0) + ' bp', 'r'), r.chg_1d, isPct);
+      const sp = tr.insertCell(); const w = 80, h = 16; const xs = d3.scaleLinear().domain([0, r.spark.length - 1]).range([1, w - 1]); const ex = d3.extent(r.spark); const ys = d3.scaleLinear().domain(ex[0] === ex[1] ? [ex[0] - 1, ex[0] + 1] : ex).range([h - 2, 2]);
+      const s1 = d3.select(sp).append('svg').attr('width', w).attr('height', h).attr('aria-hidden', 'true'); s1.append('path').attr('d', d3.line().x((v, i) => xs(i)).y((v) => ys(v))(r.spark)).style('fill', 'none').style('stroke', '#ffa028').style('stroke-width', 1.3);
+      cell(tr, isPct ? N(r.low, 2) : N(r.low, 0), 'r mu');
+      const rg = tr.insertCell(); const rw = 90; const rs = d3.scaleLinear().domain([r.low, r.high === r.low ? r.low + 1 : r.high]).range([3, rw - 3]);
+      const s2 = d3.select(rg).append('svg').attr('width', rw).attr('height', 12).attr('aria-hidden', 'true');
+      s2.append('line').attr('x1', 3).attr('x2', rw - 3).attr('y1', 6).attr('y2', 6).style('stroke', '#3a3a3a').style('stroke-width', 2);
+      s2.append('path').attr('d', d3.symbol(d3.symbolDiamond, 30)()).attr('transform', `translate(${rs(r.avg)},6)`).style('fill', '#ffa028');
+      s2.append('circle').attr('cx', rs(r.value)).attr('cy', 6).attr('r', 3.5).style('fill', '#3cc8f0');
+      cell(tr, isPct ? N(r.high, 2) : N(r.high, 0), 'r mu'); cell(tr, isPct ? N(r.avg, 2) : N(r.avg, 0), 'r');
+      const zc = cell(tr, (r.z > 0 ? '+' : '') + N(r.z, 2), 'r'); zc.style.background = Math.abs(r.z) >= 1.5 ? (r.z > 0 ? 'rgba(255,69,69,.35)' : 'rgba(46,230,107,.35)') : '';
+    });
+  });
+
+  // Security description for the bond selected in the calculator
+  const META = { TRT100227T13: ['2025-02-12', '24T2'], TRT131027T36: ['2025-10-15', '24T2'], TRT150328T24: ['2026-03-18', '24T2'], TRT081128T15: ['2023-11-15', '61T2'], TRT120929T12: ['2024-09-18', '61T2'], TRT021030T18: ['2025-10-08', '61T2'], TRT160431T35: ['2026-04-22', '61T2'], TRT051033T12: ['2023-10-18', '121T2'], TRT270934T18: ['2024-10-09', '121T2'], TRB100227T13: ['2026-06-17', '8B'], TRB170327T15: ['2026-04-08', '11B'] };
+  window.FIdes = function () {
+    const box = document.querySelector('[data-des]'); const sel = document.querySelector('#fi-calc-bond');
+    if (!box || !sel) return;
+    const r = rows('fi_bonds').find((x) => x.isin === sel.value); if (!r) return;
+    const t0 = Date.parse(r.date + 'T00:00:00Z'); const fl = FI.flows(r.isin, r.coupon ? r.coupon / 2 : 0, t0);
+    const m = META[r.isin] || [];
+    const next = fl.length ? fl[0].t : null, prevCpn = next && r.coupon ? next - 182 * FI.DAY : null;
+    const accrued = r.coupon && prevCpn ? (r.coupon / 2) * Math.max(0, (t0 - prevCpn) / FI.DAY) / 182 : 0;
+    const items = [
+      ['Issuer', 'Republic of Türkiye (Treasury)'], ['ISIN', r.isin], ['CBRT code', m[1] || '—'], ['Currency', 'TRY'],
+      ['Type', r.type === 'Bill' ? 'Zero-coupon T-bill' : 'Fixed-coupon bond'], ['Coupon (annual)', r.coupon ? N(r.coupon, 2) + '%' : '—'], ['Frequency', r.type === 'Bill' ? 'At maturity' : 'Semi-annual (182 days)'], ['Day count', 'Act/365'],
+      ['Issue date', m[0] ? TT.dt(m[0]) : '—'], ['Maturity', TT.dt(r.maturity)], ['Next coupon', r.coupon && next ? TT.dt(new Date(next)) : '—'], ['Coupons left', r.coupon ? String(fl.length) : '—'],
+      ['Accrued (per 100)', r.coupon ? N(accrued, 3) : '0.000'], ['Clean price', N(r.price - accrued, 3)], ['Dirty price', N(r.price, 3)], ['Price source', 'CBRT indicative, ' + TT.dt(r.date)]
+    ];
+    box.replaceChildren(...items.map(([a, b]) => { const d = document.createElement('div'); const l = document.createElement('div'); l.className = 'l'; l.textContent = a; const v = document.createElement('div'); v.className = 'c'; v.style.color = '#e8e8e8'; v.style.fontSize = '12px'; v.textContent = b; d.append(l, v); return d; }));
+  };
+})();
+
+// ===================== WORLD BOND MARKETS (US Treasuries, global bond & credit ETFs, risk gauges) =====================
+(function () {
+  const P = window.TTparse;
+  ['gq1', 'gq2', 'gq3', 'us_yh', 'etf_h', 'etf_h2'].forEach((id) => dash.loader(id, { description: '', fn: P.tsv }));
+  const R2 = (v) => v == null || isNaN(v) ? null : Math.round(v * 100) / 100;
+  const hist = (h, sym) => { const r = (h || []).find((x) => x.symbol === sym); return r && Array.isArray(r.data) ? r.data.map((d) => ({ date: String(d.date).slice(0, 10), close: d.close })).sort((a, b) => a.date < b.date ? -1 : 1) : []; };
+  const back = (s, n) => s.length > n ? s[s.length - 1 - n].close : null;
+  const UST = [['^IRX', '3M', 0.25], ['2YY=F', '2Y', 2], ['^FVX', '5Y', 5], ['^TNX', '10Y', 10], ['^TYX', '30Y', 30]];
+  dash.calc('ust', { inputs: ['gq1', 'gq3', 'us_yh'], title: 'ust', fn: (q1, q3, h) => {
+    const q = (q1 || []).concat(q3 || []);
+    return UST.map(([sym, tenor, yrs]) => {
+      const r = q.find((x) => x.symbol === sym); if (!r || typeof r.current_price !== 'number') return null;
+      const s = hist(h, sym); const y = r.current_price; const d = (n) => { const v = back(s, n); return v == null ? null : Math.round((y - v) * 100); };
+      return { sym, tenor, yrs, yield: y, chg_1w: d(1), chg_1m: d(4), chg_3m: d(13), chg_6m: s.length ? Math.round((y - s[0].close) * 100) : null, lo: r.week_52_low, hi: r.week_52_high, spark: s.map((p) => p.close).concat([y]), src: sym === '2YY=F' ? 'CME 2Y yield futures' : 'Cboe/Treasury index' };
+    }).filter(Boolean);
+  } });
+  dash.calc('ust_spreads', { inputs: ['ust', 'us_yh', 'fi_matrix'], title: 'ust_spreads', fn: (u, h, mx) => {
+    const y = (t) => ((u || []).find((r) => r.tenor === t) || {}).yield;
+    const s = (sym) => hist(h, sym);
+    const ser = (a, b) => { const A = s(a), B = s(b); return A.map((p, i) => B[i] ? Math.round((p.close - B[i].close) * 100) : null).filter((v) => v != null); };
+    const out = [];
+    const add = (name, now, series, note) => { if (now == null || isNaN(now)) return; const ch = series && series.length > 4 ? now - series[series.length - 5] : null; out.push({ name, bp: Math.round(now), chg_1m: ch == null ? null : Math.round(ch), lo: series && series.length ? Math.min(...series, now) : null, hi: series && series.length ? Math.max(...series, now) : null, note }); };
+    if (y('3M') != null && y('10Y') != null) add('UST 3M10Y', (y('10Y') - y('3M')) * 100, ser('^TNX', '^IRX'));
+    if (y('2Y') != null && y('10Y') != null) add('UST 2s10s', (y('10Y') - y('2Y')) * 100, null, '2Y from CME yield futures');
+    if (y('5Y') != null && y('30Y') != null) add('UST 5s30s', (y('30Y') - y('5Y')) * 100, ser('^TYX', '^FVX'));
+    if (y('10Y') != null && y('30Y') != null) add('UST 10s30s', (y('30Y') - y('10Y')) * 100, ser('^TYX', '^TNX'));
+    const m = (t) => ((mx || []).find((r) => r.tenor === t) || {}).yield;
+    if (m('2Y') != null && y('2Y') != null) add('TRY 2Y − UST 2Y', (m('2Y') - y('2Y')) * 100, null, 'local-currency differential');
+    if (m('5Y') != null && y('5Y') != null) add('TRY 5Y − UST 5Y', (m('5Y') - y('5Y')) * 100, null, 'local-currency differential');
+    return out;
+  } });
+  const ETF = [
+    ['SHY', 'UST 1-3Y', 'US Treasuries'], ['IEF', 'UST 7-10Y', 'US Treasuries'], ['TLT', 'UST 20Y+', 'US Treasuries'], ['TIP', 'US TIPS (inflation-linked)', 'US Treasuries'], ['AGG', 'US Aggregate', 'US Aggregate'],
+    ['LQD', 'USD IG corporates', 'Credit'], ['HYG', 'USD high yield', 'Credit'], ['JNK', 'USD high yield (alt.)', 'Credit'],
+    ['BWX', 'Intl treasuries (unhedged)', 'DM ex-US'], ['IGOV', 'Intl treasuries (DM)', 'DM ex-US'], ['BNDX', 'Intl aggregate (USD-hedged)', 'DM ex-US'],
+    ['EMB', 'EM sovereign, hard currency', 'Emerging markets'], ['VWOB', 'EM government, hard currency', 'Emerging markets'], ['EMLC', 'EM local-currency bonds', 'Emerging markets'], ['CEW', 'EM currency basket', 'Emerging markets'], ['TUR', 'MSCI Türkiye equities', 'Emerging markets']];
+  dash.calc('gbond_etf', { inputs: ['gq1', 'gq2', 'gq3', 'etf_h', 'etf_h2'], title: 'gbond_etf', fn: (a, b, c, h1, h2) => {
+    const h = (h1 || []).concat(h2 || []);
+    const q = (a || []).concat(b || [], c || []);
+    return ETF.map(([sym, desc, group]) => {
+      const r = q.find((x) => x.symbol === sym); if (!r || typeof r.current_price !== 'number') return null;
+      const s = hist(h, sym), px = r.current_price; const ret = (n) => { const v = back(s, n); return v ? R2((px / v - 1) * 100) : null; };
+      return { sym, desc, group, px, r1w: ret(1), r1m: ret(4), r3m: ret(13), r6m: s.length ? R2((px / s[0].close - 1) * 100) : null, lo: r.week_52_low, hi: r.week_52_high, dy: typeof r.dividend_yield === 'number' ? r.dividend_yield : null, spark: s.map((p) => p.close).concat([px]) };
+    }).filter(Boolean);
+  } });
+})();
+
+(function () {
+  const L = d3.formatLocale({ decimal: '.', thousands: ',', grouping: [3], currency: ['', ''] });
+  const N = (v, d) => v == null || isNaN(v) ? '—' : L.format(',.' + (d == null ? 2 : d) + 'f')(v);
+  const sgn = (v) => v > 0 ? '+' : v < 0 ? '−' : '';
+  const rows = (id) => { const d = dash.data(id); return d.status === 'ok' && Array.isArray(d.data) ? d.data : []; };
+  const tone = (el, v, inv) => { const x = inv ? -v : v; el.classList.toggle('up', typeof v === 'number' && x > 0); el.classList.toggle('dn', typeof v === 'number' && x < 0); };
+  const cell = (tr, text, cls) => { const td = tr.insertCell(); td.textContent = text; if (cls) td.className = cls; return td; };
+  const BP = (v) => v == null ? '—' : sgn(v) + N(Math.abs(v), 0);
+  const spark = (td, s, color) => { if (!s || s.length < 2) return; const w = 56, h = 16; const x = d3.scaleLinear().domain([0, s.length - 1]).range([1, w - 1]); const e = d3.extent(s); const y = d3.scaleLinear().domain(e[0] === e[1] ? [e[0] - 1, e[0] + 1] : e).range([h - 2, 2]); d3.select(td).append('svg').attr('width', w).attr('height', h).attr('aria-hidden', 'true').append('path').attr('d', d3.line().x((v, i) => x(i)).y((v) => y(v))(s)).style('fill', 'none').style('stroke', color || '#ffa028').style('stroke-width', 1.3); };
+  const range = (td, lo, hi, v) => { if (lo == null || hi == null || hi <= lo) { td.textContent = '—'; return; } const w = 64; const x = d3.scaleLinear().domain([lo, hi]).range([3, w - 3]).clamp(true); const s = d3.select(td).append('svg').attr('width', w).attr('height', 12).attr('aria-hidden', 'true'); s.append('line').attr('x1', 3).attr('x2', w - 3).attr('y1', 6).attr('y2', 6).style('stroke', '#3a3a3a').style('stroke-width', 2); s.append('circle').attr('cx', x(v)).attr('cy', 6).attr('r', 3.5).style('fill', '#3cc8f0'); };
+
+  // KPIs for the global strip
+  const kv = (name, fn) => dash.draw(name, (el) => { const r = fn(); el.textContent = r && r.text != null ? r.text : '—'; if (r && 'tone' in r) tone(el, r.tone, r.inv); });
+  const u = (t) => rows('ust').find((r) => r.tenor === t);
+  kv('g-k-10y', () => { const r = u('10Y'); return r && { text: N(r.yield, 3) + '%' }; });
+  kv('g-k-10y-c', () => { const r = u('10Y'); return r && { text: BP(r.chg_1w) + ' bp 1W · ' + BP(r.chg_1m) + ' bp 1M', tone: r.chg_1w, inv: true }; });
+  kv('g-k-2s10s', () => { const s = rows('ust_spreads').find((r) => r.name === 'UST 2s10s'); return s && { text: BP(s.bp) + ' bp', tone: s.bp }; });
+  kv('g-k-try', () => { const s = rows('ust_spreads').find((r) => r.name === 'TRY 2Y − UST 2Y'); return s && { text: N(s.bp, 0) + ' bp' }; });
+  const g = (sym) => rows('gbond_etf').find((r) => r.sym === sym);
+  const qv = (sym) => { const all = ['gq2'].flatMap((id) => rows(id)); return all.find((r) => r.symbol === sym); };
+  kv('g-k-vix', () => { const r = qv('^VIX'); return r && { text: N(r.current_price, 2) }; });
+  kv('g-k-dxy', () => { const r = qv('DX-Y.NYB'); return r && { text: N(r.current_price, 2) }; });
+  kv('g-k-emb', () => { const r = g('EMB'); return r && { text: sgn(r.r1m) + N(Math.abs(r.r1m), 2) + '% 1M', tone: r.r1m }; });
+
+  dash.draw('g-ust-curve', (el) => {
+    const r = rows('ust'); if (!r.length) return;
+    const pts = (f) => r.map((x) => ({ x: x.yrs, y: f(x) })).filter((p) => p.y != null);
+    TT.xy(el, [
+      { name: 'Today', color: '#ffa028', width: 2.5, dots: true, values: pts((x) => x.yield) },
+      { name: '1M ago', color: '#3cc8f0', dash: true, width: 1.5, values: pts((x) => x.chg_1m == null ? null : x.yield - x.chg_1m / 100) },
+      { name: '6M ago', color: '#8a8a8a', dash: true, width: 1.5, values: pts((x) => x.chg_6m == null ? null : x.yield - x.chg_6m / 100) }
+    ], { height: 230, xFmt: (v) => v === 0 ? '0' : N(v, 0) + 'Y', yFmt: (v) => N(v, 1) + '%', tipX: (v) => N(v, 2) + ' yrs', tipY: (v) => N(v, 3) + '%' });
+  });
+  dash.draw('g-ust', (tb) => {
+    tb.replaceChildren();
+    rows('ust').forEach((r) => {
+      const tr = tb.insertRow(); const c = cell(tr, 'UST ' + r.tenor, 'hi'); c.title = r.src;
+      cell(tr, N(r.yield, 3) + '%', 'r yl');
+      ['chg_1w', 'chg_1m', 'chg_3m', 'chg_6m'].forEach((k) => tone(cell(tr, BP(r[k]), 'r'), r[k], true));
+      spark(tr.insertCell(), r.spark); range(tr.insertCell(), r.lo, r.hi, r.yield);
+    });
+  });
+  dash.draw('g-spreads', (tb) => {
+    tb.replaceChildren();
+    rows('ust_spreads').forEach((r) => {
+      const tr = tb.insertRow(); const c = cell(tr, r.name, r.name.startsWith('TRY') ? 'yl' : 'hi'); if (r.note) c.title = r.note;
+      tone(cell(tr, BP(r.bp) + ' bp', 'r'), r.bp); tone(cell(tr, BP(r.chg_1m), 'r'), r.chg_1m);
+      cell(tr, r.lo == null ? '—' : BP(r.lo), 'r mu'); cell(tr, r.hi == null ? '—' : BP(r.hi), 'r mu');
+    });
+  });
+  // Normalised performance chart (6M = 100)
+  const PERF = [['TLT', '#3cc8f0'], ['TIP', '#7fd4ff'], ['LQD', '#2ee66b'], ['HYG', '#c86bff'], ['BWX', '#ffd23c'], ['EMB', '#ffa028'], ['EMLC', '#ff4545']];
+  dash.draw('g-perf', (el) => {
+    const r = rows('gbond_etf'); if (!r.length) return;
+    const h = dash.data('etf_h').status === 'ok' ? dash.data('etf_h').data : [];
+    const series = PERF.map(([sym, color]) => { const x = h.find((q) => q.symbol === sym); if (!x || !Array.isArray(x.data) || !x.data.length) return null; const base = x.data[0].close; return { name: sym, color, width: sym === 'EMB' || sym === 'EMLC' ? 2.2 : 1.5, values: x.data.map((d) => ({ x: TT.parseD(d.date), y: d.close / base * 100 })) }; }).filter(Boolean);
+    TT.chart(el, series, { height: 230, yFmt: (v) => N(v, 0), tipFmt: (v) => N(v, 2), refs: [{ y: 100, label: '100' }] });
+  });
+  dash.draw('g-etf', (tb) => {
+    tb.replaceChildren(); let grp = null;
+    rows('gbond_etf').forEach((r) => {
+      if (r.group !== grp) { grp = r.group; const tr = tb.insertRow(); const td = cell(tr, grp.toUpperCase(), 'am'); td.colSpan = 11; td.style.fontSize = '10px'; td.style.letterSpacing = '.06em'; td.style.paddingTop = '6px'; }
+      const tr = tb.insertRow(); cell(tr, r.sym, r.sym === 'TUR' ? 'yl' : 'hi'); cell(tr, r.desc, 'mu'); cell(tr, N(r.px, 2), 'r');
+      ['r1w', 'r1m', 'r3m', 'r6m'].forEach((k) => tone(cell(tr, r[k] == null ? '—' : sgn(r[k]) + N(Math.abs(r[k]), 2) + '%', 'r'), r[k]));
+      spark(tr.insertCell(), r.spark, (r.r6m || 0) >= 0 ? '#2ee66b' : '#ff4545'); range(tr.insertCell(), r.lo, r.hi, r.px);
+      cell(tr, r.dy == null ? '—' : N(r.dy, 2) + '%', 'r');
     });
   });
 })();
