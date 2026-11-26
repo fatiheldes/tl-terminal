@@ -65,6 +65,30 @@ html, body { margin: 0; background: #000; }
 .heat div em { display: block; font-style: normal; font-size: 15px; margin-top: 3px; }
 .heat div small { display: block; font-size: 10px; font-weight: 400; }
 .tt-empty { color: var(--mu); font-size: 11px; padding: 6px 0; }
+.bt-top .upd::first-letter { }
+@media (prefers-reduced-motion: no-preference) {
+  .blink { animation: blink 1.6s steps(2, start) infinite; }
+  .kv .v.flash, .heat div.flash { animation: flash 1.1s ease-out 1; }
+  .pn.enter { animation: enter .45s ease-out both; }
+}
+@keyframes blink { to { visibility: hidden; } }
+@keyframes flash { 0% { background: rgba(255,160,40,.35); } 100% { background: transparent; } }
+@keyframes enter { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.tabs .mon { margin-left: auto; font-size: 11px; background: #0d2a14; color: var(--up); border-color: #1f5a2c; position: relative; overflow: hidden; }
+.tabs .mon[aria-pressed="true"] { background: var(--up); color: #000; }
+.tabs .mon i { position: absolute; left: 0; bottom: 0; height: 2px; background: #000; width: 0; }
+.tabs .mon[aria-pressed="true"] i { animation: prog var(--mon, 15s) linear infinite; }
+@keyframes prog { from { width: 0; } to { width: 100%; } }
+.tabs .hint { margin-left: 8px; }
+.alerts { display: flex; flex-direction: column; gap: 3px; max-height: 236px; overflow: auto; }
+.alerts div { display: grid; grid-template-columns: 62px 86px 1fr; gap: 8px; padding: 3px 6px; border-left: 3px solid var(--mu); background: #0b0b0b; font-size: 11px; }
+.alerts div.yüksek { border-color: var(--dn); } .alerts div.orta { border-color: var(--am); } .alerts div.düşük { border-color: var(--cy); }
+.alerts b { font-weight: 700; } .alerts .lv { text-transform: uppercase; font-size: 10px; }
+.rsi { display: inline-block; position: relative; width: 80px; height: 8px; vertical-align: middle; background: linear-gradient(90deg, #1d6b33 0 30%, #2a2a2a 30% 70%, #7a2222 70% 100%); }
+.rsi i { position: absolute; top: -2px; width: 3px; height: 12px; background: var(--yl); }
+.gauges { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 4px; }
+.gauges > div { min-height: 110px; }
+
 .foot { border-top: 1px solid var(--ln); color: var(--mu); font-size: 10.5px; padding: 4px 4px 2px; line-height: 1.5; }
 .foot summary { cursor: pointer; color: var(--am); letter-spacing: .05em; }
 .foot p { margin: 4px 0; max-width: 80em; }
@@ -74,7 +98,7 @@ html, body { margin: 0; background: #000; }
   <header class="bt-top">
     <h1>TL FAİZ TERMİNALİ</h1>
     <span class="tag">TLREF · OIS · PİYASA · MAKRO · HİSSE · TAKVİM</span>
-    <span class="upd">● GÜNCELLEME: __ASOF__</span>
+    <span class="upd"><span class="blink">●</span> GÜNCELLEME: __ASOF__</span>
     <span class="clk">İSTANBUL <span data-draw="saat">—</span></span>
   </header>
 
@@ -86,7 +110,9 @@ html, body { margin: 0; background: #000; }
     <button role="tab" data-tab="makro"><span class="k">3</span>MAKRO</button>
     <button role="tab" data-tab="hisse"><span class="k">4</span>HİSSE</button>
     <button role="tab" data-tab="takvim"><span class="k">5</span>TAKVİM</button>
-    <span class="hint">klavye: 1–5 sekme</span>
+    <button role="tab" data-tab="teknik"><span class="k">6</span>TEKNİK</button>
+    <button class="mon" type="button" aria-pressed="false" title="Sekmeleri 15 saniyede bir otomatik döndürür">▶ MONİTÖR MODU<i></i></button>
+    <span class="hint">klavye: 1–6 sekme · M monitör</span>
   </nav>
 
   <!-- 1 PİYASA -->
@@ -98,6 +124,10 @@ html, body { margin: 0; background: #000; }
         <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Varlık</th><th class="r">Son</th><th class="r">Birim</th></tr></thead><tbody data-draw="t-emtia"></tbody></table></div></div></div>
       <div class="pn"><h2><span class="n">1.3</span>Endeksler<span class="s">XU100 günlük · ABD ETF 52H aralık</span></h2>
         <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Endeks</th><th class="r">Son</th><th class="r">Gün %</th><th class="r">52H</th></tr></thead><tbody data-draw="t-endeks"></tbody></table></div></div></div>
+    </div>
+    <div class="g w2">
+      <div class="pn"><h2><span class="n">1.0</span>Uyarılar<span class="s">kurala dayalı · otomatik</span></h2><div class="bd"><div class="alerts" data-draw="alerts"></div></div></div>
+      <div class="pn"><h2><span class="n">1.9</span>Göreli performans<span class="s">3 ay · başlangıç = 100</span></h2><div class="bd"><div class="tt-chart" style="min-height:236px" data-draw="ch-perf" aria-label="Göreli performans"></div></div></div>
     </div>
     <div class="g w2">
       <div class="pn"><h2><span class="n">1.4</span>BIST ısı haritası<span class="s">günlük değişim %</span></h2><div class="bd"><div class="heat" data-draw="heat"></div></div></div>
@@ -138,6 +168,10 @@ html, body { margin: 0; background: #000; }
       <div class="pn"><h2><span class="n">2.3</span>TLREF · AOFM · BIST repo<span class="s">günlük, son 6 ay</span></h2><div class="bd"><div class="tt-chart" data-draw="ch-oranlar" aria-label="TLREF, AOFM ve BIST repo"></div></div></div>
       <div class="pn"><h2><span class="n">2.4</span>Bono ima O/N geçmişi<span class="s">düşüş = daha çok indirim fiyatı</span></h2><div class="bd"><div class="tt-chart" data-draw="ch-gecmis" aria-label="Bono ima O/N geçmişi"></div></div></div>
       <div class="pn"><h2><span class="n">2.5</span>Politika faizi beklentileri<span class="s">TCMB Piyasa Katılımcıları Anketi</span></h2><div class="bd"><div class="tt-chart" data-draw="ch-ppk" aria-label="Politika faizi beklentileri"></div></div></div>
+      <div class="pn"><h2><span class="n">2.6</span>PPK takvimi ve piyasa fiyatlaması<span class="s">toplantı tarihindeki ima edilen forward O/N</span></h2>
+        <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>PPK</th><th class="r">Kalan gün</th><th class="r">İma fwd O/N</th><th class="r">AOFM'ye göre</th><th class="r">Anket</th></tr></thead><tbody data-draw="t-ppk"></tbody></table></div>
+        <div class="tt-chart sm" style="margin-top:6px" data-draw="ch-ppk-bar" aria-label="PPK tarihlerinde ima edilen değişim"></div>
+        <p class="note">Bonolardan çıkan forward O/N, toplantı tarihini kapsayan döneme aittir; bono-repo bazı düzeltilmemiştir, bu yüzden indirim büyüklüğünü abartabilir. Son bononun vadesinden sonraki toplantılar için piyasa verisi yoktur.</p></div></div>
     </div>
   </section>
 
@@ -176,6 +210,20 @@ html, body { margin: 0; background: #000; }
         <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Zaman</th><th>Veri</th><th>Önem</th><th class="r">Önceki</th></tr></thead><tbody data-draw="t-takvim"></tbody></table></div><div data-draw="t-takvim-bos"></div></div></div>
       <div class="pn"><h2><span class="n">5.2</span>Küresel, yüksek önem<span class="s">bu hafta · tüm ülkeler</span></h2>
         <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Zaman</th><th>Ülke</th><th>Veri</th><th class="r">Önceki</th></tr></thead><tbody data-draw="t-global"></tbody></table></div><div data-draw="t-global-bos"></div></div></div>
+    </div>
+  </section>
+
+  <!-- 6 TEKNİK -->
+  <section class="page" id="teknik" hidden>
+    <div class="g w2">
+      <div class="pn"><h2><span class="n">6.1</span>XU100 mum grafik<span class="s">günlük · 1 ay · SMA20 / EMA50</span></h2><div class="bd"><div class="tt-chart" style="min-height:320px" data-draw="ch-candle" aria-label="XU100 mum grafik"></div></div></div>
+      <div class="pn"><h2><span class="n">6.2</span>RSI göstergeleri<span class="s">14 gün · 30 altı aşırı satım, 70 üstü aşırı alım</span></h2><div class="bd"><div class="gauges" data-draw="gauges"></div></div></div>
+    </div>
+    <div class="pn" style="margin-top:4px"><h2><span class="n">6.3</span>Teknik tarama<span class="s">günlük · hareketli ortalamalar ve MACD</span></h2>
+      <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Sembol</th><th class="r">Son</th><th>RSI</th><th class="r">RSI</th><th class="r">SMA20'ye göre</th><th class="r">EMA50'ye göre</th><th class="r">MACD hist.</th><th>Sinyal</th></tr></thead><tbody data-draw="t-teknik"></tbody></table></div></div></div>
+    <div class="g w2" style="margin-top:4px">
+      <div class="pn"><h2><span class="n">6.4</span>Günün yükselenleri<span class="s">XU100 · %3 üzeri</span></h2><div class="bd"><div class="tt-chart" style="min-height:260px" data-draw="ch-gainers" aria-label="En çok yükselenler"></div></div></div>
+      <div class="pn"><h2><span class="n">6.5</span>Günün düşenleri<span class="s">XU100 · %3 üzeri kayıp</span></h2><div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Hisse</th><th class="r">Kapanış</th><th class="r">Değişim</th><th class="r">Hacim (mn)</th></tr></thead><tbody data-draw="t-losers"></tbody></table></div><div data-draw="t-losers-bos"></div></div></div>
     </div>
   </section>
 

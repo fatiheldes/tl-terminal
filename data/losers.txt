@@ -1,0 +1,8 @@
+## stocks
+symbol: EGGUB
+name: EGGUB
+close: 87.4
+change: -3.96
+volume: 1477835
+### additional_indicators
+total_count: 1

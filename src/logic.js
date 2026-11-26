@@ -27,14 +27,19 @@
   const tsv = ({ answer }) => {
     const text = toText(answer);
     const m = text.match(/```tsv\s*\n([\s\S]*?)```/);
-    if (!m) { if (/error|hata|unavailable/i.test(text)) throw new Error(text.slice(0, 300)); return { columns: [], rows: [] }; }
+    if (!m) {
+      if (/error|hata|unavailable/i.test(text)) throw new Error(text.slice(0, 300));
+      const recs = []; let cur = null;
+      text.split('\n').forEach((l) => { const mm = /^([a-z_]+):\s*(.*)$/.exec(l.trim()); if (!mm) return; if (mm[1] === 'symbol') { cur = {}; recs.push(cur); } if (cur && mm[1] !== 'total_count') cur[mm[1]] = mm[1] === 'symbol' || mm[1] === 'name' ? mm[2] : num(mm[2]); });
+      return { columns: recs.length ? Object.keys(recs[0]) : [], rows: recs };
+    }
     const ls = m[1].trim().split('\n').filter((l) => l.trim());
     const head = ls[0].split('\t').map((h) => h.trim());
     const rows = ls.slice(1).map((l) => {
       const c = l.split('\t'), o = {};
       head.forEach((h, i) => {
         const v = (c[i] || '').trim();
-        if (v.startsWith('[')) { try { o[h] = JSON.parse(v); return; } catch (e) { /* keep text */ } }
+        if (v.startsWith('[') || v.startsWith('{')) { try { o[h] = JSON.parse(v); return; } catch (e) { /* keep text */ } }
         o[h] = (h === 'date' || h === 'time' || h === 'as_of' || h === 'previous' || h === 'symbol' || h === 'name') ? v : num(v);
       });
       return o;
@@ -54,7 +59,7 @@
   L('bills', md(null));
   L('pka', md({ TP_PKAUO_S01_D_U: 'tufe_ys', TP_PKAUO_S01_E_U: 'tufe_12a', TP_PKAUO_S04_C_U: 'ppk_ilk', TP_PKAUO_S04_H_U: 'ppk_ys', TP_PKAUO_S04_D_U: 'ppk_12a', TP_PKAUO_S05_C_U: 'usd_12a' }));
   L('reserves', md({ TP_AB_TOPLAM: 'toplam', TP_AB_C1: 'altin', TP_AB_C2: 'doviz' }));
-  ['fx', 'usd', 'gold_hist', 'xu100_hist', 'crypto', 'bist_quotes', 'bist_hist', 'us_quotes', 'inflation', 'cal_this', 'cal_next', 'cal_global'].forEach((id) => L(id, tsv));
+  ['fx', 'usd', 'gold_hist', 'xu100_hist', 'xu100_daily', 'tech', 'gainers', 'losers', 'crypto', 'bist_quotes', 'bist_hist', 'us_quotes', 'inflation', 'cal_this', 'cal_next', 'cal_global'].forEach((id) => L(id, tsv));
   L('bist', kv);
 })();
 
@@ -178,4 +183,53 @@ C('makro_ozet', ['inflation', 'pka', 'ozet', 'reserves', 'usd'], (inf, pka, ozet
     rez: lz ? lz.toplam / 1000 : null, rez_chg: lz && pz ? (lz.toplam - pz.toplam) / 1000 : null,
     usd_12a_fark: lp && lu ? R2((lp.usd_12a / lu.close - 1) * 100) : null
   }];
+});
+
+// Technical table
+C('teknik_tablo', ['tech'], (tech) => (tech || []).map((r) => {
+  const m = r.moving_averages || {}, i = r.indicators || {}, g = r.signals || {};
+  const px = r.current_price;
+  return { symbol: r.symbol, son: px, rsi: R2(i.rsi_14), macd_h: i.macd_histogram, sma20: m.sma_20, ema50: m.ema_50, vs_sma20: m.sma_20 ? R2((px / m.sma_20 - 1) * 100) : null, vs_ema50: m.ema_50 ? R2((px / m.ema_50 - 1) * 100) : null, trend: g.trend, rsi_sinyal: g.rsi_signal, macd_sinyal: g.macd_signal };
+}));
+
+// PPK meetings published by TCMB (Para Politikası Metni / takvim)
+const PPK_DATES = ['2026-12-10', '2027-01-21', '2027-03-18', '2027-04-22', '2027-06-10'];
+C('ppk_takvim', ['egri', 'ozet', 'makro_ozet'], (egri, ozet, mk) => {
+  const pts = egri || [], o = (ozet || [])[0] || {}, m = (mk || [])[0] || {};
+  const t0 = pts.length ? Date.parse(pts[0].tarih + 'T00:00:00Z') : Date.now();
+  return PPK_DATES.map((d, idx) => {
+    const t = Date.parse(d + 'T00:00:00Z');
+    if (t < t0) return null;
+    const seg = pts.find((p) => Date.parse(p.vade + 'T00:00:00Z') >= t);
+    const ima = seg ? seg.ima_forward_on : null;
+    return { tarih: d, gun: Math.round((t - t0) / 864e5), ima_on: ima, fark_bp: ima != null && o.aofm != null ? Math.round((ima - o.aofm) * 100) : null, anket: idx === 0 ? m.ppk_ilk : null };
+  }).filter(Boolean);
+});
+
+// Relative performance, rebased to 100 at the common start date
+C('perf', ['usd', 'gold_hist', 'xu100_hist'], (usd, gold, xu) => {
+  const ser = (rows, name) => { const r = (rows || []).filter((x) => typeof x.close === 'number').map((x) => ({ d: String(x.date).slice(0, 10), v: x.close })).sort((a, b) => a.d < b.d ? -1 : 1); return { name, r }; };
+  const all = [ser(usd, 'USD/TRY'), ser(gold, 'Gram altın'), ser(xu, 'XU100')].filter((s) => s.r.length);
+  if (!all.length) return [];
+  const start = all.map((s) => s.r[0].d).sort().pop();
+  const out = [];
+  all.forEach((s) => { const base = (s.r.find((x) => x.d >= start) || s.r[0]).v; s.r.filter((x) => x.d >= start).forEach((x) => out.push({ seri: s.name, tarih: x.d, endeks: R2(x.v / base * 100) })); });
+  return out;
+});
+
+// Rule-based alerts
+C('uyarilar', ['ozet', 'fiyatlama', 'teknik_tablo', 'bist_tablo', 'makro_ozet', 'usd_ozet'], (oz, fy, tk, bt, mk, uo) => {
+  const a = [];
+  const o = (oz || [])[0], f = (fy || [])[0], m = (mk || [])[0], u = (uo || [])[0];
+  const push = (seviye, konu, mesaj) => a.push({ seviye, konu, mesaj });
+  if (o && Math.abs(o.tlref_aofm_bp) >= 50) push(o.tlref_aofm_bp > 0 ? 'yüksek' : 'orta', 'TLREF', 'TLREF, AOFM\'nin ' + Math.abs(o.tlref_aofm_bp) + ' bp ' + (o.tlref_aofm_bp > 0 ? 'üstünde: fonlama sıkışıyor' : 'altında: likidite bol'));
+  if (o && Math.abs(o.tlref_degisim_bp) >= 50) push('yüksek', 'TLREF', 'TLREF bir günde ' + (o.tlref_degisim_bp > 0 ? '+' : '') + o.tlref_degisim_bp + ' bp değişti');
+  if (f && f.aofm_farki_bp <= -200) push('orta', 'OIS', 'Bonolar ' + f.gun + ' gün için AOFM\'nin ' + Math.abs(f.aofm_farki_bp) + ' bp altında O/N fiyatlıyor: indirim beklentisi güçlü');
+  (tk || []).forEach((r) => { if (r.rsi != null && r.rsi < 30) push('orta', r.symbol, 'RSI ' + r.rsi.toFixed(1) + ': aşırı satım bölgesinde'); if (r.rsi != null && r.rsi > 70) push('orta', r.symbol, 'RSI ' + r.rsi.toFixed(1) + ': aşırı alım bölgesinde'); });
+  (bt || []).forEach((r) => { if (r.g5 != null && r.g5 <= -5) push('düşük', r.symbol, '5 günde %' + Math.abs(r.g5).toFixed(2) + ' düştü'); if (r.son && r.dip && r.son <= r.dip * 1.05) push('düşük', r.symbol, '52 haftalık dibine %5\'ten yakın'); });
+  if (m && m.rez_chg != null && m.rez_chg <= -5) push('yüksek', 'REZERV', 'TCMB brüt rezervleri bir haftada ' + Math.abs(m.rez_chg).toFixed(1) + ' mlr $ azaldı');
+  if (m && m.reel_ante != null && m.reel_ante > 10) push('düşük', 'REEL FAİZ', 'Ex-ante reel faiz +' + m.reel_ante.toFixed(1) + ' puan: sıkı duruş sürüyor');
+  if (u && Math.abs(u.degisim_yuzde) >= 0.5) push('orta', 'USD/TRY', 'Günlük değişim %' + u.degisim_yuzde.toFixed(2));
+  const rank = { 'yüksek': 0, 'orta': 1, 'düşük': 2 };
+  return a.sort((x, y) => rank[x.seviye] - rank[y.seviye]);
 });

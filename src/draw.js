@@ -10,24 +10,44 @@
   const rows = (id) => { const d = dash.data(id); return d.status === 'ok' && Array.isArray(d.data) ? d.data : []; };
   const first = (id) => rows(id)[0] || null;
 
-  // ---- tabs ----
-  const PAGES = ['piyasa', 'faiz', 'makro', 'hisse', 'takvim'];
+  // ---- tabs, animation and monitor mode ----
+  const PAGES = ['piyasa', 'faiz', 'makro', 'hisse', 'takvim', 'teknik'];
+  let cur = 'piyasa', monTimer = null;
+  const MON_MS = 15000;
   function show(name) {
     if (!PAGES.includes(name)) name = 'piyasa';
+    cur = name;
     document.querySelectorAll('section.page').forEach((s) => { s.hidden = s.id !== name; });
-    document.querySelectorAll('.tabs button').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.tab === name)));
+    document.querySelectorAll('.tabs button[data-tab]').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.tab === name)));
     try { history.replaceState(null, '', '#' + name); } catch (e) { /* file:// */ }
+    const sec = document.getElementById(name);
+    if (sec && TT.motion()) sec.querySelectorAll('.pn').forEach((p, i) => { p.classList.remove('enter'); void p.offsetWidth; p.style.animationDelay = (i * 60) + 'ms'; p.classList.add('enter'); });
+    TT.anim = true;
     if (window.TTrun) window.TTrun();
+    TT.anim = false;
+    if (sec && TT.motion()) sec.querySelectorAll('.kv .v, .heat div').forEach((v) => { v.classList.remove('flash'); void v.offsetWidth; v.classList.add('flash'); });
+  }
+  function monitor(on) {
+    const b = document.querySelector('.tabs .mon');
+    clearInterval(monTimer); monTimer = null;
+    if (b) { b.setAttribute('aria-pressed', String(on)); b.style.setProperty('--mon', (MON_MS / 1000) + 's'); b.firstChild.textContent = on ? '■ MONİTÖR AÇIK' : '▶ MONİTÖR MODU'; }
+    if (on) monTimer = setInterval(() => show(PAGES[(PAGES.indexOf(cur) + 1) % PAGES.length]), MON_MS);
+    try { localStorage.setItem('tlft-monitor', on ? '1' : '0'); } catch (e) { /* storage may be blocked */ }
   }
   window.TTshow = show;
   document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.tabs button').forEach((b) => b.addEventListener('click', () => show(b.dataset.tab)));
+    document.querySelectorAll('.tabs button[data-tab]').forEach((b) => b.addEventListener('click', () => { show(b.dataset.tab); if (monTimer) monitor(true); }));
+    const mb = document.querySelector('.tabs .mon'); if (mb) mb.addEventListener('click', () => monitor(!monTimer));
     document.addEventListener('keydown', (e) => {
       if (e.target && /input|textarea|select/i.test(e.target.tagName)) return;
-      const i = ['1', '2', '3', '4', '5'].indexOf(e.key);
-      if (i >= 0 && !e.metaKey && !e.ctrlKey && !e.altKey) show(PAGES[i]);
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      const i = ['1', '2', '3', '4', '5', '6'].indexOf(e.key);
+      if (i >= 0) { show(PAGES[i]); if (monTimer) monitor(true); }
+      if (e.key === 'm' || e.key === 'M') monitor(!monTimer);
     });
     show((location.hash || '#piyasa').slice(1));
+    let saved = null; try { saved = localStorage.getItem('tlft-monitor'); } catch (e) { /* ignore */ }
+    if (saved === '1') monitor(true);
   });
 
   // ---- clock ----
@@ -122,7 +142,7 @@
     const rs = rows(id).filter((r) => typeof r[yField] === 'number');
     if (dash.data(id).status === 'error') return fail(el, 'Veri yüklenemedi.');
     if (!rs.length) return fail(el, 'Veri yok.');
-    TT.chart(el, [{ name: label, color: C[0], values: rs.map((r) => ({ x: TT.parseD(r[xField]), y: r[yField] })) }], { height: 150, yFmt: fmt, tipFmt: (v) => N(v, d) });
+    TT.chart(el, [{ name: label, color: C[0], area: true, values: rs.map((r) => ({ x: TT.parseD(r[xField]), y: r[yField] })) }], { height: 150, yFmt: fmt, tipFmt: (v) => N(v, d) });
   });
   histChart('ch-xu', 'xu100_hist', 'date', 'close', 'XU100 haftalık kapanış', (v) => N(v, 0), 2);
   histChart('ch-usd', 'usd', 'date', 'close', 'USD/TRY kapanış', (v) => N(v, 1), 4);
@@ -227,4 +247,75 @@
   dash.draw('t-takvim-bos', (el) => { el.className = ''; el.textContent = rows('takvim').length ? '' : 'Bu iki hafta için Türkiye verisi yok.'; if (!rows('takvim').length) el.className = 'tt-empty'; });
   dash.draw('t-global', (tb) => { tb.replaceChildren(); rows('cal_global').slice().sort((a, b) => String(a.time) < String(b.time) ? -1 : 1).forEach((r) => { const tr = tb.insertRow(); cell(tr, when(r), 'hi'); cell(tr, r.country, 'cy'); cell(tr, r.event); cell(tr, r.previous == null ? '' : String(r.previous), 'r'); }); });
   dash.draw('t-global-bos', (el) => { el.className = ''; el.textContent = rows('cal_global').length ? '' : 'Kaynak bu hafta için küresel yüksek önemli veri döndürmedi.'; if (!rows('cal_global').length) el.className = 'tt-empty'; });
+
+  // ---- new panels ----
+  dash.draw('alerts', (el) => {
+    el.replaceChildren();
+    const a = rows('uyarilar');
+    if (!a.length) { const p = document.createElement('div'); p.className = 'tt-empty'; p.style.border = 'none'; p.textContent = 'Aktif uyarı yok.'; el.appendChild(p); return; }
+    a.forEach((r, i) => {
+      const d = document.createElement('div'); d.className = r.seviye;
+      const lv = document.createElement('span'); lv.className = 'lv ' + (r.seviye === 'yüksek' ? 'dn' : r.seviye === 'orta' ? 'am' : 'cy'); lv.textContent = r.seviye;
+      const k = document.createElement('b'); k.className = 'am'; k.textContent = r.konu;
+      const m = document.createElement('span'); m.textContent = r.mesaj;
+      d.append(lv, k, m);
+      if (TT.anim && TT.motion()) { d.style.opacity = 0; d.style.transform = 'translateX(-8px)'; d.style.transition = 'opacity .35s ease, transform .35s ease'; setTimeout(() => { d.style.opacity = 1; d.style.transform = 'none'; }, 80 + i * 70); }
+      el.appendChild(d);
+    });
+  });
+  dash.draw('ch-perf', (el) => {
+    const p = rows('perf');
+    if (!p.length) return fail(el, 'Veri yok.');
+    const names = Array.from(new Set(p.map((r) => r.seri)));
+    TT.chart(el, names.map((n, i) => ({ name: n, color: [C[1], C[6], C[0]][i % 3], values: p.filter((r) => r.seri === n).map((r) => ({ x: TT.parseD(r.tarih), y: r.endeks })) })), { height: 236, refs: [{ y: 100, label: '100' }], yFmt: (v) => N(v, 0), tipFmt: (v) => N(v, 1) });
+  });
+  dash.draw('t-ppk', (tb) => {
+    tb.replaceChildren();
+    rows('ppk_takvim').forEach((r) => {
+      const tr = tb.insertRow(); cell(tr, TT.dt(r.tarih), 'hi'); cell(tr, N(r.gun, 0), 'r'); cell(tr, r.ima_on == null ? 'veri yok' : TT.pct(r.ima_on), 'r' + (r.ima_on == null ? ' mu' : ''));
+      tone(cell(tr, r.fark_bp == null ? '—' : TT.bp(r.fark_bp) + ' bp', 'r'), r.fark_bp == null ? null : -r.fark_bp);
+      cell(tr, r.anket == null ? '—' : TT.pct(r.anket), 'r');
+    });
+  });
+  dash.draw('ch-ppk-bar', (el) => {
+    const r = rows('ppk_takvim').filter((x) => x.fark_bp != null);
+    if (!r.length) return fail(el, 'Bono verisi PPK tarihlerini kapsamıyor.');
+    TT.bars(el, r.map((x) => ({ x: TT.parseD(x.tarih), y: x.fark_bp / 100 })), { height: 130, label: 'AOFM\'ye göre ima edilen fark (puan)', color: C[1] });
+  });
+  dash.draw('ch-candle', (el) => {
+    const r = rows('xu100_daily').filter((x) => typeof x.close === 'number');
+    if (!r.length) return fail(el, 'Günlük veri yok.');
+    const t = rows('teknik_tablo').find((x) => x.symbol === 'XU100');
+    const refs = []; if (t && t.sma20) refs.push({ y: t.sma20, label: 'SMA20 ' + N(t.sma20, 0), color: C[1] }); if (t && t.ema50) refs.push({ y: t.ema50, label: 'EMA50 ' + N(t.ema50, 0), color: C[3] });
+    TT.candles(el, r.map((x) => ({ x: TT.parseD(x.date), o: x.open, h: x.high, l: x.low, c: x.close, v: x.volume })), { height: 320, refs });
+  });
+  dash.draw('gauges', (el) => {
+    el.replaceChildren();
+    rows('teknik_tablo').filter((r) => r.rsi != null).forEach((r) => { const d = document.createElement('div'); el.appendChild(d); TT.gauge(d, r.rsi, { label: r.symbol + ' RSI' }); });
+  });
+  dash.draw('t-teknik', (tb) => {
+    tb.replaceChildren();
+    rows('teknik_tablo').forEach((r) => {
+      const tr = tb.insertRow(); cell(tr, r.symbol, 'hi'); cell(tr, N(r.son, 2), 'r');
+      const td = tr.insertCell(); const s = document.createElement('span'); s.className = 'rsi'; const i = document.createElement('i'); i.style.left = Math.max(0, Math.min(100, r.rsi || 0)) + '%'; s.appendChild(i); td.appendChild(s);
+      const rc = cell(tr, N(r.rsi, 1), 'r'); if (r.rsi < 30) rc.className = 'r up'; else if (r.rsi > 70) rc.className = 'r dn';
+      tone(cell(tr, P(r.vs_sma20), 'r'), r.vs_sma20); tone(cell(tr, P(r.vs_ema50), 'r'), r.vs_ema50); tone(cell(tr, N(r.macd_h, 2), 'r'), r.macd_h);
+      cell(tr, (r.macd_sinyal || '') + (r.trend ? ' · trend ' + r.trend : ''), 'mu');
+    });
+  });
+  dash.draw('ch-gainers', (el) => {
+    d3.select(el).selectAll('*').remove();
+    const g = rows('gainers').filter((r) => typeof r.change === 'number').sort((a, b) => b.change - a.change).slice(0, 12);
+    if (!g.length) return fail(el, 'Tarama sonuç vermedi.');
+    const W = Math.max(280, el.clientWidth), bh = 18, H = g.length * (bh + 4) + 10, ml = 64, mr = 70;
+    const x = d3.scaleLinear().domain([0, d3.max(g, (r) => r.change)]).range([0, W - ml - mr]);
+    const svg = d3.select(el).append('svg').attr('width', W).attr('height', H).attr('role', 'img').attr('aria-label', 'Günün en çok yükselen hisseleri');
+    const row = svg.selectAll('g').data(g).join('g').attr('transform', (r, i) => `translate(0,${i * (bh + 4) + 4})`);
+    row.append('text').attr('x', 0).attr('y', bh - 5).style('fill', '#ffa028').style('font-size', '11px').text((r) => r.symbol);
+    const bar = row.append('rect').attr('x', ml).attr('height', bh).style('fill', '#22d160').attr('width', (r) => TT.anim && TT.motion() ? 0 : x(r.change));
+    const lab = row.append('text').attr('y', bh - 5).style('fill', '#e8e8e8').style('font-size', '11px').attr('x', (r) => ml + x(r.change) + 6).text((r) => '+%' + N(r.change, 2) + '  ' + N(r.close, 2));
+    if (TT.anim && TT.motion()) { bar.transition().delay((r, i) => i * 60).duration(700).ease(d3.easeCubicOut).attr('width', (r) => x(r.change)); lab.style('opacity', 0).transition().delay((r, i) => 300 + i * 60).duration(400).style('opacity', 1); }
+  });
+  dash.draw('t-losers', (tb) => { tb.replaceChildren(); rows('losers').filter((r) => typeof r.change === 'number').sort((a, b) => a.change - b.change).forEach((r) => { const tr = tb.insertRow(); cell(tr, r.symbol, 'hi'); cell(tr, N(r.close, 2), 'r'); tone(cell(tr, P(r.change), 'r'), r.change); cell(tr, N(r.volume / 1e6, 1), 'r mu'); }); });
+  dash.draw('t-losers-bos', (el) => { const n = rows('losers').length; el.className = n ? '' : 'tt-empty'; el.textContent = n ? '' : 'Bugün %3 üzeri düşen XU100 hissesi yok.'; });
 })();
