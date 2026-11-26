@@ -1,0 +1,17 @@
+## metadata
+window: 2026-10-26 .. 2026-11-26
+base_currency: TRY
+## comparison
+```tsv
+asset	market	currency	price_basis	start_date	end_date	start_price	end_price	return_try	return_usd
+GARAN	bist	TRY	last	2026-10-26	2026-11-26	128.8	140.1	0.0877	0.0687
+ENKAI	bist	TRY	last	2026-10-26	2026-11-26	75.45	76.55	0.0146	-0.0032
+EKGYO	bist	TRY	last	2026-10-26	2026-11-26	16.84	16.66	-0.0107	-0.028
+FROTO	bist	TRY	last	2026-10-26	2026-11-26	67.95	65.8	-0.0316	-0.0486
+BIMAS	bist	TRY	last	2026-10-26	2026-11-26	374.5	360	-0.0387	-0.0555
+EREGL	bist	TRY	last	2026-10-26	2026-11-26	30.86	29.58	-0.0415	-0.0582
+AEFES	bist	TRY	last	2026-10-26	2026-11-26	15.81	15.04	-0.0487	-0.0653
+ASELS	bist	TRY	last	2026-10-26	2026-11-26	335	315	-0.0597	-0.0762
+AKBNK	bist	TRY	last	2026-10-26	2026-11-26	65	60.65	-0.0669	-0.0832
+ASTOR	bist	TRY	last	2026-10-26	2026-11-26	156.8	146.3	-0.067	-0.0833
+```

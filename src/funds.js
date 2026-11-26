@@ -128,6 +128,8 @@
     });
   };
 
+  window.TT.hbars = hbars;
+
   // KPIs
   kv('fu-k-spy', () => { const r = E('SPY'); return r && { text: N(r.px, 2) }; });
   kv('fu-k-spy-c', () => { const r = E('SPY'); return r && { text: PC(r.u_1m) + ' 1M · ' + PC(r.u_ytd) + ' YTD', tone: r.u_1m }; });

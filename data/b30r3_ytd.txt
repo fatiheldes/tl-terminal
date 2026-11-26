@@ -1,0 +1,17 @@
+## metadata
+window: 2025-12-31 .. 2026-11-26
+base_currency: TRY
+## comparison
+```tsv
+asset	market	currency	price_basis	start_date	end_date	start_price	end_price	return_try	return_usd
+TUPRS	bist	TRY	last	2025-12-31	2026-11-26	184.4	323.25	0.753	0.4861
+THYAO	bist	TRY	last	2025-12-31	2026-11-26	268.5	309.75	0.1536	-0.022
+VAKBN	bist	TRY	last	2025-12-31	2026-11-26	30.68	31.58	0.0293	-0.1274
+TOASO	bist	TRY	last	2025-12-31	2026-11-26	247	244.8	-0.0089	-0.1598
+TAVHL	bist	TRY	last	2025-12-31	2026-11-26	298.25	281	-0.0578	-0.2013
+TCELL	bist	TRY	last	2025-12-31	2026-11-26	93.1	86.55	-0.0704	-0.2119
+TRMET	bist	TRY	last	2025-12-31	2026-11-26	104.4	96.8	-0.0728	-0.214
+YKBNK	bist	TRY	last	2025-12-31	2026-11-26	36.22	33.52	-0.0745	-0.2154
+TRALT	bist	TRY	last	2025-12-31	2026-11-26	40.98	33.02	-0.1942	-0.3169
+TTKOM	bist	TRY	last	2025-12-31	2026-11-26	57.5	44.76	-0.2216	-0.3401
+```

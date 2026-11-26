@@ -192,8 +192,35 @@ ul.soon li::marker { color: var(--am); }
   </section>
   <!-- 1 EQUITIES -->
   <section class="page" id="equity" hidden>
-<div class="fnbar" role="tablist"><button data-fn="EQS" aria-selected="true"><b>EQS</b>Stocks · valuation</button><button data-fn="TECH" aria-selected="false"><b>TECH</b>Technicals</button></div>
-<div class="fsub" data-fn="EQS">
+<div class="kv">
+      <div><div class="l">S&amp;P 500</div><div class="v" data-draw="eq-k-spx">—</div><div class="c" data-draw="eq-k-spx-c">—</div></div>
+      <div><div class="l">EURO STOXX 50</div><div class="v" data-draw="eq-k-sx5e">—</div><div class="c" data-draw="eq-k-sx5e-c">—</div></div>
+      <div><div class="l">NIKKEI 225</div><div class="v" data-draw="eq-k-nky">—</div><div class="c" data-draw="eq-k-nky-c">—</div></div>
+      <div><div class="l">BIST 100</div><div class="v" data-draw="eq-k-xu100">—</div><div class="c" data-draw="eq-k-xu100-c">—</div></div>
+      <div><div class="l">BIST 30 MARKET CAP</div><div class="v" data-draw="eq-k-b30">—</div><div class="c" data-draw="eq-k-b30-c">—</div></div>
+      <div><div class="l">BIST 30 BREADTH</div><div class="v" data-draw="eq-k-br">—</div><div class="c" data-draw="eq-k-br-c">—</div></div>
+    </div>
+<div class="fnbar" role="tablist" style="margin-top:4px"><button data-fn="WEI" aria-selected="true"><b>WEI</b>World equity indices</button><button data-fn="IMAP" aria-selected="false"><b>IMAP</b>BIST 30 market map</button><button data-fn="BSEC" aria-selected="false"><b>BSEC</b>BIST sectors</button><button data-fn="EQS" aria-selected="false"><b>EQS</b>Stocks · valuation</button><button data-fn="TECH" aria-selected="false"><b>TECH</b>Technicals</button></div>
+<div class="fsub" data-fn="WEI">
+<div style="margin-top:4px"><div class="pn"><h2><span class="n">WEI 1</span>World equity indices<span class="s">24 benchmarks · price returns in local currency</span></h2><div class="bd"><div class="tw"><table class="tb sticky"><thead><tr><th>Index</th><th>Market</th><th class="r">Last</th><th>Ccy</th><th class="r">1W</th><th class="r">1M</th><th class="r">YTD</th><th class="r">1Y</th><th>52W range</th><th class="r">From high</th></tr></thead><tbody data-draw="wei-table"></tbody></table></div>
+<p class="note">Index levels from Yahoo Finance via Borsa. Returns are in each index's own currency (not converted to USD) and exclude dividends; windows end at the last close and start at the first session on or after the start date, so holidays shift a few start dates. BIST 100 is shown in TRY.</p></div></div></div>
+<div style="margin-top:4px"><div class="pn"><h2><span class="n">WEI 2</span>Ranking<span class="s">local-currency price return</span></h2><div class="bd"><div class="seg" style="margin-bottom:4px"><button data-weip="1w" aria-pressed="false">1W</button><button data-weip="1m" aria-pressed="false">1M</button><button data-weip="ytd" aria-pressed="true">YTD</button><button data-weip="1y" aria-pressed="false">1Y</button></div><div data-draw="wei-bars" aria-label="World index ranking"></div></div></div></div>
+</div>
+<div class="fsub" data-fn="IMAP" hidden>
+<div style="margin-top:4px"><div class="pn"><h2><span class="n">IMAP 1</span>BIST 30 market map<span class="s">tile size = market cap · colour = price return · grouped by sector</span></h2><div class="bd"><div class="seg" style="margin-bottom:4px"><button data-imp="1w" aria-pressed="false">1W</button><button data-imp="1m" aria-pressed="true">1M</button><button data-imp="ytd" aria-pressed="false">YTD</button></div><div data-draw="im-map" style="min-height:420px" aria-label="BIST 30 market map"></div></div></div></div>
+<div class="g w2" style="margin-top:4px">
+<div class="pn"><h2><span class="n">IMAP 2</span>Sector returns<span class="s">market-cap weighted, BIST 30 members</span></h2><div class="bd"><div data-draw="im-sec" aria-label="Sector returns"></div></div></div>
+<div class="pn"><h2><span class="n">IMAP 3</span>Valuation map<span class="s">P/E vs P/B · bubble = market cap</span></h2><div class="bd"><div data-draw="im-val" style="min-height:300px" aria-label="P/E vs P/B"></div><p class="note">Trailing multiples as reported by the source; negative or missing earnings and P/E above 60× are left out.</p></div></div>
+</div>
+<div style="margin-top:4px"><div class="pn"><h2><span class="n">IMAP 4</span>BIST 30 constituents<span class="s">price returns in TRY · multiples · weight in BIST 30 market cap</span></h2><div class="bd"><div class="tw"><table class="tb sticky"><thead><tr><th>Stock</th><th>Sector</th><th class="r">Last</th><th class="r">1W</th><th class="r">1M</th><th class="r">YTD</th><th class="r">P/E</th><th class="r">P/B</th><th class="r">Div. yld</th><th class="r">Mkt cap bn</th><th class="r">Weight</th><th>52W range</th><th class="r">From high</th></tr></thead><tbody data-draw="im-table"></tbody></table></div><p class="note">Weights are each stock's share of the 30 members' total market cap, not the official free-float index weights. Returns exclude dividends, so high payers (e.g. FROTO, TOASO) look weaker than their total return.</p></div></div></div>
+</div>
+<div class="fsub" data-fn="BSEC" hidden>
+<div class="g w2" style="margin-top:4px">
+<div class="pn"><h2><span class="n">BSEC 1</span>BIST sector indices<span class="s">price return · dashed line: BIST 100</span></h2><div class="bd"><div class="seg" style="margin-bottom:4px"><button data-bsp="1w" aria-pressed="false">1W</button><button data-bsp="1m" aria-pressed="true">1M</button><button data-bsp="ytd" aria-pressed="false">YTD</button></div><div data-draw="bs-bars" aria-label="Sector index returns"></div></div></div>
+<div class="pn"><h2><span class="n">BSEC 2</span>Relative performance<span class="s">vs BIST 100 · sorted by YTD relative</span></h2><div class="bd"><div class="tw"><table class="tb sticky"><thead><tr><th>Index</th><th>Sector</th><th class="r">Last</th><th class="r">1W</th><th class="r">1M</th><th class="r">YTD</th><th class="r">Rel 1W</th><th class="r">Rel 1M</th><th class="r">Rel YTD</th><th>52W range</th><th class="r">From high</th></tr></thead><tbody data-draw="bs-table"></tbody></table></div><p class="note">Sector index closes from TradingView and Yahoo Finance via Borsa. Relative = (1 + sector return) ÷ (1 + BIST 100 return) − 1. The leasing &amp; factoring index (XFINK) is left out because its history in the source shows a structural break.</p></div></div>
+</div>
+</div>
+<div class="fsub" data-fn="EQS" hidden>
 
     <div class="pn"><h2><span class="n">5.1</span>Selected BIST stocks<span class="s">1-day and 5-day change · multiples</span></h2>
       <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Stock</th><th class="r">Last</th><th class="r">1D %</th><th class="r">5D %</th><th class="r">P/E</th><th class="r">P/B</th><th class="r">Div. yld %</th><th class="r">Mkt cap (TRY bn)</th><th class="r">52W low</th><th>52W range</th><th class="r">52W high</th><th class="r">Volume (mn)</th></tr></thead><tbody data-draw="t-bist"></tbody></table></div></div></div>
@@ -507,8 +534,51 @@ ul.soon li::marker { color: var(--am); }
   </section>
   <!-- 7 ECONOMICS -->
   <section class="page" id="eco" hidden>
-<div class="fnbar" role="tablist"><button data-fn="ECO" aria-selected="true"><b>ECO</b>Türkiye macro</button><button data-fn="CB" aria-selected="false"><b>CB</b>Central banks · global</button><button data-fn="CAL" aria-selected="false"><b>CAL</b>Calendar</button></div>
-<div class="fsub" data-fn="ECO">
+<div class="kv">
+      <div><div class="l">CPI Y/Y</div><div class="v" data-draw="ec-k-cpi">—</div><div class="c" data-draw="ec-k-cpi-c">—</div></div>
+      <div><div class="l">CORE C Y/Y</div><div class="v" data-draw="ec-k-core">—</div><div class="c" data-draw="ec-k-core-c">—</div></div>
+      <div><div class="l">GDP Y/Y</div><div class="v" data-draw="ec-k-gdp">—</div><div class="c" data-draw="ec-k-gdp-c">—</div></div>
+      <div><div class="l">INDUSTRIAL PROD.</div><div class="v" data-draw="ec-k-ip">—</div><div class="c" data-draw="ec-k-ip-c">—</div></div>
+      <div><div class="l">UNEMPLOYMENT</div><div class="v" data-draw="ec-k-un">—</div><div class="c" data-draw="ec-k-un-c">—</div></div>
+      <div><div class="l">CURRENT ACCOUNT</div><div class="v" data-draw="ec-k-ca">—</div><div class="c" data-draw="ec-k-ca-c">—</div></div>
+      <div><div class="l">BUDGET BALANCE</div><div class="v" data-draw="ec-k-bud">—</div><div class="c" data-draw="ec-k-bud-c">—</div></div>
+    </div>
+<div class="fnbar" role="tablist" style="margin-top:4px"><button data-fn="ECST" aria-selected="true"><b>ECST</b>Türkiye scorecard</button><button data-fn="INFL" aria-selected="false"><b>INFL</b>Inflation</button><button data-fn="GDP" aria-selected="false"><b>GDP</b>Growth</button><button data-fn="ACT" aria-selected="false"><b>ACT</b>Activity · labour</button><button data-fn="BOP" aria-selected="false"><b>BOP</b>External · fiscal</button><button data-fn="ECO" aria-selected="false"><b>ECO</b>Expectations · reserves</button><button data-fn="CB" aria-selected="false"><b>CB</b>Central banks · global</button><button data-fn="CAL" aria-selected="false"><b>CAL</b>Calendar</button></div>
+<div class="fsub" data-fn="ECST">
+<div style="margin-top:4px"><div class="pn"><h2><span class="n">ECST</span>Türkiye economic scorecard<span class="s">latest print · previous · a year earlier · 2-year trend</span></h2><div class="bd"><div class="tw"><table class="tb sticky"><thead><tr><th>Indicator</th><th class="r">Latest</th><th class="r">Previous</th><th class="r">Year ago</th><th class="r">Change</th><th>Period</th><th>Trend</th></tr></thead><tbody data-draw="ec-score"></tbody></table></div>
+<p class="note">CBRT EVDS series (TÜİK, CBRT and Treasury data). Change is latest minus previous; green means a move in the favourable direction. GDP previous and year-ago are one and four quarters back. Current account as % of GDP uses the IMF estimate of annual dollar GDP. "s.a." = seasonally adjusted.</p></div></div></div>
+</div>
+<div class="fsub" data-fn="INFL" hidden>
+<div class="g w2" style="margin-top:4px">
+<div class="pn"><h2><span class="n">INFL 1</span>Headline, core and producer prices<span class="s">y/y %</span></h2><div class="bd"><div class="tt-chart" data-draw="in-main" aria-label="CPI and core"></div></div></div>
+<div class="pn"><h2><span class="n">INFL 2</span>By component<span class="s">y/y % · services, rent, goods, food, energy</span></h2><div class="bd"><div class="tt-chart" data-draw="in-groups" aria-label="CPI components"></div></div></div>
+<div class="pn"><h2><span class="n">INFL 3</span>Monthly inflation<span class="s">headline CPI, m/m % (not seasonally adjusted)</span></h2><div class="bd"><div class="tt-chart" data-draw="in-mom" aria-label="CPI monthly"></div><p class="note" data-draw="in-asof">—</p></div></div>
+<div class="pn"><h2><span class="n">INFL 4</span>House prices<span class="s">CBRT residential property price index · y/y %</span></h2><div class="bd"><div class="tt-chart" data-draw="in-house" aria-label="House prices"></div></div></div>
+</div>
+<div style="margin-top:4px"><div class="pn"><h2><span class="n">INFL 5</span>Inflation table<span class="s">y/y % · latest vs previous month, 6 and 12 months ago</span></h2><div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Measure</th><th class="r">Latest</th><th class="r">Previous</th><th class="r">Change pp</th><th class="r">6M ago</th><th class="r">12M ago</th><th>2-year trend</th></tr></thead><tbody data-draw="in-table"></tbody></table></div><p class="note">CPI on the 2025 = 100 base (TÜİK). Core B excludes unprocessed food, energy, alcohol, tobacco and gold; core C also excludes all food and non-alcoholic beverages. Real house prices deflate the CBRT index by headline CPI.</p></div></div></div>
+</div>
+<div class="fsub" data-fn="GDP" hidden>
+<div class="g w2" style="margin-top:4px">
+<div class="pn"><h2><span class="n">GDP 1</span>Quarterly growth<span class="s">q/q %, seasonally and calendar adjusted chained volume</span></h2><div class="bd"><div class="tt-chart" data-draw="gd-qq" aria-label="GDP q/q"></div></div></div>
+<div class="pn"><h2><span class="n">GDP 2</span>Annual growth by expenditure<span class="s">y/y % of the adjusted volume index</span></h2><div class="bd"><div class="tt-chart" data-draw="gd-yy" aria-label="GDP y/y by component"></div></div></div>
+</div>
+<div style="margin-top:4px"><div class="pn"><h2><span class="n">GDP 3</span>Expenditure breakdown<span class="s">last six quarters</span></h2><div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Component</th></tr></thead><tbody data-draw="gd-table"></tbody></table></div><p class="note">TÜİK GDP by expenditure, chained volume index (2009 = 100), seasonally and calendar adjusted, via EVDS. Annual rates here are on the adjusted series, so they can differ slightly from the unadjusted headline TÜİK publishes.</p></div></div></div>
+</div>
+<div class="fsub" data-fn="ACT" hidden>
+<div class="g w2" style="margin-top:4px">
+<div class="pn"><h2><span class="n">ACT 1</span>Industrial production<span class="s">y/y % of the seasonally and calendar adjusted index</span></h2><div class="bd"><div class="tt-chart" data-draw="ac-ip" aria-label="Industrial production"></div></div></div>
+<div class="pn"><h2><span class="n">ACT 2</span>Confidence<span class="s">CBRT real sector (s.a.) and TÜİK/CBRT consumer confidence</span></h2><div class="bd"><div class="tt-chart" data-draw="ac-conf" aria-label="Confidence indices"></div></div></div>
+<div class="pn"><h2><span class="n">ACT 3</span>Capacity utilisation<span class="s">manufacturing, % (s.a.)</span></h2><div class="bd"><div class="tt-chart" data-draw="ac-kko" aria-label="Capacity utilisation"></div></div></div>
+<div class="pn"><h2><span class="n">ACT 4</span>Labour market<span class="s">TÜİK household labour force survey, s.a.</span></h2><div class="bd"><div class="tt-chart" data-draw="ac-lab" aria-label="Labour market"></div></div></div>
+</div>
+</div>
+<div class="fsub" data-fn="BOP" hidden>
+<div class="g w2" style="margin-top:4px">
+<div class="pn"><h2><span class="n">BOP 1</span>Current account<span class="s">12-month rolling sum, $bn</span></h2><div class="bd"><div class="tt-chart" data-draw="bp-ca" aria-label="Current account"></div><div class="tt-chart sm" style="margin-top:6px" data-draw="bp-cam" aria-label="Monthly current account"></div><p class="note">CBRT balance of payments. Core = excluding non-monetary gold and energy (chapter 27) trade.</p></div></div>
+<div class="pn"><h2><span class="n">BOP 2</span>Central government budget<span class="s">12-month rolling sum, TRY tn</span></h2><div class="bd"><div class="tt-chart" data-draw="fs-bal" aria-label="Budget balance"></div><div class="tt-chart sm" style="margin-top:6px" data-draw="fs-g" aria-label="Revenue and spending growth"></div><p class="note">Treasury and Finance Ministry general budget via EVDS. Primary balance excludes interest; growth rates compare the latest 12 months with the 12 months before.</p></div></div>
+</div>
+</div>
+<div class="fsub" data-fn="ECO" hidden>
 
     <div class="kv">
       <div><div class="l">CPI Y/Y</div><div class="v" data-draw="k-tufe">—</div><div class="c" data-draw="k-tufe-ay">—</div></div>
