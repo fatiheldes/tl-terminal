@@ -1,0 +1,14 @@
+## data
+```tsv
+symbol	name	market	currency	current_price	volume	week_52_high	week_52_low	avg_volume
+CLF27.NYM	Crude Oil Jan 27	us	USD	84.64	62869	103.01	55.81	127261
+CLG27.NYM	Crude Oil Feb 27	us	USD	83.01	26237	100.72	55.89	64974
+CLH27.NYM	Crude Oil Mar 27	us	USD	81.37	18186	98.21	55.95	58184
+CLJ27.NYM	Crude Oil Apr 27	us	USD	79.81	9504	95.81	56.04	27478
+CLK27.NYM	Crude Oil May 27	us	USD	78.51	7612	93.6	56.16	22093
+CLM27.NYM	Crude Oil Jun 27	us	USD	77.3	9907	91.64	56.25	48670
+CLU27.NYM	Crude Oil Sep 27	us	USD	74.32	2131	86.38	56.59	12298
+CLZ27.NYM	Crude Oil Dec 27	us	USD	71.93	5831	82.51	56.96	42365
+CLM28.NYM	Crude Oil Jun 28	us	USD	69.08	693	78.06	57.83	8144
+CLZ28.NYM	Crude Oil Dec 28	us	USD	67.6	2404	75.49	58.26	13606
+```

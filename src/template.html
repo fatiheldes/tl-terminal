@@ -374,12 +374,50 @@ ul.soon li::marker { color: var(--am); }
   </section>
   <!-- 4 COMMODITIES -->
   <section class="page" id="cmdty" hidden>
-<div class="g w2" style="margin-top:4px">
-<div class="pn"><h2><span class="n">1.2</span>Commodities · Crypto<span class="s">gold oz derived from gram price</span></h2>
-        <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Asset</th><th class="r">Last</th><th class="r">Unit</th></tr></thead><tbody data-draw="t-emtia"></tbody></table></div></div></div>
-<div class="pn"><h2><span class="n">1.8</span>Gold (gram)<span class="s">TRY · 3 months</span></h2><div class="bd"><div class="tt-chart sm" data-draw="ch-gold" aria-label="Gold per gram"></div></div></div>
+<div class="kv">
+      <div><div class="l">BRENT ($/bbl)</div><div class="v" data-draw="cm-k-bz">—</div><div class="c" data-draw="cm-k-bz-c">—</div></div>
+      <div><div class="l">WTI ($/bbl)</div><div class="v" data-draw="cm-k-cl">—</div><div class="c" data-draw="cm-k-cl-c">—</div></div>
+      <div><div class="l">HENRY HUB ($/MMBtu)</div><div class="v" data-draw="cm-k-ng">—</div><div class="c" data-draw="cm-k-ng-c">—</div></div>
+      <div><div class="l">GOLD ($/oz)</div><div class="v" data-draw="cm-k-gc">—</div><div class="c" data-draw="cm-k-gc-c">—</div></div>
+      <div><div class="l">SILVER ($/oz)</div><div class="v" data-draw="cm-k-si">—</div><div class="c" data-draw="cm-k-si-c">—</div></div>
+      <div><div class="l">COPPER ($/lb)</div><div class="v" data-draw="cm-k-hg">—</div><div class="c" data-draw="cm-k-hg-c">—</div></div>
+      <div><div class="l">GRAM GOLD (TRY)</div><div class="v" data-draw="cm-k-gt">—</div><div class="c" data-draw="cm-k-gt-c">—</div></div>
+    </div>
+<div class="fnbar" role="tablist" style="margin-top:4px"><button data-fn="GLCO" aria-selected="true"><b>GLCO</b>Commodity monitor</button><button data-fn="ENGY" aria-selected="false"><b>ENGY</b>Energy · curves · spreads</button><button data-fn="METL" aria-selected="false"><b>METL</b>Metals · gold in TRY</button><button data-fn="AGRI" aria-selected="false"><b>AGRI</b>Agriculture · livestock</button></div>
+<div class="fsub" data-fn="GLCO">
+<div style="margin-top:4px"><div class="pn"><h2><span class="n">GLCO 1</span>Performance heatmap<span class="s">front-month futures · change over the period</span></h2><div class="bd"><div class="seg" style="margin-bottom:4px"><button data-cmper="w1" aria-pressed="false">1W</button><button data-cmper="m1" aria-pressed="true">1M</button><button data-cmper="m3" aria-pressed="false">3M</button><button data-cmper="m6" aria-pressed="false">6M</button></div><div data-draw="cm-heat" style="min-height:240px" aria-label="Commodity performance heatmap"></div></div></div></div>
+<div style="margin-top:4px"><div class="pn"><h2><span class="n">GLCO 2</span>Commodity monitor<span class="s">CME / ICE front month · weekly closes for changes and volatility</span></h2><div class="bd"><div class="seg" style="margin-bottom:4px;flex-wrap:wrap"><button data-cmg="ALL" aria-pressed="true">All</button><button data-cmg="Energy" aria-pressed="false">Energy</button><button data-cmg="Precious metals" aria-pressed="false">Precious</button><button data-cmg="Industrial metals" aria-pressed="false">Industrial</button><button data-cmg="Agriculture" aria-pressed="false">Agriculture</button></div>
+<div class="tw"><table class="tb sticky"><thead><tr><th>Commodity</th><th>Ticker</th><th class="r">Last</th><th>Unit</th><th class="r">1W</th><th class="r">1M</th><th class="r">3M</th><th class="r">6M</th><th>6M trend</th><th>52W range</th><th class="r">Vol</th></tr></thead><tbody data-draw="cm-table"></tbody></table></div>
+<p class="note">Front-month futures from Yahoo Finance via Borsa (delayed). Changes and the 6-month trend use weekly closes; Vol is the annualised standard deviation of weekly log returns over 6 months. The dot in the 52-week range marks the last price between the 52-week low and high. Front contracts roll, so a change can include a roll gap.</p></div></div></div>
 </div>
-<div style="margin-top:4px"><div class="pn"><h2><span class="n">CMDTY</span>Commodities<span class="s">in progress</span></h2><div class="bd"><p class="soon">This area is being built. Planned functions:</p><ul class="soon"><li>Energy: WTI, Brent, natural gas futures curves</li><li>Metals: gold, silver, copper, platinum; gold in TRY</li><li>Agriculture: wheat, corn, soybeans, sugar, coffee</li><li>Performance heatmap and ratios (gold/silver, oil/gas)</li></ul></div></div></div>
+<div class="fsub" data-fn="ENGY" hidden>
+<div class="g w2" style="margin-top:4px">
+<div class="pn"><h2><span class="n">ENGY 1</span>Crude oil futures curves<span class="s">WTI (NYMEX) and Brent (last-day financial) · $/bbl</span></h2><div class="bd"><div class="tt-chart" data-draw="cm-oil-curve" aria-label="Crude oil futures curves"></div></div></div>
+<div class="pn"><h2><span class="n">ENGY 2</span>Curve shape<span class="s">front contract vs next and ~12 months out</span></h2><div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Curve</th><th class="r">Front</th><th class="r">M1−M2</th><th class="r">M1−12M</th><th>Shape</th><th class="r">Roll yield p.a.</th></tr></thead><tbody data-draw="cm-curve-stats"></tbody></table></div>
+<div class="tt-chart sm" style="margin-top:6px" data-draw="cm-gas-curve" aria-label="Henry Hub futures curve"></div>
+<p class="note">Backwardation = the front contract trades above later ones, so a long position earns a positive roll. Roll yield p.a. = (front ÷ 12-month contract − 1), annualised. Natural gas has a winter seasonal hump, so its 12-month spread mixes seasonality with curve slope.</p></div></div>
+<div class="pn"><h2><span class="n">ENGY 3</span>Refining margin &amp; Brent−WTI<span class="s">weekly · front month</span></h2><div class="bd"><div class="tt-chart" data-draw="cm-crack" aria-label="Crack spread and Brent-WTI"></div><p class="note">3-2-1 crack = (2 × RBOB + 1 × heating oil − 3 × WTI) ÷ 3, with gasoline and heating oil converted from $/gal at 42 gal/bbl. The Brent front month expires about a month earlier than WTI, so the two fronts are usually one delivery month apart.</p></div></div>
+<div class="pn"><h2><span class="n">ENGY 4</span>Gas: Europe vs US<span class="s">Dutch TTF and Henry Hub · $/MMBtu</span></h2><div class="bd"><div class="tt-chart" data-draw="cm-gas" aria-label="TTF vs Henry Hub"></div><p class="note">TTF converted from €/MWh with the weekly EUR/USD close and 3.412 MMBtu per MWh.</p></div></div>
+</div>
+<div style="margin-top:4px"><div class="pn"><h2><span class="n">ENGY 5</span>Energy complex rebased<span class="s">6 months ago = 100 · weekly · front month</span></h2><div class="bd"><div class="tt-chart" data-draw="cm-rb-engy" aria-label="Energy rebased"></div></div></div></div>
+</div>
+<div class="fsub" data-fn="METL" hidden>
+<div class="g w2" style="margin-top:4px">
+<div class="pn"><h2><span class="n">METL 1</span>Gold in Turkish lira<span class="s">gram gold, TRY · daily</span></h2><div class="bd"><div class="tt-chart" data-draw="cm-goldtry" aria-label="Gram gold in TRY"></div></div></div>
+<div class="pn"><h2><span class="n">METL 2</span>Gram gold arithmetic<span class="s">market price vs COMEX × USD/TRY</span></h2><div class="bd"><div class="tw"><table class="tb"><tbody data-draw="cm-goldtry-tbl"></tbody></table></div><p class="note">Implied gram = COMEX gold ($/oz) ÷ 31.1035 × USD/TRY (CBRT). The two prices are taken at different times of day, so a small gap is normal. The quarter-coin figure is gold content only, without the workmanship premium.</p></div></div>
+<div class="pn"><h2><span class="n">METL 3</span>Gold / silver ratio<span class="s">ounces of silver per ounce of gold</span></h2><div class="bd"><div class="tt-chart" data-draw="cm-gsr" aria-label="Gold silver ratio"></div></div></div>
+<div class="pn"><h2><span class="n">METL 4</span>Copper / gold ratio<span class="s">growth vs safety · copper $/lb ÷ gold $/oz × 1000</span></h2><div class="bd"><div class="tt-chart" data-draw="cm-cg" aria-label="Copper gold ratio"></div></div></div>
+<div class="pn"><h2><span class="n">METL 5</span>Platinum − palladium<span class="s">$/oz</span></h2><div class="bd"><div class="tt-chart" data-draw="cm-ptpd" aria-label="Platinum minus palladium"></div></div></div>
+<div class="pn"><h2><span class="n">METL 6</span>Metals rebased<span class="s">6 months ago = 100 · weekly</span></h2><div class="bd"><div class="tt-chart" data-draw="cm-rb-prec" aria-label="Metals rebased to 100"></div></div></div>
+</div>
+</div>
+<div class="fsub" data-fn="AGRI" hidden>
+<div style="margin-top:4px"><div class="pn"><h2><span class="n">AGRI 1</span>Agricultural returns<span class="s">front-month futures · 1W / 1M / 3M / 6M</span></h2><div class="bd"><div data-draw="cm-ag-bars" style="min-height:260px" aria-label="Agricultural commodity returns"></div><p class="note">Grains (CBOT), softs (ICE US) and live cattle (CME). Prices are in US cents unless the unit says otherwise; see the monitor for levels.</p></div></div></div>
+<div class="g w2" style="margin-top:4px">
+<div class="pn"><h2><span class="n">AGRI 2</span>Grains &amp; livestock rebased<span class="s">6 months ago = 100 · weekly</span></h2><div class="bd"><div class="tt-chart" data-draw="cm-rb-grain" aria-label="Grains rebased"></div></div></div>
+<div class="pn"><h2><span class="n">AGRI 3</span>Softs rebased<span class="s">6 months ago = 100 · weekly</span></h2><div class="bd"><div class="tt-chart" data-draw="cm-rb-soft" aria-label="Softs rebased"></div></div></div>
+</div>
+</div>
   </section>
   <!-- 5 DERIVATIVES -->
   <section class="page" id="deriv" hidden>

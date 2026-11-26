@@ -16,7 +16,7 @@ import pathlib
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent
-IDS = ['rates', 'bills', 'pka', 'reserves', 'fx', 'crypto', 'usd', 'gold_hist', 'xu100_hist', 'bist', 'bist_quotes', 'bist_hist', 'us_quotes', 'inflation', 'cal_this', 'cal_next', 'cal_global', 'tech', 'xu100_daily', 'gainers', 'losers', 'bonds', 'coupons1', 'coupons2', 'polrates1', 'polrates2', 'nonres', 'funding', 'frn', 'frn_coupons', 'gcpi', 'gca', 'ggdp1', 'ggdp2', 'gq1', 'gq2', 'gq3', 'us_yh', 'etf_h', 'etf_h2', 'wgb', 'cds', 'ratings', 'tr_ratings', 'news', 'futs1', 'futs2', 'struct', 'debt', 'ibs', 'mm_daily', 'mm_weekly', 'usmm', 'fxq1', 'fxq2', 'fxh1', 'fxh2', 'fxh3', 'reer', 'fxops']
+IDS = ['rates', 'bills', 'pka', 'reserves', 'fx', 'crypto', 'usd', 'gold_hist', 'xu100_hist', 'bist', 'bist_quotes', 'bist_hist', 'us_quotes', 'inflation', 'cal_this', 'cal_next', 'cal_global', 'tech', 'xu100_daily', 'gainers', 'losers', 'bonds', 'coupons1', 'coupons2', 'polrates1', 'polrates2', 'nonres', 'funding', 'frn', 'frn_coupons', 'gcpi', 'gca', 'ggdp1', 'ggdp2', 'gq1', 'gq2', 'gq3', 'us_yh', 'etf_h', 'etf_h2', 'wgb', 'cds', 'ratings', 'tr_ratings', 'news', 'futs1', 'futs2', 'struct', 'debt', 'ibs', 'mm_daily', 'mm_weekly', 'usmm', 'fxq1', 'fxq2', 'fxh1', 'fxh2', 'fxh3', 'reer', 'fxops', 'cmq1', 'cmq2', 'cmh1', 'cmh2', 'cmc_cl', 'cmc_bz', 'cmc_ng']
 
 
 def read(p):
@@ -64,6 +64,7 @@ def main():
 <script>{read('src/fi2.js')}</script>
 <script>{read('src/mm.js')}</script>
 <script>{read('src/fx.js')}</script>
+<script>{read('src/cmdty.js')}</script>
 <script>{read('src/nav.js')}</script>
 </body>
 </html>

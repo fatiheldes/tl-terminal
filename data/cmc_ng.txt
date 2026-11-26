@@ -1,0 +1,14 @@
+## data
+```tsv
+symbol	name	market	currency	current_price	volume	week_52_high	week_52_low	avg_volume
+NGF27.NYM	Natural Gas Jan 27	us	USD	3.618	18272	5.65	3.313	86102
+NGG27.NYM	Natural Gas Feb 27	us	USD	3.164	6906	5.009	2.988	34069
+NGH27.NYM	Natural Gas Mar 27	us	USD	2.411	3651	4.072	2.373	37617
+NGJ27.NYM	Natural Gas Apr 27	us	USD	2.385	2219	3.619	2.33	26732
+NGK27.NYM	Natural Gas May 27	us	USD	2.444	988	3.593	2.383	15862
+NGN27.NYM	Natural Gas Jul 27	us	USD	2.86	741	3.838	2.783	9591
+NGQ27.NYM	Natural Gas Aug 27	us	USD	2.953	631	3.877	2.868	5249
+NGV27.NYM	Natural Gas Oct 27	us	USD	3.023	661	3.92	2.934	13001
+NGX27.NYM	Natural Gas Nov 27	us	USD	3.307	276	4.087	3.229	5547
+NGF28.NYM	Natural Gas Jan 28	us	USD	4.379	313	5.218	4.27	4970
+```
