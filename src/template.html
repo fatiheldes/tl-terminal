@@ -1,157 +1,188 @@
 <style>
 html, body { margin: 0; background: #000; }
 #dash-root { min-height: 100vh; background: #000; }
-.bt { --bg: #000; --pn: #060606; --hd: #141414; --ln: #262626; --am: #ffa028; --tx: #e8e8e8; --mu: #8a8a8a; --up: #2ee66b; --dn: #ff4545; --cy: #3cc8f0;
-  background: var(--bg); color: var(--tx); font-family: "IBM Plex Mono", "JetBrains Mono", "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace; font-size: 12.5px; line-height: 1.35; padding: 6px; display: flex; flex-direction: column; gap: 6px; font-variant-numeric: tabular-nums; }
+.bt { --bg: #000; --pn: #050505; --hd: #121212; --ln: #242424; --am: #ffa028; --yl: #ffd23c; --tx: #e8e8e8; --mu: #8a8a8a; --up: #2ee66b; --dn: #ff4545; --cy: #3cc8f0;
+  background: var(--bg); color: var(--tx); font-family: "IBM Plex Mono", "JetBrains Mono", "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace; font-size: 12px; line-height: 1.3; padding: 4px; display: flex; flex-direction: column; gap: 4px; font-variant-numeric: tabular-nums; }
 .bt * { box-sizing: border-box; }
-.bt-top { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; border-bottom: 2px solid var(--am); padding: 4px 4px 6px; }
-.bt-top h1 { margin: 0; font-size: 15px; font-weight: 700; color: var(--am); letter-spacing: .08em; }
-.bt-top .bt-tag { color: var(--mu); font-size: 11px; letter-spacing: .06em; }
-.bt-top .bt-clock { margin-left: auto; color: var(--tx); font-size: 12px; white-space: nowrap; }
-.bt-top .bt-live { color: var(--up); font-size: 11px; white-space: nowrap; }
-.bt-tick { display: grid; grid-template-columns: repeat(auto-fit, minmax(124px, 1fr)); border: 1px solid var(--ln); background: var(--pn); }
-.bt-cell { padding: 5px 8px 6px; border-right: 1px solid var(--ln); border-bottom: 1px solid var(--ln); min-width: 0; }
-.bt-cell .l { color: var(--am); font-size: 10.5px; letter-spacing: .06em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.bt-cell .v { font-size: 18px; color: var(--tx); white-space: nowrap; margin-top: 1px; }
-.bt-cell .c { font-size: 11px; color: var(--mu); white-space: nowrap; }
-.bt-news { border: 1px solid var(--ln); background: var(--pn); padding: 6px 8px; line-height: 1.5; }
-.bt-news .k { background: var(--am); color: #000; font-weight: 700; padding: 0 5px; margin-right: 8px; font-size: 11px; }
-.bt-news b { color: var(--am); font-weight: 600; }
-.bt-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr)); gap: 6px; }
-.bt-pn { border: 1px solid var(--ln); background: var(--pn); min-width: 0; }
-.bt-pn > h2 { margin: 0; display: flex; align-items: center; gap: 8px; background: var(--hd); border-bottom: 1px solid var(--ln); padding: 3px 8px; font-size: 11.5px; font-weight: 600; color: var(--am); letter-spacing: .06em; text-transform: uppercase; }
-.bt-pn > h2 .n { background: var(--am); color: #000; padding: 0 5px; font-weight: 700; }
-.bt-pn > h2 .s { margin-left: auto; color: var(--mu); font-weight: 400; text-transform: none; letter-spacing: 0; font-size: 11px; }
-.bt-body { padding: 6px 8px 8px; }
-.bt-note { color: var(--mu); font-size: 11px; margin: 0 0 6px; line-height: 1.45; }
-.up { color: var(--up) !important; }
-.dn { color: var(--dn) !important; }
-.tt-chart { position: relative; min-height: 250px; }
+.bt-top { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; padding: 3px 4px 4px; border-bottom: 2px solid var(--am); }
+.bt-top h1 { margin: 0; font-size: 14px; font-weight: 700; color: var(--am); letter-spacing: .1em; }
+.bt-top .tag { color: var(--mu); font-size: 11px; letter-spacing: .06em; }
+.bt-top .upd { color: var(--up); font-size: 11px; white-space: nowrap; }
+.bt-top .clk { margin-left: auto; font-size: 12px; white-space: nowrap; }
+.tape { overflow: hidden; border: 1px solid var(--ln); background: #0a0a0a; white-space: nowrap; height: 22px; position: relative; }
+.tape-in { display: inline-block; padding: 3px 0; will-change: transform; }
+@media (prefers-reduced-motion: no-preference) { .tape-in.run { animation: tape 90s linear infinite; } }
+@keyframes tape { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.tape-in .it { display: inline-block; margin: 0 14px; font-size: 11.5px; }
+.tape-in .it b { color: var(--am); font-weight: 600; margin-right: 6px; }
+.tabs { display: flex; flex-wrap: wrap; gap: 3px; }
+.tabs button { font: inherit; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; background: #161616; color: var(--tx); border: 1px solid var(--ln); padding: 4px 12px 4px 6px; cursor: pointer; }
+.tabs button .k { background: var(--yl); color: #000; padding: 0 5px; margin-right: 7px; }
+.tabs button[aria-selected="true"] { background: var(--am); color: #000; border-color: var(--am); }
+.tabs button[aria-selected="true"] .k { background: #000; color: var(--am); }
+.tabs .hint { margin-left: auto; color: var(--mu); font-size: 10.5px; align-self: center; }
+.g { display: grid; gap: 4px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); }
+.g.w2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 520px), 1fr)); }
+.pn { border: 1px solid var(--ln); background: var(--pn); min-width: 0; }
+.pn > h2 { margin: 0; display: flex; align-items: center; gap: 7px; background: var(--hd); border-bottom: 1px solid var(--ln); padding: 2px 7px; font-size: 11px; font-weight: 700; color: var(--am); letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; overflow: hidden; }
+.pn > h2 .n { background: var(--am); color: #000; padding: 0 4px; }
+.pn > h2 .s { margin-left: auto; color: var(--mu); font-weight: 400; text-transform: none; letter-spacing: 0; overflow: hidden; text-overflow: ellipsis; }
+.bd { padding: 5px 7px 7px; }
+.note { color: var(--mu); font-size: 10.5px; margin: 5px 0 0; line-height: 1.4; }
+.up { color: var(--up) !important; } .dn { color: var(--dn) !important; } .am { color: var(--am); } .cy { color: var(--cy); } .yl { color: var(--yl); } .mu { color: var(--mu); }
+.kv { display: grid; grid-template-columns: repeat(auto-fit, minmax(118px, 1fr)); border-top: 1px solid var(--ln); border-left: 1px solid var(--ln); }
+.kv > div { padding: 4px 7px 5px; border-right: 1px solid var(--ln); border-bottom: 1px solid var(--ln); min-width: 0; }
+.kv .l { color: var(--am); font-size: 10px; letter-spacing: .06em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kv .v { font-size: 17px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kv .c { font-size: 10.5px; color: var(--mu); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.news { border: 1px solid var(--ln); background: var(--pn); padding: 5px 8px; line-height: 1.5; margin: 0; }
+.news .k { background: var(--am); color: #000; font-weight: 700; padding: 0 5px; margin-right: 8px; font-size: 10.5px; }
+.news b { color: var(--yl); font-weight: 600; }
+.tt-chart { position: relative; min-height: 230px; }
+.tt-chart.sm { min-height: 150px; }
 .tt-chart svg { display: block; overflow: visible; }
-.tt-chart .axis text { fill: var(--mu); font-size: 10.5px; font-family: inherit; }
+.tt-chart .axis text { fill: var(--mu); font-size: 10px; font-family: inherit; }
 .tt-chart .axis path, .tt-chart .axis line { stroke: #3a3a3a; }
-.tt-chart .grid line { stroke: #1d1d1d; stroke-dasharray: 2 3; }
+.tt-chart .grid line { stroke: #1b1b1b; stroke-dasharray: 2 3; }
 .tt-chart .grid path { display: none; }
-.tt-tip { position: absolute; pointer-events: none; background: #000; border: 1px solid var(--am); padding: 5px 8px; font-size: 11px; white-space: nowrap; z-index: 2; color: var(--tx); }
+.tt-tip { position: absolute; pointer-events: none; background: #000; border: 1px solid var(--am); padding: 4px 7px; font-size: 10.5px; white-space: nowrap; z-index: 3; color: var(--tx); }
 .tt-tip .tt-tip-d { color: var(--am); margin-bottom: 2px; }
-.tt-legend { display: flex; flex-wrap: wrap; gap: 2px 14px; font-size: 10.5px; color: var(--mu); margin-bottom: 4px; text-transform: uppercase; letter-spacing: .04em; }
+.tt-legend { display: flex; flex-wrap: wrap; gap: 2px 12px; font-size: 10px; color: var(--mu); margin-bottom: 3px; text-transform: uppercase; letter-spacing: .04em; }
 .tt-legend span::before { content: ""; display: inline-block; width: 12px; height: 2px; margin-right: 5px; vertical-align: middle; background: var(--sw); }
 .tt-legend span.dash::before { background: repeating-linear-gradient(90deg, var(--sw) 0 3px, transparent 3px 5px); }
-.tt-tablewrap { overflow-x: auto; }
-.bt-table { width: 100%; border-collapse: collapse; font-size: 12px; }
-.bt-table th { text-align: left; font-weight: 600; font-size: 10.5px; color: var(--am); text-transform: uppercase; letter-spacing: .05em; border-bottom: 1px solid #3a3a3a; padding: 4px 10px 4px 0; white-space: nowrap; }
-.bt-table td { border-bottom: 1px dotted #222; padding: 4px 10px 4px 0; white-space: nowrap; }
-.bt-table tbody tr:hover td { background: #111; }
-.bt-table .num { text-align: right; }
-.bt-table td.hi { color: var(--am); }
+.tw { overflow-x: auto; }
+.tb { width: 100%; border-collapse: collapse; font-size: 11.5px; }
+.tb th { text-align: left; font-weight: 700; font-size: 10px; color: var(--am); text-transform: uppercase; letter-spacing: .05em; border-bottom: 1px solid #3a3a3a; padding: 3px 8px 3px 0; white-space: nowrap; }
+.tb td { border-bottom: 1px dotted #1f1f1f; padding: 3px 8px 3px 0; white-space: nowrap; }
+.tb tbody tr:hover td { background: #101010; }
+.tb .r { text-align: right; } .tb th.r { text-align: right; }
+.tb td.hi { color: var(--am); }
+.rng { display: inline-block; position: relative; width: 70px; height: 6px; background: #222; vertical-align: middle; }
+.rng i { position: absolute; top: -2px; width: 3px; height: 10px; background: var(--yl); }
+.heat { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 3px; }
+.heat div { padding: 6px 6px 7px; color: #000; font-weight: 700; min-height: 52px; }
+.heat div span { display: block; font-size: 11px; }
+.heat div em { display: block; font-style: normal; font-size: 15px; margin-top: 3px; }
+.heat div small { display: block; font-size: 10px; font-weight: 400; }
 .tt-empty { color: var(--mu); font-size: 11px; padding: 6px 0; }
-.bt-foot { border-top: 1px solid var(--ln); color: var(--mu); font-size: 10.5px; padding: 5px 4px 2px; line-height: 1.5; }
-.bt-foot summary { cursor: pointer; color: var(--am); letter-spacing: .05em; }
-.bt-foot p { margin: 4px 0; max-width: 70em; }
-.bt .dash-skeleton { min-width: 3em; }
+.foot { border-top: 1px solid var(--ln); color: var(--mu); font-size: 10.5px; padding: 4px 4px 2px; line-height: 1.5; }
+.foot summary { cursor: pointer; color: var(--am); letter-spacing: .05em; }
+.foot p { margin: 4px 0; max-width: 80em; }
 </style>
 
 <div class="bt">
-  <header class="bt-top" id="baslik">
+  <header class="bt-top">
     <h1>TL FAİZ TERMİNALİ</h1>
-    <span class="bt-tag">PARA PİYASASI · TLREF · YAKLAŞIK OIS</span>
-    <span class="bt-live">● GÜNCELLEME: __ASOF__</span>
-    <span class="bt-clock">İSTANBUL <span data-draw="saat">—</span></span>
+    <span class="tag">TLREF · OIS · PİYASA · MAKRO · HİSSE · TAKVİM</span>
+    <span class="upd">● GÜNCELLEME: __ASOF__</span>
+    <span class="clk">İSTANBUL <span data-draw="saat">—</span></span>
   </header>
 
-  <section class="bt-tick" id="gostergeler" data-fetchpriority="high">
-    <div class="bt-cell" id="kart-tlref"><div class="l">TLREF O/N</div><div class="v" data-draw="k-tlref" data-source="ozet" data-field="tlref" data-row="0">—</div><div class="c"><span data-draw="k-chg" data-source="ozet" data-field="tlref_degisim_bp" data-row="0">—</span> bp</div></div>
-    <div class="bt-cell" id="kart-aofm"><div class="l">TCMB AOFM</div><div class="v" data-draw="k-aofm" data-source="ozet" data-field="aofm" data-row="0">—</div><div class="c">fonlama maliyeti</div></div>
-    <div class="bt-cell" id="kart-repo"><div class="l">BIST O/N REPO</div><div class="v" data-draw="k-repo" data-source="ozet" data-field="bist_repo" data-row="0">—</div><div class="c">ağırlıklı ort.</div></div>
-    <div class="bt-cell" id="kart-spread"><div class="l">TLREF−AOFM</div><div class="v" data-draw="k-spread" data-source="ozet" data-field="tlref_aofm_bp" data-row="0">—</div><div class="c">baz puan</div></div>
-    <div class="bt-cell" id="kart-ima"><div class="l">İMA O/N (BONO)</div><div class="v" data-draw="k-ima" data-source="fiyatlama" data-field="ima_ortalama_on" data-row="0">—</div><div class="c"><span data-draw="k-ima-fark" data-source="fiyatlama" data-field="aofm_farki_bp" data-row="0">—</span> bp vs AOFM</div></div>
-    <div class="bt-cell" id="kart-usd"><div class="l">USDTRY</div><div class="v" data-draw="k-usd" data-source="fx" data-field="last" data-where="symbol=USD">—</div><div class="c"><span data-draw="k-usd-chg" data-source="usd_ozet" data-field="degisim_yuzde" data-row="0">—</span></div></div>
-    <div class="bt-cell" id="kart-eur"><div class="l">EURTRY</div><div class="v" data-draw="k-eur" data-source="fx" data-field="last" data-where="symbol=EUR">—</div><div class="c">son</div></div>
-    <div class="bt-cell" id="kart-altin"><div class="l">ALTIN GR/TL</div><div class="v" data-draw="k-altin" data-source="fx" data-field="last" data-where="symbol=gram-altin">—</div><div class="c">son</div></div>
-    <div class="bt-cell" id="kart-brent"><div class="l">BRENT $</div><div class="v" data-draw="k-brent" data-source="fx" data-field="last" data-where="symbol=BRENT">—</div><div class="c">son</div></div>
-    <div class="bt-cell" id="kart-bist"><div class="l">XU100</div><div class="v" data-draw="k-bist" data-source="bist" data-field="value" data-row="0">—</div><div class="c"><span data-draw="k-bist-chg" data-source="bist" data-field="change_percent" data-row="0">—</span></div></div>
+  <div class="tape" aria-label="Fiyat şeridi"><div class="tape-in" data-draw="tape"></div></div>
+
+  <nav class="tabs" role="tablist">
+    <button role="tab" data-tab="piyasa"><span class="k">1</span>PİYASA</button>
+    <button role="tab" data-tab="faiz"><span class="k">2</span>FAİZ · OIS</button>
+    <button role="tab" data-tab="makro"><span class="k">3</span>MAKRO</button>
+    <button role="tab" data-tab="hisse"><span class="k">4</span>HİSSE</button>
+    <button role="tab" data-tab="takvim"><span class="k">5</span>TAKVİM</button>
+    <span class="hint">klavye: 1–5 sekme</span>
+  </nav>
+
+  <!-- 1 PİYASA -->
+  <section class="page" id="piyasa">
+    <div class="g">
+      <div class="pn"><h2><span class="n">1.1</span>Döviz<span class="s">son kapanış · çapraz kurlar hesaplanır</span></h2>
+        <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Parite</th><th class="r">Son</th><th class="r">Tarih</th></tr></thead><tbody data-draw="t-fx"></tbody></table></div></div></div>
+      <div class="pn"><h2><span class="n">1.2</span>Emtia · Kripto<span class="s">ons altın gram fiyatından türetilir</span></h2>
+        <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Varlık</th><th class="r">Son</th><th class="r">Birim</th></tr></thead><tbody data-draw="t-emtia"></tbody></table></div></div></div>
+      <div class="pn"><h2><span class="n">1.3</span>Endeksler<span class="s">XU100 günlük · ABD ETF 52H aralık</span></h2>
+        <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Endeks</th><th class="r">Son</th><th class="r">Gün %</th><th class="r">52H</th></tr></thead><tbody data-draw="t-endeks"></tbody></table></div></div></div>
+    </div>
+    <div class="g w2">
+      <div class="pn"><h2><span class="n">1.4</span>BIST ısı haritası<span class="s">günlük değişim %</span></h2><div class="bd"><div class="heat" data-draw="heat"></div></div></div>
+      <div class="pn"><h2><span class="n">1.5</span>TL faiz özeti<span class="s">EVDS · TCMB anketi</span></h2>
+        <div class="bd"><div class="kv">
+          <div><div class="l">TLREF O/N</div><div class="v" data-draw="k-tlref">—</div><div class="c"><span data-draw="k-chg">—</span> bp</div></div>
+          <div><div class="l">TCMB AOFM</div><div class="v" data-draw="k-aofm">—</div><div class="c">fonlama maliyeti</div></div>
+          <div><div class="l">İMA O/N (BONO)</div><div class="v" data-draw="k-ima">—</div><div class="c"><span data-draw="k-ima-fark">—</span> bp vs AOFM</div></div>
+          <div><div class="l">PPK BEKLENTİ</div><div class="v" data-draw="k-ppk">—</div><div class="c">ilk toplantı (anket)</div></div>
+          <div><div class="l">TÜFE YILLIK</div><div class="v" data-draw="k-tufe">—</div><div class="c" data-draw="k-tufe-ay">—</div></div>
+          <div><div class="l">REEL FAİZ (EX-ANTE)</div><div class="v" data-draw="k-reel">—</div><div class="c">TLREF − 12A TÜFE bekl.</div></div>
+        </div></div></div>
+    </div>
+    <div class="g">
+      <div class="pn"><h2><span class="n">1.6</span>XU100<span class="s">haftalık kapanış · 3 ay</span></h2><div class="bd"><div class="tt-chart sm" data-draw="ch-xu" aria-label="XU100 haftalık"></div></div></div>
+      <div class="pn"><h2><span class="n">1.7</span>USD/TRY<span class="s">günlük · 3 ay</span></h2><div class="bd"><div class="tt-chart sm" data-draw="ch-usd" aria-label="USD/TRY"></div></div></div>
+      <div class="pn"><h2><span class="n">1.8</span>Gram altın<span class="s">TL · 3 ay</span></h2><div class="bd"><div class="tt-chart sm" data-draw="ch-gold" aria-label="Gram altın"></div></div></div>
+    </div>
   </section>
 
-  <p class="bt-news" id="ozet-cumle"><span class="k">ÖZET</span>TLREF <b data-draw="k-tlref-s" data-source="ozet" data-field="tlref" data-row="0" class="dash-skeleton">—</b> (<span data-draw="k-tlref-tarih" class="dash-skeleton">—</span>), önceki iş gününe göre <b data-draw="k-chg-s" data-source="ozet" data-field="tlref_degisim_bp" data-row="0" class="dash-skeleton">—</b> bp. Hazine bonoları <b data-draw="f-gun" data-source="fiyatlama" data-field="gun" data-row="0" class="dash-skeleton">—</b> gün için ortalama <b data-draw="f-ort" data-source="fiyatlama" data-field="ima_ortalama_on" data-row="0" class="dash-skeleton">—</b> gecelik faiz ima ediyor: TCMB fonlama maliyetinin <b data-draw="f-fark" data-source="fiyatlama" data-field="aofm_farki_bp" data-row="0" class="dash-skeleton">—</b> bp <span data-draw="f-yon">—</span>.</p>
+  <!-- 2 FAİZ -->
+  <section class="page" id="faiz" hidden>
+    <p class="news"><span class="k">ÖZET</span>TLREF <b data-draw="k-tlref-s">—</b> (<span data-draw="k-tlref-tarih">—</span>), önceki iş gününe göre <b data-draw="k-chg-s">—</b> bp. Hazine bonoları <b data-draw="f-gun">—</b> gün için ortalama <b data-draw="f-ort">—</b> gecelik faiz ima ediyor: TCMB fonlama maliyetinin <b data-draw="f-fark">—</b> bp <span data-draw="f-yon">—</span>. Anket katılımcıları ilk PPK toplantısı için <b data-draw="k-ppk-s">—</b> bekliyor.</p>
+    <div class="kv" style="margin-top:4px">
+      <div><div class="l">TLREF O/N</div><div class="v" data-draw="k-tlref">—</div><div class="c"><span data-draw="k-chg">—</span> bp</div></div>
+      <div><div class="l">TCMB AOFM</div><div class="v" data-draw="k-aofm">—</div><div class="c">fonlama maliyeti</div></div>
+      <div><div class="l">BIST O/N REPO</div><div class="v" data-draw="k-repo">—</div><div class="c">ağırlıklı ort.</div></div>
+      <div><div class="l">TLREF−AOFM</div><div class="v" data-draw="k-spread">—</div><div class="c">baz puan</div></div>
+      <div><div class="l">İMA O/N (BONO)</div><div class="v" data-draw="k-ima">—</div><div class="c"><span data-draw="k-ima-fark">—</span> bp vs AOFM</div></div>
+      <div><div class="l">YIL SONU PPK</div><div class="v" data-draw="k-ppk-ys">—</div><div class="c">anket beklentisi</div></div>
+      <div><div class="l">12 AY SONRA PPK</div><div class="v" data-draw="k-ppk-12">—</div><div class="c">anket beklentisi</div></div>
+    </div>
+    <div class="g w2" style="margin-top:4px">
+      <div class="pn"><h2><span class="n">2.1</span>İma edilen O/N patikası<span class="s">bono forward · basit, gün/365</span></h2><div class="bd"><div class="tt-chart" data-draw="ch-patika" aria-label="İma edilen gecelik faiz patikası"></div></div></div>
+      <div class="pn"><h2><span class="n">2.2</span>Yaklaşık OIS eğrisi<span class="s">TCMB gösterge fiyatı</span></h2>
+        <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Bono</th><th>Vade</th><th class="r">Gün</th><th class="r">Fiyat</th><th class="r">OIS eşd.</th><th class="r">İma O/N</th><th class="r">Fwd</th></tr></thead><tbody data-draw="t-egri"></tbody></table></div>
+        <p class="note">OIS eşdeğeri = (100/P − 1) × 365/gün. İma O/N, bu getiriyi günlük bileşik TLREF'e çeviren oran. Gerçek swap kotasyonu değildir.</p></div></div>
+      <div class="pn"><h2><span class="n">2.3</span>TLREF · AOFM · BIST repo<span class="s">günlük, son 6 ay</span></h2><div class="bd"><div class="tt-chart" data-draw="ch-oranlar" aria-label="TLREF, AOFM ve BIST repo"></div></div></div>
+      <div class="pn"><h2><span class="n">2.4</span>Bono ima O/N geçmişi<span class="s">düşüş = daha çok indirim fiyatı</span></h2><div class="bd"><div class="tt-chart" data-draw="ch-gecmis" aria-label="Bono ima O/N geçmişi"></div></div></div>
+      <div class="pn"><h2><span class="n">2.5</span>Politika faizi beklentileri<span class="s">TCMB Piyasa Katılımcıları Anketi</span></h2><div class="bd"><div class="tt-chart" data-draw="ch-ppk" aria-label="Politika faizi beklentileri"></div></div></div>
+    </div>
+  </section>
 
-  <div class="bt-grid">
-    <section class="bt-pn" id="patika">
-      <h2><span class="n">1</span>İma edilen O/N patikası<span class="s">bono forward · basit, gün/365</span></h2>
-      <div class="bt-body">
-        <div class="tt-chart" data-draw="ch-patika" data-source="egri ozet" role="figure" aria-label="İma edilen gecelik faiz patikası"></div>
-      </div>
-    </section>
+  <!-- 3 MAKRO -->
+  <section class="page" id="makro" hidden>
+    <div class="kv">
+      <div><div class="l">TÜFE YILLIK</div><div class="v" data-draw="k-tufe">—</div><div class="c" data-draw="k-tufe-ay">—</div></div>
+      <div><div class="l">YIL SONU TÜFE BEKL.</div><div class="v" data-draw="k-bek-ys">—</div><div class="c">anket</div></div>
+      <div><div class="l">12 AY TÜFE BEKL.</div><div class="v" data-draw="k-bek-12">—</div><div class="c">anket</div></div>
+      <div><div class="l">REEL FAİZ EX-ANTE</div><div class="v" data-draw="k-reel">—</div><div class="c">TLREF − 12A bekl.</div></div>
+      <div><div class="l">REEL FAİZ EX-POST</div><div class="v" data-draw="k-reel-post">—</div><div class="c">TLREF − son TÜFE</div></div>
+      <div><div class="l">BRÜT REZERV</div><div class="v" data-draw="k-rez">—</div><div class="c"><span data-draw="k-rez-chg">—</span> haftalık</div></div>
+      <div><div class="l">12 AY USD/TRY BEKL.</div><div class="v" data-draw="k-usd12">—</div><div class="c" data-draw="k-usd12-fark">—</div></div>
+    </div>
+    <div class="g w2" style="margin-top:4px">
+      <div class="pn"><h2><span class="n">3.1</span>TÜFE<span class="s">yıllık % (çizgi) · aylık % (sütun) · 24 ay</span></h2><div class="bd"><div class="tt-chart" data-draw="ch-tufe" aria-label="TÜFE"></div></div></div>
+      <div class="pn"><h2><span class="n">3.2</span>Enflasyon beklentileri<span class="s">anket vs gerçekleşen</span></h2><div class="bd"><div class="tt-chart" data-draw="ch-bek" aria-label="Enflasyon beklentileri"></div></div></div>
+      <div class="pn"><h2><span class="n">3.3</span>TCMB brüt rezervleri<span class="s">haftalık, milyar $</span></h2><div class="bd"><div class="tt-chart" data-draw="ch-rez" aria-label="TCMB rezervleri"></div></div></div>
+      <div class="pn"><h2><span class="n">3.4</span>Anket özeti<span class="s">son iki anket</span></h2>
+        <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Gösterge</th><th class="r">Önceki</th><th class="r">Son</th><th class="r">Fark</th></tr></thead><tbody data-draw="t-anket"></tbody></table></div></div></div>
+    </div>
+  </section>
 
-    <section class="bt-pn" id="egri-tablo">
-      <h2><span class="n">2</span>Yaklaşık OIS eğrisi<span class="s">TCMB gösterge fiyatı</span></h2>
-      <div class="bt-body">
-        <div class="tt-tablewrap">
-          <table class="bt-table" data-source="egri" data-row-key="kod">
-            <thead><tr>
-              <th data-field="kod">Bono</th>
-              <th data-field="vade">Vade</th>
-              <th data-field="gun" class="num">Gün</th>
-              <th data-field="fiyat" class="num">Fiyat</th>
-              <th data-field="ois_esdegeri" class="num">OIS eşd.</th>
-              <th data-field="ima_ortalama_on" class="num">İma O/N</th>
-              <th data-field="ima_forward_on" class="num">Fwd</th>
-            </tr></thead>
-            <tbody data-draw="t-egri"></tbody>
-          </table>
-        </div>
-        <p class="bt-note" style="margin-top:8px">OIS eşdeğeri = (100/P − 1) × 365/gün. İma O/N, bu getiriyi günlük bileşik TLREF'e çeviren oran. Gerçek swap kotasyonu değildir.</p>
-      </div>
-    </section>
-  </div>
+  <!-- 4 HİSSE -->
+  <section class="page" id="hisse" hidden>
+    <div class="pn"><h2><span class="n">4.1</span>BIST seçili hisseler<span class="s">günlük ve 5 günlük değişim · çarpanlar</span></h2>
+      <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Hisse</th><th class="r">Son</th><th class="r">Gün %</th><th class="r">5G %</th><th class="r">F/K</th><th class="r">PD/DD</th><th class="r">Temettü %</th><th class="r">Piy. değ. (mlr ₺)</th><th class="r">52H dip</th><th>52H aralık</th><th class="r">52H tepe</th><th class="r">Hacim (mn)</th></tr></thead><tbody data-draw="t-bist"></tbody></table></div></div></div>
+    <div class="pn" style="margin-top:4px"><h2><span class="n">4.2</span>ABD<span class="s">son fiyat · 52 haftalık aralık</span></h2>
+      <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Sembol</th><th>Ad</th><th class="r">Son $</th><th class="r">F/K</th><th class="r">PD/DD</th><th class="r">Piy. değ. (mlr $)</th><th class="r">52H dip</th><th>52H aralık</th><th class="r">52H tepe</th><th class="r">Tepeden %</th></tr></thead><tbody data-draw="t-us"></tbody></table></div></div></div>
+  </section>
 
-  <div class="bt-grid">
-    <section class="bt-pn" id="tarihce">
-      <h2><span class="n">3</span>TLREF · AOFM · BIST repo<span class="s">günlük, son 6 ay</span></h2>
-      <div class="bt-body">
-        <div class="tt-chart" data-draw="ch-oranlar" data-source="rates" role="figure" aria-label="TLREF, AOFM ve BIST repo zaman serisi"></div>
-      </div>
-    </section>
+  <!-- 5 TAKVİM -->
+  <section class="page" id="takvim" hidden>
+    <div class="g w2">
+      <div class="pn"><h2><span class="n">5.1</span>Türkiye ekonomik takvimi<span class="s">bu hafta ve gelecek hafta</span></h2>
+        <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Zaman</th><th>Veri</th><th>Önem</th><th class="r">Önceki</th></tr></thead><tbody data-draw="t-takvim"></tbody></table></div><div data-draw="t-takvim-bos"></div></div></div>
+      <div class="pn"><h2><span class="n">5.2</span>Küresel, yüksek önem<span class="s">bu hafta · tüm ülkeler</span></h2>
+        <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Zaman</th><th>Ülke</th><th>Veri</th><th class="r">Önceki</th></tr></thead><tbody data-draw="t-global"></tbody></table></div><div data-draw="t-global-bos"></div></div></div>
+    </div>
+  </section>
 
-    <section class="bt-pn" id="fiyatlama-gecmis">
-      <h2><span class="n">4</span>Bono ima O/N geçmişi<span class="s">düşüş = daha çok indirim fiyatı</span></h2>
-      <div class="bt-body">
-        <div class="tt-chart" data-draw="ch-gecmis" data-source="bono_gecmis rates" role="figure" aria-label="Bonoların ima ettiği gecelik faiz geçmişi"></div>
-      </div>
-    </section>
-  </div>
-
-  <div class="bt-grid">
-    <section class="bt-pn" id="piyasalar">
-      <h2><span class="n">5</span>Piyasalar<span class="s">son kapanış</span></h2>
-      <div class="bt-body">
-        <div class="tt-tablewrap">
-          <table class="bt-table" data-source="fx" data-row-key="symbol">
-            <thead><tr><th data-field="symbol">Varlık</th><th data-field="last" class="num">Son</th><th data-field="as_of" class="num">Tarih</th></tr></thead>
-            <tbody data-draw="t-fx"></tbody>
-          </table>
-        </div>
-        <div class="tt-chart" style="min-height:170px;margin-top:8px" data-draw="ch-usd" data-source="usd" data-fetchpriority="low" role="figure" aria-label="USD/TRY son 3 ay"></div>
-      </div>
-    </section>
-
-    <section class="bt-pn" id="takvim-panel" data-fetchpriority="low">
-      <h2><span class="n">6</span>Ekonomik takvim · TR<span class="s">bu hafta ve gelecek hafta</span></h2>
-      <div class="bt-body">
-        <div class="tt-tablewrap">
-          <table class="bt-table" data-source="takvim" data-row-key="time,event">
-            <thead><tr><th data-field="time">Zaman</th><th data-field="event">Veri</th><th data-field="importance">Önem</th><th data-field="previous" class="num">Önceki</th></tr></thead>
-            <tbody data-draw="t-takvim"></tbody>
-          </table>
-        </div>
-        <div data-draw="t-takvim-bos"></div>
-      </div>
-    </section>
-  </div>
-
-  <details class="bt-foot" id="yontem">
+  <details class="foot">
     <summary>KAYNAK VE YÖNTEM</summary>
-    <p>TLREF, TCMB fonlama maliyeti (AOFM) ve BIST gecelik repo TCMB EVDS'den; döviz, altın, Brent, XU100 ve takvim Borsa bağlantısından gelir. TLREF 16:00'dan sonra yayımlanır, günün değeri akşam görünür.</p>
-    <p>Yaklaşık OIS: vadeye kalan gün d ve TCMB gösterge fiyatı P olan iskontolu hazine bonosu için OIS eşdeğeri sabit oran = (100/P − 1) × 365/d. İma edilen ortalama gecelik faiz = 365 × ((100/P)^(1/d) − 1). Forward, art arda iki bono arasındaki dönem için aynı hesaptır.</p>
-    <p>Bu değerler gerçek TLREF OIS kotasyonları değildir: bono-repo bazı, likidite ve teminat talebi farkı içerir. 1 yıldan uzun vadeler için kaynak yoktur. Sayfa hafta içi günde birkaç kez otomatik güncellenir; açık sekme 30 dakikada bir kendini yeniler.</p>
+    <p>Kaynaklar: TCMB EVDS (TLREF, AOFM, BIST repo, hazine bonosu gösterge fiyatları, Piyasa Katılımcıları Anketi, rezervler) ve Borsa bağlantısı (döviz, altın, Brent, kripto, BIST ve ABD fiyatları, TÜFE, ekonomik takvim). TLREF 16:00'dan sonra yayımlanır.</p>
+    <p>Yaklaşık OIS: vadeye kalan gün d ve gösterge fiyatı P olan iskontolu bono için OIS eşdeğeri = (100/P − 1) × 365/d; ima edilen ortalama gecelik faiz = 365 × ((100/P)^(1/d) − 1). Gerçek TLREF OIS kotasyonu değildir. Ons altın, gram altın ve USD/TRY'den (31,1035 g) türetilir; çapraz kurlar TL kurlarından hesaplanır.</p>
+    <p>Sayfa hafta içi günde birkaç kez otomatik güncellenir; açık sekme 30 dakikada bir kendini yeniler.</p>
   </details>
 </div>

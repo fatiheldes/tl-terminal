@@ -37,6 +37,7 @@
       } catch (e) { console.error(n, e); }
     }));
   }
+  window.TTrun = run;
   document.addEventListener('DOMContentLoaded', () => {
     run();
     let w = window.innerWidth, t;

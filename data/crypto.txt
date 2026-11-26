@@ -1,0 +1,6 @@
+## quotes
+```tsv
+symbol	pair	exchange	price	bid	ask
+BTC-USD	BTC-USD	coinbase	60580.05	0	0
+ETH-USD	ETH-USD	coinbase	1697.59	0	0
+```

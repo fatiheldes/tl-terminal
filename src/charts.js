@@ -82,4 +82,28 @@
       })
       .on('pointerleave', () => { tip.style('display', 'none'); rule.style('display', 'none'); });
   };
+  // Simple bar chart: data [{x:Date,y}]
+  window.TT.bars = function (el, data, o) {
+    o = o || {};
+    d3.select(el).selectAll('*').remove();
+    if (!data.length) return;
+    const lg = d3.select(el).append('div').attr('class', 'tt-legend');
+    lg.append('span').style('--sw', o.color).text(o.label || '');
+    const W = Math.max(260, el.clientWidth), H = o.height || 110;
+    const m = { t: 6, r: 14, b: 22, l: 40 };
+    const x = d3.scaleBand().domain(data.map((d) => +d.x)).range([m.l, W - m.r]).padding(0.25);
+    const y = d3.scaleLinear().domain([Math.min(0, d3.min(data, (d) => d.y)), d3.max(data, (d) => d.y)]).nice().range([H - m.b, m.t]);
+    const svg = d3.select(el).append('svg').attr('width', W).attr('height', H).attr('role', 'img').attr('aria-label', o.label || 'Sütun grafik');
+    svg.append('g').attr('class', 'grid').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(3).tickSize(-(W - m.l - m.r)).tickFormat(''));
+    svg.append('g').attr('class', 'axis').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(3).tickFormat((v) => '%' + TT.f1(v)).tickSizeOuter(0));
+    const every = Math.max(1, Math.ceil(data.length / Math.max(2, Math.floor((W - m.l - m.r) / 60))));
+    svg.append('g').attr('class', 'axis').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).tickValues(x.domain().filter((d, i) => i % every === 0)).tickFormat((d) => TT.mShort(new Date(d))).tickSizeOuter(0));
+    const tip = d3.select(el).append('div').attr('class', 'tt-tip').style('display', 'none');
+    svg.append('g').selectAll('rect').data(data).join('rect')
+      .attr('x', (d) => x(+d.x)).attr('width', x.bandwidth())
+      .attr('y', (d) => y(Math.max(0, d.y))).attr('height', (d) => Math.abs(y(d.y) - y(0)))
+      .style('fill', o.color || '#3cc8f0')
+      .on('pointerenter', (ev, d) => { tip.selectAll('*').remove(); tip.append('div').attr('class', 'tt-tip-d').text(TT.mShort(d.x) + ' ' + d.x.getUTCFullYear()); tip.append('div').text((o.label || '') + ': %' + TT.f2(d.y)); const px = x(+d.x); tip.style('display', null).style('top', '20px').style('left', Math.min(px + 10, W - 140) + 'px'); })
+      .on('pointerleave', () => tip.style('display', 'none'));
+  };
 })();
