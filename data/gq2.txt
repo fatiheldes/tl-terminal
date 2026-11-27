@@ -1,21 +1,21 @@
 ## metadata
 market: us
 symbols: LQD, BWX, BNDX, TIP, AGG, IGOV, JNK, VWOB, DX-Y.NYB, ^VIX
-timestamp: 2026-11-27T10:43:21.305514
+timestamp: 2026-11-27T14:39:39.235504
 source: yfinance
 successful_count: 10
 failed_count: 0
 ## data
 ```tsv
 symbol	name	market	currency	current_price	volume	pe_ratio	pb_ratio	dividend_yield	week_52_high	week_52_low	avg_volume
-LQD	iShares iBoxx $ Investment Grade Corporate Bond ETF	us	USD	104.29	30620100	31.54	0.77	4.85	112.02	101.2	31865723
-BWX	State Street SPDR Bloomberg International Treasury Bond ETF	us	USD	21.17	553400			2.46	23.12	20.98	575298
-BNDX	Vanguard Total International Bond Index Fund ETF Shares	us	USD	47.6	4279500			4.64	49.68	46.63	5275040
-TIP	iShares TIPS Bond ETF	us	USD	105.84	2200800	11.89	0.84	4.41	111.98	103.76	2132621
-AGG	iShares Core U.S. Aggregate Bond ETF	us	USD	96.55	8389700	123.15	0.84	4.11	101.46	93.84	11506692
-IGOV	iShares International Treasury Bond ETF	us	USD	39.8	177800			1.46	43.12	39.23	240276
-JNK	State Street SPDR Bloomberg High Yield Bond ETF	us	USD	91.75	4486900	19.22	0.85	6.83	98.03	91.3	4004482
-VWOB	Vanguard Emerging Markets Government Bond Index Fund ETF Shares	us	USD	63.08	563700			6.07	68.41	62.42	622393
-DX-Y.NYB	US Dollar Index	us	USD	103.834	0				104.53	95.55	0
-^VIX	CBOE Volatility Index	us	USD	24.74	0				40.03	13.38	0
+LQD	iShares iBoxx $ Investment Grade Corporate Bond ETF	us	USD	104.25	640292	31.52	0.77	4.85	112.02	101.2	32025380
+BWX	State Street SPDR Bloomberg International Treasury Bond ETF	us	USD	21.185	32420			2.46	23.12	20.98	578939
+BNDX	Vanguard Total International Bond Index Fund ETF Shares	us	USD	47.669	330863			4.64	49.68	46.63	5297371
+TIP	iShares TIPS Bond ETF	us	USD	105.8699	47809	11.9	0.84	4.41	111.98	103.76	2143287
+AGG	iShares Core U.S. Aggregate Bond ETF	us	USD	96.475	267005	123.05	0.84	4.11	101.46	93.84	11594058
+IGOV	iShares International Treasury Bond ETF	us	USD	39.49	6146			1.46	43.12	39.23	242811
+JNK	State Street SPDR Bloomberg High Yield Bond ETF	us	USD	91.94	61395	19.26	0.85	6.83	98.03	91.3	4043003
+VWOB	Vanguard Emerging Markets Government Bond Index Fund ETF Shares	us	USD	63.3701	18819			6.07	68.41	62.42	627704
+DX-Y.NYB	US Dollar Index	us	USD	103.95	0				104.53	95.55	0
+^VIX	CBOE Volatility Index	us	USD	26.02	0				40.03	13.38	0
 ```

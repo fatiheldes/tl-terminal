@@ -1,7 +1,7 @@
 ## metadata
 market: fx
 symbols: USD, EUR, GBP, CHF, JPY, gram-altin, BRENT
-timestamp: 2026-11-27T10:39:49.763642
+timestamp: 2026-11-27T14:38:53.802282
 source: borsapy
 successful_count: 1
 failed_count: 0

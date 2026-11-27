@@ -1,7 +1,7 @@
 ## metadata
 market: us
 symbols: ^NDX
-timestamp: 2026-11-27T10:39:25.281096
+timestamp: 2026-11-27T14:39:30.626171
 source: yfinance
 successful_count: 1
 failed_count: 0
@@ -10,8 +10,8 @@ symbol: ^NDX
 name: NASDAQ-100
 market: us
 currency: USD
-current_price: 26046.9004
-volume: 11362660000
+current_price: 26261.4668
+volume: 144093822
 week_52_high: 31361.3691
 week_52_low: 22841.4199
-avg_volume: 8580377500
+avg_volume: 8598345238

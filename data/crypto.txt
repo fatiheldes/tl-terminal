@@ -1,13 +1,13 @@
 ## metadata
 market: crypto_global
 symbols: BTC-USD, ETH-USD
-timestamp: 2026-11-27T10:40:01.152063
+timestamp: 2026-11-27T14:38:54.060304
 source: exchange
 successful_count: 1
 failed_count: 0
 ## quotes
 ```tsv
 symbol	pair	exchange	price	bid	ask
-BTC-USD	BTC-USD	coinbase	61559.9	0	0
-ETH-USD	ETH-USD	coinbase	1726.92	0	0
+BTC-USD	BTC-USD	coinbase	60428.27	0	0
+ETH-USD	ETH-USD	coinbase	1691.63	0	0
 ```

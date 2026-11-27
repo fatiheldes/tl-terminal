@@ -1,21 +1,21 @@
 ## metadata
 market: us
 symbols: SPY, QQQ, IWM, VTI, ACWI, EFA, EEM, VEA, VWO, VXUS
-timestamp: 2026-11-27T10:46:12.199353
+timestamp: 2026-11-27T14:40:54.520301
 source: yfinance
 successful_count: 10
 failed_count: 0
 ## data
 ```tsv
 symbol	name	market	currency	current_price	volume	pe_ratio	pb_ratio	dividend_yield	week_52_high	week_52_low	avg_volume
-SPY	State Street SPDR S&P 500 ETF Trust	us	USD	716.7	73112800	22.8	1.67	1	781.62	629.28	48645904
-QQQ	Invesco QQQ Trust	us	USD	633.93	81996700	26.11	1.77	0.45	762.86	555.6	43669471
-IWM	iShares Russell 2000 ETF	us	USD	268.87	33322300	15.67	1.23	0.98	305.18	238.69	25034440
-VTI	Vanguard Morningstar Total Stock Market ETF	us	USD	353.2	5962500	21.68	2.53	1.06	385.12	310.4	3551656
-ACWI	iShares MSCI ACWI ETF	us	USD	148	3089200	19.57		1.44	162.8	133.65	2616648
-EFA	iShares MSCI EAFE ETF	us	USD	99.18	17614300	16.47	1.37	3.26	108.89	93.08	14444987
-EEM	iShares MSCI Emerging Markets ETF	us	USD	56.4	39872900	13.24	1.07	1.83	71.57	52.58	24326921
-VEA	Vanguard FTSE Developed Markets Index Fund ETF Shares	us	USD	65.67	18190000	14.8		2.46	74.04	61.23	11040635
-VWO	Vanguard FTSE Emerging Markets Index Fund ETF Shares	us	USD	52.78	15702000	13.16	1.1	2.19	61.54	50.5	9032692
-VXUS	Vanguard Total International Stock Index Fund ETF Shares	us	USD	78.02	7647600	14.35		2.42	88.62	74.3	6016365
+SPY	State Street SPDR S&P 500 ETF Trust	us	USD	721.95	4009218	22.97	1.68	1	781.62	629.28	48869536
+QQQ	Invesco QQQ Trust	us	USD	639.22	5584295	26.33	1.79	0.45	762.86	555.6	43906709
+IWM	iShares Russell 2000 ETF	us	USD	271.73	1697345	15.83	1.24	0.98	305.18	238.69	25215007
+VTI	Vanguard Morningstar Total Stock Market ETF	us	USD	356	265809	21.85	2.55	1.06	385.12	310.4	3561819
+ACWI	iShares MSCI ACWI ETF	us	USD	149.39	80621	19.75		1.44	162.8	133.65	2612736
+EFA	iShares MSCI EAFE ETF	us	USD	99.915	1770714	16.59	1.38	3.26	108.89	93.08	14589004
+EEM	iShares MSCI Emerging Markets ETF	us	USD	57.545	3398109	13.51	1.09	1.83	71.57	52.58	24539869
+VEA	Vanguard FTSE Developed Markets Index Fund ETF Shares	us	USD	66.41	819261	14.97		2.46	74.04	61.23	11072261
+VWO	Vanguard FTSE Emerging Markets Index Fund ETF Shares	us	USD	53.735	1121215	13.39	1.12	2.19	61.54	50.5	9103192
+VXUS	Vanguard Total International Stock Index Fund ETF Shares	us	USD	78.955	417797	14.52		2.42	88.62	74.3	6040130
 ```

@@ -1,21 +1,21 @@
 ## metadata
 market: us
 symbols: XLRE, SMH, IBIT, GLD, SLV, USO, VUG, VTV, SCHD, MTUM
-timestamp: 2026-11-27T10:46:07.421777
+timestamp: 2026-11-27T14:41:05.184648
 source: yfinance
 successful_count: 10
 failed_count: 0
 ## data
 ```tsv
 symbol	name	market	currency	current_price	volume	pe_ratio	dividend_yield	week_52_high	week_52_low	avg_volume	pb_ratio
-XLRE	State Street Real Estate Select Sector SPDR ETF	us	USD	43.86	8422600	29.29	3.34	46.455	39.725	7151989
-SMH	VanEck Semiconductor ETF	us	USD	422.46	14039500	22.81	0.21	671.83	338.06	9414889
-IBIT	iShares Bitcoin Trust ETF	us	USD	34.07	70112500		0	55.6	32.35	47831523
-GLD	SPDR Gold Shares	us	USD	327.45	17062100		0	509.7	313.96	9724834	1.93
-SLV	iShares Silver Trust	us	USD	37.1	51065900		0	109.83	34.48	19049265	1.74
-USO	United States Oil Fund, LP	us	USD	139.89	2153100	42.33	0	171.82	65.99	5186234	2.02
-VUG	Vanguard Morningstar Growth ETF	us	USD	79.1	10580500	26.64	0.41	93	69.6333	6905026	0.37
-VTV	Vanguard Morningstar Value ETF	us	USD	221.04	2937400	18.85	1.83	231.99	188.27	2884050	2.92
-SCHD	Schwab U.S. Dividend Equity ETF	us	USD	35.29	26205000	18.98	2.95	36.38	27.21	24326134
-MTUM	iShares MSCI USA Momentum Factor ETF	us	USD	61.51	6362600	22.8	0.65	86.3975	57.355	4928007
+XLRE	State Street Real Estate Select Sector SPDR ETF	us	USD	44.02	1196936	29.39	3.34	46.455	39.725	7191896
+SMH	VanEck Semiconductor ETF	us	USD	425.22	1352604	22.96	0.21	671.83	338.06	9460165
+IBIT	iShares Bitcoin Trust ETF	us	USD	34.02	9697662		0	55.6	32.35	47623042
+GLD	SPDR Gold Shares	us	USD	332.349	1207548		0	509.7	313.96	9766673	1.95
+SLV	iShares Silver Trust	us	USD	39.2	6738028		0	109.83	34.48	19121719	1.84
+USO	United States Oil Fund, LP	us	USD	139.8774	330400	42.32	0	171.82	65.99	5220006	2.02
+VUG	Vanguard Morningstar Growth ETF	us	USD	79.665	726778	26.83	0.41	93	69.6333	6940273	0.37
+VTV	Vanguard Morningstar Value ETF	us	USD	222.75	114788	19	1.83	231.99	188.27	2901742	2.94
+SCHD	Schwab U.S. Dividend Equity ETF	us	USD	35.47	2072079	19.08	2.95	36.38	27.21	24303160
+MTUM	iShares MSCI USA Momentum Factor ETF	us	USD	62.2	131495	23.06	0.65	86.3975	57.355	4930985
 ```

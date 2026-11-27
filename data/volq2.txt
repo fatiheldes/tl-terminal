@@ -1,7 +1,7 @@
 ## metadata
 market: us
 symbols: ^OVX, ^GVZ, ^VXEEM, ^VXTLT, ^VXSLV
-timestamp: 2026-11-27T10:39:46.746600
+timestamp: 2026-11-27T14:39:27.457309
 source: yfinance
 successful_count: 5
 failed_count: 0

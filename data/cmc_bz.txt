@@ -1,19 +1,19 @@
 ## metadata
 market: us
-symbols: BZG27.NYM, BZH27.NYM, BZJ27.NYM, BZK27.NYM, BZM27.NYM, BZN27.NYM, BZV27.NYM, BZF28.NYM, BZN28.NYM, BZF29.NYM
-timestamp: 2026-11-27T10:44:58.621083
+symbols: BZG27.NYM, BZH27.NYM, BZJ27.NYM, BZK27.NYM, BZM27.NYM, BZN27.NYM, BZV27.NYM, BZF28.NYM
+timestamp: 2026-11-27T14:42:47.322074
 source: yfinance
-successful_count: 10
+successful_count: 8
 failed_count: 0
 ## data
 ```tsv
 symbol	name	market	currency	current_price	volume	week_52_high	week_52_low	avg_volume
-BZG27.NYM	Brent Crude Oil Last Day Financ	us	USD	92.44	26293	110.41	59.39	22547
-BZH27.NYM	Brent Crude Oil Last Day Financ	us	USD	89.19	22254	106.88	59.49	20869
-BZJ27.NYM	Brent Crude Oil Last Day Financ	us	USD	86.94	16922	103.66	59.58	13601
-BZK27.NYM	Brent Crude Oil Last Day Financ	us	USD	84.92	10100	101.21	59.69	10345
-BZM27.NYM	Brent Crude Oil Last Day Financ	us	USD	83.46	13350	98.73	59.8	13649
-BZN27.NYM	Brent Crude Oil Last Day Financ	us	USD	81.88	5096	96.23	59.88	3970
-BZV27.NYM	Brent Crude Oil Last Day Financ	us	USD	78.77	764	90.72	60.28	443
-BZF28.NYM	Brent Crude Oil Last Day Financ	us	USD	76.4	210	87.03	60.69	103
+BZG27.NYM	Brent Crude Oil Last Day Financ	us	USD	91.23	30395	110.41	59.39	23015
+BZH27.NYM	Brent Crude Oil Last Day Financ	us	USD	88.32	26098	106.88	59.49	21369
+BZJ27.NYM	Brent Crude Oil Last Day Financ	us	USD	86.3	20362	103.66	59.58	13964
+BZK27.NYM	Brent Crude Oil Last Day Financ	us	USD	84.92	0	101.21	59.69	10473
+BZM27.NYM	Brent Crude Oil Last Day Financ	us	USD	83.46	13350	98.73	59.8	13899
+BZN27.NYM	Brent Crude Oil Last Day Financ	us	USD	79.11	0	96.23	59.88	4028
+BZV27.NYM	Brent Crude Oil Last Day Financ	us	USD	77.2	0	90.72	60.28	450
+BZF28.NYM	Brent Crude Oil Last Day Financ	us	USD	82.5	0	87.03	60.69	105
 ```
