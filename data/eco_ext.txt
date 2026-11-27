@@ -1,4 +1,4 @@
-Bugünün tarihi: 26-11-2026
+Bugünün tarihi: 27-11-2026
 
 | Tarih | TP_HARICCARIACIK_K1 | TP_HARICCARIACIK_K4 | TP_HARICCARIACIK_K7 | TP_HARICCARIACIK_K8 | TP_HARICCARIACIK_K10 | TP_KB_GEN01 | TP_KB_GEN12 | TP_KB_GEN17 | TP_KB_GEN34 | TP_KB_GEN35 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |

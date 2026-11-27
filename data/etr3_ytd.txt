@@ -1,6 +1,8 @@
 ## metadata
-window: 2025-12-31 .. 2026-11-26
+window: 2025-12-31 .. 2026-11-27
 base_currency: USD
+fx_series: USD (borsapy/canlidoviz)
+resolved: XLRE=us, SMH=us, IBIT=us, GLD=us, SLV=us, USO=us, VUG=us, VTV=us, SCHD=us, MTUM=us
 ## comparison
 ```tsv
 asset	market	currency	price_basis	start_date	end_date	start_price	end_price	return_try	return_usd
@@ -15,3 +17,4 @@ GLD	us	USD	last	2025-12-31	2026-11-25	396.31	327.45	-0.0254	-0.1738
 IBIT	us	USD	last	2025-12-31	2026-11-25	49.65	34.07	-0.1906	-0.3138
 SLV	us	USD	last	2025-12-31	2026-11-25	64.42	37.1	-0.3207	-0.4241
 ```
+> Not: Returns are PRICE returns and exclude dividends. Splits are adjusted.

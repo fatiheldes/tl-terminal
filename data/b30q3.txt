@@ -1,6 +1,10 @@
 ## metadata
 market: bist
+symbols: TAVHL, TCELL, THYAO, TOASO, TRALT, TRMET, TTKOM, TUPRS, VAKBN, YKBNK
+timestamp: 2026-11-27T06:44:24.339792
 source: yfinance
+successful_count: 10
+failed_count: 0
 ## data
 ```tsv
 symbol	name	market	currency	current_price	volume	market_cap	pe_ratio	pb_ratio	dividend_yield	week_52_high	week_52_low

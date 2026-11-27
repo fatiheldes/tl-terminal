@@ -1,10 +1,12 @@
 ## metadata
-window: 2025-12-31 .. 2026-11-26
+window: 2025-12-31 .. 2026-11-27
 base_currency: USD
+fx_series: USD (borsapy/canlidoviz)
+resolved: ARCC=us, OBDC=us, BXSL=us, FSK=fund, MAIN=us, HTGC=us, GBDC=us, PSEC=us, BIZD=us, PSP=us
 ## comparison
 ```tsv
 asset	market	currency	price_basis	start_date	end_date	start_price	end_price	return_try	return_usd
-FSK	fund	TRY	nav	2026-01-01	2026-11-25	4.821	6.7155	0.393	0.1809
+FSK	fund	TRY	nav	2026-01-01	2026-11-26	4.821	6.7194	0.3938	0.1818
 MAIN	us	USD	last	2025-12-31	2026-11-25	60.39	57.69	0.1269	-0.0447
 ARCC	us	USD	last	2025-12-31	2026-11-25	20.23	18.95	0.105	-0.0633
 GBDC	us	USD	last	2025-12-31	2026-11-25	13.57	12.6	0.0953	-0.0715
@@ -15,3 +17,6 @@ PSP	us	USD	last	2025-12-31	2026-11-25	67.07	58.08	0.0215	-0.134
 HTGC	us	USD	last	2025-12-31	2026-11-25	18.82	15.89	-0.0041	-0.1557
 PSEC	us	USD	last	2025-12-31	2026-11-25	2.59	1.43	-0.3487	-0.4479
 ```
+> Not: Returns are PRICE returns and exclude dividends. Splits are adjusted.
+> Not: FSK: Fund rows are keyed on their valuation date (the previous trading day), not TEFAS's publication date. A fund's freshest NAV always trails the freshest stock close by one trading day.
+> Not: FSK: Fund NAV accrues its holdings' dividends, so a fund is a total return while the stocks beside it are a price return (dividends excluded).

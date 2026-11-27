@@ -1,8 +1,17 @@
+## metadata
+market: bist
+symbols: XU100
+timestamp: 2026-11-27T06:40:30.110052
+source: borsapy
+successful_count: 1
+failed_count: 0
+index: XU100
+preset: big_losers
+timeframe: 1d
 ## stocks
-symbol: EGGUB
-name: EGGUB
-close: 87.4
-change: -3.96
-volume: 1477835
-### additional_indicators
-total_count: 1
+```tsv
+symbol	name	close	change	volume	additional_indicators
+ASTOR	ASTOR	146.3	-4	28153063	{}
+EGGUB	EGGUB	84.6	-7.03	2204584	{}
+```
+total_count: 2

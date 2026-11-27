@@ -1,6 +1,8 @@
 ## metadata
-window: 2025-12-31 .. 2026-11-26
+window: 2025-12-31 .. 2026-11-27
 base_currency: USD
+fx_series: USD (borsapy/canlidoviz)
+resolved: EWJ=us, EWG=us, EWU=us, FXI=us, INDA=us, EWZ=us, EWW=us, TUR=us, EWY=us, EZU=us
 ## comparison
 ```tsv
 asset	market	currency	price_basis	start_date	end_date	start_price	end_price	return_try	return_usd
@@ -15,3 +17,4 @@ EWG	us	USD	last	2025-12-31	2026-11-25	42.5	40.08	0.1124	-0.0569
 TUR	us	USD	last	2025-12-31	2026-11-25	34.42	29.08	-0.0034	-0.1551
 FXI	us	USD	last	2025-12-31	2026-11-25	38.29	31.3	-0.0357	-0.1826
 ```
+> Not: Returns are PRICE returns and exclude dividends. Splits are adjusted.

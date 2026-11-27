@@ -1,5 +1,10 @@
 ## metadata
+market: us
+symbols: ARCC, OBDC, BXSL, FSK, MAIN, HTGC, GBDC, PSEC, BIZD, PSP
+timestamp: 2026-11-27T06:44:54.619711
 source: yfinance
+successful_count: 10
+failed_count: 0
 ## data
 ```tsv
 symbol	name	market	currency	current_price	volume	market_cap	pe_ratio	pb_ratio	roe	dividend_yield	week_52_high	week_52_low	avg_volume	beta

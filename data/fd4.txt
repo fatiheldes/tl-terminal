@@ -1,27 +1,34 @@
 ## metadata
 market: fund
 symbols: TCD
+timestamp: 2026-11-27T06:54:54.247717
+source: borsapy
+successful_count: 1
+failed_count: 0
 ## fund
 code: TCD
 name: TACİRLER PORTFÖY DEĞIŞKEN FON
 category: Değişken Fon
-price: 40.6611
-total_assets: 1058244939.24
-investor_count: 9925
-daily_return: -2.4808
-weekly_return: -6.32
-return_1m: -3.8461
-return_3m: -17.7094
-return_6m: -12.2064
-return_ytd: 9.3873
-return_1y: 15.3397
-return_3y: 52.7249
-return_5y: 599.6566
-category_rank: 95
+company: 
+price: 40.7968
+total_assets: 1059503605.82
+investor_count: 9905
+daily_return: 0.3338
+weekly_return: -5.45
+return_1m: -4.1644
+return_3m: -17.8731
+return_6m: -11.2146
+return_ytd: 9.7525
+return_1y: 15.2729
+return_3y: 53.2347
+return_5y: 618.5927
+category_rank: 93
 category_fund_count: 189
-market_share: 1.27
+market_share: 1.3
 isin: TRMTCDWWWWW8
+kap_link: https://www.kap.org.tr/tr/fon-bilgileri/genel/tcd-tacirler-portfoy-degisken-fon
 order_cutoff_time: 17:30
+order_open_time: 09:00
 buy_valor_days: 1
 sell_valor_days: 2
 ## portfolio
@@ -40,4 +47,15 @@ ybyf	Yabancı Borsa Yatırım Fonları	0.95
 dt	Devlet Tahvili	0.02
 tpp	Takasbank Para Piyasası	0.02
 vmtl	Mevduat (TL)	0.02
+```
+## recent_prices
+```tsv
+date	price
+2026-11-27	40.7968
+2026-11-26	40.6611
+2026-11-25	41.6955
+2026-11-24	42.1143
+2026-11-23	42.1528
+2026-11-20	43.1506
+2026-11-19	43.4046
 ```

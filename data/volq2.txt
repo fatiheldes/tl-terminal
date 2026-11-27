@@ -1,6 +1,10 @@
 ## metadata
 market: us
+symbols: ^OVX, ^GVZ, ^VXEEM, ^VXTLT, ^VXSLV
+timestamp: 2026-11-27T06:39:25.903470
 source: yfinance
+successful_count: 5
+failed_count: 0
 ## data
 ```tsv
 symbol	name	market	currency	current_price	volume	week_52_high	week_52_low	avg_volume

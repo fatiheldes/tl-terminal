@@ -1,6 +1,10 @@
 ## metadata
 market: bist
+symbols: XBANK, XUSIN, XHOLD, XELKT, XGMYO, XULAS, XKMYA, XMANA, XUTEK, XGIDA
+timestamp: 2026-11-27T06:43:58.283854
 source: yfinance
+successful_count: 10
+failed_count: 0
 ## data
 ```tsv
 symbol	name	market	currency	current_price	volume	week_52_high	week_52_low

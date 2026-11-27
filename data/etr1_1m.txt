@@ -1,17 +1,20 @@
 ## metadata
-window: 2026-10-26 .. 2026-11-26
+window: 2026-10-27 .. 2026-11-27
 base_currency: USD
+fx_series: USD (borsapy/canlidoviz)
+resolved: SPY=us, QQQ=us, IWM=us, VTI=us, ACWI=us, EFA=us, EEM=us, VEA=us, VWO=us, VXUS=us
 ## comparison
 ```tsv
 asset	market	currency	price_basis	start_date	end_date	start_price	end_price	return_try	return_usd
-IWM	us	USD	last	2026-10-26	2026-11-25	276.99	268.87	-0.012	-0.0293
-EFA	us	USD	last	2026-10-26	2026-11-25	102.91	99.18	-0.0191	-0.0362
-VEA	us	USD	last	2026-10-26	2026-11-25	69.33	65.67	-0.0359	-0.0528
-VXUS	us	USD	last	2026-10-26	2026-11-25	82.63	78.02	-0.039	-0.0558
-VTI	us	USD	last	2026-10-26	2026-11-25	375.59	353.2	-0.0429	-0.0596
-ACWI	us	USD	last	2026-10-26	2026-11-25	157.57	148	-0.044	-0.0607
-SPY	us	USD	last	2026-10-26	2026-11-25	765.37	716.7	-0.0469	-0.0636
-VWO	us	USD	last	2026-10-26	2026-11-25	56.5	52.78	-0.0492	-0.0658
-EEM	us	USD	last	2026-10-26	2026-11-25	61.82	56.4	-0.0714	-0.0877
-QQQ	us	USD	last	2026-10-26	2026-11-25	712.2	633.93	-0.0941	-0.1099
+IWM	us	USD	last	2026-10-27	2026-11-25	280.18	268.87	-0.024	-0.0404
+EFA	us	USD	last	2026-10-27	2026-11-25	103.59	99.18	-0.0262	-0.0426
+VEA	us	USD	last	2026-10-27	2026-11-25	69.88	65.67	-0.0442	-0.0602
+VXUS	us	USD	last	2026-10-27	2026-11-25	83.3	78.02	-0.0474	-0.0634
+VTI	us	USD	last	2026-10-27	2026-11-25	377.92	353.2	-0.0495	-0.0654
+ACWI	us	USD	last	2026-10-27	2026-11-25	158.61	148	-0.051	-0.0669
+SPY	us	USD	last	2026-10-27	2026-11-25	769.66	716.7	-0.0529	-0.0688
+VWO	us	USD	last	2026-10-27	2026-11-25	56.83	52.78	-0.0554	-0.0713
+EEM	us	USD	last	2026-10-27	2026-11-25	62.52	56.4	-0.0825	-0.0979
+QQQ	us	USD	last	2026-10-27	2026-11-25	721.25	633.93	-0.1061	-0.1211
 ```
+> Not: Returns are PRICE returns and exclude dividends. Splits are adjusted.

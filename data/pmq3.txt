@@ -1,5 +1,10 @@
 ## metadata
+market: us
+symbols: VNQ, REET, IGF, IPO, ARKK, PAVE, VNQI, SRVR
+timestamp: 2026-11-27T06:44:50.483414
 source: yfinance
+successful_count: 8
+failed_count: 0
 ## data
 ```tsv
 symbol	name	market	currency	current_price	volume	pe_ratio	pb_ratio	dividend_yield	week_52_high	week_52_low	avg_volume

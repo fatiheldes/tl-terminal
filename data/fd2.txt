@@ -1,36 +1,54 @@
 ## metadata
 market: fund
 symbols: AFT
+timestamp: 2026-11-27T06:54:54.230953
+source: borsapy
+successful_count: 1
+failed_count: 0
 ## fund
 code: AFT
 name: AK PORTFÖY YENİ TEKNOLOJİLER YABANCI HİSSE SENEDİ FONU
 category: Hisse Senedi Fonu
-price: 0.7412
-total_assets: 12108379882.59
+company: 
+price: 0.7428
+total_assets: 12134718485.59
 investor_count: 123604
-daily_return: -6.9534
-weekly_return: -11.7
-return_1m: -20.0982
-return_3m: -23.4941
-return_6m: -25.1549
-return_ytd: -13.4855
-return_1y: -7.0555
-return_3y: 129.6242
-return_5y: 391.6366
-category_rank: 147
+daily_return: 0.2175
+weekly_return: -13.54
+return_1m: -20.5827
+return_3m: -23.4182
+return_6m: -25.0792
+return_ytd: -13.2974
+return_1y: -8.3942
+return_3y: 130.1236
+return_5y: 399.8372
+category_rank: 155
 category_fund_count: 201
-market_share: 9.29
+market_share: 9.1
 isin: TRYAKBK00144
+kap_link: https://www.kap.org.tr/tr/fon-bilgileri/genel/aft-ak-portfoy-yeni-teknolojiler-yabanci-hisse-senedi-fonu
 order_cutoff_time: 17:45
+order_open_time: 09:00
 buy_valor_days: 1
 sell_valor_days: 2
 ## portfolio
-date: 2026-11-26
+date: 2026-11-27
 ### allocation
 ```tsv
 code	label	weight
-yhs	Yabancı Hisse Senedi	98.98
-tr	Ters-Repo	0.75
+yhs	Yabancı Hisse Senedi	98.97
+tr	Ters-Repo	0.76
 yyf	Yatırım Fonları Katılma Payları	0.26
 vmtl	Mevduat (TL)	0.01
+```
+## recent_prices
+```tsv
+date	price
+2026-11-27	0.7428
+2026-11-26	0.7412
+2026-11-25	0.7966
+2026-11-24	0.8197
+2026-11-23	0.7849
+2026-11-20	0.8591
+2026-11-19	0.8394
 ```

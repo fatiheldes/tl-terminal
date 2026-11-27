@@ -1,17 +1,22 @@
 ## metadata
-window: 2025-11-26 .. 2026-11-26
+window: 2025-11-27 .. 2026-11-27
 base_currency: USD
+fx_series: USD (borsapy/canlidoviz)
+resolved: ARCC=us, OBDC=us, BXSL=us, FSK=fund, MAIN=us, HTGC=us, GBDC=us, PSEC=us, BIZD=us, PSP=us
 ## comparison
 ```tsv
 asset	market	currency	price_basis	start_date	end_date	start_price	end_price	return_try	return_usd
-FSK	fund	TRY	nav	2025-11-26	2026-11-25	4.6441	6.7155	0.446	0.2111
-MAIN	us	USD	last	2025-11-26	2026-11-25	57.69	57.69	0.1939	0
-ARCC	us	USD	last	2025-11-26	2026-11-25	20.51	18.95	0.1031	-0.0761
-GBDC	us	USD	last	2025-11-26	2026-11-25	13.96	12.6	0.0776	-0.0974
-HTGC	us	USD	last	2025-11-26	2026-11-25	17.88	15.89	0.0611	-0.1113
-PSP	us	USD	last	2025-11-26	2026-11-25	65.46	58.08	0.0593	-0.1127
-BIZD	us	USD	last	2025-11-26	2026-11-25	14.55	12.37	0.0151	-0.1498
-BXSL	us	USD	last	2025-11-26	2026-11-25	27.49	23.22	0.0085	-0.1553
-OBDC	us	USD	last	2025-11-26	2026-11-25	13.13	10.99	-0.0007	-0.163
-PSEC	us	USD	last	2025-11-26	2026-11-25	2.62	1.43	-0.3483	-0.4542
+FSK	fund	TRY	nav	2025-11-27	2026-11-26	4.6491	6.7194	0.4453	0.2106
+MAIN	us	USD	last	2025-11-28	2026-11-25	58.04	57.69	0.1851	-0.006
+ARCC	us	USD	last	2025-11-28	2026-11-25	20.62	18.95	0.0957	-0.081
+GBDC	us	USD	last	2025-11-28	2026-11-25	14.09	12.6	0.0662	-0.1057
+HTGC	us	USD	last	2025-11-28	2026-11-25	18	15.89	0.0525	-0.1172
+PSP	us	USD	last	2025-11-28	2026-11-25	66.15	58.08	0.0468	-0.122
+BIZD	us	USD	last	2025-11-28	2026-11-25	14.64	12.37	0.0074	-0.1551
+BXSL	us	USD	last	2025-11-28	2026-11-25	27.59	23.22	0.0034	-0.1584
+OBDC	us	USD	last	2025-11-28	2026-11-25	13.17	10.99	-0.0051	-0.1655
+PSEC	us	USD	last	2025-11-28	2026-11-25	2.64	1.43	-0.3542	-0.4583
 ```
+> Not: Returns are PRICE returns and exclude dividends. Splits are adjusted.
+> Not: FSK: Fund rows are keyed on their valuation date (the previous trading day), not TEFAS's publication date. A fund's freshest NAV always trails the freshest stock close by one trading day.
+> Not: FSK: Fund NAV accrues its holdings' dividends, so a fund is a total return while the stocks beside it are a price return (dividends excluded).

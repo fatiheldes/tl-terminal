@@ -1,6 +1,10 @@
 ## metadata
 market: bist
+symbols: GUBRF, ISCTR, KCHOL, KRDMD, MGROS, PETKM, PGSUS, SAHOL, SASA, SISE
+timestamp: 2026-11-27T06:43:33.850113
 source: yfinance
+successful_count: 10
+failed_count: 0
 ## data
 ```tsv
 symbol	name	market	currency	current_price	volume	market_cap	pe_ratio	pb_ratio	dividend_yield	week_52_high	week_52_low

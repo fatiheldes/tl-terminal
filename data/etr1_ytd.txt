@@ -1,6 +1,8 @@
 ## metadata
-window: 2025-12-31 .. 2026-11-26
+window: 2025-12-31 .. 2026-11-27
 base_currency: USD
+fx_series: USD (borsapy/canlidoviz)
+resolved: SPY=us, QQQ=us, IWM=us, VTI=us, ACWI=us, EFA=us, EEM=us, VEA=us, VWO=us, VXUS=us
 ## comparison
 ```tsv
 asset	market	currency	price_basis	start_date	end_date	start_price	end_price	return_try	return_usd
@@ -15,3 +17,4 @@ QQQ	us	USD	last	2025-12-31	2026-11-25	614.31	633.93	0.2173	0.0319
 EEM	us	USD	last	2025-12-31	2026-11-25	54.71	56.4	0.216	0.0309
 VWO	us	USD	last	2025-12-31	2026-11-25	53.76	52.78	0.1581	-0.0182
 ```
+> Not: Returns are PRICE returns and exclude dividends. Splits are adjusted.

@@ -1,8 +1,17 @@
 ## metadata
 market: us
+symbols: ^NDX
+timestamp: 2026-11-27T06:39:25.905261
 source: yfinance
+successful_count: 1
+failed_count: 0
 ## data
-```tsv
-symbol	name	market	currency	current_price	volume	week_52_high	week_52_low	avg_volume
-^NDX	NASDAQ-100	us	USD	26046.9004	11362660000	31361.3691	22841.4199	8580377500
-```
+symbol: ^NDX
+name: NASDAQ-100
+market: us
+currency: USD
+current_price: 26046.9004
+volume: 11362660000
+week_52_high: 31361.3691
+week_52_low: 22841.4199
+avg_volume: 8580377500

@@ -1,4 +1,4 @@
-Bugünün tarihi: 26-11-2026
+Bugünün tarihi: 27-11-2026
 
 | Tarih | TP_TUKFIY2025_GENEL | TP_FE25_OKTG03 | TP_FE25_OKTG04 | TP_FE25_OKTG09 | TP_FE25_OKTG10 | TP_FE25_OKTG18 | TP_FE25_OKTG23 | TP_FE25_OKTG24 | TP_TUFE1YI_T1 | TP_KFE_TR |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |

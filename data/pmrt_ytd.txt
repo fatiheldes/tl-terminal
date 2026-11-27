@@ -1,17 +1,20 @@
 ## metadata
-window: 2025-12-31 .. 2026-11-26
+window: 2025-12-31 .. 2026-11-27
 base_currency: TRY
+fx_series: USD (borsapy/canlidoviz)
+resolved: ISGYO=bist, TRGYO=bist, ZRGYO=bist, OZKGY=bist, ISGSY=bist, GOZDE=bist, HDFGS=bist, VERTU=bist, KLGYO=bist, SNGYO=bist
 ## comparison
 ```tsv
 asset	market	currency	price_basis	start_date	end_date	start_price	end_price	return_try	return_usd
-TRGYO	bist	TRY	last	2025-12-31	2026-11-26	74	82.75	0.1182	-0.052
-ISGSY	bist	TRY	last	2025-12-31	2026-11-26	11.5836	10.69	-0.0771	-0.2176
-ISGYO	bist	TRY	last	2025-12-31	2026-11-26	21	17.62	-0.161	-0.2887
-ZRGYO	bist	TRY	last	2025-12-31	2026-11-26	23.44	18.59	-0.2069	-0.3277
-OZKGY	bist	TRY	last	2025-12-31	2026-11-26	14.22	11.09	-0.2201	-0.3389
-GOZDE	bist	TRY	last	2025-12-31	2026-11-26	21.72	14.25	-0.3439	-0.4438
-VERTU	bist	TRY	last	2025-12-31	2026-11-26	42.3	23.8	-0.4374	-0.523
-KLGYO	bist	TRY	last	2025-12-31	2026-11-26	6.09	3.35	-0.4499	-0.5337
-SNGYO	bist	TRY	last	2025-12-31	2026-11-26	4.54	2.32	-0.489	-0.5668
+TRGYO	bist	TRY	last	2025-12-31	2026-11-26	74	82.75	0.1182	-0.0519
+ISGSY	bist	TRY	last	2025-12-31	2026-11-26	11.5836	10.69	-0.0771	-0.2175
+ISGYO	bist	TRY	last	2025-12-31	2026-11-26	21	17.62	-0.161	-0.2886
+ZRGYO	bist	TRY	last	2025-12-31	2026-11-26	23.44	18.59	-0.2069	-0.3276
+OZKGY	bist	TRY	last	2025-12-31	2026-11-26	14.22	11.09	-0.2201	-0.3387
+GOZDE	bist	TRY	last	2025-12-31	2026-11-26	21.72	14.25	-0.3439	-0.4437
+VERTU	bist	TRY	last	2025-12-31	2026-11-26	42.3	23.8	-0.4374	-0.5229
+KLGYO	bist	TRY	last	2025-12-31	2026-11-26	6.09	3.35	-0.4499	-0.5336
+SNGYO	bist	TRY	last	2025-12-31	2026-11-26	4.54	2.32	-0.489	-0.5667
 HDFGS	bist	TRY	last	2025-12-31	2026-11-26	3.15	1.04	-0.6698	-0.7201
 ```
+> Not: Returns are PRICE returns and exclude dividends. Splits are adjusted.

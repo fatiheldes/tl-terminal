@@ -1,39 +1,57 @@
 ## metadata
 market: fund
 symbols: ZBJ
+timestamp: 2026-11-27T06:54:54.168369
+source: borsapy
+successful_count: 1
+failed_count: 0
 ## fund
 code: ZBJ
 name: ZİRAAT PORTFÖY BAŞAK PARA PİYASASI (TL) FONU
 category: Para Piyasası Fonu
-price: 5.6968
-total_assets: 48976421419.29
-investor_count: 37946
-daily_return: 0.0488
-weekly_return: 0.6
-return_1m: 3.0302
-return_3m: 9.4136
-return_6m: 20.9484
-return_ytd: 40.6008
-return_1y: 46.1191
-return_3y: 262.3694
-category_rank: 8
+company: 
+price: 5.7
+total_assets: 48730020932.02
+investor_count: 37666
+daily_return: 0.0545
+weekly_return: 0.55
+return_1m: 2.9786
+return_3m: 9.3555
+return_6m: 20.2305
+return_ytd: 40.6774
+return_1y: 46.0429
+return_3y: 262.5668
+category_rank: 7
 category_fund_count: 86
-market_share: 3.2
+market_share: 3.22
 isin: TRYZIPO00394
+kap_link: https://www.kap.org.tr/tr/fon-bilgileri/genel/zbj-ziraat-portfoy-basak-para-piyasasi-tl-fonu
 order_cutoff_time: 13:30
+order_open_time: 09:00
 buy_valor_days: 0
 sell_valor_days: 0
 ## portfolio
-date: 2026-11-26
+date: 2026-11-27
 ### allocation
 ```tsv
 code	label	weight
-vmtl	Mevduat (TL)	41.23
-dt	Devlet Tahvili	19.79
-tr	Ters-Repo	14.15
-tpp	Takasbank Para Piyasası	13.76
-khtl	Katılma Hesabı (TL)	6.39
-ost	Özel Sektör Tahvili	2.16
-vdm	Varlığa Dayalı Menkul Kıymetler	1.5
-fb	Finansman Bonosu	1.01
+vmtl	Mevduat (TL)	41.48
+dt	Devlet Tahvili	19.86
+tr	Ters-Repo	17.66
+tpp	Takasbank Para Piyasası	9.71
+khtl	Katılma Hesabı (TL)	6.43
+ost	Özel Sektör Tahvili	2.38
+vdm	Varlığa Dayalı Menkul Kıymetler	1.45
+fb	Finansman Bonosu	1.02
+```
+## recent_prices
+```tsv
+date	price
+2026-11-27	5.7
+2026-11-26	5.6968
+2026-11-25	5.6941
+2026-11-24	5.6897
+2026-11-23	5.6847
+2026-11-20	5.6685
+2026-11-19	5.6629
 ```

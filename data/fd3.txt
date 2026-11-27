@@ -1,38 +1,56 @@
 ## metadata
 market: fund
 symbols: GTA
+timestamp: 2026-11-27T06:54:54.239106
+source: borsapy
+successful_count: 1
+failed_count: 0
 ## fund
 code: GTA
 name: GARANTİ PORTFÖY ALTIN FONU
 category: Altın Fonu
-price: 1.4132
-total_assets: 20657670766.87
-investor_count: 69800
-daily_return: -2.2182
-weekly_return: -3.05
-return_1m: -7.0762
-return_3m: -16.5978
-return_6m: -11.2609
-return_ytd: -3.8703
-return_1y: 1.6842
-return_3y: 185.4711
-return_5y: 648.4512
+company: 
+price: 1.4155
+total_assets: 20595928362.38
+investor_count: 69760
+daily_return: 0.1625
+weekly_return: -2.08
+return_1m: -6.9061
+return_3m: -16.2977
+return_6m: -11.1003
+return_ytd: -3.7141
+return_1y: 1.6016
+return_3y: 185.935
+return_5y: 641.0531
 category_rank: 16
 category_fund_count: 30
-market_share: 12.75
+market_share: 12.68
 isin: TRYGRAN00027
+kap_link: https://www.kap.org.tr/tr/fon-bilgileri/genel/gta-garanti-portfoy-altin-fonu
 order_cutoff_time: 17:45
+order_open_time: 09:00
 buy_valor_days: 1
 sell_valor_days: 1
 ## portfolio
-date: 2026-11-26
+date: 2026-11-27
 ### allocation
 ```tsv
 code	label	weight
-kmkks	Kıymetli Madenler Cinsinden İhraç Edilen Kamu Kira Sertifikaları	52.27
-km	Kıymetli Madenler	44.71
-kmkba	Kıymetli Madenler Cinsinden İhraç Edilen Kamu Borçlanma Araçları	2.88
-vmd	Mevduat (Döviz)	0.09
-vmtl	Mevduat (TL)	0.03
+kmkks	Kıymetli Madenler Cinsinden İhraç Edilen Kamu Kira Sertifikaları	52.71
+km	Kıymetli Madenler	44.12
+kmkba	Kıymetli Madenler Cinsinden İhraç Edilen Kamu Borçlanma Araçları	2.91
+vmtl	Mevduat (TL)	0.16
+vmd	Mevduat (Döviz)	0.1
 vint	Vadeli İşlemler Nakit Teminatları	0.01
+```
+## recent_prices
+```tsv
+date	price
+2026-11-27	1.4155
+2026-11-26	1.4132
+2026-11-25	1.4453
+2026-11-24	1.4379
+2026-11-23	1.404
+2026-11-20	1.4456
+2026-11-19	1.4576
 ```

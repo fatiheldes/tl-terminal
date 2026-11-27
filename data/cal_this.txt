@@ -1,6 +1,13 @@
+## metadata
+market: fx
+symbols: calendar
+source: borsapy
+timestamp: 2026-11-27T06:49:58.141922
 ## events
 ```tsv
 date	time	country	event	importance	previous
 2026-11-30	2026-11-30 10:00:00	TR	Dış Ticaret Dengesi (Final) (-)	high	-5,16
 2026-11-30	2026-11-30 10:00:00	TR	İşsizlik Oranı (-)	high	%8,4
 ```
+period: this_week
+country_filter: TR

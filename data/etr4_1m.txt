@@ -1,17 +1,20 @@
 ## metadata
-window: 2026-10-26 .. 2026-11-26
+window: 2026-10-27 .. 2026-11-27
 base_currency: USD
+fx_series: USD (borsapy/canlidoviz)
+resolved: EWJ=us, EWG=us, EWU=us, FXI=us, INDA=us, EWZ=us, EWW=us, TUR=us, EWY=us, EZU=us
 ## comparison
 ```tsv
 asset	market	currency	price_basis	start_date	end_date	start_price	end_price	return_try	return_usd
-INDA	us	USD	last	2026-10-26	2026-11-25	46.59	53.2	0.1622	0.1419
-EZU	us	USD	last	2026-10-26	2026-11-25	64.93	63.27	-0.0082	-0.0256
-EWW	us	USD	last	2026-10-26	2026-11-25	75.3	73.34	-0.0087	-0.026
-EWG	us	USD	last	2026-10-26	2026-11-25	41.24	40.08	-0.0108	-0.0281
-EWU	us	USD	last	2026-10-26	2026-11-25	47.61	46.12	-0.014	-0.0313
-FXI	us	USD	last	2026-10-26	2026-11-25	32.51	31.3	-0.0201	-0.0372
-TUR	us	USD	last	2026-10-26	2026-11-25	30.82	29.08	-0.0397	-0.0565
-EWJ	us	USD	last	2026-10-26	2026-11-25	94.28	87.25	-0.0581	-0.0746
-EWZ	us	USD	last	2026-10-26	2026-11-25	34.15	30.16	-0.1011	-0.1168
-EWY	us	USD	last	2026-10-26	2026-11-25	152.72	129.19	-0.139	-0.1541
+INDA	us	USD	last	2026-10-27	2026-11-25	46.74	53.2	0.1576	0.1382
+EWW	us	USD	last	2026-10-27	2026-11-25	75	73.34	-0.0055	-0.0221
+EWU	us	USD	last	2026-10-27	2026-11-25	47.19	46.12	-0.006	-0.0227
+EWG	us	USD	last	2026-10-27	2026-11-25	41.52	40.08	-0.0182	-0.0347
+EZU	us	USD	last	2026-10-27	2026-11-25	65.59	63.27	-0.0189	-0.0354
+FXI	us	USD	last	2026-10-27	2026-11-25	32.5	31.3	-0.0205	-0.0369
+TUR	us	USD	last	2026-10-27	2026-11-25	30.83	29.08	-0.0407	-0.0568
+EWJ	us	USD	last	2026-10-27	2026-11-25	95.25	87.25	-0.0684	-0.084
+EWZ	us	USD	last	2026-10-27	2026-11-25	34.3	30.16	-0.1057	-0.1207
+EWY	us	USD	last	2026-10-27	2026-11-25	157.46	129.19	-0.1655	-0.1795
 ```
+> Not: Returns are PRICE returns and exclude dividends. Splits are adjusted.

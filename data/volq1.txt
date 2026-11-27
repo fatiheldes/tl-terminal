@@ -1,6 +1,10 @@
 ## metadata
 market: us
+symbols: ^VIX9D, ^VIX, ^VIX3M, ^VIX6M, ^VIX1Y, ^VVIX, ^SKEW, ^MOVE, ^VXN, ^VXD
+timestamp: 2026-11-27T06:39:25.903969
 source: yfinance
+successful_count: 10
+failed_count: 0
 ## data
 ```tsv
 symbol	name	market	currency	current_price	volume	week_52_high	week_52_low	avg_volume

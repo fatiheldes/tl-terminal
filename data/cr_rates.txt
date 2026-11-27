@@ -1,4 +1,4 @@
-Bugünün tarihi: 26-11-2026
+Bugünün tarihi: 27-11-2026
 
 | Tarih | YEARWEEK | TP_KTFTUK | TP_KTF101 | TP_KTF11 | TP_KTF12 | TP_KTF17 | TP_KTF18 | TP_KTF17_USD | TP_KTF17_EUR | TP_TRY_MT06 | TP_USD_MT06 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |

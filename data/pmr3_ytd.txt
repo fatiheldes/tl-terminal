@@ -1,6 +1,8 @@
 ## metadata
-window: 2025-12-31 .. 2026-11-26
+window: 2025-12-31 .. 2026-11-27
 base_currency: USD
+fx_series: USD (borsapy/canlidoviz)
+resolved: VNQ=us, REET=us, IGF=us, IPO=us, ARKK=us, PAVE=us, VNQI=us, SRVR=us
 ## comparison
 ```tsv
 asset	market	currency	price_basis	start_date	end_date	start_price	end_price	return_try	return_usd
@@ -13,3 +15,4 @@ VNQI	us	USD	last	2025-12-31	2026-11-25	45.84	42.93	0.1047	-0.0635
 SRVR	us	USD	last	2025-12-31	2026-11-25	28.64	26.18	0.0783	-0.0859
 ARKK	us	USD	last	2025-12-31	2026-11-25	76.92	67.36	0.033	-0.1243
 ```
+> Not: Returns are PRICE returns and exclude dividends. Splits are adjusted.

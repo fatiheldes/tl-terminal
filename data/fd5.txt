@@ -1,27 +1,34 @@
 ## metadata
 market: fund
 symbols: IPV
+timestamp: 2026-11-27T06:54:58.700374
+source: borsapy
+successful_count: 1
+failed_count: 0
 ## fund
 code: IPV
 name: İŞ PORTFÖY EUROBOND BORÇLANMA ARAÇLARI (DÖVİZ) FONU
 category: Borçlanma Araçları Fonu
-price: 82.0451
-total_assets: 2189135308.72
+company: 
+price: 82.1131
+total_assets: 2190947559.26
 investor_count: 11740
-daily_return: -0.3053
-weekly_return: -0.27
-return_1m: 1.7883
-return_3m: 4.3577
-return_6m: 11.6567
-return_ytd: 19.399
-return_1y: 23.0005
-return_3y: 113.414
-return_5y: 468.3795
-category_rank: 69
+daily_return: 0.0828
+weekly_return: -0.14
+return_1m: 1.6995
+return_3m: 4.3876
+return_6m: 11.5944
+return_ytd: 19.4978
+return_1y: 23.055
+return_3y: 113.5906
+return_5y: 465.3915
+category_rank: 68
 category_fund_count: 87
-market_share: 0.97
+market_share: 0.99
 isin: TRYISPO00100
+kap_link: https://www.kap.org.tr/tr/fon-bilgileri/genel/ipv-is-portfoy-eurobond-borclanma-araclari-doviz-fonu
 order_cutoff_time: 17:45
+order_open_time: 09:00
 buy_valor_days: 1
 sell_valor_days: 3
 ## portfolio
@@ -36,4 +43,15 @@ tr	Ters-Repo	4.08
 gsykb	Girişim Sermayesi Yatırım Fonları Katılma Payları	3.82
 gykb	Gayrimenkul Yatırım Fonları Katılma Payları	0.87
 d	Diğer	0.12
+```
+## recent_prices
+```tsv
+date	price
+2026-11-27	82.1131
+2026-11-26	82.0451
+2026-11-25	82.2964
+2026-11-24	82.2215
+2026-11-23	82.1317
+2026-11-20	82.2258
+2026-11-19	82.2639
 ```

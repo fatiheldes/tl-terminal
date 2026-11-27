@@ -1,6 +1,10 @@
 ## metadata
 market: us
+symbols: ^IRX, ^FVX, ^TNX, ^TYX, TLT, IEF, SHY, EMB, EMLC, HYG
+timestamp: 2026-11-27T06:40:56.069926
 source: yfinance
+successful_count: 10
+failed_count: 0
 ## data
 ```tsv
 symbol	name	market	currency	current_price	volume	week_52_high	week_52_low	avg_volume	pb_ratio	dividend_yield	pe_ratio
@@ -8,7 +12,7 @@ symbol	name	market	currency	current_price	volume	week_52_high	week_52_low	avg_vo
 ^FVX	Treasury Yield 5 Years	us	USD	4.66	0	5.153	3.507	0			
 ^TNX	CBOE Interest Rate 10 Year T Note	us	USD	4.848	0	5.364	3.956	0			
 ^TYX	Treasury Yield 30 Years	us	USD	5.235	0	5.732	4.627	0			
-TLT	iShares 20+ Year Treasury Bond ETF	us	USD	82.24	48928800	90.86	76.43	40539448	0.55	4.76	
+TLT	iShares 20+ Year Treasury Bond ETF	us	USD	82.24	48998300	90.86	76.43	40540534	0.55	4.76	
 IEF	iShares 7-10 Year Treasury Bond ETF	us	USD	92.06	12866200	98.05	88.64	11218595	0.79	4.05	
 SHY	iShares 1-3 Year Treasury Bond ETF	us	USD	81.64	6974800	83.2	80.95	4987514	0.95	3.61	3710.91
 EMB	iShares J.P. Morgan USD Emerging Markets Bond ETF	us	USD	90.73	10680400	97.8	89.69	8206685		5.37	

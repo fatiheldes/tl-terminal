@@ -1,4 +1,4 @@
-Bugünün tarihi: 26-11-2026
+Bugünün tarihi: 27-11-2026
 
 | Tarih | TP_TSANAYMT2021_BCD | TP_TSANAYMT2021_C | TP_KKO_MA | TP_GY1_N2 | TP_TG2_Y01 | TP_TIG08 | TP_TIG06 | TP_TIG07 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |

@@ -1,6 +1,10 @@
 ## metadata
 market: bist
+symbols: XINSA, XTRZM, XSGRT, XILTM, XTEKS, XMESY, XTAST, XUMAL, XKAGT, XFINK
+timestamp: 2026-11-27T06:43:14.386480
 source: yfinance
+successful_count: 10
+failed_count: 0
 ## data
 ```tsv
 symbol	name	market	currency	current_price	week_52_high	week_52_low

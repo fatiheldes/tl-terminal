@@ -1,6 +1,8 @@
 ## metadata
-window: 2025-12-31 .. 2026-11-26
+window: 2025-12-31 .. 2026-11-27
 base_currency: USD
+fx_series: USD (borsapy/canlidoviz)
+resolved: XLK=us, XLF=us, XLE=us, XLV=us, XLI=us, XLY=us, XLP=us, XLU=us, XLB=us, XLC=us
 ## comparison
 ```tsv
 asset	market	currency	price_basis	start_date	end_date	start_price	end_price	return_try	return_usd
@@ -15,3 +17,4 @@ XLU	us	USD	last	2025-12-31	2026-11-25	42.69	43.61	0.205	0.0216
 XLY	us	USD	last	2025-12-31	2026-11-25	119.41	117.49	0.1606	-0.0161
 XLC	us	USD	last	2025-12-31	2026-11-25	117.72	105.38	0.0559	-0.1048
 ```
+> Not: Returns are PRICE returns and exclude dividends. Splits are adjusted.

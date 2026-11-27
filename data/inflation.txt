@@ -1,3 +1,15 @@
+## metadata
+market: fx
+symbols: inflation
+timestamp: 2026-11-27T06:40:30.088346
+source: tcmb
+successful_count: 1
+failed_count: 0
+data_type: inflation
+region: tr
+currency: TRY
+source: TCMB
+inflation_type: tufe
 ## inflation_data
 ```tsv
 date	rate	change

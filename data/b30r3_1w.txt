@@ -1,17 +1,20 @@
 ## metadata
-window: 2026-11-19 .. 2026-11-26
+window: 2026-11-20 .. 2026-11-27
 base_currency: TRY
+fx_series: USD (borsapy/canlidoviz)
+resolved: TAVHL=bist, TCELL=bist, THYAO=bist, TOASO=bist, TRALT=bist, TRMET=bist, TTKOM=bist, TUPRS=bist, VAKBN=bist, YKBNK=bist
 ## comparison
 ```tsv
 asset	market	currency	price_basis	start_date	end_date	start_price	end_price	return_try	return_usd
-TOASO	bist	TRY	last	2026-11-19	2026-11-26	249.3	244.8	-0.0181	-0.0223
-TUPRS	bist	TRY	last	2026-11-19	2026-11-26	334.75	323.25	-0.0344	-0.0385
-TAVHL	bist	TRY	last	2026-11-19	2026-11-26	291.5	281	-0.036	-0.0402
-VAKBN	bist	TRY	last	2026-11-19	2026-11-26	33.36	31.58	-0.0534	-0.0574
-THYAO	bist	TRY	last	2026-11-19	2026-11-26	328.25	309.75	-0.0564	-0.0604
-TCELL	bist	TRY	last	2026-11-19	2026-11-26	93.05	86.55	-0.0699	-0.0739
-TRALT	bist	TRY	last	2026-11-19	2026-11-26	35.64	33.02	-0.0735	-0.0775
-TTKOM	bist	TRY	last	2026-11-19	2026-11-26	48.8	44.76	-0.0828	-0.0867
-YKBNK	bist	TRY	last	2026-11-19	2026-11-26	36.76	33.52	-0.0881	-0.0921
-TRMET	bist	TRY	last	2026-11-19	2026-11-26	110.4	96.8	-0.1232	-0.127
+TUPRS	bist	TRY	last	2026-11-20	2026-11-26	322.75	323.25	0.0015	-0.0004
+TOASO	bist	TRY	last	2026-11-20	2026-11-26	246.5	244.8	-0.0069	-0.0089
+TAVHL	bist	TRY	last	2026-11-20	2026-11-26	284.75	281	-0.0132	-0.0151
+VAKBN	bist	TRY	last	2026-11-20	2026-11-26	33	31.58	-0.043	-0.0449
+TCELL	bist	TRY	last	2026-11-20	2026-11-26	90.85	86.55	-0.0473	-0.0492
+TTKOM	bist	TRY	last	2026-11-20	2026-11-26	47.48	44.76	-0.0573	-0.0591
+THYAO	bist	TRY	last	2026-11-20	2026-11-26	329	309.75	-0.0585	-0.0604
+TRALT	bist	TRY	last	2026-11-20	2026-11-26	35.3	33.02	-0.0646	-0.0664
+YKBNK	bist	TRY	last	2026-11-20	2026-11-26	36.16	33.52	-0.073	-0.0748
+TRMET	bist	TRY	last	2026-11-20	2026-11-26	105.3	96.8	-0.0807	-0.0825
 ```
+> Not: Returns are PRICE returns and exclude dividends. Splits are adjusted.

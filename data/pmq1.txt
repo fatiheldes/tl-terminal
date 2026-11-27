@@ -1,5 +1,10 @@
 ## metadata
+market: us
+symbols: BX, KKR, APO, ARES, CG, TPG, BAM, OWL, III.L, PGHN.SW
+timestamp: 2026-11-27T06:45:02.783805
 source: yfinance
+successful_count: 10
+failed_count: 0
 ## data
 ```tsv
 symbol	name	market	currency	current_price	volume	market_cap	pe_ratio	pb_ratio	roe	dividend_yield	week_52_high	week_52_low	avg_volume	beta
@@ -11,6 +16,6 @@ CG	The Carlyle Group Inc.	us	USD	39.44	3859700	13958396938.4521	41.52	2.79	0.052
 TPG	TPG Inc.	us	USD	47.24	1934100	8222093097.8161	51.35	6.07	0.1919	4.95	70.38	36.95	2660676	1.461
 BAM	Brookfield Asset Management Ltd.	us	USD	52.12	2168400	83281409868.802	17.67	8.84	0.4229	3.86	55.975	42.2	3084112	1.322
 OWL	Blue Owl Capital Inc.	us	USD	9.21	19090000	6380496034.7674	65.79	3.32	0.0641	9.93	17	7.95	19713182	1.274
-III.L	3i Group Ord	us	GBp	2780	1581371	2812737141000	7.77	0.88	0.1201	3.11	3626	1825	2147427	1.171
-PGHN.SW	Partners Group Holding AG	us	CHF	638.6	125818	16450249160.097	13.94	11.24	0.7539	7.32	1097.5	582.6	120403	0.988
+III.L	3i Group Ord	us	GBp	2780	1581371	2812737141000	7.77	0.88	0.1201	3.25	3626	1825	2147427	1.171
+PGHN.SW	Partners Group Holding AG	us	CHF	638.6	125695	16450249160.097	13.94	11.24	0.7539	7.2	1097.5	582.6	120403	0.988
 ```

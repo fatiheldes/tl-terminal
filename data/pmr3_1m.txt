@@ -1,15 +1,18 @@
 ## metadata
-window: 2026-10-26 .. 2026-11-26
+window: 2026-10-27 .. 2026-11-27
 base_currency: USD
+fx_series: USD (borsapy/canlidoviz)
+resolved: VNQ=us, REET=us, IGF=us, IPO=us, ARKK=us, PAVE=us, VNQI=us, SRVR=us
 ## comparison
 ```tsv
 asset	market	currency	price_basis	start_date	end_date	start_price	end_price	return_try	return_usd
-VNQ	us	USD	last	2026-10-26	2026-11-25	93.17	95.66	0.045	0.0267
-REET	us	USD	last	2026-10-26	2026-11-25	26.27	26.9	0.0422	0.024
-IGF	us	USD	last	2026-10-26	2026-11-25	64.7	65.71	0.0337	0.0156
-VNQI	us	USD	last	2026-10-26	2026-11-25	42.9	42.93	0.0185	0.0007
-PAVE	us	USD	last	2026-10-26	2026-11-25	52.13	51.38	0.0032	-0.0144
-SRVR	us	USD	last	2026-10-26	2026-11-25	27.63	26.18	-0.0356	-0.0525
-IPO	us	USD	last	2026-10-26	2026-11-25	48.48	43.54	-0.0859	-0.1019
-ARKK	us	USD	last	2026-10-26	2026-11-25	81.84	67.36	-0.1623	-0.1769
+VNQ	us	USD	last	2026-10-27	2026-11-25	92.39	95.66	0.0531	0.0354
+REET	us	USD	last	2026-10-27	2026-11-25	26.14	26.9	0.0466	0.0291
+IGF	us	USD	last	2026-10-27	2026-11-25	64.94	65.71	0.0291	0.0119
+VNQI	us	USD	last	2026-10-27	2026-11-25	42.77	42.93	0.0209	0.0037
+PAVE	us	USD	last	2026-10-27	2026-11-25	52.96	51.38	-0.0133	-0.0298
+SRVR	us	USD	last	2026-10-27	2026-11-25	28.01	26.18	-0.0494	-0.0653
+IPO	us	USD	last	2026-10-27	2026-11-25	49.53	43.54	-0.1059	-0.1209
+ARKK	us	USD	last	2026-10-27	2026-11-25	84.78	67.36	-0.1919	-0.2055
 ```
+> Not: Returns are PRICE returns and exclude dividends. Splits are adjusted.

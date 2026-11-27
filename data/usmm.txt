@@ -1,10 +1,17 @@
+## metadata
+market: us
+symbols: BIL, SGOV, SHV, USFR, TFLO, MINT, JPST, ICSH, GBIL, TBLL
+timestamp: 2026-11-27T06:41:04.058527
+source: yfinance
+successful_count: 10
+failed_count: 0
 ## data
 ```tsv
 symbol	name	market	currency	current_price	volume	dividend_yield	week_52_high	week_52_low	avg_volume
-BIL	State Street SPDR Bloomberg 1-3 Month T-Bill ETF	us	USD	91.64	11338100	3.66	91.73	91.26	11973070
-SGOV	iShares 0-3 Month Treasury Bond ETF	us	USD	100.68	31437300	3.64	100.74	100.27	24122631
+BIL	State Street SPDR Bloomberg 1-3 Month T-Bill ETF	us	USD	91.64	11381300	3.66	91.73	91.26	11973745
+SGOV	iShares 0-3 Month Treasury Bond ETF	us	USD	100.68	31710200	3.64	100.74	100.27	24126895
 SHV	iShares 0–1 Year Treasury Bond ETF	us	USD	110.32	5510800	3.63	110.46	109.86	3925690
-USFR	WisdomTree Floating Rate Treasury Fund	us	USD	50.37	8417400	3.71	50.54	50.28	6914171
+USFR	WisdomTree Floating Rate Treasury Fund	us	USD	50.37	8465700	3.71	50.54	50.28	6914926
 TFLO	iShares Treasury Floating Rate Bond ETF	us	USD	50.66	1941300	3.72	50.71	50.39	2158184
 MINT	PIMCO Enhanced Short Maturity Active Exchange-Traded Fund	us	USD	100.65	1961000	4.08	100.82	100.23	2160645
 JPST	JPMorgan Ultra-Short Income ETF	us	USD	50.36	6939800	4.13	50.79	50.2	8008298
