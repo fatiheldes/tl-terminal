@@ -47,7 +47,7 @@ def main():
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="refresh" content="1800">
-<title>TL Rates Terminal</title>
+<title>Ağababa Terminal</title>
 {style}
 <script>{read('vendor/d3.min.js')}</script>
 <script>{safe(data_js)}</script>
@@ -70,6 +70,7 @@ def main():
 <script>{read('src/dercr.js')}</script>
 <script>{read('src/private.js')}</script>
 <script>{read('src/overview.js')}</script>
+<script>{read('src/pulse.js')}</script>
 <script>{read('src/nav.js')}</script>
 </body>
 </html>

@@ -6,7 +6,8 @@ html, body { margin: 0; background: #000; }
 .bt * { box-sizing: border-box; }
 .bt-top { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; padding: 3px 4px 4px; border-bottom: 2px solid var(--am); }
 .bt-top h1 { margin: 0; font-size: 14px; font-weight: 700; color: var(--am); letter-spacing: .1em; }
-.bt-top .tag { color: var(--mu); font-size: 11px; letter-spacing: .06em; }
+.bt-top .tag { color: var(--mu); font-size: 11px; letter-spacing: .06em; flex: 1 1 0; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+@media (max-width: 1100px) { .bt-top .tag { display: none; } }
 .bt-top .upd { color: var(--up); font-size: 11px; white-space: nowrap; }
 .bt-top .clk { margin-left: auto; font-size: 12px; white-space: nowrap; }
 .tape { overflow: hidden; border: 1px solid var(--ln); background: #0a0a0a; white-space: nowrap; height: 22px; position: relative; }
@@ -71,6 +72,22 @@ html, body { margin: 0; background: #000; }
   .kv .v.flash, .heat div.flash { animation: flash 1.1s ease-out 1; }
   .pn.enter { animation: enter .45s ease-out both; }
 }
+.bt-top .csep { color: #444; margin: 0 8px; }
+.pn h2 .live { color: var(--up); font-size: 10px; letter-spacing: .08em; margin-left: 8px; font-weight: 700; }
+.pn h2 .live i { font-style: normal; }
+.cmd-cur { color: var(--yl); font-size: 12px; margin-right: -4px; }
+@media (prefers-reduced-motion: no-preference) {
+  .tk-up { animation: tkup 1.3s ease-out 1; }
+  .tk-dn { animation: tkdn 1.3s ease-out 1; }
+  .tk-am { animation: tkam 1.3s ease-out 1; }
+  .alerts div.high .lv { animation: blink 1s steps(2, start) infinite; }
+  .ov-gl { animation: glow 2.4s ease-in-out infinite; }
+  .bt-top .clk [data-draw] { text-shadow: 0 0 6px rgba(255,160,40,.35); }
+}
+@keyframes tkup { 0% { background: rgba(46,230,107,.6); color: #000; } 35% { background: rgba(46,230,107,.3); } 100% { background: transparent; } }
+@keyframes tkdn { 0% { background: rgba(255,69,69,.65); color: #fff; } 35% { background: rgba(255,69,69,.3); } 100% { background: transparent; } }
+@keyframes tkam { 0% { background: rgba(255,160,40,.5); color: #000; } 100% { background: transparent; } }
+@keyframes glow { 50% { opacity: .45; } }
 @keyframes blink { to { visibility: hidden; } }
 @keyframes flash { 0% { background: rgba(255,160,40,.35); } 100% { background: transparent; } }
 @keyframes enter { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
@@ -147,10 +164,10 @@ ul.soon li::marker { color: var(--am); }
 
 <div class="bt">
   <header class="bt-top">
-    <h1>TL RATES TERMINAL</h1>
+    <h1>AĞABABA TERMINAL</h1>
     <span class="tag">EQUITIES · FIXED INCOME · FX · COMMODITIES · DERIVATIVES · MONEY MARKETS · ECONOMICS · FUNDS · CREDIT · PRIVATE</span>
     <span class="upd"><span class="blink">●</span> UPDATED: __ASOF__</span>
-    <span class="clk">ISTANBUL <span data-draw="saat">—</span></span>
+    <span class="clk">ISTANBUL <span data-draw="saat">—</span><span class="csep">│</span>JERUSALEM <span data-draw="saat-jer">—</span></span>
   </header>
 
   <div class="tape" aria-label="Price ticker"><div class="tape-in" data-draw="tape"></div></div>
@@ -186,10 +203,10 @@ ul.soon li::marker { color: var(--am); }
 <div class="fnbar" role="tablist" style="margin-top:4px"><button data-fn="MKT" aria-selected="true"><b>MKT</b>Cross-asset overview</button><button data-fn="TRMK" aria-selected="false"><b>TRMK</b>Türkiye snapshot · alerts · charts</button></div>
 <div class="fsub" data-fn="MKT">
 <div class="g ov-main" style="margin-top:4px">
-<div class="pn"><h2><span class="n">MKT 1</span>Cross-asset monitor<span class="s">hover a row for units and sources · range: 52 weeks (Türkiye rates: available history)</span></h2><div class="bd"><div class="tw"><table class="tb sticky"><thead><tr><th>Asset</th><th class="r">Last</th><th class="r">1W</th><th class="r">1M</th><th>Range</th><th class="r">From high</th><th>Trend</th></tr></thead><tbody data-draw="ov-mon"></tbody></table></div>
+<div class="pn"><h2><span class="n">MKT 1</span>Cross-asset monitor<span class="live"><i class="blink">●</i> LIVE</span><span class="s">hover a row for units and sources · range: 52 weeks (Türkiye rates: available history)</span></h2><div class="bd"><div class="tw"><table class="tb sticky"><thead><tr><th>Asset</th><th class="r">Last</th><th class="r">1W</th><th class="r">1M</th><th>Range</th><th class="r">From high</th><th>Trend</th></tr></thead><tbody data-draw="ov-mon"></tbody></table></div>
 <p class="note">Equity indices in local currency; commodities are front-month futures; FX shows the change of the quoted pair (USD/TRY up = lira weaker). Cell colours show the market-friendly direction: green for higher equity and bond prices, lower yields and lower volatility. Trend lines are weekly over six months, daily for Türkiye rates.</p></div></div>
 <div class="ov-side">
-<div class="pn"><h2><span class="n">MKT 2</span>Risk regime<span class="s">ten rule-based signals · hover for the rule</span></h2><div class="bd"><div data-draw="ov-regime"></div></div></div>
+<div class="pn"><h2><span class="n">MKT 2</span>Risk regime<span class="live"><i class="blink">●</i> SIGNAL</span><span class="s">ten rule-based signals · hover for the rule</span></h2><div class="bd"><div data-draw="ov-regime"></div></div></div>
 <div class="pn" style="margin-top:4px"><h2><span class="n">MKT 3</span>Türkiye at a glance<span class="s">click a tile to open its tab</span></h2><div class="bd"><div class="ov-tiles" data-draw="ov-tr"></div></div></div>
 
 <div class="pn" style="margin-top:4px"><h2><span class="n">MKT 4</span>Cross-asset scoreboard<span class="s">USD price return · colour = asset class</span></h2><div class="bd"><div class="seg" style="margin-bottom:4px"><button data-ovp="w1" aria-pressed="false">1W</button><button data-ovp="m1" aria-pressed="true">1M</button><button data-ovp="m3" aria-pressed="false">3M</button></div><div data-draw="ov-score" aria-label="Cross-asset scoreboard"></div></div></div>
