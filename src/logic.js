@@ -96,7 +96,8 @@ C('egri', ['bills'], (bills) => {
 C('fiyatlama', ['egri', 'ozet'], (egri, ozet) => {
   const e = (egri || [])[0], o = (ozet || [])[0];
   if (!e || !o || o.aofm == null) return [];
-  return [{ kod: e.kod, gun: e.gun, ima_ortalama_on: e.ima_ortalama_on, aofm: o.aofm, aofm_farki_bp: Math.round((e.ima_ortalama_on - o.aofm) * 100) }];
+  const aOn = 365 * (Math.pow(1 + o.aofm * 7 / 36500, 1 / 7) - 1) * 100; // AWFC is a 1-week simple rate: compare on an overnight basis
+  return [{ kod: e.kod, gun: e.gun, ima_ortalama_on: e.ima_ortalama_on, aofm: o.aofm, aofm_on: R2(aOn), aofm_farki_bp: Math.round((e.ima_ortalama_on - aOn) * 100) }];
 });
 
 C('bono_gecmis', ['bills'], (bills) => {
@@ -225,7 +226,7 @@ C('uyarilar', ['ozet', 'fiyatlama', 'teknik_tablo', 'bist_tablo', 'makro_ozet', 
   const push = (seviye, konu, mesaj) => a.push({ seviye, konu, mesaj });
   if (o && Math.abs(o.tlref_aofm_bp) >= 50) push(o.tlref_aofm_bp > 0 ? 'high' : 'medium', 'TLREF', 'TLREF is ' + Math.abs(o.tlref_aofm_bp) + ' bp ' + (o.tlref_aofm_bp > 0 ? 'above the CBRT funding cost: funding is tight' : 'below the CBRT funding cost: liquidity is ample'));
   if (o && Math.abs(o.tlref_degisim_bp) >= 50) push('high', 'TLREF', 'TLREF moved ' + (o.tlref_degisim_bp > 0 ? '+' : '') + o.tlref_degisim_bp + ' bp in one day');
-  if (f && f.aofm_farki_bp <= -200) push('medium', 'OIS', 'Bills price the O/N rate ' + Math.abs(f.aofm_farki_bp) + ' bp below the CBRT funding cost over ' + f.gun + ' days: strong easing expectations');
+  if (f && f.aofm_farki_bp <= -200) push('medium', 'OIS', 'Bills price the O/N rate ' + Math.abs(f.aofm_farki_bp) + ' bp below the CBRT funding cost over ' + f.gun + ' days (O/N basis); bills usually trade rich, see OIS for the cut pricing');
   (tk || []).forEach((r) => { if (r.rsi != null && r.rsi < 30) push('medium', r.symbol, 'RSI ' + r.rsi.toFixed(1) + ': oversold'); if (r.rsi != null && r.rsi > 70) push('medium', r.symbol, 'RSI ' + r.rsi.toFixed(1) + ': overbought'); });
   (bt || []).forEach((r) => { if (r.g5 != null && r.g5 <= -5) push('low', r.symbol, 'Down ' + Math.abs(r.g5).toFixed(2) + '% in 5 days'); if (r.son && r.dip && r.son <= r.dip * 1.05) push('low', r.symbol, 'Within 5% of its 52-week low'); });
   if (m && m.rez_chg != null && m.rez_chg <= -5) push('high', 'RESERVES', 'CBRT gross reserves fell $' + Math.abs(m.rez_chg).toFixed(1) + ' bn in one week');

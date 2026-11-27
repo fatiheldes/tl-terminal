@@ -541,31 +541,28 @@ ul.soon li::marker { color: var(--am); }
 </div>
 </div>
 <div class="fsub" data-fn="OIS" hidden>
-
-    <p class="news"><span class="k">SUMMARY</span>TLREF <b data-draw="k-tlref-s">—</b> (<span data-draw="k-tlref-tarih">—</span>), <b data-draw="k-chg-s">—</b> bp vs the previous business day. T-bills price an average overnight rate of <b data-draw="f-ort">—</b> over the next <b data-draw="f-gun">—</b> days: <b data-draw="f-fark">—</b> bp <span data-draw="f-yon">—</span> the CBRT average funding cost. Survey respondents expect <b data-draw="k-ppk-s">—</b> at the next MPC meeting.</p>
+    <p class="news" data-draw="ois-sum"></p>
     <div class="kv" style="margin-top:4px">
-      <div><div class="l">TLREF O/N</div><div class="v" data-draw="k-tlref">—</div><div class="c"><span data-draw="k-chg">—</span> bp</div></div>
-      <div><div class="l">CBRT AWFC</div><div class="v" data-draw="k-aofm">—</div><div class="c">avg funding cost</div></div>
-      <div><div class="l">BIST O/N REPO</div><div class="v" data-draw="k-repo">—</div><div class="c">weighted avg.</div></div>
-      <div><div class="l">TLREF−AWFC</div><div class="v" data-draw="k-spread">—</div><div class="c">basis points</div></div>
-      <div><div class="l">IMPLIED O/N (BILLS)</div><div class="v" data-draw="k-ima">—</div><div class="c"><span data-draw="k-ima-fark">—</span> bp vs AWFC</div></div>
-      <div><div class="l">YEAR-END POLICY</div><div class="v" data-draw="k-ppk-ys">—</div><div class="c">survey expectation</div></div>
-      <div><div class="l">POLICY IN 12M</div><div class="v" data-draw="k-ppk-12">—</div><div class="c">survey expectation</div></div>
+      <div><div class="l">TLREF O/N</div><div class="v" data-draw="k-tlref">—</div><div class="c"><span data-draw="k-chg">—</span> bp on the day</div></div>
+      <div><div class="l">CBRT FUNDING RATE</div><div class="v" data-draw="k-aofm">—</div><div class="c" data-draw="ois-k-awfc-c">—</div></div>
+      <div><div class="l">USUAL BILL GAP</div><div class="v" data-draw="ois-k-gap">—</div><div class="c" data-draw="ois-k-gap-c">—</div></div>
+      <div><div class="l">NEXT MPC PRICED</div><div class="v" data-draw="ois-k-m1">—</div><div class="c" data-draw="ois-k-m1-c">—</div></div>
+      <div><div class="l">PRICED IN ~6 MONTHS</div><div class="v" data-draw="ois-k-6m">—</div><div class="c" data-draw="ois-k-6m-c">—</div></div>
+      <div><div class="l">POLICY IN 12 MONTHS</div><div class="v" data-draw="ois-k-12">—</div><div class="c" data-draw="ois-k-12-c">—</div></div>
+    </div>
+    <div style="margin-top:4px"><div class="pn"><h2><span class="n">OIS 1</span>Market-implied CBRT policy path<span class="s">piecewise-constant rate between meetings, fitted to T-bills and the government bond curve · 1-week repo terms</span></h2><div class="bd"><div data-draw="ois-path" aria-label="Market-implied CBRT policy path" style="min-height:330px"></div>
+    <p class="note">Method: the overnight rate is assumed constant between MPC meetings. Until the first meeting it equals today's funding rate plus the usual TLREF basis. After that, one rate per meeting is fitted by least squares to the T-bill discount factors (exact, high weight) and, beyond the last bill, to the fitted government bond curve (lower weight; yields to maturity treated as zero rates). A small smoothness penalty keeps the far end stable. Rates are shown in 1-week repo terms, net of the TLREF basis, so they compare directly with the funding rate and the survey. T-bills often trade rich to policy because banks hold them for liquidity, so the market path may overstate cuts. Hover for meeting detail.</p></div></div></div>
+    <div class="g w2" style="margin-top:4px">
+      <div class="pn"><h2><span class="n">OIS 2</span>Pricing by meeting<span class="s">implied rate after each MPC · * assumed date</span></h2><div class="bd"><div class="tw"><table class="tb sticky"><thead><tr><th>MPC</th><th class="r">Days</th><th class="r">Implied</th><th class="r">At mtg</th><th class="r">Cumul.</th><th class="r">1M ago</th><th class="r">Δ 1M</th><th class="r">Survey</th><th>Source</th></tr></thead><tbody data-draw="ois-meet"></tbody></table></div>
+      <div class="tt-chart sm" style="margin-top:6px" data-draw="ois-cum" aria-label="Cumulative change priced"></div></div></div>
+      <div class="pn"><h2><span class="n">OIS 3</span>TLREF curve in overnight terms<span class="s">average daily-compounded O/N rate to each maturity</span></h2><div class="bd"><div class="tt-chart" data-draw="ois-curve" aria-label="Overnight-equivalent curve"></div>
+      <div class="tw" style="margin-top:6px"><table class="tb"><thead><tr><th>Security</th><th>Coupon</th><th>Maturity</th><th class="r">Days</th><th class="r">Price</th><th class="r">Quoted yld</th><th class="r">O/N equiv.</th></tr></thead><tbody data-draw="ois-curve-t"></tbody></table></div>
+      <p class="note">CBRT indicative prices (dirty for coupon bonds). Bills: simple yield (100/P − 1) × 365/days. Bonds: compound yield to maturity. O/N equivalent converts either into the daily-compounded rate that TLREF would have to average to maturity. The 10 Feb 2027 bill and the coupon bond maturing the same day price almost identically, a check that the data are consistent. This is a synthetic OIS curve, not a dealer swap quote.</p></div></div>
     </div>
     <div class="g w2" style="margin-top:4px">
-      <div class="pn"><h2><span class="n">2.1</span>Implied O/N path<span class="s">bill forwards · simple, act/365</span></h2><div class="bd"><div class="tt-chart" data-draw="ch-patika" aria-label="Implied overnight rate path"></div></div></div>
-      <div class="pn"><h2><span class="n">2.2</span>Approximate OIS curve<span class="s">CBRT indicative prices</span></h2>
-        <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Bill</th><th>Maturity</th><th class="r">Days</th><th class="r">Price</th><th class="r">OIS equiv.</th><th class="r">Implied O/N</th><th class="r">Fwd</th></tr></thead><tbody data-draw="t-egri"></tbody></table></div>
-        <p class="note">OIS equivalent = (100/P − 1) × 365/days. Implied O/N converts that yield into a daily-compounded TLREF rate. Not an actual swap quote.</p></div></div>
-      
-      <div class="pn"><h2><span class="n">2.4</span>Bill-implied O/N history<span class="s">falling = more cuts priced</span></h2><div class="bd"><div class="tt-chart" data-draw="ch-gecmis" aria-label="Bill-implied O/N history"></div></div></div>
-      <div class="pn"><h2><span class="n">2.5</span>Policy rate expectations<span class="s">CBRT Survey of Market Participants</span></h2><div class="bd"><div class="tt-chart" data-draw="ch-ppk" aria-label="Policy rate expectations"></div></div></div>
-      <div class="pn"><h2><span class="n">2.6</span>MPC calendar &amp; market pricing<span class="s">implied forward O/N at each meeting date</span></h2>
-        <div class="bd"><div class="tw"><table class="tb"><thead><tr><th>MPC</th><th class="r">Days</th><th class="r">Implied fwd O/N</th><th class="r">vs AWFC</th><th class="r">Survey</th></tr></thead><tbody data-draw="t-ppk"></tbody></table></div>
-        <div class="tt-chart sm" style="margin-top:6px" data-draw="ch-ppk-bar" aria-label="Implied change at MPC dates"></div>
-        <p class="note">Bill forwards belong to the period that contains each meeting date and are not adjusted for the bill–repo basis, so they may overstate the size of cuts. No market data beyond the last bill's maturity.</p></div></div>
+      <div class="pn"><h2><span class="n">OIS 4</span>Track record: what bills priced vs what TLREF did<span class="s">3-month constant maturity · since June 2025</span></h2><div class="bd"><div class="tt-chart" data-draw="ois-hist" aria-label="Bill-implied vs realised overnight rate"></div><div class="tt-chart sm" style="margin-top:6px" data-draw="ois-spread" aria-label="Pricing error"></div><p class="note">Each day the bills imply an average overnight rate for the next three months (interpolated between bills). The white line shows what TLREF actually averaged over those three months. Since mid-2025 bills have priced the overnight rate well below the outcome in every window: partly cuts that did not come (the CBRT tightened in March 2026), partly a persistent richness of bills. The orange dashed line in OIS 1 shows the next three months with the median gap of the latest six months of completed windows removed.</p></div></div>
+      <div class="pn"><h2><span class="n">OIS 5</span>What economists expect<span class="s">CBRT Survey of Market Participants vs the actual policy rate · monthly</span></h2><div class="bd"><div class="tt-chart" data-draw="ois-survey" aria-label="Policy rate expectations"></div><p class="note">The year-end expectation switches to the following year every January, so each target year is drawn as its own line.</p></div></div>
     </div>
-  
 </div>
 <div class="fsub" data-fn="FUT" hidden>
 <div style="margin-top:4px"><div class="pn"><h2><span class="n">WIRP</span>US rate expectations · Fed funds &amp; SOFR futures<span class="s">implied rate = 100 − price</span></h2><div class="bd"><div class="tt-chart" style="min-height:250px" data-draw="wirp-chart" aria-label="Implied US policy rate path"></div><div class="tw" style="margin-top:6px;max-height:260px;overflow:auto"><table class="tb sticky"><thead><tr><th>Contract</th><th>Type</th><th>Month</th><th class="r">Price</th><th class="r">Implied</th><th class="r">vs policy bp</th><th class="r">vs front bp</th><th class="r">25bp moves</th></tr></thead><tbody data-draw="wirp-table"></tbody></table></div><p class="note">CME 30-day Fed funds and 3-month SOFR futures (Yahoo Finance via Borsa). The policy-rate reference is the BIS monthly series, so a decision after its last month is not reflected there; compare the front contract instead.</p></div></div></div>
