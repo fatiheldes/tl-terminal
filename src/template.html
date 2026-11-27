@@ -97,6 +97,22 @@ html, body { margin: 0; background: #000; }
 .tabs .mon[aria-pressed="true"] i { animation: prog var(--mon, 15s) linear infinite; }
 @keyframes prog { from { width: 0; } to { width: 100%; } }
 .tabs .hint { margin-left: 8px; }
+.kn-tab { color: #ffd23c !important; }
+.kn-banner { border: 1px solid #2a3a8a; background: #0b1240; }
+.kn-stripe { height: 5px; background: repeating-linear-gradient(90deg, #ffd23c 0 28px, #1b2a8b 28px 56px); }
+.kn-title { padding: 8px 12px; font-size: 22px; font-weight: 800; letter-spacing: .12em; color: #ffd23c; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.kn-title .kn-sub { font-size: 11px; font-weight: 400; letter-spacing: .06em; color: #c9d2ff; }
+.kn-title .kn-sub b { color: #ff6b6b; }
+.kn-dot { color: #ffd23c; font-size: 14px; }
+.kn-y { color: #ffd23c !important; }
+tr.kn-fb td { background: rgba(255, 210, 60, .07); }
+.kn-bar { height: 8px; background: linear-gradient(90deg, #ffa028, #ff4545); }
+.kn-gb { background: linear-gradient(90deg, #2ee66b, #ffa028 50%, #ff4545) !important; }
+.kn-wire { max-height: 560px; overflow: auto; }
+.kn-hl { display: flex; gap: 8px; padding: 4px 2px; border-bottom: 1px solid var(--ln); font-size: 11px; line-height: 1.35; color: #e6e6e6; }
+.kn-hl .kn-t { color: var(--am); flex: 0 0 34px; }
+.kn-hl:first-child { color: #ffd23c; }
+@media (prefers-reduced-motion: no-preference) { .kn-title { text-shadow: 0 0 10px rgba(255, 210, 60, .35); } .kn-hl:first-child { animation: glow 2.4s ease-in-out infinite; } }
 .ov-main { grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); }
 @media (max-width: 1100px) { .ov-main { grid-template-columns: 1fr; } }
 .ov-gauge { padding: 2px 0 8px; }
@@ -184,6 +200,7 @@ ul.soon li::marker { color: var(--am); }
     <button role="tab" data-tab="funds"><span class="k">8</span>FUNDS &amp; ETFs</button>
     <button role="tab" data-tab="credit"><span class="k">9</span>CREDIT</button>
     <button role="tab" data-tab="private"><span class="k">P</span>PRIVATE</button>
+    <button role="tab" data-tab="kaan" class="kn-tab"><span class="k">K</span>KAAN</button>
     <button class="mon" type="button" aria-pressed="false" title="Rotates through the tabs every 15 seconds">▶ MONITOR<i></i></button>
   </nav>
   <div class="cmdline"><label for="cmd">&lt;GO&gt;</label><input id="cmd" type="text" autocomplete="off" spellcheck="false" placeholder="Type a function and press Enter: BTMM, WB, OIS, WCDS, YAS, ECO …   ( / to focus · 0–9, P tabs · [ ] functions · M monitor )" aria-label="Command line"></div>
@@ -853,6 +870,35 @@ ul.soon li::marker { color: var(--am); }
 <div class="pn"><h2><span class="n">TRPM 3</span>Sales by city &amp; house prices<span class="s">latest month vs a year earlier</span></h2><div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Units</th><th class="r">Latest</th><th class="r">Year ago</th><th class="r">Y/Y</th></tr></thead><tbody data-draw="pm-hstab"></tbody></table></div><div class="tt-chart sm" style="margin-top:6px" data-draw="pm-kfe" aria-label="House price growth"></div><p class="note">House prices: CBRT residential property price index; real deflates by headline CPI.</p></div></div>
 </div>
 </div>
+  </section>
+  <section class="page" id="kaan" hidden>
+<div class="kn-banner" aria-label="En büyük Fenerbahçe"><div class="kn-stripe"></div><div class="kn-title"><span class="blink kn-dot">●</span> EN BÜYÜK FENERBAHÇE <span class="kn-sub">KAAN TERMINAL · Sarı-Lacivert Stratejik Araştırma · GSRAY kapsama başlatıldı: <b>SAT</b></span></div><div class="kn-stripe"></div></div>
+<div class="kv" style="margin-top:4px">
+      <div><div class="l">EN BÜYÜK</div><div class="v kn-y" data-draw="kn-k-big">—</div><div class="c" data-draw="kn-k-big-c">—</div></div>
+      <div><div class="l">FENER / GSRAY</div><div class="v" data-draw="kn-k-ratio">—</div><div class="c" data-draw="kn-k-ratio-c">—</div></div>
+      <div><div class="l">FENER</div><div class="v" data-draw="kn-k-fener">—</div><div class="c" data-draw="kn-k-fener-c">—</div></div>
+      <div><div class="l">GSRAY</div><div class="v" data-draw="kn-k-gs">—</div><div class="c" data-draw="kn-k-gs-c">—</div></div>
+      <div><div class="l">GSRAY P/DD</div><div class="v" data-draw="kn-k-pb">—</div><div class="c" data-draw="kn-k-pb-c">—</div></div>
+      <div><div class="l">KAAN ACI ENDEKSİ</div><div class="v dn" data-draw="kn-k-pain">—</div><div class="c" data-draw="kn-k-pain-c">—</div></div>
+    </div>
+<div class="g ov-main" style="margin-top:4px">
+<div>
+<div class="pn"><h2><span class="n">KAAN 1</span>Kulüp hisseleri monitörü<span class="live"><i class="blink">●</i> CANLI</span><span class="s">BIST · piyasa değerine göre sıralı · notlar tamamen şaka</span></h2><div class="bd"><div class="tw"><table class="tb"><thead><tr><th>#</th><th>Kod</th><th>Kulüp</th><th class="r">Son TL</th><th class="r">Piyasa değeri</th><th class="r">P/DD</th><th class="r">1A</th><th class="r">1Y</th><th class="r">Zirveden</th><th class="r">Not</th><th>Gerekçe</th></tr></thead><tbody data-draw="kn-tbl"></tbody></table></div></div></div>
+<div class="g w2" style="margin-top:4px">
+<div class="pn"><h2><span class="n">KAAN 2</span>Büyüklük ligi<span class="s">piyasa değeri, milyar TL · tartışmaya kapalı</span></h2><div class="bd"><div data-draw="kn-league" aria-label="Piyasa değeri sıralaması"></div></div></div>
+<div class="pn"><h2><span class="n">KAAN 3</span>Kaan Acı Endeksi<span class="s">dört bileşenli, bilimsel olmayan ölçüm</span></h2><div class="bd"><div data-draw="kn-pain"></div></div></div>
+</div>
+<div class="g w2" style="margin-top:4px">
+<div class="pn"><h2><span class="n">KAAN 4</span>Son 1 ay<span class="s">günlük kapanış · başlangıç = 100</span></h2><div class="bd"><div class="tt-chart" data-draw="kn-1m" aria-label="Son bir ay"></div></div></div>
+<div class="pn"><h2><span class="n">KAAN 5</span>Son 1 yıl<span class="s">aylık kapanış · başlangıç = 100</span></h2><div class="bd"><div class="tt-chart" data-draw="kn-1y" aria-label="Son bir yıl"></div></div></div>
+</div>
+</div>
+<div class="ov-side">
+<div class="pn"><h2><span class="n">KAAN 6</span>KAAN ALERT<span class="live"><i class="blink">●</i> AKTİF</span><span class="s">kural bazlı · otomatik</span></h2><div class="bd"><div class="alerts" style="max-height:none" data-draw="kn-alerts"></div></div></div>
+<div class="pn" style="margin-top:4px"><h2><span class="n">KAAN 7</span>Sarı-Lacivert haber ajansı<span class="s">kaynak: bu terminal · doğrulama: gerek yok</span></h2><div class="bd"><div class="kn-wire" data-draw="kn-wire"></div></div></div>
+</div>
+</div>
+<p class="note" style="margin-top:4px">Bu sekme arkadaşlar arası bir şakadır. Fiyatlar, piyasa değerleri ve oranlar gerçektir (Yahoo Finance, Borsa üzerinden; günde üç kez güncellenir). Notlar, gerekçeler, manşetler ve Acı Endeksi uydurmadır ve yatırım tavsiyesi değildir. Kulüp logoları ve tezahüratlar bilerek kullanılmadı.</p>
   </section>
 
   <details class="foot">

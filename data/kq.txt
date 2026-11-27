@@ -1,0 +1,15 @@
+## metadata
+market: bist
+symbols: FENER, GSRAY, BJKAS, TSPOR
+timestamp: 2026-11-27T13:28:04.945041
+source: yfinance
+successful_count: 4
+failed_count: 0
+## data
+```tsv
+symbol	name	market	currency	current_price	volume	market_cap	pb_ratio	week_52_high	week_52_low	pe_ratio
+FENER	FENER	bist	TRY	1.93	35202148	11937500000	1.4	5.5196	1.86
+GSRAY	GSRAY	bist	TRY	0.69	45888824	9180000000	0.5	1.75	0.64	13.3
+BJKAS	BJKAS	bist	TRY	1.15	51800178	5062900000	1.2	3.2	1.07
+TSPOR	TSPOR	bist	TRY	0.72	73204914	5400000000	0.4	1.6	0.69
+```

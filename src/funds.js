@@ -111,7 +111,7 @@
     const x = d3.scaleLinear().domain(d3.extent(vals)).nice().range([m.l, W - m.r]);
     const svg = d3.select(el).append('svg').attr('width', W).attr('height', H).attr('role', 'img').attr('aria-label', el.getAttribute('aria-label') || 'Bar chart');
     svg.append('g').attr('class', 'grid').attr('transform', `translate(0,${m.t})`).call(d3.axisTop(x).ticks(6).tickSize(-(H - m.t - m.b)).tickFormat(''));
-    svg.append('g').attr('class', 'axis').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).ticks(6).tickFormat((v) => v + '%'));
+    svg.append('g').attr('class', 'axis').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).ticks(6).tickFormat((v) => o.fmt ? o.fmt(v) : v + '%'));
     const an = TT.anim && TT.motion();
     const g = svg.append('g').selectAll('g').data(data).join('g').attr('transform', (d, i) => `translate(0,${m.t + i * rh})`);
     g.append('text').attr('x', m.l - 6).attr('y', rh / 2 + 3.5).attr('text-anchor', 'end').style('fill', (d) => d.hl ? '#ffd23c' : '#d8d8d8').style('font-size', '10.5px').text((d) => d.label);
@@ -119,8 +119,8 @@
       .attr('x', x(0)).attr('width', an ? 0 : (d) => Math.abs(x(d.v) - x(0)));
     r.filter(() => !an).attr('x', (d) => Math.min(x(0), x(d.v)));
     if (an) r.transition().duration(650).ease(d3.easeCubicOut).delay((d, i) => i * 12).attr('x', (d) => Math.min(x(0), x(d.v))).attr('width', (d) => Math.abs(x(d.v) - x(0)));
-    r.append('title').text((d) => `${d.label}: ${PC(d.v, 2)}`);
-    g.append('text').attr('x', (d) => d.v >= 0 ? Math.max(x(d.v), x(0)) + 4 : Math.max(x(d.v), x(0)) + 4).attr('y', rh / 2 + 3.5).style('fill', '#aaa').style('font-size', '10px').text((d) => PC(d.v, 1));
+    r.append('title').text((d) => `${d.label}: ${o.fmt ? o.fmt(d.v) : PC(d.v, 2)}`);
+    g.append('text').attr('x', (d) => d.v >= 0 ? Math.max(x(d.v), x(0)) + 4 : Math.max(x(d.v), x(0)) + 4).attr('y', rh / 2 + 3.5).style('fill', '#aaa').style('font-size', '10px').text((d) => o.fmt ? o.fmt(d.v) : PC(d.v, 1));
     svg.append('line').attr('x1', x(0)).attr('x2', x(0)).attr('y1', m.t).attr('y2', H - m.b).style('stroke', '#777');
     (o.refs || []).filter((rf) => isN(rf.v)).forEach((rf, i) => {
       svg.append('line').attr('x1', x(rf.v)).attr('x2', x(rf.v)).attr('y1', 12 + i * 12).attr('y2', H - m.b).style('stroke', rf.color || '#ffa028').style('stroke-dasharray', '4 3').style('stroke-width', 1.4);

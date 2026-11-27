@@ -1,8 +1,8 @@
 // Navigation: 11 top-level tabs, Bloomberg-style function bars inside each tab, a global command line,
 // deep links (#page/FUNCTION), keyboard shortcuts and monitor mode.
 (function () {
-  const PAGES = ['piyasa', 'equity', 'fixed', 'fx', 'cmdty', 'deriv', 'mm', 'eco', 'funds', 'credit', 'private'];
-  const KEYS = { '0': 'piyasa', '1': 'equity', '2': 'fixed', '3': 'fx', '4': 'cmdty', '5': 'deriv', '6': 'mm', '7': 'eco', '8': 'funds', '9': 'credit', 'p': 'private', 'P': 'private' };
+  const PAGES = ['piyasa', 'equity', 'fixed', 'fx', 'cmdty', 'deriv', 'mm', 'eco', 'funds', 'credit', 'private', 'kaan'];
+  const KEYS = { '0': 'piyasa', '1': 'equity', '2': 'fixed', '3': 'fx', '4': 'cmdty', '5': 'deriv', '6': 'mm', '7': 'eco', '8': 'funds', '9': 'credit', 'p': 'private', 'P': 'private', 'k': 'kaan', 'K': 'kaan' };
   const MON_MS = 15000;
   let cur = 'piyasa', monTimer = null;
   const fnOf = {}; // page -> current function
@@ -62,7 +62,7 @@
     MM: ['mm'], MONEY: ['mm'], BTMM: ['mm', 'BTMM'], MMR: ['mm', 'BTMM'], LIQ: ['mm', 'LIQ'], CP: ['mm', 'CP'], USMM: ['mm', 'USMM'], WIRP: ['mm', 'USMM'], FEDS: ['mm', 'USMM'],
     ECO: ['eco', 'ECO'], ECST: ['eco', 'ECST'], ECFC: ['eco', 'ECST'], INFL: ['eco', 'INFL'], CPI: ['eco', 'INFL'], GDP: ['eco', 'GDP'], ACT: ['eco', 'ACT'], IP: ['eco', 'ACT'], BOP: ['eco', 'BOP'], CA: ['eco', 'BOP'], BUDG: ['eco', 'BOP'], ECON: ['eco'], ECFC: ['eco', 'ECO'], CAL: ['eco', 'CAL'], ECOC: ['eco', 'CAL'], CB: ['eco', 'CB'], WIR: ['eco', 'CB'], CENB: ['eco', 'CB'],
     FUNDS: ['funds'], FUND: ['funds', 'FUND'], TEFAS: ['funds', 'FUND'], FSRC: ['funds', 'FSRT'], FSRT: ['funds', 'FSRT'], FDES: ['funds', 'FDES'], ETF: ['funds', 'ETF'], ETFS: ['funds', 'ETF'], ETFR: ['funds', 'ETFR'], RRG: ['funds', 'ETFR'], BETF: ['funds', 'BETF'], CREDIT: ['credit'], TRCR: ['credit', 'TRCR'], LOANR: ['credit', 'TRCR'], LOAN: ['credit', 'LOAN'], NPL: ['credit', 'LOAN'], CRPR: ['credit', 'CRPR'], WCDS: ['credit', 'CRPR'], SOVR: ['credit', 'CRPR'], RATC: ['credit', 'CRPR'], CDSW: ['credit', 'CRPR'], CORP: ['credit', 'CORP'], IGHY: ['credit', 'CORP'],
-    PRIVATE: ['private'], PE: ['private', 'ALTS'], PREQ: ['private', 'ALTS'], ALTS: ['private', 'ALTS'], PCRD: ['private', 'PCRD'], BDC: ['private', 'PCRD'], RLAS: ['private', 'RLAS'], REIT: ['private', 'RLAS'], TRPM: ['private', 'TRPM'], GYO: ['private', 'TRPM'], HOUS: ['private', 'TRPM'], TECH: ['equity', 'TECH'], EQS: ['equity', 'EQS'], NIM: ['fixed', 'NIM'], NEWS: ['fixed', 'NEWS'], TOP: ['fixed', 'NEWS'], UST: ['fixed', 'UST'], WB: ['fixed', 'WB'], YAS: ['fixed', 'YAS'], STRC: ['deriv', 'STRC'], MTGE: ['deriv', 'STRC']
+    PRIVATE: ['private'], KAAN: ['kaan'], FB: ['kaan'], GS: ['kaan'], FENER: ['kaan'], GSRAY: ['kaan'], PE: ['private', 'ALTS'], PREQ: ['private', 'ALTS'], ALTS: ['private', 'ALTS'], PCRD: ['private', 'PCRD'], BDC: ['private', 'PCRD'], RLAS: ['private', 'RLAS'], REIT: ['private', 'RLAS'], TRPM: ['private', 'TRPM'], GYO: ['private', 'TRPM'], HOUS: ['private', 'TRPM'], TECH: ['equity', 'TECH'], EQS: ['equity', 'EQS'], NIM: ['fixed', 'NIM'], NEWS: ['fixed', 'NEWS'], TOP: ['fixed', 'NEWS'], UST: ['fixed', 'UST'], WB: ['fixed', 'WB'], YAS: ['fixed', 'YAS'], STRC: ['deriv', 'STRC'], MTGE: ['deriv', 'STRC']
   };
   function go(text) {
     const v = String(text || '').trim().toUpperCase().replace(/\s*<?GO>?$/, '');
