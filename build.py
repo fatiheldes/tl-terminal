@@ -69,6 +69,7 @@ def main():
 <script>{read('src/eqeco.js')}</script>
 <script>{read('src/dercr.js')}</script>
 <script>{read('src/private.js')}</script>
+<script>{read('src/overview.js')}</script>
 <script>{read('src/nav.js')}</script>
 </body>
 </html>

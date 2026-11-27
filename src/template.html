@@ -80,6 +80,21 @@ html, body { margin: 0; background: #000; }
 .tabs .mon[aria-pressed="true"] i { animation: prog var(--mon, 15s) linear infinite; }
 @keyframes prog { from { width: 0; } to { width: 100%; } }
 .tabs .hint { margin-left: 8px; }
+.ov-main { grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); }
+@media (max-width: 1100px) { .ov-main { grid-template-columns: 1fr; } }
+.ov-gauge { padding: 2px 0 8px; }
+.ov-gl { font-size: 18px; letter-spacing: .08em; font-weight: 700; }
+.ov-gb { position: relative; height: 8px; margin: 6px 0 4px; background: linear-gradient(90deg, var(--dn), var(--am) 50%, var(--up)); opacity: .85; }
+.ov-gb span { position: absolute; top: -3px; width: 3px; height: 14px; margin-left: -1px; background: #fff; }
+.ov-gs { font-size: 10.5px; color: var(--mu); }
+.ov-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); border-top: 1px solid var(--ln); border-left: 1px solid var(--ln); }
+.ov-tile { display: block; padding: 4px 7px 5px; border-right: 1px solid var(--ln); border-bottom: 1px solid var(--ln); color: inherit; text-decoration: none; min-width: 0; }
+.ov-tile:hover, .ov-tile:focus-visible { background: #141414; outline: none; }
+.ov-tile .l { color: var(--am); font-size: 10px; letter-spacing: .06em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ov-tile .v { font-size: 16px; white-space: nowrap; }
+.ov-tile .c { font-size: 10px; color: var(--mu); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ov-news td:nth-child(2) a { color: #ddd; text-decoration: none; }
+.ov-news td:nth-child(2) a:hover { color: var(--yl); text-decoration: underline; }
 .alerts { display: flex; flex-direction: column; gap: 3px; max-height: 236px; overflow: auto; }
 .alerts div { display: grid; grid-template-columns: 62px 86px 1fr; gap: 8px; padding: 3px 6px; border-left: 3px solid var(--mu); background: #0b0b0b; font-size: 11px; }
 .alerts div.high { border-color: var(--dn); } .alerts div.medium { border-color: var(--am); } .alerts div.low { border-color: var(--cy); }
@@ -158,6 +173,38 @@ ul.soon li::marker { color: var(--am); }
 
   <!-- 0 MARKETS -->
   <section class="page" id="piyasa">
+<div class="kv">
+      <div><div class="l">S&amp;P 500</div><div class="v" data-draw="ov-k-spx">—</div><div class="c" data-draw="ov-k-spx-c">—</div></div>
+      <div><div class="l">BIST 100</div><div class="v" data-draw="ov-k-xu">—</div><div class="c" data-draw="ov-k-xu-c">—</div></div>
+      <div><div class="l">UST 10Y</div><div class="v" data-draw="ov-k-ust">—</div><div class="c" data-draw="ov-k-ust-c">—</div></div>
+      <div><div class="l">TÜRKİYE 2Y</div><div class="v" data-draw="ov-k-tr2">—</div><div class="c" data-draw="ov-k-tr2-c">—</div></div>
+      <div><div class="l">USD/TRY</div><div class="v" data-draw="ov-k-try">—</div><div class="c" data-draw="ov-k-try-c">—</div></div>
+      <div><div class="l">BRENT $/BBL</div><div class="v" data-draw="ov-k-brent">—</div><div class="c" data-draw="ov-k-brent-c">—</div></div>
+      <div><div class="l">GOLD $/OZ</div><div class="v" data-draw="ov-k-gold">—</div><div class="c" data-draw="ov-k-gold-c">—</div></div>
+      <div><div class="l">VIX</div><div class="v" data-draw="ov-k-vix">—</div><div class="c" data-draw="ov-k-vix-c">—</div></div>
+    </div>
+<div class="fnbar" role="tablist" style="margin-top:4px"><button data-fn="MKT" aria-selected="true"><b>MKT</b>Cross-asset overview</button><button data-fn="TRMK" aria-selected="false"><b>TRMK</b>Türkiye snapshot · alerts · charts</button></div>
+<div class="fsub" data-fn="MKT">
+<div class="g ov-main" style="margin-top:4px">
+<div class="pn"><h2><span class="n">MKT 1</span>Cross-asset monitor<span class="s">hover a row for units and sources · range: 52 weeks (Türkiye rates: available history)</span></h2><div class="bd"><div class="tw"><table class="tb sticky"><thead><tr><th>Asset</th><th class="r">Last</th><th class="r">1W</th><th class="r">1M</th><th>Range</th><th class="r">From high</th><th>Trend</th></tr></thead><tbody data-draw="ov-mon"></tbody></table></div>
+<p class="note">Equity indices in local currency; commodities are front-month futures; FX shows the change of the quoted pair (USD/TRY up = lira weaker). Cell colours show the market-friendly direction: green for higher equity and bond prices, lower yields and lower volatility. Trend lines are weekly over six months, daily for Türkiye rates.</p></div></div>
+<div class="ov-side">
+<div class="pn"><h2><span class="n">MKT 2</span>Risk regime<span class="s">ten rule-based signals · hover for the rule</span></h2><div class="bd"><div data-draw="ov-regime"></div></div></div>
+<div class="pn" style="margin-top:4px"><h2><span class="n">MKT 3</span>Türkiye at a glance<span class="s">click a tile to open its tab</span></h2><div class="bd"><div class="ov-tiles" data-draw="ov-tr"></div></div></div>
+
+<div class="pn" style="margin-top:4px"><h2><span class="n">MKT 4</span>Cross-asset scoreboard<span class="s">USD price return · colour = asset class</span></h2><div class="bd"><div class="seg" style="margin-bottom:4px"><button data-ovp="w1" aria-pressed="false">1W</button><button data-ovp="m1" aria-pressed="true">1M</button><button data-ovp="m3" aria-pressed="false">3M</button></div><div data-draw="ov-score" aria-label="Cross-asset scoreboard"></div></div></div>
+<div class="pn" style="margin-top:4px"><h2><span class="n">MKT 6</span>Week ahead<span class="s">high-importance releases · Istanbul time</span></h2><div class="bd"><div class="tw"><table class="tb"><thead><tr><th>Day</th><th>Time</th><th>Ctry</th><th>Event</th><th class="r">Prev.</th></tr></thead><tbody data-draw="ov-cal"></tbody></table></div></div></div>
+</div>
+</div>
+<div class="g" style="margin-top:4px">
+<div class="pn"><h2><span class="n">MKT 5</span>Central banks<span class="s">policy rates, most recent movers first · BIS</span></h2><div class="bd"><div class="tw" style="max-height:420px"><table class="tb sticky"><thead><tr><th>Central bank</th><th class="r">Rate</th><th class="r">Last move</th><th class="r">When</th><th class="r">Hikes / cuts 12M</th><th>Stance</th></tr></thead><tbody data-draw="ov-cb"></tbody></table></div></div></div>
+<div><div class="pn"><h2><span class="n">MKT 7</span>Headlines<span class="s">fixed income &amp; Türkiye · full list in NEWS</span></h2><div class="bd"><div class="tw"><table class="tb ov-news"><tbody data-draw="ov-news"></tbody></table></div></div></div>
+</div>
+<div class="pn"><h2><span class="n">MKT 8</span>Alerts<span class="s">rule-based · Türkiye rates and markets</span></h2><div class="bd"><div class="alerts" style="max-height:372px" data-draw="alerts"></div></div></div>
+</div>
+</div>
+<div class="fsub" data-fn="TRMK" hidden>
+
 
     <div class="g">
       <div class="pn"><h2><span class="n">1.1</span>FX<span class="s">last close · crosses computed from TRY rates</span></h2>
@@ -189,6 +236,7 @@ ul.soon li::marker { color: var(--am); }
       <div class="pn"><h2><span class="n">1.8</span>Gold (gram)<span class="s">TRY · 3 months</span></h2><div class="bd"><div class="tt-chart sm" data-draw="ch-gold" aria-label="Gold per gram"></div></div></div>
     </div>
   
+</div>
   </section>
   <!-- 1 EQUITIES -->
   <section class="page" id="equity" hidden>
