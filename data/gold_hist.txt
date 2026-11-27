@@ -1,7 +1,7 @@
 ## metadata
 market: fx
 symbols: gram-altin
-timestamp: 2026-11-27T06:39:01.706660
+timestamp: 2026-11-27T10:40:40.118427
 source: borsapy
 successful_count: 1
 failed_count: 0

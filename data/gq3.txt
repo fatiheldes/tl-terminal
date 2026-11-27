@@ -1,17 +1,17 @@
 ## metadata
 market: us
 symbols: 2YY=F, ZT=F, ZN=F, ZB=F, TUR, CEW
-timestamp: 2026-11-27T06:41:06.061983
+timestamp: 2026-11-27T10:43:23.556327
 source: yfinance
 successful_count: 6
 failed_count: 0
 ## data
 ```tsv
 symbol	name	market	currency	current_price	volume	week_52_high	week_52_low	avg_volume	pe_ratio	dividend_yield
-2YY=F	2YY=F	us	USD	4.775	0	4.885	3.376			
-ZT=F	ZT=F	us	USD	102.043	221528	104.5391	101.5469	914603		
-ZN=F	ZN=F	us	USD	106.5781	541911	114.375	103.8906	2210581		
-ZB=F	ZB=F	us	USD	107.1562	135994	119.5938	101.1562	501589		
+2YY=F	2YY=F	us	USD	4.775	0	4.885	3.376
+ZT=F	ZT=F	us	USD	102.0391	372905	104.5391	101.5469	914603
+ZN=F	ZN=F	us	USD	106.6406	722738	114.375	103.8906	2210581
+ZB=F	ZB=F	us	USD	107.2188	189332	119.5938	101.1562	501589
 TUR	iShares MSCI Turkey ETF	us	USD	29.08	273400	43.98	28.6	193212	11.43	2.83
 CEW	WisdomTree Emerging Currency Strategy Fund	us	USD	19.13	35300	20.56	17.8	4348		2.39
 ```

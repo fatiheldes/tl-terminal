@@ -1,7 +1,7 @@
 ## metadata
 market: us
 symbols: EWJ, EWG, EWU, FXI, INDA, EWZ, EWW, TUR, EWY, EZU
-timestamp: 2026-11-27T06:45:02.786843
+timestamp: 2026-11-27T10:46:16.638367
 source: yfinance
 successful_count: 10
 failed_count: 0

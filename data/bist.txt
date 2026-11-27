@@ -1,7 +1,7 @@
 ## metadata
 market: bist
 symbols: XU100
-timestamp: 2026-11-27T06:04:33.830732
+timestamp: 2026-11-27T10:11:11.351922
 source: borsapy
 successful_count: 1
 failed_count: 0
@@ -9,11 +9,11 @@ failed_count: 0
 code: XU100
 name: BIST 100
 market: bist
-value: 10743.11
-change: 87.37
-change_percent: 0.82
-open: 10772.46
-high: 10916.38
-low: 10738.61
-previous_close: 10655.74
-volume: 5670797346
+value: 10940.17
+change: 197.06
+change_percent: 1.83
+open: 10737.18
+high: 10951.38
+low: 10615.74
+previous_close: 10743.11
+volume: 3388022284

@@ -1,7 +1,7 @@
 ## metadata
 market: us
 symbols: ARCC, OBDC, BXSL, FSK, MAIN, HTGC, GBDC, PSEC, BIZD, PSP
-timestamp: 2026-11-27T06:44:54.619711
+timestamp: 2026-11-27T10:50:26.424729
 source: yfinance
 successful_count: 10
 failed_count: 0
@@ -16,6 +16,6 @@ MAIN	Main Street Capital Corporation	us	USD	57.69	631300	5414010398.1913	11.89	1
 HTGC	Hercules Capital, Inc.	us	USD	15.89	1191100	3011930433.5164	8.5	1.28	0.1582	11.83	19.13	13.7	1375737	0.746
 GBDC	Golub Capital BDC, Inc.	us	USD	12.6	1604400	3255996199.9765	34.05	0.9	0.0251	10.48	14.41	11.77	1386729	0.444
 PSEC	Prospect Capital Corporation	us	USD	1.43	10176400	796494558.2448		0.27	0.012	29.37	3.13	1.22	6729406	0.835
-BIZD	VanEck BDC Income ETF	us	USD	12.37	3582900		13.4			12.62	15.12	11.73	2668979	
-PSP	Invesco Global Listed Private Equity ETF	us	USD	58.08	27800		14.03			5.35	70.49	54.12	29698	
+BIZD	VanEck BDC Income ETF	us	USD	12.37	3582900		13.4			12.62	15.12	11.73	2668979
+PSP	Invesco Global Listed Private Equity ETF	us	USD	58.08	27800		14.03			5.35	70.49	54.12	29698
 ```

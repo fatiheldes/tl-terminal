@@ -2,7 +2,7 @@
 market: fx
 symbols: calendar
 source: borsapy
-timestamp: 2026-11-27T06:51:46.868849
+timestamp: 2026-11-27T10:43:37.778985
 period: next_week
 country_filter: TR
 > Not: No events returned. This may be a data-source problem rather than a genuinely empty calendar, so do not report it as 'no events scheduled'. Note that importance defaults to 'high': pass importance='low' to widen the search before concluding anything.

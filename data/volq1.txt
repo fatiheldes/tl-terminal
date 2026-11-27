@@ -1,7 +1,7 @@
 ## metadata
 market: us
 symbols: ^VIX9D, ^VIX, ^VIX3M, ^VIX6M, ^VIX1Y, ^VVIX, ^SKEW, ^MOVE, ^VXN, ^VXD
-timestamp: 2026-11-27T06:39:25.903969
+timestamp: 2026-11-27T10:39:43.961641
 source: yfinance
 successful_count: 10
 failed_count: 0
@@ -9,10 +9,10 @@ failed_count: 0
 ```tsv
 symbol	name	market	currency	current_price	volume	week_52_high	week_52_low	avg_volume
 ^VIX9D	CBOE S&P 500 9 Day Volatility I	us	USD	29.61	0	46.21	8.99	0
-^VIX	CBOE Volatility Index	us	USD	26.8	0	40.03	13.38	0
+^VIX	CBOE Volatility Index	us	USD	24.73	0	40.03	13.38	0
 ^VIX3M	CBOE S&P 500 3-Month Volatility	us	USD	26.29	0	33.31	10.06	0
 ^VIX6M	CBOE S&P 500 6 Month Volatility	us	USD	26.89	0	31.3	15.17	0
-^VIX1Y	Cboe S&P 500 One Year Volatilit	us	USD	26.12	0	0	0	
+^VIX1Y	Cboe S&P 500 One Year Volatilit	us	USD	26.12	0	0	0
 ^VVIX	CBOE VIX VOLATILITY INDEX	us	USD	115.38	0	146.55	81.51	0
 ^SKEW	CBOE SKEW INDEX	us	USD	142.06	0	168.59	126.41	0
 ^MOVE	Northern Trust iBoxx 5-Year Tar	us	USD	97.54	0	115.02	55.77	0

@@ -1,7 +1,7 @@
 ## metadata
 market: us
 symbols: SPY, QQQ, IWM, VTI, ACWI, EFA, EEM, VEA, VWO, VXUS
-timestamp: 2026-11-27T06:42:08.474421
+timestamp: 2026-11-27T10:46:12.199353
 source: yfinance
 successful_count: 10
 failed_count: 0

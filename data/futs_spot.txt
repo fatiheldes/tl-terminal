@@ -1,7 +1,7 @@
 ## metadata
 market: us
 symbols: ^NDX
-timestamp: 2026-11-27T06:39:25.905261
+timestamp: 2026-11-27T10:39:25.281096
 source: yfinance
 successful_count: 1
 failed_count: 0

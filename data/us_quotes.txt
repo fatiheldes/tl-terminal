@@ -1,16 +1,16 @@
 ## metadata
 market: us
 symbols: SPY, QQQ, DIA, AAPL, NVDA, MSFT, TSLA
-timestamp: 2026-11-27T06:40:36.598857
+timestamp: 2026-11-27T10:43:21.318016
 source: yfinance
 successful_count: 7
 failed_count: 0
 ## data
 ```tsv
 symbol	name	market	currency	current_price	volume	pe_ratio	pb_ratio	dividend_yield	week_52_high	week_52_low	avg_volume	market_cap	roe	beta
-SPY	State Street SPDR S&P 500 ETF Trust	us	USD	716.7	73112800	22.8	1.67	1	781.62	629.28	48645904			
-QQQ	Invesco QQQ Trust	us	USD	633.93	81996700	26.11	1.77	0.45	762.86	555.6	43669471			
-DIA	State Street SPDR Dow Jones Industrial Average ETF Trust	us	USD	501.27	4714800	19.85	1.4	1.39	546.75	450.44	3614010			
+SPY	State Street SPDR S&P 500 ETF Trust	us	USD	716.7	73112800	22.8	1.67	1	781.62	629.28	48645904
+QQQ	Invesco QQQ Trust	us	USD	633.93	81996700	26.11	1.77	0.45	762.86	555.6	43669471
+DIA	State Street SPDR Dow Jones Industrial Average ETF Trust	us	USD	501.27	4714800	19.85	1.4	1.39	546.75	450.44	3614010
 AAPL	Apple Inc.	us	USD	355.58	54285300	39.6	46.1	0.3	360.83	243.42	43904198	5167353080425.7207	1.4226	1.089
 NVDA	NVIDIA Corporation	us	USD	149.3	366571900	16.04	13.5	0.67	243.37	124.5	187728343	3605147173690.7959	1.1736	2.247
 MSFT	Microsoft Corporation	us	USD	489.93	26759500	25.57	7.73	0.8	559.15	349.2	24207951	3638315442470.2866	0.3422	1.045

@@ -1,7 +1,7 @@
 ## metadata
 market: bist
 symbols: XU100, THYAO, GARAN, AKBNK, YKBNK, ASELS, KCHOL, BIMAS, TUPRS, SISE
-timestamp: 2026-11-27T06:40:30.110423
+timestamp: 2026-11-27T10:42:00.328180
 source: mixed
 successful_count: 10
 failed_count: 0
@@ -9,16 +9,16 @@ tickers: XU100, THYAO, GARAN, AKBNK, YKBNK, ASELS, KCHOL, BIMAS, TUPRS, SISE
 ## data
 ```tsv
 symbol	timeframe	current_price	moving_averages	indicators	signals
-XU100	1d	10743.11	{"sma_20": 11335.7265, "ema_20": 11177.242974974908, "ema_50": 11368.48505991335}	{"rsi_14": 28.704882248933075, "macd": -191.24208493844162, "macd_signal": -109.67745017317478, "macd_histogram": -81.56463476526685}	{"trend": "yatay", "rsi_signal": "AL", "macd_signal": "RSI aşırı satım bölgesinde (28.7)"}
-THYAO	1d	309.75	{"sma_20": 306.1475, "ema_20": 314.37291198340967, "ema_50": 303.2091484588834}	{"rsi_14": 60.19417475728156, "macd": 11.163763524526246, "macd_signal": 12.252526210004241, "macd_histogram": -1.0887626854779953}	{"trend": "yatay", "rsi_signal": "SAT", "macd_signal": "MACD düşüş sinyali veriyor"}
-GARAN	1d	140.1	{"sma_20": 143.77, "ema_20": 143.60197778641336, "ema_50": 141.7373592162379}	{"rsi_14": 44.03409090909089, "macd": 1.8646185701754519, "macd_signal": 3.1926951271110555, "macd_histogram": -1.3280765569356037}	{"trend": "yatay", "rsi_signal": "SAT", "macd_signal": "MACD düşüş sinyali veriyor"}
-AKBNK	1d	60.65	{"sma_20": 66.475, "ema_20": 65.04591645162297, "ema_50": 66.12700918977302}	{"rsi_14": 18.99224806201545, "macd": -1.0810927381500477, "macd_signal": -0.19252629979817162, "macd_histogram": -0.8885664383518761}	{"trend": "yatay", "rsi_signal": "AL", "macd_signal": "RSI aşırı satım bölgesinde (19.0)"}
-YKBNK	1d	33.52	{"sma_20": 36.482, "ema_20": 35.88213536477629, "ema_50": 36.21143369551855}	{"rsi_14": 28.066037735849036, "macd": -0.32929833074226167, "macd_signal": 0.08490419091238495, "macd_histogram": -0.4142025216546466}	{"trend": "yatay", "rsi_signal": "AL", "macd_signal": "RSI aşırı satım bölgesinde (28.1)"}
-ASELS	1d	315	{"sma_20": 336.675, "ema_20": 329.46416114627743, "ema_50": 335.9487374381242}	{"rsi_14": 37.638376383763834, "macd": -6.484576291846793, "macd_signal": -3.6042581043158237, "macd_histogram": -2.880318187530969}	{"trend": "yatay", "rsi_signal": "SAT", "macd_signal": "MACD düşüş sinyali veriyor"}
-KCHOL	1d	186	{"sma_20": 198.245, "ema_20": 193.11297613874015, "ema_50": 197.99532163219814}	{"rsi_14": 31.82640144665463, "macd": -4.88234549345799, "macd_signal": -3.0682763613224626, "macd_histogram": -1.8140691321355273}	{"trend": "yatay", "rsi_signal": "SAT", "macd_signal": "MACD düşüş sinyali veriyor"}
-BIMAS	1d	360	{"sma_20": 374.7, "ema_20": 373.42218808119856, "ema_50": 377.6665651922213}	{"rsi_14": 41.328413284132836, "macd": -4.244377111022743, "macd_signal": -2.304526297949189, "macd_histogram": -1.9398508130735541}	{"trend": "yatay", "rsi_signal": "SAT", "macd_signal": "MACD düşüş sinyali veriyor"}
-TUPRS	1d	323.25	{"sma_20": 337.45, "ema_20": 332.18509137527496, "ema_50": 342.80224327651}	{"rsi_14": 41.492537313432834, "macd": -10.617151901235047, "macd_signal": -9.15298334924569, "macd_histogram": -1.4641685519893581}	{"trend": "yatay", "rsi_signal": "SAT", "macd_signal": "MACD düşüş sinyali veriyor"}
-SISE	1d	31.28	{"sma_20": 33.81400000000001, "ema_20": 32.6956352143338, "ema_50": 33.85460928875018}	{"rsi_14": 34.58333333333333, "macd": -1.1589740744163848, "macd_signal": -0.7872027523455225, "macd_histogram": -0.3717713220708623}	{"trend": "yatay", "rsi_signal": "SAT", "macd_signal": "MACD düşüş sinyali veriyor"}
+XU100	1d	11014.89	{"sma_20": 11348.492999999999, "ema_20": 11149.944886449837, "ema_50": 11307.664801726125}	{"rsi_14": 30.37739032620918, "macd": -157.7199152762878, "macd_signal": -82.38579311178538, "macd_histogram": -75.33412216450242}	{"trend": "yatay", "rsi_signal": "SAT", "macd_signal": "MACD düşüş sinyali veriyor"}
+THYAO	1d	313.75	{"sma_20": 309.725, "ema_20": 314.2554340836811, "ema_50": 303.666975945957}	{"rsi_14": 54.18994413407822, "macd": 10.588458137724103, "macd_signal": 12.26388102076439, "macd_histogram": -1.6754228830402873}	{"trend": "yatay", "rsi_signal": "SAT", "macd_signal": "MACD düşüş sinyali veriyor"}
+GARAN	1d	139.1	{"sma_20": 144.465, "ema_20": 142.89338160741093, "ema_50": 141.30349367617484}	{"rsi_14": 24.452554744525585, "macd": 1.5898879312360918, "macd_signal": 3.1262888327110234, "macd_histogram": -1.5364009014749316}	{"trend": "yatay", "rsi_signal": "AL", "macd_signal": "RSI aşırı satım bölgesinde (24.5)"}
+AKBNK	1d	59.4	{"sma_20": 66.4, "ema_20": 64.1696548190869, "ema_50": 65.51442828032053}	{"rsi_14": 1.2658227848100552, "macd": -1.344773461233629, "macd_signal": -0.30119305854726586, "macd_histogram": -1.0435804026863633}	{"trend": "yatay", "rsi_signal": "AL", "macd_signal": "RSI aşırı satım bölgesinde (1.3)"}
+YKBNK	1d	32.68	{"sma_20": 36.418, "ema_20": 35.38550310184523, "ema_50": 35.89021961483915}	{"rsi_14": 11.253196930946245, "macd": -0.504716512993916, "macd_signal": 0.03051883632485769, "macd_histogram": -0.5352353493187736}	{"trend": "yatay", "rsi_signal": "AL", "macd_signal": "RSI aşırı satım bölgesinde (11.3)"}
+ASELS	1d	333	{"sma_20": 335.975, "ema_20": 329.93654040557783, "ema_50": 334.66200611779726}	{"rsi_14": 47.02194357366771, "macd": -4.725465712219432, "macd_signal": -2.6900963732586263, "macd_histogram": -2.0353693389608054}	{"trend": "yatay", "rsi_signal": "SAT", "macd_signal": "MACD düşüş sinyali veriyor"}
+KCHOL	1d	190.7	{"sma_20": 198.14000000000001, "ema_20": 192.69579443136948, "ema_50": 196.76922384262681}	{"rsi_14": 29.79515828677839, "macd": -4.073429411257337, "macd_signal": -2.5386109300813953, "macd_histogram": -1.5348184811759413}	{"trend": "yatay", "rsi_signal": "AL", "macd_signal": "RSI aşırı satım bölgesinde (29.8)"}
+BIMAS	1d	375.75	{"sma_20": 376.1125, "ema_20": 373.64378118212966, "ema_50": 375.48736208293394}	{"rsi_14": 46.101694915254235, "macd": -1.8435809008042838, "macd_signal": -0.04142869023409779, "macd_histogram": -1.8021522105701862}	{"trend": "yatay", "rsi_signal": "SAT", "macd_signal": "MACD düşüş sinyali veriyor"}
+TUPRS	1d	338.25	{"sma_20": 337.1875, "ema_20": 333.0582134461351, "ema_50": 341.57064407789426}	{"rsi_14": 53.208556149732615, "macd": -8.512430631759173, "macd_signal": -8.071791012842231, "macd_histogram": -0.4406396189169417}	{"trend": "yatay", "rsi_signal": "SAT", "macd_signal": "MACD düşüş sinyali veriyor"}
+SISE	1d	32	{"sma_20": 33.812, "ema_20": 32.581288315025226, "ema_50": 33.60791575711205}	{"rsi_14": 30.837004405286365, "macd": -1.026627442086827, "macd_signal": -0.7185999156052628, "macd_histogram": -0.3080275264815643}	{"trend": "yatay", "rsi_signal": "SAT", "macd_signal": "MACD düşüş sinyali veriyor"}
 ```
 successful_count: 10
 failed_count: 0

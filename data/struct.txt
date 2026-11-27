@@ -1,17 +1,17 @@
 ## metadata
 market: us
 symbols: ZQ=F, SR3=F, ZF=F, UB=F, MBB, VMBS, JAAA, CMBS, BKLN, FLOT
-timestamp: 2026-11-27T06:40:59.975284
+timestamp: 2026-11-27T10:45:07.769244
 source: yfinance
 successful_count: 10
 failed_count: 0
 ## data
 ```tsv
 symbol	name	market	currency	current_price	volume	week_52_high	week_52_low	avg_volume	dividend_yield
-ZQ=F	ZQ=F	us	USD	95.85	25400	96.3825	96.1075	62518	
-SR3=F	SR3=F	us	USD	95.725	112534	95.7375	95.7225	37	
-ZF=F	ZF=F	us	USD	104.7656	391397	110.2188	103.0312	1379563	
-UB=F	UB=F	us	USD	108.9688	114363	122.9062	102.0312	441314	
+ZQ=F	ZQ=F	us	USD	95.85	36316	96.3825	96.1075	62518
+SR3=F	SR3=F	us	USD	95.725	155572	95.7375	95.7225	37
+ZF=F	ZF=F	us	USD	104.7891	578305	110.2188	103.0312	1379563
+UB=F	UB=F	us	USD	109.125	160999	122.9062	102.0312	441314
 MBB	iShares MBS ETF	us	USD	92.03	2757000	96.97	88.58	5684778	4.43
 VMBS	Vanguard Mortgage-Backed Securities Index Fund ETF Shares	us	USD	45.58	1510000	47.9	43.95	2293325	4.32
 JAAA	Janus Henderson AAA CLO ETF	us	USD	50.65	7605100	50.82	50.32	7551025	5.26

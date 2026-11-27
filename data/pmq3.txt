@@ -1,7 +1,7 @@
 ## metadata
 market: us
 symbols: VNQ, REET, IGF, IPO, ARKK, PAVE, VNQI, SRVR
-timestamp: 2026-11-27T06:44:50.483414
+timestamp: 2026-11-27T10:50:52.991405
 source: yfinance
 successful_count: 8
 failed_count: 0

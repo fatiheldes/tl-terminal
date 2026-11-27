@@ -1,7 +1,7 @@
 ## metadata
 market: bist
 symbols: XU100
-timestamp: 2026-11-27T06:39:02.139283
+timestamp: 2026-11-27T10:40:40.775535
 source: borsapy
 successful_count: 1
 failed_count: 0
@@ -23,8 +23,8 @@ date	open	high	low	close	volume
 2026-11-06T00:00:00	10765.09	11617	10626.34	11482.6	30724333102
 2026-11-13T00:00:00	11559.31	11935.51	11521.4	11842.82	23967676958
 2026-11-20T00:00:00	11808.77	11951.86	11102.52	11131.32	19314566788
-2026-11-26T00:00:00	11192.08	11289.25	10649.5	10743.11	16190777636
+2026-11-27T00:00:00	11192.08	11289.25	10615.74	11006.31	20092421576
 ```
 data_points: 13
 bar_interval: weekly
-> Not: Resampled from 63 daily bars to 13 weekly bars to bound response size. These are NOT daily candles. For daily bars, request a period of 1mo or shorter, or pass an explicit start_date/end_date range.
+> Not: Resampled from 64 daily bars to 13 weekly bars to bound response size. These are NOT daily candles. For daily bars, request a period of 1mo or shorter, or pass an explicit start_date/end_date range.

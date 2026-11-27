@@ -2,7 +2,7 @@
 market: fx
 symbols: calendar
 source: borsapy
-timestamp: 2026-11-27T06:49:58.141922
+timestamp: 2026-11-27T10:43:37.863036
 ## events
 ```tsv
 date	time	country	event	importance	previous
